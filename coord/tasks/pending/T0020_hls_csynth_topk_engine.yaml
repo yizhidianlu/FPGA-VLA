@@ -1,0 +1,62 @@
+task_id: T0020
+created_by: orchestrator
+created_at: 2026-05-19T00:30:00Z
+type: hls_csynth
+priority: P1
+depends_on: [T0014]
+deadline_minutes: 45
+params:
+  module_name: topk_engine
+  description: |
+    Top-K=64 selection engine for the cross-modal sparse attention IP (C2).
+    Input:  N=256 16-bit fixed-point attention scores (action_token -> vision_token)
+    Output: top-K=64 indices (uint16) + their scores
+    Goal:   Identify the 64 vision tokens that the current action token most attends to.
+
+    Algorithm choice (let Claude pick best for HLS, prefer one of):
+      a) Bitonic sorter (parameterizable, predictable cycles, more DSP)
+      b) Insertion sort with priority queue (lower DSP, harder to pipeline)
+      c) Tournament tree (good for fixed K)
+
+    Pragmas to consider:
+      #pragma HLS PIPELINE II=1
+      #pragma HLS ARRAY_PARTITION on score array (cyclic factor>=8)
+      #pragma HLS DATAFLOW between stages
+
+  target_part_primary: xcvc1902-vsva2197-2MP-e-S
+  target_part_fallback: xczu9eg-ffvb1156-2-e            # use if T0014 said Versal missing
+  clock_period_ns: 4.0                                   # 250 MHz target
+
+  resource_caps:   # from EXPERIMENT_MASTER_PLAN §2.3 DSP budget
+    dsp_max: 200   # top-k is one of several IPs; budget conservatively
+    bram_max: 32
+    lut_max: 8000
+    ii_max: 2      # pipeline initiation interval
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.csim_pass: true
+  - result.csynth_pass: true
+  - result.dsp_used: "< 200"
+  - result.lut_used: "< 8000"
+  - result.ii: "<= 2"
+human_ack_required_on:
+  - dsp_above_150
+  - latency_above_400_cycles
+notes: |
+  This is a building block for T0022 (cross-modal sparse attention v0).
+
+  Write source files to runs/T0020/:
+    - topk_engine.cpp / .hpp
+    - topk_engine_tb.cpp (testbench with golden top-K from sorted python)
+    - run_hls.tcl
+
+  In result.json include:
+    csim_pass, csynth_pass, latency_cycles, ii, dsp_used, bram_used, lut_used, ff_used
+    target_part_used  (which fallback was actually used)
+    algorithm_chosen  (bitonic / insertion / tournament)
+
+  Copy synth_util.rpt to coord/reports/T0020/ for orchestrator inspection.
+
+  If acceptance fails (e.g., DSP > 200), report the actual number and
+  recommendation — orchestrator decides whether to ack-proceed or downgrade K.

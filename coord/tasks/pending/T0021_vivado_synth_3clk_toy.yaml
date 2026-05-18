@@ -1,0 +1,77 @@
+task_id: T0021
+created_by: orchestrator
+created_at: 2026-05-19T00:30:00Z
+type: vivado_synth
+priority: P0                            # P0 because answers RISK-CLK (BLOCK-1 of master plan)
+depends_on: [T0014]
+deadline_minutes: 90
+params:
+  module_name: tri_rate_toy_scheduler
+  description: |
+    *** THIS TASK ANSWERS THE BIGGEST UNKNOWN IN MR-VLA HARDWARE DESIGN ***
+
+    Devil's Advocate BLOCK-1 noted: MR-VLA's H1 hypothesis (three independent
+    clock domains) is unfalsifiable as written if implemented as 'three physical
+    PLL clocks'. The honest implementation is 'single PLL + three sub-rate
+    clock-enables', because:
+      - simpler timing closure (one constraint set)
+      - lower CDC risk
+      - same logical isolation as multi-clock
+
+    This task PROVES whether the single-PLL+enable topology timing-closes on
+    Versal (or fallback ZCU102) at 250 MHz fabric clock with the following
+    enable rates:
+        vision_enable  : asserted 1 in 8.33M cycles  (30 Hz from 250 MHz)
+        language_enable: asserted 1 in 250M cycles   (1  Hz)
+        action_enable  : asserted 1 in 2.5M cycles   (100 Hz)
+
+    The toy design:
+      - 3 small "compute units" (each = a 32-bit MAC accumulator)
+      - Each compute unit gated by its rate enable
+      - All 3 share the same 250 MHz PL clock domain
+      - Inter-unit AXI-Stream FIFOs (depths: vision->attn=64, attn->action=8)
+
+    Verifies:
+      [a] Timing closure at 250 MHz on the chosen target part
+      [b] WNS / WHS positive
+      [c] Resource utilization scales sub-linearly (3 units shouldn't 3x area)
+
+  target_part_primary: xcvc1902-vsva2197-2MP-e-S
+  target_part_fallback: xczu9eg-ffvb1156-2-e
+  clock_period_ns: 4.0
+  rtl_style: SystemVerilog                # cleaner for clock-enable patterns
+acceptance_criteria:
+  - status: "== DONE"
+  - result.synth_ok: true
+  - result.timing_met: true
+  - result.wns_ns: ">= 0"
+human_ack_required_on:
+  - wns_below_0_5ns
+  - resource_over_5pct
+notes: |
+  result.json must include:
+    synth_ok, timing_met, wns_ns (worst negative slack), whs_ns, target_part_used,
+    lut_used, ff_used, bram_used, dsp_used, lut_pct, ff_pct
+    clock_summary (max achievable freq from STA)
+    cdc_warnings_count   (should be 0 since single clock, just enables)
+
+  Write source to runs/T0021/:
+    - rtl/tri_rate_toy.sv
+    - rtl/rate_enable_gen.sv
+    - rtl/axis_fifo.sv (or use Vivado built-in IP)
+    - constraints/tri_rate_toy.xdc (250 MHz clock, false_path on async resets only)
+    - vivado/build.tcl
+    - vivado/run_synth.tcl
+
+  Run: vivado -mode batch -source vivado/build.tcl
+       then: vivado -mode batch -source vivado/run_synth.tcl
+
+  Copy these to coord/reports/T0021/:
+    - synth_util.rpt
+    - timing_summary.rpt
+    - clock_interaction.rpt   (CDC report)
+    - top_synth.dcp           (if < 50 MB; else skip)
+
+  *** If timing fails: this is critical to know NOW, not after weeks of design ***
+  Set acceptance_criteria_passed=false and human_ack_needed=true with
+  recommendation (e.g., "WNS=-0.8ns, recommend dropping fabric clock to 200 MHz").

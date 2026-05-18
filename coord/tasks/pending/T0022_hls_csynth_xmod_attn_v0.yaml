@@ -1,0 +1,76 @@
+task_id: T0022
+created_by: orchestrator
+created_at: 2026-05-19T00:30:00Z
+type: hls_csynth
+priority: P1
+depends_on: [T0020]                     # reuses topk_engine from T0020
+deadline_minutes: 90
+params:
+  module_name: xmod_attn_v0
+  description: |
+    Cross-modal sparse attention engine v0 — C2 contribution of MR-VLA.
+
+    Architecture (per paper §III.C):
+      Input:  Q (1 x 4096 INT8) — current action token query
+              K (256 x 4096 INT8) — vision token keys (from AIE)
+              V (256 x 4096 INT8) — vision token values (from AIE)
+      Step 1: Compute Q·K^T -> 256 scores (1 x 256)
+      Step 2: Top-K=64 selection on scores (REUSES topk_engine from T0020)
+      Step 3: Softmax over the 64 selected scores
+      Step 4: Weighted sum V[selected] -> output (1 x 4096 INT8)
+
+    Tier-0 evidence supports k=64 design (99.99% of measurements pass
+    top-64 ≥ 0.80 mass coverage on base OpenVLA; 98.75% on fine-tuned).
+    Therefore this IP commits to k=64 with INT8 precision.
+
+  target_part_primary: xcvc1902-vsva2197-2MP-e-S
+  target_part_fallback: xczu9eg-ffvb1156-2-e
+  clock_period_ns: 4.0
+
+  resource_caps:   # per EXPERIMENT_MASTER_PLAN §3 (DA-INC-2 resolution: 19% DSP)
+    dsp_max: 600       # ~19% of VCK190's 1968 DSPs (or ~25% of ZCU102's 2520)
+    bram_max: 200
+    lut_max: 80000     # ~9% of VCK190's 900K LUTs
+    ii_max: 8
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.csim_pass: true
+  - result.csynth_pass: true
+  - result.dsp_used: "< 600"
+  - result.lut_used: "< 80000"
+  - result.ii: "<= 8"
+human_ack_required_on:
+  - dsp_above_500
+  - latency_above_5000_cycles
+  - csim_pass: false
+notes: |
+  PRIMARY GOAL: get [HLS-EST] LUT/DSP/BRAM numbers for the centerpiece IP
+  of MR-VLA. These numbers feed into paper Table V (resource utilization).
+
+  REUSE T0020's topk_engine: instantiate it as a submodule.
+
+  Source files to write under runs/T0022/:
+    - xmod_attn_v0.cpp (top function)
+    - q_kt_matmul.cpp  (Q.K^T computation, INT8 systolic-like)
+    - softmax_64.cpp   (softmax over 64 elements)
+    - weighted_sum.cpp (V weighted sum)
+    - xmod_attn_v0_tb.cpp (testbench: feed 5 OpenVLA-style golden tensors,
+                            verify output vs python reference)
+    - run_hls.tcl
+
+  Testbench golden data:
+    - Generate 5 random (Q, K, V) sets in python
+    - Run python reference: scores = Q @ K.T; top_idx = scores.argsort()[-64:];
+      attn = softmax(scores[top_idx]); out = attn @ V[top_idx]
+    - Save as .h files with const arrays
+    - HLS testbench loads, runs xmod_attn_v0, compares with cosine sim > 0.99
+
+  In result.json include:
+    csim_pass, csynth_pass, csim_cosine_sim (vs python golden)
+    latency_cycles (Q.K^T + topk + softmax + weighted_sum total)
+    ii, dsp_used, bram_used, lut_used, ff_used
+    target_part_used
+    breakdown_by_submodule: {q_kt: {dsp, lut}, topk: {dsp, lut}, softmax: {dsp, lut}, weighted_sum: {dsp, lut}}
+
+  Copy synth_util.rpt + schedule.rpt to coord/reports/T0022/.

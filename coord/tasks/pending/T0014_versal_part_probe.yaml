@@ -1,0 +1,38 @@
+task_id: T0014
+created_by: orchestrator
+created_at: 2026-05-19T00:30:00Z
+type: vitis_install_check
+priority: P0
+depends_on: [T0012]
+deadline_minutes: 5
+params:
+  probe_parts:
+    - xcvc1902-vsva2197-2MP-e-S          # Versal VCK190 (primary target)
+    - xczu9eg-ffvb1156-2-e               # Zynq UltraScale+ ZCU102 (fallback if Versal absent)
+    - xczu7ev-ffvc1156-2-e               # Zynq UltraScale+ ZCU104 (alt fallback)
+acceptance_criteria:
+  - status: "== DONE"
+  - result.versal_part_supported: true
+human_ack_required_on:
+  - versal_part_missing
+notes: |
+  Verify the actual Vitis HLS installation supports the Versal VCK190 part
+  (xcvc1902-vsva2197-2MP-e-S). Run `vitis_hls -help_part <part>` for each
+  candidate; record which parts are recognized.
+
+  Critical: T0011 noted "Tools in Vitis_HLS\bin and Vivado\bin, not unified
+  Vitis\bin" — suggests standalone HLS+Vivado install, not the bundled Vitis
+  installer. The Versal device support files may be in a separate Xilinx
+  install component (Vivado Design Suite — Devices — Versal).
+
+  Result.json should include:
+    versal_part_supported: bool                  (xcvc1902 specifically)
+    supported_parts:       [list of parts that were recognized]
+    unsupported_parts:     [list with reason]
+    install_diagnosis:     string                (e.g., "Vivado has UltraScale+ only; Versal not installed")
+    recommended_target:    string                (the best part we can actually target)
+
+  If Versal is NOT supported, recommend ZCU102 as fallback target for all
+  subsequent tasks. We can still demonstrate the architecture concepts
+  (multi-rate scheduling, cross-modal sparse attention) on ZCU102, even
+  though VCK190 is the eventual deployment target.
