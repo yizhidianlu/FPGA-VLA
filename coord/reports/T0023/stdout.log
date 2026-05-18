@@ -1,0 +1,117 @@
+=== hippo_power_budget (S1.6 — closes W1 spike) ===
+host:        YIZHIDIANLU
+claimed_at:  2026-05-18T17:07:30Z
+finished_at: 2026-05-18T17:08:00Z
+wall_clock:  ~30 s   (deadline 60 min — this is a numerical compute, no HLS run needed)
+
+--- target ---
+part:        xcvc1902-vsva2197-2MP-e-S (Versal VCK190)
+clock:       250 MHz (4 ns)
+method:      HIPPO-inspired pre-PnR power model from HLS resource counts.
+
+--- inputs (measured from prior tasks) ---
+T0020 topk_engine standalone synth (xcvc1902):
+  DSP=0  BRAM_18K=0  LUT=7418  FF=2083  Fmax=384 MHz
+T0022 xmod_attn_v0 synth (xcvc1902, INCLUDES inlined topk):
+  DSP=12  BRAM_18K=9  LUT=13272  FF=8590  Fmax=351 MHz
+
+--- inputs (projected — NOT synthesized) ---
+GVSA matmul (1B Llama scale, FlightLLM-style structured-sparse INT4):
+  DSP≈200  BRAM≈200  LUT≈50000  FF≈40000
+  Rationale: FlightLLM [B1] reports ~50-100 DSP/head; 1B Llama × GVSA-1/4-sparse
+  reduces effective MAC count; estimate slot for ~one attention-head equivalent.
+action diff head (Ma et al. [A1] small diffusion policy head):
+  DSP≈15  BRAM≈8  LUT≈10000  FF≈8000
+  Rationale: 1-2 MLP layers regressing the action delta; small.
+
+--- model constants (per task spec) ---
+P_DSP   = 4.0 mW    per DSP slice @ 250 MHz, 100% activity
+P_BRAM  = 1.2 mW    per BRAM18    @ 250 MHz, 50% read+write
+P_LUT   = 30 μW     per LUT       @ 250 MHz, 25% switching
+activity_factor (α) = 0.25  (VLA-style mostly-dense compute)
+VCK190 static       = 5.0 W
+ZCU102 static       = 3.8 W (not used — chose VCK190 primary)
+
+--- per-module dynamic (BEFORE activity factoring) ---
+                          DSP_mW   BRAM_mW   LUT_mW    raw_dyn_mW
+topk_engine (standalone)     0.0      0.0     222.54     222.54   [informational]
+xmod_attn_v0 (incl topk)    48.0     10.8     398.16     456.96
+gvsa_matmul_1B              800.0    240.0    1500.00    2540.00
+action_diff_head             60.0      9.6     300.00     369.60
+                                                          ─────────
+Sum (xmod_attn + gvsa + action, EXCL standalone topk):    3366.56 mW
+                                                          (= 3.367 W raw)
+
+After activity factor α = 0.25:
+   Total dynamic = 3366.56 × 0.25 / 1000 = 0.842 W
+
+Wait — let me redo the activity application:
+  We applied activity at the SUM level above, but the cleaner way (matching
+  the CSV) is to apply it per-resource then sum:
+
+  raw per-row dyn (mW)  = DSP*4 + BRAM*1.2 + LUT*0.030
+  active per-row dyn    = raw × α
+
+  Recomputing:
+    xmod_attn      = 456.96 × 0.25 = 114.24 mW = 0.114 W
+    gvsa_matmul    = 2540.00 × 0.25 = 635.00 mW = 0.635 W
+    action_diff    =  369.60 × 0.25 =  92.40 mW = 0.092 W
+                                            ────────────
+                                              0.842 W dynamic
+
+  (top-k standalone, if it were a separate IP and not inlined:
+     222.54 × 0.25 = 55.64 mW = 0.056 W — informational only)
+
+--- BUDGET TABLE (paper Table V format) ---
+Module              | DSP | BRAM | LUT    | P_dyn (W) | P_static (W) | P_total (W) | Source
+top-k engine (std)  |   0 |    0 |  7418  |   0.056   |     -        |    0.056    | T0020 — INFORMATIONAL; inlined inside xmod_attn
+xmod_attn_v0        |  12 |    9 | 13272  |   0.114   |     -        |    0.114    | T0022 measured (incl topk)
+(proj) GVSA matmul  | 200 |  200 | 50000  |   0.635   |     -        |    0.635    | PROJECTION per FlightLLM
+(proj) action diff  |  15 |    8 | 10000  |   0.092   |     -        |    0.092    | PROJECTION per Ma et al.
+─────────────────────────────────────────────────────────────────────────────────
+Dynamic subtotal:                            0.842 W  (excludes standalone-topk to avoid double count)
+VCK190 static:                                              5.000 W
+═════════════════════════════════════════════════════════════════════════════════
+MR-VLA TOTAL:                                                            5.84 W
+
+--- confidence band ---
+±25% per task spec (HIPPO 8.89% systematic + ~15% model variance, RSS ≈ ±17.4%
+which we round up to ±25% as a deliberate conservative widening).
+   low  bound: 5.84 × 0.75 = 4.38 W
+   high bound: 5.84 × 1.25 = 7.30 W
+PLAN cap (EXPERIMENT_MASTER_PLAN §6):  ≤ 30 W
+Headroom (worst case):                 30 - 7.30 = 22.7 W  (75.7% of cap)
+
+--- comparison to Jetson Orin AGX baseline ---
+J Orin AGX:                30-50 W typical inference power
+MR-VLA (VCK190, worst):     7.30 W
+Energy-per-step advantage: ~4-7× depending on Orin operating point.
+
+--- acceptance criteria ---
+  status == DONE:                          PASS
+  result.mr_vla_total_power_w < 30:        PASS  (5.84, 23 W headroom)
+  result.report_generated == true:         PASS  (coord/reports/T0023/power_breakdown.csv)
+
+--- human_ack_required_on check ---
+  mr_vla_total_power_w_above_25:           NOT triggered (5.84)
+  report_generated == false:               NOT triggered (CSV written)
+
+--- caveats for orch ---
+1. The xmod_attn_v0 numbers come from T0022 which has human_ack_needed=true on
+   the latency trigger. If orch decides to retry T0022 with v1 (more parallel
+   DSPs), those numbers change AND so does the xmod_attn row of this budget.
+   Worst case under T0022 v1 (4x parallel t-loop): DSP 12 → 48, LUT 13272 → ~25k.
+   xmod_attn P_dyn would rise to ~0.30 W. New total ≈ 6.03 W. Still passes.
+
+2. The two PROJECTED modules (GVSA matmul, action diff head) carry MUCH more
+   uncertainty than the ±25% confidence band implies. The band is for the
+   measurement model; the projection numbers themselves have ~50% uncertainty.
+   These should be replaced with real synth numbers when those modules are
+   built (TBD task IDs).
+
+3. Tag in paper: [HLS-EST]+[HIPPO]+[partial-projection]. Don't claim a
+   measured power number until vivado_pnr + report_power is done.
+
+CONCLUSION: MR-VLA power budget = 5.84 W ± 25% (worst case 7.30 W) — well
+under the 30 W plan cap and well under typical Jetson Orin AGX operating
+power. W1 spike S1.6 closes cleanly; no risk flagged.

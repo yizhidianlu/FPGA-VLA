@@ -1,7 +1,7 @@
 {
   "worker": "remote_claude_win",
   "platform": "windows",
-  "ts": "2026-05-18T17:07:00Z",
+  "ts": "2026-05-18T17:08:30Z",
   "pid": 0,
   "uptime_sec": 0,
   "vitis": "OK",
@@ -9,9 +9,10 @@
   "claude_cli": "OK",
   "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
   "current_task": "",
-  "tasks_completed_session": 7,
-  "last_completed_task": "T0022",
-  "last_completed_summary": "T0022 xmod_attn_v0: csim cos=1.0, Fmax 351MHz, DSP 12 / LUT 13272 / BRAM 9, Latency 0.674ms — caps met, latency trigger fired (await ACK).",
+  "tasks_completed_session": 8,
+  "last_completed_task": "T0023",
+  "last_completed_summary": "T0023 HIPPO power budget: 5.84 W ± 25% — W1 spike S1.6 closes. All 8 W1 tasks DONE this session.",
+  "outstanding_ack_needed": ["T0022:latency_above_5000_cycles"],
   "protocol_version": "1.0",
   "session_kind": "claude_code_interactive"
 }

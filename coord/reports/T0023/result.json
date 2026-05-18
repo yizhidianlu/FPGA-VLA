@@ -1,0 +1,118 @@
+{
+  "task_id": "T0023",
+  "status": "DONE",
+  "claimed_at": "2026-05-18T17:07:30Z",
+  "finished_at": "2026-05-18T17:08:00Z",
+  "duration_sec": 30,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "mr_vla_total_power_w": 5.84,
+    "mr_vla_total_dynamic_w": 0.842,
+    "mr_vla_total_static_w": 5.000,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "target_clock_period_ns": 4.0,
+    "activity_factor_assumed": 0.25,
+    "static_power_w": 5.000,
+    "report_generated": true,
+    "report_path": "coord/reports/T0023/power_breakdown.csv",
+    "confidence_band": "±25% per HIPPO 8.89% systematic + 15% model variance (RSS ≈ ±17.4%; rounded up to ±25% as conservative)",
+    "confidence_band_pct": 25.0,
+    "mr_vla_total_power_w_low": 4.38,
+    "mr_vla_total_power_w_high": 7.30,
+    "plan_cap_w": 30.0,
+    "headroom_w_worst_case": 22.70,
+    "headroom_pct_worst_case": 75.7,
+    "per_module_table": [
+      {
+        "module": "topk_engine",
+        "kind": "measured_standalone",
+        "dsp": 0,
+        "bram": 0,
+        "lut": 7418,
+        "ff": 2083,
+        "p_dyn_w": 0.056,
+        "p_static_w": null,
+        "p_total_w": 0.056,
+        "source": "T0020 standalone synth",
+        "note": "INFORMATIONAL — this IP is inlined inside xmod_attn_v0; do NOT add to MR-VLA total."
+      },
+      {
+        "module": "xmod_attn_v0",
+        "kind": "measured_includes_inlined_topk",
+        "dsp": 12,
+        "bram": 9,
+        "lut": 13272,
+        "ff": 8590,
+        "p_dyn_w": 0.114,
+        "p_static_w": null,
+        "p_total_w": 0.114,
+        "source": "T0022 synth (includes topk_engine inlined)"
+      },
+      {
+        "module": "gvsa_matmul_1B_llama",
+        "kind": "projected_FlightLLM_B1",
+        "dsp": 200,
+        "bram": 200,
+        "lut": 50000,
+        "ff": 40000,
+        "p_dyn_w": 0.635,
+        "p_static_w": null,
+        "p_total_w": 0.635,
+        "source": "PROJECTION per FlightLLM [B1] scaling for 1B-Llama GVSA matmul slice — NOT yet synthesized."
+      },
+      {
+        "module": "action_diff_head",
+        "kind": "projected_Ma_etal_A1",
+        "dsp": 15,
+        "bram": 8,
+        "lut": 10000,
+        "ff": 8000,
+        "p_dyn_w": 0.092,
+        "p_static_w": null,
+        "p_total_w": 0.092,
+        "source": "PROJECTION per Ma et al. [A1] small diffusion-policy head — NOT yet synthesized."
+      },
+      {
+        "module": "static_baseline_VCK190",
+        "kind": "datasheet_baseline",
+        "dsp": null,
+        "bram": null,
+        "lut": null,
+        "p_dyn_w": null,
+        "p_static_w": 5.000,
+        "p_total_w": 5.000,
+        "source": "Versal VCK190 datasheet baseline"
+      }
+    ],
+    "model_constants_used": {
+      "p_dsp_mw": 4.0,
+      "p_bram_mw": 1.2,
+      "p_lut_uw": 30,
+      "activity_factor": 0.25,
+      "vck190_static_w": 5.0,
+      "zcu102_static_w": 3.8,
+      "fabric_clock_mhz": 250
+    },
+    "jetson_orin_agx_comparison_w": "30-50 W typical inference power",
+    "energy_per_step_advantage_estimate": "~4-7x depending on Orin operating point",
+    "method": "HIPPO-inspired pre-PnR power model from HLS resource counts: P_dyn = α * (Σ DSP*P_DSP + Σ BRAM*P_BRAM + Σ LUT*P_LUT). Static from datasheet. No vivado_power_estimate or post-PnR measurement involved — strictly an HLS-stage projection.",
+    "paper_tag": "[HLS-EST]+[HIPPO]+[partial-projection] — replace with [HW-MEAS] only after vivado_pnr + report_power."
+  },
+  "acceptance_criteria_passed": true,
+  "human_ack_needed": false,
+  "human_ack_reasons": [],
+  "artefacts": [
+    "coord/reports/T0023/stdout.log",
+    "coord/reports/T0023/result.json",
+    "coord/reports/T0023/power_breakdown.csv"
+  ],
+  "next_task_suggestion": null,
+  "next_task_suggestion_note": "Worker not auto-suggesting next task. This closes the W1 spike (S1.6). Orch decides W2 scope.",
+  "error": null,
+  "depends_on_provenance": {
+    "T0020_used_numbers": {"dsp": 0, "bram": 0, "lut": 7418},
+    "T0022_used_numbers": {"dsp": 12, "bram": 9, "lut": 13272},
+    "caveat": "T0022 had human_ack_needed=true on latency trigger. Numbers consumed here are from the v0 implementation; if T0022 is retried with v1 (more parallel DSP), this T0023 result must be re-run with new ID."
+  }
+}

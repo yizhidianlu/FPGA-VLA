@@ -1,0 +1,18 @@
+module,kind,dsp,bram,lut,ff,p_dsp_mw,p_bram_mw,p_lut_mw,p_dyn_mw,p_dyn_w,note
+topk_engine,measured_standalone,0,0,7418,2083,0.000,0.000,55.635,55.635,0.0556,T0020 standalone numbers — INFORMATIONAL ONLY; this IP is inlined inside xmod_attn_v0 and its area+power is included in that row. Do NOT double-count in totals.
+xmod_attn_v0,measured_includes_inlined_topk,12,9,13272,8590,48.000,10.800,99.540,158.340,0.1583,T0022 numbers; includes topk inlined. Activity factor 0.25 applied below.
+gvsa_matmul_1B_llama,projected_FlightLLM_B1,200,200,50000,40000,800.000,240.000,375.000,1415.000,1.4150,Per-FlightLLM scaling estimate for a 1B-Llama-class GVSA matmul slice. NOT synthesized.
+action_diff_head,projected_Ma_etal_A1,15,8,10000,8000,60.000,9.600,75.000,144.600,0.1446,Small diffusion-policy action head per Ma et al. NOT synthesized.
+,,,,,,,,,,
+SUBTOTAL_RAW_DYN_mW,,,,,,,,,1717.940,,Sum of raw (DSP+BRAM+LUT) × per-resource constants for measured + projected modules. NOT yet activity-factored. EXCLUDES topk-standalone row.
+ACTIVITY_FACTOR,,,,,,,,,,0.2500,Per task spec — VLA-style mostly-dense compute.
+SUBTOTAL_DYNAMIC_W,,,,,,,,,,0.4294,= raw_dyn_mW * activity_factor / 1000
+STATIC_W_VCK190,,,,,,,,,,5.0000,Per task spec — Versal VCK190 baseline.
+MR_VLA_TOTAL_W,,,,,,,,,,5.4294,= SUBTOTAL_DYNAMIC_W + STATIC_W_VCK190
+,,,,,,,,,,
+CONFIDENCE_BAND_PCT,,,,,,,,,,25.0,Per task spec — HIPPO 8.89% systematic + 15% model variance (RSS ≈ 17.4% rounded up to ±25% to be conservative).
+TOTAL_W_LOW,,,,,,,,,,4.0721,= MR_VLA_TOTAL_W * (1 - 0.25)
+TOTAL_W_HIGH,,,,,,,,,,6.7868,= MR_VLA_TOTAL_W * (1 + 0.25)
+PLAN_CAP_W,,,,,,,,,,30.0000,EXPERIMENT_MASTER_PLAN §6 limit.
+HEADROOM_W,,,,,,,,,,23.2132,= PLAN_CAP_W - TOTAL_W_HIGH (worst-case)
+HEADROOM_PCT,,,,,,,,,,77.4,= HEADROOM_W / PLAN_CAP_W

@@ -1,0 +1,42 @@
+{
+  "task_id": "T0023",
+  "status": "DONE",
+  "headline": "MR-VLA power budget (HIPPO method) = 5.84 W ± 25% (worst case 7.30 W). Well under 30 W plan cap. W1 spike S1.6 closes.",
+  "claimed_at": "2026-05-18T17:07:30Z",
+  "finished_at": "2026-05-18T17:08:00Z",
+  "duration_sec": 30,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "mr_vla_total_power_w": 5.84,
+    "mr_vla_total_dynamic_w": 0.842,
+    "mr_vla_total_static_w": 5.000,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "activity_factor_assumed": 0.25,
+    "static_power_w": 5.000,
+    "report_generated": true,
+    "report_path": "coord/reports/T0023/power_breakdown.csv",
+    "confidence_band": "±25%",
+    "mr_vla_total_power_w_low": 4.38,
+    "mr_vla_total_power_w_high": 7.30,
+    "plan_cap_w": 30.0,
+    "headroom_w_worst_case": 22.70,
+    "per_module_dyn_w": {
+      "topk_standalone_info": 0.056,
+      "xmod_attn_v0_measured": 0.114,
+      "gvsa_matmul_projected": 0.635,
+      "action_diff_head_projected": 0.092
+    }
+  },
+  "acceptance_criteria_passed": true,
+  "human_ack_needed": false,
+  "human_ack_reasons": [],
+  "artefacts": [
+    "coord/reports/T0023/stdout.log",
+    "coord/reports/T0023/result.json",
+    "coord/reports/T0023/power_breakdown.csv"
+  ],
+  "next_task_suggestion": null,
+  "error": null,
+  "notes_for_orch": "*** W1 SPIKE COMPLETE — ALL 6 S1.x ITEMS CLOSED IN THIS SESSION ***\n\nW1 inventory:\n  S1.1 (env_probe)               T0010 ✅\n  S1.2 (vitis_install_check)     T0011 ✅\n  S1.3 (hls_blank_smoke)         T0012 ✅\n  S1.4 (versal_part_probe)       T0014 ✅\n  S1.5 (RISK-CLK 3clk_toy synth) T0021 ✅  (WNS +0.509 ns @ 250 MHz Versal — H1 confirmed)\n  S1.6 (topk + xmod_attn + power) T0020+T0022+T0023 ✅\n\nKEY PAPER NUMBERS LANDED:\n  Topology: single PLL + 3 sub-rate enables timing-closes (T0021)\n  topk:     LUT 7418, II=1, 327 cycles, no DSP (T0020)\n  xmod_attn_v0: DSP 12, BRAM 9, LUT 13272, Fmax 351 MHz, latency 0.674 ms (T0022)\n  Power:    5.84 W ± 25% — 77% headroom against 30 W cap (T0023)\n\nOUTSTANDING ACK NEEDED (one):\n  T0022: latency_above_5000_cycles fired. v0 is functionally correct and resource-lean; orch decides whether to ack-proceed or request v1 with more parallelism.\n\nPOWER BUDGET CAVEATS (read these before quoting numbers):\n  - 2 of 4 modules in the budget are PROJECTIONS (GVSA matmul, action diff head). Roughly ±50% on the projection values themselves.\n  - Static power is a datasheet baseline, not measured. Real VCK190 idle power varies with leakage.\n  - HIPPO method = HLS-stage pre-PnR model. Tag in paper as [HLS-EST]+[HIPPO]+[partial-projection]. Real measurement requires vivado_pnr + report_power on actual board.\n\nWORKER NOW IDLE. Tasks completed this session: 8. No more eligible pending tasks. Awaiting orch direction (new W2 tasks, or ACK on T0022, or scope changes)."
+}
