@@ -1,0 +1,66 @@
+=== hls_blank_smoke (Windows port) ===
+host: YIZHIDIANLU
+claimed_at: 2026-05-18T16:42:00Z (approx)
+started_vitis_hls: 2026-05-18T16:42:36Z
+finished_vitis_hls: 2026-05-18T16:43:35Z
+vitis_hls duration: 59 sec (incl. tool startup)
+
+--- target ---
+part:           xcvc1902-vsva2197-2MP-e-S  (Versal AI Core, VCK190 dev board)
+clock_period:   4.0 ns  (target Fmax 250 MHz)
+top:            smoke_mac
+flow_target:    vivado
+
+--- command ---
+cmd /c '"E:\Applaction\Xilinx\Vitis_HLS\2024.1\settings64.bat" && vitis_hls -f run_hls.tcl > hls.log 2>&1'
+rc = 0
+
+--- csim ---
+Compiler:     CLANG (debug mode build)
+Source:       smoke_mac.cpp + smoke_mac_tb.cpp
+Result:       got=87360 expected=87360
+              CSim done with 0 errors.
+              *** CSIM finish ***
+csim_pass = true
+csim_elapsed = 16 s
+
+--- csynth ---
+Tool:         vitis_hls v2024.1 (SW Build 5069499)
+Pipelining:   Target II=1, Achieved II=1, Pipeline Depth=16, Loop LOOP_MAC
+Latency:      80 cycles min/max  (= 0.320 us at 4ns clock)
+Trip count:   64
+Loop constraints:  All satisfied
+Estimated Fmax:    342.47 MHz  (period 2.920 ns + uncertainty 1.08 ns, target 4.00 ns)
+Memory bursts:     Inferred MAXI bursts (some missed bursts noted; benign for smoke test)
+csynth_pass = true
+csynth_elapsed = 27 s
+total_vitis_hls_elapsed = 52 s (per Vitis self-report)
+
+--- utilization (csynth estimates, Versal xcvc1902) ---
+                BRAM_18K   DSP    FF     LUT    URAM
+Total                 4     1   5098   4589      0
+Available          1934  1968 1799680 899840    463
+Utilization (%)      ~0    ~0     ~0     ~0      0
+
+Of which:
+  control_s_axi_U   0    0    214    360   0
+  gmem0_m_axi_U     2    0   2334   2037   0
+  gmem1_m_axi_U     2    0   2334   2037   0
+  (the user MAC kernel itself uses 1 DSP for muladd; the rest is AXI interface overhead.)
+
+--- artefacts saved to coord/reports/T0012/ ---
+  smoke_mac.cpp           — source kernel
+  smoke_mac_tb.cpp        — testbench
+  run_hls.tcl             — replay script
+  hls.log                 — full vitis_hls stdout
+  smoke_mac_csynth.rpt    — per-top synthesis report (utilization, latency, interface)
+  csynth.rpt              — solution-level summary
+
+--- acceptance criteria check ---
+  status == DONE:               PASS
+  result.csim_pass == true:     PASS
+  result.csynth_pass == true:   PASS
+human_ack_required_on: ['csim_fail','csynth_fail'] — neither triggered → no ack needed.
+
+CONCLUSION: HLS toolchain validated end-to-end on Windows targeting Versal VCK190.
+Pipeline reaches II=1 with comfortable timing margin (Fmax 342 MHz vs 250 MHz target).
