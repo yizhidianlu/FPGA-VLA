@@ -1,0 +1,42 @@
+{
+  "task_id": "T0014",
+  "status": "DONE",
+  "claimed_at": "2026-05-18T16:45:10Z",
+  "finished_at": "2026-05-18T16:45:51Z",
+  "duration_sec": 41,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "versal_part_supported": true,
+    "supported_parts": [
+      "xcvc1902-vsva2197-2MP-e-S",
+      "xczu9eg-ffvb1156-2-e",
+      "xczu7ev-ffvc1156-2-e"
+    ],
+    "unsupported_parts": [],
+    "supported_families": ["versalaicore", "zynquplus"],
+    "install_diagnosis": "Vitis HLS v2024.1 install is COMPLETE for both Versal AI Core and Zynq UltraScale+ device families. All three candidate parts (VCK190 + ZCU102 + ZCU104) accepted by set_part without error. T0012 already demonstrated end-to-end csim+csynth on xcvc1902 — Versal pipeline is functional, not just metadata-only.",
+    "recommended_target": "xcvc1902-vsva2197-2MP-e-S",
+    "recommended_rationale": "Primary deployment target per EXPERIMENT_MASTER_PLAN. Both supported AND functional (proven by T0012 actually synthesizing on it). No fallback needed.",
+    "fallback_options_available": [
+      "xczu9eg-ffvb1156-2-e (ZCU102) — both supported",
+      "xczu7ev-ffvc1156-2-e (ZCU104) — both supported"
+    ],
+    "vitis_hls_elapsed_sec": 3.63,
+    "probe_method": "TCL foreach loop over candidate parts, open_solution -reset + set_part + close_solution per part, single vitis_hls process",
+    "deprecation_warning": "[HLS 200-2053] vitis_hls executable is deprecated in v2024.1; AMD recommends 'vitis-run --mode hls --tcl'. Non-blocking; flag for future handler refactor.",
+    "default_flow_target": "vivado",
+    "flow_target_note": "For Versal Vitis Kernel Flow (.xo packaging), use flow_target=vitis. csim/csynth works on either."
+  },
+  "acceptance_criteria_passed": true,
+  "human_ack_needed": false,
+  "human_ack_reasons": [],
+  "artefacts": [
+    "coord/reports/T0014/stdout.log",
+    "coord/reports/T0014/result.json",
+    "coord/reports/T0014/probe.log",
+    "coord/reports/T0014/probe_parts.tcl"
+  ],
+  "next_task_suggestion": "T0020 or T0021 (both unblocked now)",
+  "error": null
+}

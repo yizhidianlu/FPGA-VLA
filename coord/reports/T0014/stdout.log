@@ -1,0 +1,49 @@
+=== versal_part_probe ===
+host: YIZHIDIANLU
+claimed_at: 2026-05-18T16:45:10Z
+finished_at: 2026-05-18T16:45:51Z
+
+--- approach ---
+Single vitis_hls TCL invocation with a foreach loop over the 3 candidate parts.
+For each part: open_solution -reset; set_part <part>; get_part to confirm; close.
+Capture which parts succeed vs error.
+
+cmd: cmd /c '"E:\Applaction\Xilinx\Vitis_HLS\2024.1\settings64.bat" && vitis_hls -f probe_parts.tcl'
+rc = 0
+total elapsed = 3.6 seconds (Vitis self-report)
+
+--- per-part results ---
+[1/3] xcvc1902-vsva2197-2MP-e-S   (Versal AI Core, VCK190)
+      set_part OK, target device set, no warning of unsupported family
+      Confirmed by T0012 having actually run csim+csynth on this part already.
+      PROBE_PART_SUPPORTED: yes
+
+[2/3] xczu9eg-ffvb1156-2-e         (Zynq UltraScale+, ZCU102)
+      set_part OK
+      WARNING: [HLS 200-1610] Resetting target device (expected — switching from prev solution)
+      PROBE_PART_SUPPORTED: yes
+
+[3/3] xczu7ev-ffvc1156-2-e         (Zynq UltraScale+, ZCU104)
+      set_part OK
+      WARNING: [HLS 200-1610] Resetting target device (expected)
+      PROBE_PART_SUPPORTED: yes
+
+--- noteworthy ---
+- All three parts accepted by vitis_hls v2024.1 — install is healthy across the
+  Versal AI Core family AND the Zynq UltraScale+ family. Plenty of fallback room.
+- WARNING: [HLS 200-2053] vitis_hls is deprecated, prefer 'vitis-run --mode hls --tcl'.
+  Non-blocking, but flagging for orchestrator: handler scripts may want to switch
+  to vitis-run going forward.
+- INFO: [HLS 200-1505] Using default flow_target 'vivado' — for Versal we could
+  alternatively use flow_target=vitis to enable Vitis Kernel Flow (.xo packaging).
+  csim/csynth works fine on either flow_target.
+
+--- recommended_target for downstream tasks ---
+xcvc1902-vsva2197-2MP-e-S  (Versal VCK190, primary)
+  Rationale: it IS supported, and it's the deployment target per
+  EXPERIMENT_MASTER_PLAN. No need to fall back to ZCU102.
+
+--- acceptance criteria ---
+  status == DONE:                              PASS
+  result.versal_part_supported == true:        PASS
+human_ack_required_on: ['versal_part_missing'] — not triggered.

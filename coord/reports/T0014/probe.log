@@ -1,0 +1,53 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2024.1 (64-bit)
+  **** SW Build 5069499 on May 21 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 19 00:45:37 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source E:/Applaction/Xilinx/Vitis_HLS/2024.1/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] For user 'jielu' on host 'yizhidianlu' (Windows NT_amd64 version 10.0) on Tue May 19 00:45:37 +0800 2026
+INFO: [HLS 200-10] In directory 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0014'
+WARNING: [HLS 200-2053] The vitis_hls executable is deprecated. Consider using vitis-run --mode hls --tcl
+Sourcing Tcl script 'probe_parts.tcl'
+>>> probe_parts.tcl start
+INFO: [HLS 200-1510] Running: open_project probe_proj -reset 
+INFO: [HLS 200-10] Creating and opening project 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0014/probe_proj'.
+>>> trying part: xcvc1902-vsva2197-2MP-e-S (solution=sol_xcvc1902_vsva2197_2MP_e_S)
+INFO: [HLS 200-1510] Running: open_solution -reset sol_xcvc1902_vsva2197_2MP_e_S 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0014/probe_proj/sol_xcvc1902_vsva2197_2MP_e_S'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcvc1902-vsva2197-2MP-e-S 
+INFO: [HLS 200-1611] Setting target device to 'xcvc1902-vsva2197-2MP-e-S'
+  set_part OK, queried family: xcvc1902-vsva2197-2MP-e-S
+PROBE_PART_SUPPORTED: xcvc1902-vsva2197-2MP-e-S
+INFO: [HLS 200-1510] Running: close_solution 
+>>> trying part: xczu9eg-ffvb1156-2-e (solution=sol_xczu9eg_ffvb1156_2_e)
+INFO: [HLS 200-1510] Running: open_solution -reset sol_xczu9eg_ffvb1156_2_e 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0014/probe_proj/sol_xczu9eg_ffvb1156_2_e'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xczu9eg-ffvb1156-2-e 
+WARNING: [HLS 200-1610] Resetting target device to 'xczu9eg-ffvb1156-2-e'
+  set_part OK, queried family: xczu9eg-ffvb1156-2-e
+PROBE_PART_SUPPORTED: xczu9eg-ffvb1156-2-e
+INFO: [HLS 200-1510] Running: close_solution 
+>>> trying part: xczu7ev-ffvc1156-2-e (solution=sol_xczu7ev_ffvc1156_2_e)
+INFO: [HLS 200-1510] Running: open_solution -reset sol_xczu7ev_ffvc1156_2_e 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0014/probe_proj/sol_xczu7ev_ffvc1156_2_e'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xczu7ev-ffvc1156-2-e 
+WARNING: [HLS 200-1610] Resetting target device to 'xczu7ev-ffvc1156-2-e'
+  set_part OK, queried family: xczu7ev-ffvc1156-2-e
+PROBE_PART_SUPPORTED: xczu7ev-ffvc1156-2-e
+INFO: [HLS 200-1510] Running: close_solution 
+INFO: [HLS 200-1510] Running: close_project 
+>>> probe_parts.tcl done
+INFO: [HLS 200-112] Total CPU user time: 3 seconds. Total CPU system time: 1 seconds. Total elapsed time: 3.63 seconds; peak allocated memory: 333.363 MB.

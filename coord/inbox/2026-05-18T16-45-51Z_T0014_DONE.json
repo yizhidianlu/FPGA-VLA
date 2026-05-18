@@ -1,0 +1,33 @@
+{
+  "task_id": "T0014",
+  "status": "DONE",
+  "claimed_at": "2026-05-18T16:45:10Z",
+  "finished_at": "2026-05-18T16:45:51Z",
+  "duration_sec": 41,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "versal_part_supported": true,
+    "supported_parts": [
+      "xcvc1902-vsva2197-2MP-e-S",
+      "xczu9eg-ffvb1156-2-e",
+      "xczu7ev-ffvc1156-2-e"
+    ],
+    "unsupported_parts": [],
+    "recommended_target": "xcvc1902-vsva2197-2MP-e-S",
+    "install_diagnosis": "All 3 candidate parts supported. Versal AI Core and Zynq UltraScale+ device support both installed.",
+    "vitis_hls_elapsed_sec": 3.63
+  },
+  "acceptance_criteria_passed": true,
+  "human_ack_needed": false,
+  "human_ack_reasons": [],
+  "artefacts": [
+    "coord/reports/T0014/stdout.log",
+    "coord/reports/T0014/result.json",
+    "coord/reports/T0014/probe.log",
+    "coord/reports/T0014/probe_parts.tcl"
+  ],
+  "next_task_suggestion": "T0020 (topk) OR T0021 (RISK-CLK vivado_synth) — both unblocked",
+  "error": null,
+  "notes_for_orch": "GOOD NEWS: install is healthy across both Versal AI Core and Zynq UltraScale+ families. No fallback needed — sticking with xcvc1902 as primary. Both T0020 (topk) and T0021 (RISK-CLK vivado_synth) are now unblocked; T0022 still waits on T0020. RECOMMEND running T0021 next because it's P0 (answers BLOCK-1, single-PLL+enable topology timing closure) — that's a bigger architectural risk than T0020. Also flagging: vitis_hls is deprecated in 2024.1 (warning 200-2053), AMD recommends 'vitis-run --mode hls --tcl' — handler refactor candidate."
+}
