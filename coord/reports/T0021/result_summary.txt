@@ -1,0 +1,4 @@
+WNS=0.509
+WHS=0.079
+part=xcvc1902-vsva2197-2MP-e-S
+top=tri_rate_toy

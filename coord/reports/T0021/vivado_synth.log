@@ -1,0 +1,457 @@
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 19 00:48:26 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source build_synth.tcl
+# set part "xcvc1902-vsva2197-2MP-e-S"
+# set top  "tri_rate_toy"
+# puts ">>> build_synth.tcl start"
+>>> build_synth.tcl start
+# puts ">>> target part: $part"
+>>> target part: xcvc1902-vsva2197-2MP-e-S
+# puts ">>> top:         $top"
+>>> top:         tri_rate_toy
+# read_verilog -sv ../rtl/rate_enable_gen.sv
+read_verilog: Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 630.281 ; gain = 198.402
+# read_verilog -sv ../rtl/mac_unit.sv
+# read_verilog -sv ../rtl/axis_fifo.sv
+# read_verilog -sv ../rtl/tri_rate_toy.sv
+# read_xdc ../constraints/tri_rate_toy.xdc
+# puts ">>> running synth_design -top $top -part $part"
+>>> running synth_design -top tri_rate_toy -part xcvc1902-vsva2197-2MP-e-S
+# synth_design -top $top -part $part -mode out_of_context
+Command: synth_design -top tri_rate_toy -part xcvc1902-vsva2197-2MP-e-S -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-86] Your Synthesis license expires in 20 day(s)
+INFO: [Device 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 4104
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2066.031 ; gain = 445.027
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'tri_rate_toy' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/tri_rate_toy.sv:14]
+INFO: [Synth 8-6157] synthesizing module 'rate_enable_gen' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/rate_enable_gen.sv:12]
+	Parameter VISION_CYCLES bound to: 32'sb00000000011111110010100000010101 
+	Parameter LANGUAGE_CYCLES bound to: 32'sb00001110111001101011001010000000 
+	Parameter ACTION_CYCLES bound to: 32'sb00000000001001100010010110100000 
+INFO: [Synth 8-6155] done synthesizing module 'rate_enable_gen' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/rate_enable_gen.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'axis_fifo' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/axis_fifo.sv:7]
+	Parameter WIDTH bound to: 32'sb00000000000000000000000000100000 
+	Parameter DEPTH bound to: 32'sb00000000000000000000000001000000 
+INFO: [Synth 8-6155] done synthesizing module 'axis_fifo' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/axis_fifo.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'mac_unit' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/mac_unit.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'mac_unit' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/mac_unit.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'axis_fifo__parameterized0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/axis_fifo.sv:7]
+	Parameter WIDTH bound to: 32'sb00000000000000000000000000100000 
+	Parameter DEPTH bound to: 32'sb00000000000000000000000000001000 
+INFO: [Synth 8-6155] done synthesizing module 'axis_fifo__parameterized0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/axis_fifo.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'tri_rate_toy' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/tri_rate_toy.sv:14]
+WARNING: [Synth 8-7129] Port m_action_tready in module tri_rate_toy is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2176.805 ; gain = 555.801
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2176.805 ; gain = 555.801
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2176.805 ; gain = 555.801
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 2176.805 ; gain = 0.000
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Applaction/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/constraints/tri_rate_toy.xdc]
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2378.676 ; gain = 32.219
+Finished Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/constraints/tri_rate_toy.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2378.676 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 2378.676 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 2378.676 ; gain = 757.672
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcvc1902-vsva2197-2MP-e-S
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 2378.676 ; gain = 757.672
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 2378.676 ; gain = 757.672
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3936] Found unconnected internal register 'prod_w_reg' and it is trimmed from '64' to '32' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/rtl/mac_unit.sv:21]
+INFO: [Synth 8-6904] The RAM "axis_fifo:/mem_reg" of size (depth=64 x width=32) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "axis_fifo__parameterized0:/mem_reg" of size (depth=8 x width=32) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 2378.676 ; gain = 757.672
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    7 Bit       Adders := 3     
+	   2 Input    4 Bit       Adders := 2     
++---Registers : 
+	               32 Bit    Registers := 3     
+	                7 Bit    Registers := 2     
+	                4 Bit    Registers := 2     
+	                1 Bit    Registers := 3     
++---Multipliers : 
+	              32x32  Multipliers := 3     
++---RAMs : 
+	               2K Bit	(64 X 32 bit)          RAMs := 1     
+	              256 Bit	(8 X 32 bit)          RAMs := 1     
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1968 (col length:164)
+BRAMs: 1934 (col length: RAMB18 168 RAMB36 84)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+INFO: [Synth 8-6904] The RAM "tri_rate_toy/u_vision_fifo/mem_reg" of size (depth=64 x width=32) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+DSP Report: Generating DSP u_mac_attn/prod_w0, operation Mode is: A2*B.
+DSP Report: register u_mac_attn/prod_w0 is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: operator u_mac_attn/prod_w0 is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: operator u_mac_attn/prod_w0 is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: Generating DSP u_mac_attn/prod_w0, operation Mode is: (PCIN>>23)+A*B2.
+DSP Report: register u_mac_vision/acc_reg is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: operator u_mac_attn/prod_w0 is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: operator u_mac_attn/prod_w0 is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: Generating DSP u_mac_attn/prod_w0, operation Mode is: A*B2.
+DSP Report: register u_mac_attn/prod_w0 is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: operator u_mac_attn/prod_w0 is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: operator u_mac_attn/prod_w0 is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: Generating DSP u_mac_attn/prod_w0, operation Mode is: (PCIN>>23)+A*B2.
+DSP Report: register u_mac_vision/acc_reg is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: operator u_mac_attn/prod_w0 is absorbed into DSP u_mac_attn/prod_w0.
+DSP Report: operator u_mac_attn/prod_w0 is absorbed into DSP u_mac_attn/prod_w0.
+INFO: [Synth 8-6904] The RAM "tri_rate_toy/u_attn_action_fifo/mem_reg" of size (depth=8 x width=32) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+WARNING: [Synth 8-7129] Port m_action_tready in module tri_rate_toy is either unconnected or has no load
+INFO: [Synth 8-6904] The RAM "tri_rate_toy/u_vision_fifo/mem_reg" of size (depth=64 x width=32) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "tri_rate_toy/u_attn_action_fifo/mem_reg" of size (depth=8 x width=32) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 2446.004 ; gain = 825.000
+---------------------------------------------------------------------------------
+ Sort Area is  u_mac_attn/prod_w0_0 : 0 0 : 4030 5862 : Used 1 time 0
+ Sort Area is  u_mac_attn/prod_w0_0 : 0 1 : 1832 5862 : Used 1 time 0
+ Sort Area is  u_mac_attn/prod_w0_3 : 0 0 : 1821 2742 : Used 1 time 0
+ Sort Area is  u_mac_attn/prod_w0_3 : 0 1 : 921 2742 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Preliminary Mapping Report (see note below)
++-------------+----------------------------+-----------+----------------------+---------------+
+|Module Name  | RTL Object                 | Inference | Size (Depth x Width) | Primitives    | 
++-------------+----------------------------+-----------+----------------------+---------------+
+|tri_rate_toy | u_vision_fifo/mem_reg      | Implied   | 64 x 32              | RAM64M8 x 5   | 
+|tri_rate_toy | u_attn_action_fifo/mem_reg | Implied   | 8 x 32               | RAM32M16 x 3  | 
++-------------+----------------------------+-----------+----------------------+---------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++-------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name  | DSP Mapping     | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++-------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|tri_rate_toy | A2*B            | 24     | 10     | -      | -      | 58     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|tri_rate_toy | (PCIN>>23)+A*B2 | 10     | 10     | -      | -      | 58     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|tri_rate_toy | A*B2            | 24     | 24     | -      | -      | 58     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|tri_rate_toy | (PCIN>>23)+A*B2 | 24     | 10     | -      | -      | 58     | 0    | 1    | -    | -    | -     | 0    | 0    | 
++-------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 3137.309 ; gain = 1516.305
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:38 ; elapsed = 00:00:43 . Memory (MB): peak = 3166.406 ; gain = 1545.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Final Mapping Report
++-------------+----------------------------+-----------+----------------------+---------------+
+|Module Name  | RTL Object                 | Inference | Size (Depth x Width) | Primitives    | 
++-------------+----------------------------+-----------+----------------------+---------------+
+|tri_rate_toy | u_vision_fifo/mem_reg      | Implied   | 64 x 32              | RAM64M8 x 5   | 
+|tri_rate_toy | u_attn_action_fifo/mem_reg | Implied   | 8 x 32               | RAM32M16 x 3  | 
++-------------+----------------------------+-----------+----------------------+---------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+RETIMING: backward move register u_mac_attn/prod_w_reg[29] from retiming_backward is deleted already 
+RETIMING: backward move register u_mac_attn/prod_w_reg[27] from retiming_backward is deleted already 
+RETIMING: backward move register u_mac_attn/prod_w_reg[25] from retiming_backward is deleted already 
+INFO: [Synth 8-5816] Retiming module `tri_rate_toy`
+   Worst Slack before retiming is -1.189 ns and worst slack after retiming is -0.126 ns
+   Numbers of local forward move = 0, and local backward move = 1
+
+	Retimed registers names:
+		u_mac_attn/prod_w_reg[31]_bret
+		u_mac_attn/prod_w_reg[31]_bret__0
+		u_mac_attn/prod_w_reg[31]_bret__1
+		u_mac_attn/prod_w_reg[31]_bret__10
+		u_mac_attn/prod_w_reg[31]_bret__11
+		u_mac_attn/prod_w_reg[31]_bret__12
+		u_mac_attn/prod_w_reg[31]_bret__13
+		u_mac_attn/prod_w_reg[31]_bret__14
+		u_mac_attn/prod_w_reg[31]_bret__15
+		u_mac_attn/prod_w_reg[31]_bret__16
+		u_mac_attn/prod_w_reg[31]_bret__17
+		u_mac_attn/prod_w_reg[31]_bret__2
+		u_mac_attn/prod_w_reg[31]_bret__3
+		u_mac_attn/prod_w_reg[31]_bret__4
+		u_mac_attn/prod_w_reg[31]_bret__5
+		u_mac_attn/prod_w_reg[31]_bret__6
+		u_mac_attn/prod_w_reg[31]_bret__7
+		u_mac_attn/prod_w_reg[31]_bret__8
+		u_mac_attn/prod_w_reg[31]_bret__9
+ 
+
+INFO: [Synth 8-5816] Retiming module `tri_rate_toy' done
+
+
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:39 ; elapsed = 00:00:43 . Memory (MB): peak = 3166.406 ; gain = 1545.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:42 ; elapsed = 00:00:47 . Memory (MB): peak = 3166.406 ; gain = 1545.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:42 ; elapsed = 00:00:47 . Memory (MB): peak = 3166.406 ; gain = 1545.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:42 ; elapsed = 00:00:47 . Memory (MB): peak = 3166.406 ; gain = 1545.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:42 ; elapsed = 00:00:47 . Memory (MB): peak = 3166.406 ; gain = 1545.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:42 ; elapsed = 00:00:47 . Memory (MB): peak = 3166.406 ; gain = 1545.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:42 ; elapsed = 00:00:47 . Memory (MB): peak = 3166.406 ; gain = 1545.402
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Retiming Report:
++--------------------+----+
+|Retiming summary:   |    | 
++--------------------+----+
+|Forward Retiming    | 0  | 
+|Backward Retiming   | 1  | 
+|New registers added | 19 | 
+|Registers deleted   | 10 | 
++--------------------+----+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++-------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name  | DSP Mapping      | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++-------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|tri_rate_toy | (A'*B)'          | 23     | 9      | -      | -      | 58     | 1    | 0    | -    | -    | -     | 0    | 1    | 
+|tri_rate_toy | A*B'             | 23     | 23     | -      | -      | 58     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|tri_rate_toy | (PCIN>>23+A*B')' | 0      | 9      | -      | -      | 58     | 0    | 1    | -    | -    | -     | 0    | 1    | 
++-------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------------------+------+
+|      |Cell              |Count |
++------+------------------+------+
+|1     |DSP_ALUADD        |     3|
+|2     |DSP_ALUMUX        |     3|
+|3     |DSP_ALUREG        |     3|
+|4     |DSP_A_B_DATA58    |     3|
+|7     |DSP_C_DATA58      |     3|
+|8     |DSP_MULTIPLIER58  |     3|
+|9     |DSP_M_DATA58      |     3|
+|10    |DSP_OUTPUT58      |     3|
+|12    |DSP_PATDET        |     3|
+|13    |DSP_PREADD58      |     3|
+|14    |DSP_PREADD_DATA58 |     3|
+|16    |DSP_SRCMX_OPTINV  |     3|
+|17    |LOOKAHEAD8        |    28|
+|22    |LUT1              |     6|
+|23    |LUT2              |    10|
+|24    |LUT3              |    40|
+|25    |LUT4              |    20|
+|26    |LUT5              |    12|
+|27    |LUT6              |    11|
+|28    |LUT6CY            |   212|
+|29    |RAM32M            |     1|
+|30    |RAM32M16          |     2|
+|31    |RAM64M8           |     5|
+|32    |FDRE              |   287|
++------+------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:42 ; elapsed = 00:00:47 . Memory (MB): peak = 3166.406 ; gain = 1545.402
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 3 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:28 ; elapsed = 00:00:38 . Memory (MB): peak = 3166.406 ; gain = 1343.531
+Synthesis Optimization Complete : Time (s): cpu = 00:00:43 ; elapsed = 00:00:48 . Memory (MB): peak = 3166.406 ; gain = 1545.402
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 3166.406 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 223 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/constraints/tri_rate_toy.xdc]
+create_clock: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 3166.406 ; gain = 0.000
+Finished Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/constraints/tri_rate_toy.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3166.406 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 223 instances were transformed.
+  DSP58 => DSP58 (DSP_ALUADD, DSP_ALUMUX, DSP_ALUREG, DSP_A_B_DATA58, DSP_C_DATA58, DSP_MULTIPLIER58, DSP_M_DATA58, DSP_OUTPUT58, DSP_PATDET, DSP_PREADD58, DSP_PREADD_DATA58, DSP_SRCMX_OPTINV, VCC): 3 instances
+  LUT6CY => LUT6CY (LUTCY1, LUTCY2): 212 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 1 instance 
+  RAM32M16 => RAM32M16 (RAMD32(x14), RAMS32(x2)): 2 instances
+  RAM64M8 => RAM64M8 (RAMD64E5(x8), VCC): 5 instances
+
+Synth Design complete | Checksum: 21ee096a
+INFO: [Common 17-83] Releasing license: Synthesis
+41 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:03 ; elapsed = 00:01:13 . Memory (MB): peak = 3166.406 ; gain = 2536.125
+# puts ">>> reporting utilization, timing, clocks, clock_interaction"
+>>> reporting utilization, timing, clocks, clock_interaction
+# report_utilization -file synth_util.rpt
+# report_timing_summary -file timing_summary.rpt -warn_on_violation -no_header
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2MP, Temperature grade: E, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "clk" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+report_timing_summary: Time (s): cpu = 00:00:44 ; elapsed = 00:00:47 . Memory (MB): peak = 3982.570 ; gain = 816.164
+# report_clock_interaction -file clock_interaction.rpt -delay_type min_max
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2MP, Temperature grade: E, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+# report_clocks -file clocks.rpt
+# set wns_paths [get_timing_paths -setup -max_paths 1 -nworst 1]
+# if {[llength $wns_paths] > 0} {
+#     set wns [get_property SLACK [lindex $wns_paths 0]]
+# } else {
+#     set wns "n/a"
+# }
+# set whs_paths [get_timing_paths -hold -max_paths 1 -nworst 1]
+# if {[llength $whs_paths] > 0} {
+#     set whs [get_property SLACK [lindex $whs_paths 0]]
+# } else {
+#     set whs "n/a"
+# }
+# set fp [open "result_summary.txt" w]
+# puts $fp "WNS=$wns"
+# puts $fp "WHS=$whs"
+# puts $fp "part=$part"
+# puts $fp "top=$top"
+# close $fp
+# puts ">>> WNS_NS=$wns"
+>>> WNS_NS=0.509
+# puts ">>> WHS_NS=$whs"
+>>> WHS_NS=0.079
+# write_checkpoint -force top_synth.dcp
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 3991.645 ; gain = 0.023
+INFO: [Timing 38-480] Writing timing data to binary archive.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0021/vivado/top_synth.dcp' has been generated.
+# puts ">>> build_synth.tcl done"
+>>> build_synth.tcl done
+# exit 0
+INFO: [Common 17-206] Exiting Vivado at Tue May 19 00:50:44 2026...
