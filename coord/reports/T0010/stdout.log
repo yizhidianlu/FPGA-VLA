@@ -1,0 +1,41 @@
+=== env_probe (Windows port) ===
+host: YIZHIDIANLU
+os: Microsoft Windows 11 家庭中文版 build 26200
+date: 2026-05-19T (executed by Claude Code worker session)
+
+--- gpu ---
+NVIDIA GeForce RTX 3060 Laptop GPU, 6144 MiB, 546.30, 8.6
+
+--- cpu / ram / disk ---
+cpu_logical_cores: 16
+ram_gb: 15.9
+disk_C_free_gb: 100.7
+disk_C_total_gb: 200
+disk_E_free_gb: 274.9
+
+--- python ---
+Python 3.13.13 (E:\Applaction\Miniconda3\python.exe)
+
+--- xilinx tools (paths only; version probe deferred to T0011) ---
+vitis_hls: E:\Applaction\Xilinx\Vitis_HLS\2024.1\bin\vitis_hls.bat (exists)
+vivado:    E:\Applaction\Xilinx\Vivado\2024.1\bin\vivado.bat (exists)
+v++:       E:\Applaction\Xilinx\Vitis\2024.1\bin\v++.bat (exists)
+aiecompiler.bat: NOT found in Vitis\2024.1\bin (will recheck in T0011)
+Vitis settings64.bat:     present
+Vitis_HLS settings64.bat: present
+Vivado settings64.bat:    present
+
+--- git ---
+git version 2.54.0.windows.1
+HEAD: cda435f61985bfe6affbf715b0905b11f330fd01
+
+--- claude cli ---
+C:\Users\jielu\.local\bin\claude.exe
+
+--- NOTE ---
+This env_probe was run by an interactive Claude Code worker session, not the
+remote_worker.ps1 daemon. T0010 was found stale in coord/tasks/claimed/ from
+a prior PowerShell-daemon invocation that started but never wrote result.json
+(only _claude_prompt.txt was left). Taking ownership and completing.
+
+Worker version: claude-code-interactive-v1

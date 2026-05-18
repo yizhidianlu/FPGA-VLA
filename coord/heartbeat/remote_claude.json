@@ -1,13 +1,15 @@
-﻿{
-    "current_task":  "",
-    "platform":  "windows",
-    "ts":  "2026-05-18T16:33:50Z",
-    "vivado":  "OK",
-    "protocol_version":  "1.0",
-    "pid":  24840,
-    "gpu":  "NVIDIA GeForce RTX 3060 Laptop GPU",
-    "worker":  "remote_claude_win",
-    "vitis":  "OK",
-    "uptime_sec":  1469,
-    "claude_cli":  "OK"
+{
+  "worker": "remote_claude_win",
+  "platform": "windows",
+  "ts": "2026-05-18T16:40:06Z",
+  "pid": 0,
+  "uptime_sec": 0,
+  "vitis": "OK",
+  "vivado": "OK",
+  "claude_cli": "OK",
+  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+  "current_task": "T0010",
+  "protocol_version": "1.0",
+  "session_kind": "claude_code_interactive",
+  "session_note": "Driven by interactive Claude Code session (not remote_worker.ps1 daemon). Single human-supervised tick loop."
 }
