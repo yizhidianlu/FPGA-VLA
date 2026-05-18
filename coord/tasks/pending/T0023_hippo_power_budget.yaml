@@ -1,0 +1,79 @@
+task_id: T0023
+created_by: orchestrator
+created_at: 2026-05-19T00:50:00Z
+type: hls_csynth                      # we'll use HLS report-based estimation; HIPPO is the underlying method
+priority: P0                          # closes the 6th W1 spike (S1.6) before any W2 work
+depends_on: [T0022]                   # need xmod_attn_v0 synthesized first to budget around
+deadline_minutes: 60
+params:
+  module_name: mr_vla_power_estimate
+  description: |
+    *** Closes W1 spike S1.6 — pre-HLS power budgeting per HIPPO [F5] method. ***
+
+    HIPPO [F5, ICCAD'25] reports 8.89 % mean dynamic-power error vs post-PnR
+    measurement, achieved via HLS-stage hierarchy-preserving power modeling.
+    For MR-VLA W1 (no real board yet), this gives the FIRST [HW-EST] power
+    number for paper §V Table V's "power" column.
+
+    Method (Claude executes):
+      1. Take the synthesized .rpt files from T0020 (top-k engine) and
+         T0022 (xmod_attn_v0). Read DSP, BRAM, LUT, FF utilization.
+      2. Open both projects in vitis_hls and run:
+            open_project <hls_proj>
+            open_solution sol1
+            export_design -evaluate verilog -format ip_catalog
+         (this gives detailed per-module resource breakdown)
+      3. For each module, compute estimated dynamic power using:
+            P_dyn = α * (Σ DSP_w × P_DSP_each + Σ LUT × P_LUT_each + Σ BRAM × P_BRAM_each)
+         where reference per-resource power constants for Versal VCK190 / ZCU102:
+            P_DSP_each   ≈ 4.0 mW @ 250 MHz, 100% activity
+            P_BRAM_each  ≈ 1.2 mW @ 250 MHz, 50% read+write
+            P_LUT_each   ≈ 0.03 mW @ 250 MHz, 25% switching
+            activity factor α ≈ 0.25 for VLA-style mostly-dense compute
+      4. Add static power baseline (target part datasheet): VCK190 ~5 W, ZCU102 ~3.8 W
+      5. Output budget table:
+            Module          | DSP | BRAM | LUT | P_dyn (W) | P_static (W) | P_total (W)
+            top-k engine    |     |      |     |           |              |
+            xmod_attn_v0    |     |      |     |           |              |
+            (projected) GVSA matmul (1B Llama)  per FlightLLM [B1] scale
+            (projected) action diff head        per Ma et al. [A1] scale
+            ─────────────────────────────────────────────────────────────
+            MR-VLA total                        | -- | -- |
+      6. Compare against EXPERIMENT_MASTER_PLAN §6 target: total ≤ 30 W
+         (so MR-VLA can plausibly fit in single VCK190's 75 W TDP envelope
+         and beat Jetson Orin AGX's typical 30-50 W on the J/step metric).
+
+  target_part_primary: xcvc1902-vsva2197-2MP-e-S
+  target_part_fallback: xczu9eg-ffvb1156-2-e
+  clock_period_ns: 4.0
+  reference_constants:
+    p_dsp_mw:  4.0
+    p_bram_mw: 1.2
+    p_lut_uw:  30
+    activity_factor: 0.25
+    vck190_static_w: 5.0
+    zcu102_static_w: 3.8
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.mr_vla_total_power_w: "< 30"      # plan target: ≤ 30 W
+  - result.report_generated: true
+human_ack_required_on:
+  - mr_vla_total_power_w_above_25
+  - report_generated: false
+notes: |
+  result.json must include:
+    per_module_table: [{module, dsp, bram, lut, p_dyn_w, p_static_w, p_total_w}]
+    mr_vla_total_power_w
+    target_part_used
+    activity_factor_assumed
+    static_power_w
+    confidence_band:   "±25% per HIPPO 8.89% systematic + 15% model variance"
+
+  Copy detailed CSV to coord/reports/T0023/power_breakdown.csv
+
+  *** This number goes directly into MR-VLA paper §V Table V Power column ***
+  *** Tag with [HLS-EST]+[HIPPO] in paper text ***
+
+  If acceptance fails (P_total > 30 W), report breakdown by module and recommend
+  which module to compress (e.g., drop precision, reduce parallelism).
