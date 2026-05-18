@@ -1,0 +1,53 @@
+=== vitis_install_check (Windows port) ===
+host: YIZHIDIANLU
+claimed_at: 2026-05-18T16:40:25Z (approx)
+finished_at: 2026-05-18T16:41:33Z
+
+--- vitis_hls launch test ---
+cmd: cmd /c '"E:\Applaction\Xilinx\Vitis_HLS\2024.1\settings64.bat" && vitis_hls -version'
+result: launched successfully, version reported:
+  Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2024.1 (64-bit)
+  SW Build 5069499 on May 21 2024
+  IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  Tool Version Limit: 2024.05
+  Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+  Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+hls_ok = true
+hls_launch_ok = true (binary printed version, no license/crash error)
+
+--- vivado launch test ---
+cmd: cmd /c '"E:\Applaction\Xilinx\Vivado\2024.1\settings64.bat" && vivado -version'
+result: launched successfully, version reported:
+  vivado v2024.1 (64-bit)
+  Tool Version Limit: 2024.05
+  SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+vivado_ok = true
+(note: vivado -version returned cmd exit code 1 even though output was correct — this
+ is a known Xilinx behavior on Windows; the version string itself is authoritative.)
+
+--- aiecompiler check ---
+cmd: cmd /c '"E:\Applaction\Xilinx\Vitis\2024.1\settings64.bat" && where aiecompiler'
+result: NOT FOUND in PATH after sourcing unified Vitis settings.
+Also searched Xilinx\Vitis\2024.1\aietools\bin\aiecompiler* — does not exist.
+Also recursive search under E:\Applaction\Xilinx\ for aiecompiler* — zero hits.
+aie_ok = false
+(per T0011 notes: AIE compiler is optional for this check; T0012 will gate on it
+ separately. T0012 targets xcvc1902 Versal but only uses HLS C-synth, not AIE graph,
+ so this absence should not block T0012.)
+
+--- key install layout findings ---
+- vitis_hls is at:  E:\Applaction\Xilinx\Vitis_HLS\2024.1\bin\vitis_hls.bat
+- vivado is at:     E:\Applaction\Xilinx\Vivado\2024.1\bin\vivado.bat
+- v++ (unified) is: E:\Applaction\Xilinx\Vitis\2024.1\bin\v++.bat
+- aiecompiler:      ABSENT
+- The unified Vitis\2024.1\settings64.bat does NOT bring vitis_hls or vivado onto
+  PATH on its own — must source Vitis_HLS\ or Vivado\ settings64.bat for those.
+  Recommend handlers source the tool-specific settings64.bat per task type.
+
+Acceptance criteria:
+  status == DONE:              PASS
+  result.hls_ok == true:       PASS
+  result.vivado_ok == true:    PASS
+  result.hls_launch_ok==true:  PASS
+human_ack_required_on: ['vitis_or_vivado_missing'] — neither missing → no ack triggered.

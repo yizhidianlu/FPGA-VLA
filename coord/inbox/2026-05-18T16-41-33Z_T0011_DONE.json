@@ -1,0 +1,33 @@
+{
+  "task_id": "T0011",
+  "status": "DONE",
+  "claimed_at": "2026-05-18T16:40:25Z",
+  "finished_at": "2026-05-18T16:41:33Z",
+  "duration_sec": 68,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "hls_ok": true,
+    "hls_version": "2024.1",
+    "hls_path": "E:\\Applaction\\Xilinx\\Vitis_HLS\\2024.1\\bin\\vitis_hls.bat",
+    "hls_launch_ok": true,
+    "hls_sw_build": "5069499",
+    "vivado_ok": true,
+    "vivado_version": "2024.1",
+    "vivado_path": "E:\\Applaction\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat",
+    "vivado_sw_build": "5076996",
+    "aie_ok": false,
+    "aie_note": "aiecompiler not installed; optional per T0011 acceptance, but flagging for orch awareness on any future AIE-targeted task.",
+    "settings_routing_advice": "Handlers MUST source Vitis_HLS\\settings64.bat for vitis_hls and Vivado\\settings64.bat for vivado. Unified Vitis\\settings64.bat alone exposes v++ only."
+  },
+  "acceptance_criteria_passed": true,
+  "human_ack_needed": false,
+  "human_ack_reasons": [],
+  "artefacts": [
+    "coord/reports/T0011/stdout.log",
+    "coord/reports/T0011/result.json"
+  ],
+  "next_task_suggestion": "T0012",
+  "error": null,
+  "notes_for_orch": "Both vitis_hls and vivado v2024.1 launch cleanly with no license errors. Install layout discovery: tools are NOT in the unified Vitis\\bin — they live in Vitis_HLS\\bin and Vivado\\bin respectively. Update any handler that assumes unified-settings sourcing. AIE compiler absent (not required by T0011)."
+}

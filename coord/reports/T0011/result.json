@@ -1,0 +1,39 @@
+{
+  "task_id": "T0011",
+  "status": "DONE",
+  "claimed_at": "2026-05-18T16:40:25Z",
+  "finished_at": "2026-05-18T16:41:33Z",
+  "duration_sec": 68,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "hls_ok": true,
+    "hls_version": "2024.1",
+    "hls_path": "E:\\Applaction\\Xilinx\\Vitis_HLS\\2024.1\\bin\\vitis_hls.bat",
+    "hls_launch_ok": true,
+    "hls_sw_build": "5069499",
+    "vivado_ok": true,
+    "vivado_version": "2024.1",
+    "vivado_path": "E:\\Applaction\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat",
+    "vivado_sw_build": "5076996",
+    "aie_ok": false,
+    "aie_version": "",
+    "aie_path": "",
+    "aie_note": "aiecompiler not installed on this machine; T0011 acceptance does not require it (optional). T0012 (HLS-only smoke on xcvc1902) should still work without AIE.",
+    "license_env": "",
+    "license_note": "vitis_hls -version succeeded without printing any license-related error; license server presumed reachable / node-locked OK.",
+    "vitis_unified_settings": "E:\\Applaction\\Xilinx\\Vitis\\2024.1\\settings64.bat",
+    "vitis_hls_settings": "E:\\Applaction\\Xilinx\\Vitis_HLS\\2024.1\\settings64.bat",
+    "vivado_settings": "E:\\Applaction\\Xilinx\\Vivado\\2024.1\\settings64.bat",
+    "settings_routing_advice": "Handlers MUST source the tool-specific settings64.bat (Vitis_HLS\\ for vitis_hls, Vivado\\ for vivado). The unified Vitis\\settings64.bat alone exposes v++ but NOT vitis_hls or vivado on this install."
+  },
+  "acceptance_criteria_passed": true,
+  "human_ack_needed": false,
+  "human_ack_reasons": [],
+  "artefacts": [
+    "coord/reports/T0011/stdout.log",
+    "coord/reports/T0011/result.json"
+  ],
+  "next_task_suggestion": "T0012",
+  "error": null
+}
