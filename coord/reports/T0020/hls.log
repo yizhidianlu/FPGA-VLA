@@ -1,0 +1,156 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2024.1 (64-bit)
+  **** SW Build 5069499 on May 21 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 19 00:57:59 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source E:/Applaction/Xilinx/Vitis_HLS/2024.1/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] For user 'jielu' on host 'yizhidianlu' (Windows NT_amd64 version 10.0) on Tue May 19 00:58:00 +0800 2026
+INFO: [HLS 200-10] In directory 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020'
+WARNING: [HLS 200-2053] The vitis_hls executable is deprecated. Consider using vitis-run --mode hls --tcl
+Sourcing Tcl script 'run_hls.tcl'
+INFO: [HLS 200-1510] Running: open_project topk_hls -reset 
+INFO: [HLS 200-10] Creating and opening project 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls'.
+INFO: [HLS 200-1510] Running: set_top topk_engine 
+INFO: [HLS 200-1510] Running: add_files topk_engine.cpp -cflags -std=c++14 
+INFO: [HLS 200-10] Adding design file 'topk_engine.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb topk_engine_tb.cpp -cflags -std=c++14 
+INFO: [HLS 200-10] Adding test bench file 'topk_engine_tb.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution sol1 -flow_target vivado 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1'.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcvc1902-vsva2197-2MP-e-S 
+INFO: [HLS 200-1611] Setting target device to 'xcvc1902-vsva2197-2MP-e-S'
+INFO: [HLS 200-1510] Running: create_clock -period 4.0 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [HLS 200-1510] Running: csim_design 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../topk_engine_tb.cpp in debug mode
+   Compiling ../../../../topk_engine.cpp in debug mode
+   Generating csim.exe
+case 0: errors=0
+case 1: errors=0
+case 2: errors=0
+case 3: errors=0
+case 4: errors=0
+total_errors=0
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-2161] Finished Command csim_design Elapsed time: 00:00:02; Allocated memory: 0.969 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.189 seconds; current allocated memory: 230.000 MB.
+INFO: [HLS 200-10] Analyzing design file 'topk_engine.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 1.534 seconds; current allocated memory: 231.812 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 186 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 3,582 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 2,148 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,769 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,769 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 2,130 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 469 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 469 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 469 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 597 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 597 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 469 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 469 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 469 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 475 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 484 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 214-291] Loop 'COMPARE_LOOP' is marked as complete unroll implied by the pipeline pragma (topk_engine.cpp:69:16)
+INFO: [HLS 214-291] Loop 'SHIFT_LOOP' is marked as complete unroll implied by the pipeline pragma (topk_engine.cpp:81:14)
+INFO: [HLS 214-291] Loop 'COMMIT_LOOP' is marked as complete unroll implied by the pipeline pragma (topk_engine.cpp:102:22)
+INFO: [HLS 214-186] Unrolling loop 'COMPARE_LOOP' (topk_engine.cpp:69:16) in function 'topk_engine' completely with a factor of 64 (topk_engine.cpp:36:0)
+INFO: [HLS 214-186] Unrolling loop 'SHIFT_LOOP' (topk_engine.cpp:81:14) in function 'topk_engine' completely with a factor of 64 (topk_engine.cpp:36:0)
+INFO: [HLS 214-186] Unrolling loop 'COMMIT_LOOP' (topk_engine.cpp:102:22) in function 'topk_engine' completely with a factor of 64 (topk_engine.cpp:36:0)
+INFO: [HLS 214-186] Unrolling loop 'INIT_LOOP' (topk_engine.cpp:54:13) in function 'topk_engine' completely with a factor of 64 (topk_engine.cpp:36:0)
+INFO: [HLS 214-248] Applying array_partition to 'top_v': Complete partitioning on dimension 1. (topk_engine.cpp:48:10)
+INFO: [HLS 214-248] Applying array_partition to 'top_i': Complete partitioning on dimension 1. (topk_engine.cpp:49:14)
+INFO: [HLS 214-248] Applying array_partition to 'new_v': Complete partitioning on dimension 1. (topk_engine.cpp:77:17)
+INFO: [HLS 214-248] Applying array_partition to 'new_i': Complete partitioning on dimension 1. (topk_engine.cpp:78:18)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 7.797 seconds; current allocated memory: 234.129 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.019 seconds; current allocated memory: 234.133 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.067 seconds; current allocated memory: 240.344 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.042 seconds; current allocated memory: 242.395 MB.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.157 seconds; current allocated memory: 266.273 MB.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.231 seconds; current allocated memory: 283.059 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'topk_engine' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'topk_engine_Pipeline_MAIN_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'MAIN_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'MAIN_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 18 seconds. CPU system time: 0 seconds. Elapsed time: 18.944 seconds; current allocated memory: 308.074 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 0.665 seconds; current allocated memory: 309.574 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'topk_engine_Pipeline_WRITE_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'WRITE_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'WRITE_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.287 seconds; current allocated memory: 309.820 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.087 seconds; current allocated memory: 309.820 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'topk_engine' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.245 seconds; current allocated memory: 310.129 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.183 seconds; current allocated memory: 310.219 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'topk_engine_Pipeline_MAIN_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'topk_engine_Pipeline_MAIN_LOOP' pipeline 'MAIN_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'topk_engine_Pipeline_MAIN_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.379 seconds; current allocated memory: 314.879 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'topk_engine_Pipeline_WRITE_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_129_6_16_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'topk_engine_Pipeline_WRITE_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 5 seconds. Elapsed time: 7.411 seconds; current allocated memory: 344.262 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'topk_engine' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'topk_engine/scores' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'topk_engine/top_scores' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'topk_engine/top_indices' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'topk_engine' to 'ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'topk_engine'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.077 seconds; current allocated memory: 346.090 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.861 seconds; current allocated memory: 354.395 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1 seconds. CPU system time: 2 seconds. Elapsed time: 1.788 seconds; current allocated memory: 361.305 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for topk_engine.
+INFO: [VLOG 209-307] Generating Verilog RTL for topk_engine.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 384.02 MHz
+INFO: [HLS 200-2161] Finished Command csynth_design Elapsed time: 00:00:44; Allocated memory: 131.609 MB.
+INFO: [HLS 200-112] Total CPU user time: 29 seconds. Total CPU system time: 10 seconds. Total elapsed time: 49.542 seconds; peak allocated memory: 361.387 MB.

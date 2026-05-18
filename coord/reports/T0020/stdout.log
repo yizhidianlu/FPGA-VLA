@@ -1,0 +1,89 @@
+=== hls_csynth topk_engine ===
+host:        YIZHIDIANLU
+claimed_at:  2026-05-18T16:51:30Z
+finished_at: 2026-05-18T16:58:49Z
+wall_clock:  ~7 min  (deadline 45 min → 16% used; 3 algorithm iterations included)
+
+--- target ---
+part:           xcvc1902-vsva2197-2MP-e-S  (Versal AI Core, VCK190)
+clock_period:   4.0 ns  (target 250 MHz)
+top:            topk_engine
+N (input):      256 signed 16-bit scores
+K (output):     64 (score, index) pairs
+flow_target:    vivado
+
+--- algorithm journey ---
+v1: argmin-replace (initial)
+  Per-cycle: scan top_v[64], find argmin, replace if new > min.
+  Result:    csim PASS (5/5), csynth FAIL — Fmax 15.67 MHz, II=257, LUT=9297.
+  Cause:     64-wide argmin tree = 6-level combinational compare cascade ≈ 6-8 ns
+             at 4 ns clock → pipelining collapses, slow.
+  Log:       coord/reports/T0020/hls_v1_argmin_replace.log
+
+v2: systolic insertion sort (rewrite)
+  Per-cell logic: 1 compare with input + 1 mux (own / right-neighbor / new-input).
+  Each cell only inspects local + right-neighbor state. No global tree.
+  Result:    csim PASS (5/5), csynth Fmax 342 MHz, MAIN_LOOP II=1, LUT=12409
+             — TIMING NOW PASSES but LUT over the 8000 cap by 55%.
+  Cause:     m_axi burst engines (gmem_in + gmem_out) chew ~4500 LUT
+             of pure interface overhead.
+  Log:       coord/reports/T0020/hls_v2_with_axi.log
+
+v3: systolic insertion sort + light interface (FINAL)
+  Algorithm:   IDENTICAL to v2.
+  Interface:   ap_ctrl_hs only on return. Arrays default to ap_memory
+               (BRAM port) when called externally.
+               Rationale: this IP will be CALLED FROM another HLS function
+               (T0022 xmod_attn_v0) — parent has its own m_axi already, so
+               burdening this submodule with m_axi engines is pure waste.
+  Result:      ALL acceptance criteria pass.
+  Log:         coord/reports/T0020/hls.log  (=== this run ===)
+
+--- v3 RESULTS ---
+csim:           5/5 cases pass, total_errors = 0
+csynth:         "All loop constraints were satisfied"
+Fmax:           384.02 MHz  (clock estimated 2.604 ns vs 4.0 ns target)
+MAIN_LOOP:      II = 1, Depth = 2, Interval = 257, Latency = 258
+WRITE_LOOP:     II = 1, Depth = 1, Interval = 65,  Latency = 66
+Function:       Latency = 327 cycles = 1.308 us at 250 MHz
+
+Resources (Versal xcvc1902):
+                Used      Avail        Util%
+LUT             7418     899,840       <1%
+FF              2083   1,799,680       <1%
+DSP                0       1,968        0%
+BRAM_18K           0       1,934        0%
+URAM               0         463        0%
+
+Breakdown:
+  MAIN_LOOP module:   6687 LUT, 2068 FF
+  WRITE_LOOP module:   707 LUT,    9 FF
+  No instance overhead (no AXI engines).
+
+--- acceptance criteria ---
+  status == DONE:                       PASS
+  result.csim_pass == true:             PASS  (5/5 deterministic LCG-seeded inputs, set-equal vs std::sort)
+  result.csynth_pass == true:           PASS
+  result.dsp_used < 200:                PASS  (0)
+  result.lut_used < 8000:               PASS  (7418, 7.3% headroom)
+  result.ii <= 2:                       PASS  (1 on MAIN_LOOP and WRITE_LOOP)
+
+--- human_ack_required_on check ---
+  dsp_above_150:              NOT triggered (0)
+  latency_above_400_cycles:   NOT triggered (327 < 400)
+
+--- design notes for T0022 reuse ---
+Call from parent HLS as:
+    int16_t  top_scores[64];
+    uint16_t top_indices[64];
+    topk_engine(my_256_scores, top_scores, top_indices);
+
+Output order: top_v is sorted ASCENDING (top_v[0] = K-th largest, i.e. the
+threshold; top_v[K-1] = global max). top_i carries the corresponding input
+indices. The SET of indices is what xmod_attn_v0 needs to gather V[selected].
+
+When inlined into T0022, expect the LUT count to grow ~6700 + AXI of the
+parent — well within the 80,000 LUT budget for T0022.
+
+algorithm_chosen: "systolic-insertion-sort (cell-local compare+mux, K=64 cells, II=1)"
+target_part_used: xcvc1902-vsva2197-2MP-e-S (no fallback needed)

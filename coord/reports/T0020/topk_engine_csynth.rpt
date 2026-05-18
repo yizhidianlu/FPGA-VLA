@@ -1,0 +1,142 @@
+
+
+================================================================
+== Vitis HLS Report for 'topk_engine'
+================================================================
+* Date:           Tue May 19 00:58:45 2026
+
+* Version:        2024.1 (Build 5069499 on May 21 2024)
+* Project:        topk_hls
+* Solution:       sol1 (Vivado IP Flow Target)
+* Product family: versalaicore
+* Target device:  xcvc1902-vsva2197-2MP-e-S
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.604 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |      327|      327|  1.308 us|  1.308 us|  328|  328|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        +--------------------------------------------+---------------------------------+---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+        |                                            |                                 |  Latency (cycles) |  Latency (absolute) |  Interval |                    Pipeline                   |
+        |                  Instance                  |              Module             |   min   |   max   |    min   |    max   | min | max |                      Type                     |
+        +--------------------------------------------+---------------------------------+---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+        |grp_topk_engine_Pipeline_MAIN_LOOP_fu_542   |topk_engine_Pipeline_MAIN_LOOP   |      258|      258|  1.032 us|  1.032 us|  257|  257|  loop auto-rewind stp(delay=0 clock cycles(s))|
+        |grp_topk_engine_Pipeline_WRITE_LOOP_fu_676  |topk_engine_Pipeline_WRITE_LOOP  |       66|       66|  0.264 us|  0.264 us|   65|   65|  loop auto-rewind stp(delay=0 clock cycles(s))|
+        +--------------------------------------------+---------------------------------+---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+---------+--------+-----+
+|       Name      | BRAM_18K|  DSP |    FF   |   LUT  | URAM|
++-----------------+---------+------+---------+--------+-----+
+|DSP              |        -|     -|        -|       -|    -|
+|Expression       |        -|     -|        -|       -|    -|
+|FIFO             |        -|     -|        -|       -|    -|
+|Instance         |        -|     -|     2077|    7394|    -|
+|Memory           |        -|     -|        -|       -|    -|
+|Multiplexer      |        -|     -|        0|      24|    -|
+|Register         |        -|     -|        6|       -|    -|
++-----------------+---------+------+---------+--------+-----+
+|Total            |        0|     0|     2083|    7418|    0|
++-----------------+---------+------+---------+--------+-----+
+|Available        |     1934|  1968|  1799680|  899840|  463|
++-----------------+---------+------+---------+--------+-----+
+|Utilization (%)  |        0|     0|       ~0|      ~0|    0|
++-----------------+---------+------+---------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    +--------------------------------------------+---------------------------------+---------+----+------+------+-----+
+    |                  Instance                  |              Module             | BRAM_18K| DSP|  FF  |  LUT | URAM|
+    +--------------------------------------------+---------------------------------+---------+----+------+------+-----+
+    |grp_topk_engine_Pipeline_MAIN_LOOP_fu_542   |topk_engine_Pipeline_MAIN_LOOP   |        0|   0|  2068|  6687|    0|
+    |grp_topk_engine_Pipeline_WRITE_LOOP_fu_676  |topk_engine_Pipeline_WRITE_LOOP  |        0|   0|     9|   707|    0|
+    +--------------------------------------------+---------------------------------+---------+----+------+------+-----+
+    |Total                                       |                                 |        0|   0|  2077|  7394|    0|
+    +--------------------------------------------+---------------------------------+---------+----+------+------+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    N/A
+
+    * Multiplexer: 
+    +-----------+----+-----------+-----+-----------+
+    |    Name   | LUT| Input Size| Bits| Total Bits|
+    +-----------+----+-----------+-----+-----------+
+    |ap_NS_fsm  |  24|          5|    1|          5|
+    +-----------+----+-----------+-----+-----------+
+    |Total      |  24|          5|    1|          5|
+    +-----------+----+-----------+-----+-----------+
+
+    * Register: 
+    +---------------------------------------------------------+---+----+-----+-----------+
+    |                           Name                          | FF| LUT| Bits| Const Bits|
+    +---------------------------------------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                                                |  4|   0|    4|          0|
+    |grp_topk_engine_Pipeline_MAIN_LOOP_fu_542_ap_start_reg   |  1|   0|    1|          0|
+    |grp_topk_engine_Pipeline_WRITE_LOOP_fu_676_ap_start_reg  |  1|   0|    1|          0|
+    +---------------------------------------------------------+---+----+-----+-----------+
+    |Total                                                    |  6|   0|    6|          0|
+    +---------------------------------------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++----------------------+-----+-----+------------+--------------+--------------+
+|       RTL Ports      | Dir | Bits|  Protocol  | Source Object|    C Type    |
++----------------------+-----+-----+------------+--------------+--------------+
+|ap_clk                |   in|    1|  ap_ctrl_hs|   topk_engine|  return value|
+|ap_rst                |   in|    1|  ap_ctrl_hs|   topk_engine|  return value|
+|ap_start              |   in|    1|  ap_ctrl_hs|   topk_engine|  return value|
+|ap_done               |  out|    1|  ap_ctrl_hs|   topk_engine|  return value|
+|ap_idle               |  out|    1|  ap_ctrl_hs|   topk_engine|  return value|
+|ap_ready              |  out|    1|  ap_ctrl_hs|   topk_engine|  return value|
+|scores_address0       |  out|    8|   ap_memory|        scores|         array|
+|scores_ce0            |  out|    1|   ap_memory|        scores|         array|
+|scores_q0             |   in|   16|   ap_memory|        scores|         array|
+|top_scores_address0   |  out|    6|   ap_memory|    top_scores|         array|
+|top_scores_ce0        |  out|    1|   ap_memory|    top_scores|         array|
+|top_scores_we0        |  out|    1|   ap_memory|    top_scores|         array|
+|top_scores_d0         |  out|   16|   ap_memory|    top_scores|         array|
+|top_indices_address0  |  out|    6|   ap_memory|   top_indices|         array|
+|top_indices_ce0       |  out|    1|   ap_memory|   top_indices|         array|
+|top_indices_we0       |  out|    1|   ap_memory|   top_indices|         array|
+|top_indices_d0        |  out|   16|   ap_memory|   top_indices|         array|
++----------------------+-----+-----+------------+--------------+--------------+
+

@@ -1,0 +1,308 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2024.1 (64-bit)
+  **** SW Build 5069499 on May 21 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 19 00:53:54 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source E:/Applaction/Xilinx/Vitis_HLS/2024.1/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] For user 'jielu' on host 'yizhidianlu' (Windows NT_amd64 version 10.0) on Tue May 19 00:53:55 +0800 2026
+INFO: [HLS 200-10] In directory 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020'
+WARNING: [HLS 200-2053] The vitis_hls executable is deprecated. Consider using vitis-run --mode hls --tcl
+Sourcing Tcl script 'run_hls.tcl'
+INFO: [HLS 200-1510] Running: open_project topk_hls -reset 
+INFO: [HLS 200-10] Creating and opening project 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls'.
+INFO: [HLS 200-1510] Running: set_top topk_engine 
+INFO: [HLS 200-1510] Running: add_files topk_engine.cpp -cflags -std=c++14 
+INFO: [HLS 200-10] Adding design file 'topk_engine.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb topk_engine_tb.cpp -cflags -std=c++14 
+INFO: [HLS 200-10] Adding test bench file 'topk_engine_tb.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution sol1 -flow_target vivado 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1'.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcvc1902-vsva2197-2MP-e-S 
+INFO: [HLS 200-1611] Setting target device to 'xcvc1902-vsva2197-2MP-e-S'
+INFO: [HLS 200-1510] Running: create_clock -period 4.0 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [HLS 200-1510] Running: csim_design 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../topk_engine_tb.cpp in debug mode
+   Compiling ../../../../topk_engine.cpp in debug mode
+   Generating csim.exe
+case 0: errors=0
+case 1: errors=0
+case 2: errors=0
+case 3: errors=0
+case 4: errors=0
+total_errors=0
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-2161] Finished Command csim_design Elapsed time: 00:00:02; Allocated memory: 1.316 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.198 seconds; current allocated memory: 231.129 MB.
+INFO: [HLS 200-10] Analyzing design file 'topk_engine.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.604 seconds; current allocated memory: 232.844 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 107 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 880 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 552 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 552 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 552 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 937 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 546 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 546 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 546 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 680 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 677 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 549 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 549 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 549 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 556 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 562 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0020/topk_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 214-291] Loop 'ARGMIN_LOOP' is marked as complete unroll implied by the pipeline pragma (topk_engine.cpp:53:22)
+INFO: [HLS 214-186] Unrolling loop 'ARGMIN_LOOP' (topk_engine.cpp:53:22) in function 'topk_engine' completely with a factor of 63 (topk_engine.cpp:22:0)
+INFO: [HLS 214-186] Unrolling loop 'INIT_LOOP' (topk_engine.cpp:38:13) in function 'topk_engine' completely with a factor of 64 (topk_engine.cpp:22:0)
+INFO: [HLS 214-248] Applying array_partition to 'top_v': Complete partitioning on dimension 1. (topk_engine.cpp:32:10)
+INFO: [HLS 214-248] Applying array_partition to 'top_i': Complete partitioning on dimension 1. (topk_engine.cpp:33:14)
+WARNING: [HLS 214-358] Array transformation on index using bit extension logic may lead to poor performance. Please use int or long for array index computation to benefit from optimizations. (topk_engine.cpp:63:13)
+INFO: [HLS 214-115] Multiple burst reads of length 256 and bit width 16 in loop 'MAIN_LOOP'(topk_engine.cpp:45:16) has been inferred on bundle 'gmem_in'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (topk_engine.cpp:45:16)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 7.808 seconds; current allocated memory: 234.273 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.014 seconds; current allocated memory: 234.285 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.061 seconds; current allocated memory: 240.973 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.059 seconds; current allocated memory: 244.535 MB.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.327 seconds; current allocated memory: 270.121 MB.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.364 seconds; current allocated memory: 287.957 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'topk_engine' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'topk_engine_Pipeline_MAIN_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'MAIN_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'MAIN_LOOP'
+WARNING: [HLS 200-871] Estimated clock period (63.823 ns) exceeds the target (target clock period: 4.000 ns, clock uncertainty: 1.080 ns, effective delay budget: 2.920 ns).
+Resolution: For help on HLS 200-871 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-871.html
+WARNING: [HLS 200-1016] The critical path in module 'topk_engine_Pipeline_MAIN_LOOP' consists of the following:
+	'muxlogic' operation 16 bit ('MuxLogicAddr_to_min_v_load_1') [660]  (0.000 ns)
+	'load' operation 16 bit ('min_v_load_1', topk_engine.cpp:55) on local variable 'min_v', topk_engine.cpp:51 [661]  (0.000 ns)
+	'icmp' operation 1 bit ('min_k', topk_engine.cpp:55) [794]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [795]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55', topk_engine.cpp:55) [797]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [798]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_1', topk_engine.cpp:55) [799]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [800]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_2', topk_engine.cpp:55) [805]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [806]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_3', topk_engine.cpp:55) [807]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [808]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_4', topk_engine.cpp:55) [812]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [813]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_5', topk_engine.cpp:55) [814]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [815]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_6', topk_engine.cpp:55) [820]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [821]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_7', topk_engine.cpp:55) [822]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [823]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_8', topk_engine.cpp:55) [827]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [828]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_9', topk_engine.cpp:55) [829]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [830]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_10', topk_engine.cpp:55) [834]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [835]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_11', topk_engine.cpp:55) [836]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [837]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_12', topk_engine.cpp:55) [841]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [842]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_13', topk_engine.cpp:55) [843]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [844]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_14', topk_engine.cpp:55) [849]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [850]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_15', topk_engine.cpp:55) [851]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [852]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_16', topk_engine.cpp:55) [856]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [857]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_17', topk_engine.cpp:55) [858]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [859]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_18', topk_engine.cpp:55) [863]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [864]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_19', topk_engine.cpp:55) [865]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [866]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_20', topk_engine.cpp:55) [870]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [871]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_21', topk_engine.cpp:55) [872]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [873]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_22', topk_engine.cpp:55) [877]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [878]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_23', topk_engine.cpp:55) [879]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [880]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_24', topk_engine.cpp:55) [884]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [885]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_25', topk_engine.cpp:55) [886]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [887]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_26', topk_engine.cpp:55) [891]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [892]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_27', topk_engine.cpp:55) [893]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [894]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_28', topk_engine.cpp:55) [898]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [899]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_29', topk_engine.cpp:55) [900]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [901]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_30', topk_engine.cpp:55) [906]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [907]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_31', topk_engine.cpp:55) [908]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [909]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_32', topk_engine.cpp:55) [913]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [914]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_33', topk_engine.cpp:55) [915]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [916]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_34', topk_engine.cpp:55) [920]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [921]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_35', topk_engine.cpp:55) [922]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [923]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_36', topk_engine.cpp:55) [927]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [928]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_37', topk_engine.cpp:55) [929]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [930]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_38', topk_engine.cpp:55) [934]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [935]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_39', topk_engine.cpp:55) [936]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [937]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_40', topk_engine.cpp:55) [941]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [942]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_41', topk_engine.cpp:55) [943]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [944]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_42', topk_engine.cpp:55) [948]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [949]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_43', topk_engine.cpp:55) [950]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [951]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_44', topk_engine.cpp:55) [955]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [956]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_45', topk_engine.cpp:55) [957]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [958]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_46', topk_engine.cpp:55) [962]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [963]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_47', topk_engine.cpp:55) [964]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [965]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_48', topk_engine.cpp:55) [969]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [970]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_49', topk_engine.cpp:55) [971]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [972]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_50', topk_engine.cpp:55) [976]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [977]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_51', topk_engine.cpp:55) [978]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [979]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_52', topk_engine.cpp:55) [983]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [984]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_53', topk_engine.cpp:55) [985]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [986]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_54', topk_engine.cpp:55) [990]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [991]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_55', topk_engine.cpp:55) [992]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [993]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_56', topk_engine.cpp:55) [997]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [998]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_57', topk_engine.cpp:55) [999]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [1000]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_58', topk_engine.cpp:55) [1004]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [1005]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_59', topk_engine.cpp:55) [1006]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [1007]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_60', topk_engine.cpp:55) [1011]  (0.617 ns)
+	'select' operation 16 bit ('min_v', topk_engine.cpp:55) [1012]  (0.382 ns)
+	'icmp' operation 1 bit ('icmp_ln55_61', topk_engine.cpp:55) [1013]  (0.617 ns)
+	'select' operation 6 bit ('select_ln55_61', topk_engine.cpp:55) [1015]  (0.000 ns)
+	'select' operation 6 bit ('min_k', topk_engine.cpp:55) [1017]  (0.352 ns)
+	'store' operation 0 bit ('top_i_47_write_ln33', topk_engine.cpp:33) of variable 'zext_ln64', topk_engine.cpp:64 on local variable 'top_i', topk_engine.cpp:33 [1147]  (0.372 ns)
+	blocking operation 0.544 ns on control path)
+
+Resolution: For help on HLS 200-1016 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1016.html
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 27 seconds. CPU system time: 1 seconds. Elapsed time: 27.778 seconds; current allocated memory: 326.918 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.19 seconds; current allocated memory: 328.309 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'topk_engine_Pipeline_WRITE_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'WRITE_LOOP'.
+WARNING: [HLS 200-885] The II Violation in module 'topk_engine_Pipeline_WRITE_LOOP' (loop 'WRITE_LOOP'): Unable to schedule bus request operation ('gmem_out_addr_1_req', topk_engine.cpp:72) on port 'gmem_out' (topk_engine.cpp:72) due to limited memory ports (II = 1). Please consider using a memory core with more ports or partitioning the array.
+Resolution: For help on HLS 200-885 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-885.html
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 2, Depth = 15, loop 'WRITE_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.372 seconds; current allocated memory: 328.562 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.335 seconds; current allocated memory: 328.582 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'topk_engine' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.533 seconds; current allocated memory: 328.645 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.306 seconds; current allocated memory: 328.699 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'topk_engine_Pipeline_MAIN_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'topk_engine_Pipeline_MAIN_LOOP' pipeline 'MAIN_LOOP' pipeline type 'loop pipeline'
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'topk_engine_Pipeline_MAIN_LOOP/m_axi_gmem_in_ARUSER' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'topk_engine_Pipeline_MAIN_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.507 seconds; current allocated memory: 330.617 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'topk_engine_Pipeline_WRITE_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'topk_engine_Pipeline_WRITE_LOOP' pipeline 'WRITE_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_129_6_16_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'topk_engine_Pipeline_WRITE_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 3 seconds. CPU system time: 4 seconds. Elapsed time: 7.27 seconds; current allocated memory: 346.656 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'topk_engine' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'topk_engine/gmem_in' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'topk_engine/gmem_out' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'topk_engine/scores' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'topk_engine/top_scores' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'topk_engine/top_indices' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'topk_engine' to 's_axilite & ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Bundling port 'scores', 'top_scores', 'top_indices' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'topk_engine'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 3 seconds. CPU system time: 1 seconds. Elapsed time: 3.196 seconds; current allocated memory: 352.168 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 5 seconds. CPU system time: 0 seconds. Elapsed time: 6.415 seconds; current allocated memory: 359.902 MB.
+INFO: [HLS 200-1603] Design has inferred MAXI bursts and missed bursts, see Vitis HLS GUI synthesis summary report for detailed information.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1 seconds. CPU system time: 2 seconds. Elapsed time: 2.299 seconds; current allocated memory: 368.559 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for topk_engine.
+INFO: [VLOG 209-307] Generating Verilog RTL for topk_engine.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were NOT satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 15.67 MHz
+INFO: [HLS 200-2161] Finished Command csynth_design Elapsed time: 00:01:01; Allocated memory: 137.836 MB.
+INFO: [HLS 200-112] Total CPU user time: 46 seconds. Total CPU system time: 10 seconds. Total elapsed time: 67.583 seconds; peak allocated memory: 368.676 MB.
