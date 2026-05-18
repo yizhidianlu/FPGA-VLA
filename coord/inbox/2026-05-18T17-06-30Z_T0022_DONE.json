@@ -1,0 +1,54 @@
+{
+  "task_id": "T0022",
+  "status": "DONE",
+  "headline": "xmod_attn_v0 PASS: csim bit-exact (cos=1.0), csynth Fmax 351 MHz, DSP 12 / LUT 13272 / BRAM 9 / URAM 0 — all caps satisfied. Latency 0.674 ms — triggered the >5000-cycle ack (expected for v0).",
+  "claimed_at": "2026-05-18T17:02:30Z",
+  "finished_at": "2026-05-18T17:06:30Z",
+  "duration_sec": 240,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_cosine_sim_min": 1.0,
+    "csynth_pass": true,
+    "fmax_estimated_mhz": 351.62,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "latency_cycles": 168507,
+    "latency_ms_at_250mhz": 0.674,
+    "ii": 1,
+    "lut_used": 13272,
+    "ff_used": 8590,
+    "dsp_used": 12,
+    "bram_used": 9,
+    "uram_used": 0,
+    "breakdown_by_submodule": {
+      "q_kt_matmul":   {"dsp": 4, "lut": 705,  "bram": 0, "latency_cycles": 131073},
+      "topk":          {"dsp": 0, "lut": 7250, "bram": 0, "latency_cycles": 328},
+      "softmax_approx":{"dsp": 0, "lut": 3763, "bram": 0, "latency_cycles": 215},
+      "weighted_sum":  {"dsp": 8, "lut": 646,  "bram": 0, "latency_cycles": 32768}
+    },
+    "softmax_kind": "shifted_linear_approx (NOT real exp)"
+  },
+  "acceptance_criteria_passed": true,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "latency_above_5000_cycles: 168507 cycles >> 5000. v0 is correct but slow; orch ACK needed before T0023 (HIPPO power) proceeds."
+  ],
+  "artefacts": [
+    "coord/reports/T0022/stdout.log",
+    "coord/reports/T0022/result.json",
+    "coord/reports/T0022/xmod_attn_v0.hpp",
+    "coord/reports/T0022/xmod_attn_v0.cpp",
+    "coord/reports/T0022/q_kt_matmul.cpp",
+    "coord/reports/T0022/softmax_64.cpp",
+    "coord/reports/T0022/weighted_sum.cpp",
+    "coord/reports/T0022/topk_engine.cpp",
+    "coord/reports/T0022/topk_engine.hpp",
+    "coord/reports/T0022/xmod_attn_v0_tb.cpp",
+    "coord/reports/T0022/hls.log",
+    "coord/reports/T0022/xmod_attn_v0_csynth.rpt"
+  ],
+  "next_task_suggestion": null,
+  "error": null,
+  "notes_for_orch": "*** CENTERPIECE IP v0 LANDED — KEY NUMBERS FOR PAPER §V TABLE V ***\n\nxcvc1902 Versal, 250 MHz, INT8/INT16:\n  DSP   12  (out of 1968, 0.6%)\n  BRAM   9  (out of 1934, 0.5%)\n  LUT  13272 (out of 899840, 1.5%)\n  FF   8590  (out of 1.8M, 0.5%)\n  Latency 168507 cycles = 0.674 ms per Q\n  Throughput ≈ 1485 attention Q/sec @ 250 MHz fabric\n\nBREAKDOWN: matmul dominates 78% of latency at only 4 DSPs. topk and softmax are negligible. weighted_sum is 20% latency at 8 DSPs.\n\nDECISION FOR ORCH:\n  1. ACK proceed → T0023 HIPPO power budget can run on these numbers.\n  2. scope_change → bump latency trigger to e.g. 200k cycles (since 0.674 ms is fine for 30 Hz vision processing).\n  3. retry with v1 optimization → 4x parallel t in matmul cuts latency to ~50k cycles, ~64 DSPs.\n\nMY RECOMMENDATION: option (1). 0.674 ms per query × 30 Hz vision = 20 ms / sec compute, leaving 980 ms free per second. Latency budget is FINE for the real-time loop. The >5000-cycle trigger was set conservatively and should be relaxed — orch can do this via scope_change.\n\nALSO IMPORTANT: csim cosine=1.0 because DUT vs reference both use the same shifted-linear softmax approx. A SEPARATE comparison against numpy float-softmax was NOT done — that deviation is the open question for v1 design, and is intentional v0 scope. Tag in paper as [HLS-EST]+[softmax-approx-v0].\n\nNo v1 task auto-created — waiting for orch ACK per protocol §11."
+}

@@ -1,0 +1,123 @@
+=== hls_csynth xmod_attn_v0 (cross-modal sparse attention, C2 IP centerpiece) ===
+host:        YIZHIDIANLU
+claimed_at:  2026-05-18T17:02:30Z
+started_hls: 2026-05-18T17:03:27Z
+finished_hls: 2026-05-18T17:06:30Z
+wall_clock:  ~4 min   (deadline 90 min → 4% used)
+
+--- target ---
+part:           xcvc1902-vsva2197-2MP-e-S  (Versal AI Core, VCK190)
+clock_period:   4.0 ns  (target 250 MHz)
+top:            xmod_attn_v0
+QDIM:           4096    (Q/K-row/V-row dim, OpenVLA scale)
+NTOK:           256     (vision tokens)
+TOPK:           64      (selected tokens after top-K)
+UNROLL_FACTOR:  8       (per-cycle MAC parallelism in matmul + weighted_sum)
+flow_target:    vivado
+
+--- pipeline ---
+Stage 1: q_kt_matmul     Q · K^T  →  scores[256] int16        (8 DSP, 131k cycles)
+Stage 2: topk_engine     scores → top_scores+top_indices       (REUSED from T0020; 328 cycles)
+Stage 3: softmax_64      top_scores → weights[64] Q0.15        (shifted-linear approx, ~215 cycles)
+Stage 4: weighted_sum    weights, top_idx, V → out[4096] int8  (8 DSP, 33k cycles)
+                          plus INIT (4k cycles) + final WRITE (4k cycles)
+
+--- csim ---
+Cases:        3 deterministic LCG-seeded (Q, K, V) tensors
+Method:       DUT vs slow C++ reference (same shifted-linear softmax semantics)
+case 0:       cosine_sim_vs_ref = 1.0,  exact_mismatch = 0 / 4096
+case 1:       cosine_sim_vs_ref = 1.0,  exact_mismatch = 0 / 4096
+case 2:       cosine_sim_vs_ref = 1.0,  exact_mismatch = 0 / 4096
+min_cosine_sim_across_cases = 1.0   →  bit-exact match
+cases_failed = 0 / 3
+
+NOTE: cosine_sim = 1.0 (not just >0.99) because the reference uses IDENTICAL
+quantization + softmax-approx semantics — this is a self-consistency check
+that the optimized pipelined DUT matches the obviously-correct unpipelined
+reference. A SEPARATE comparison against a float numpy reference (with real
+exp-softmax) would yield cos < 1.0 due to the softmax approximation; that
+deviation is intentional for v0 and would be measured in a follow-up task.
+
+--- csynth ---
+"All loop constraints were satisfied"
+Estimated Fmax:           351.62 MHz   (period 2.844 ns + uncertainty 1.08 ns vs 4.0 ns target)
+Clock target:             4.000 ns
+Clock estimated:          2.844 ns
+
+Per-loop pipelining (all II=1):
+  T_LOOP_D_LOOP (matmul):       II=1, depth=7,  interval=131073   (256 t × 4096/8 = 131072 + drain)
+  INIT_LOOP (acc init):          II=1, depth=1,  interval=4097
+  topk_engine (whole submodule): N/A,                interval=328  (REUSED from T0020)
+  MAX_LOOP:                      II=1, depth=1,  interval=64
+  SHIFT_SUM_LOOP:                II=1, depth=2,  interval=65
+  NORM_LOOP:                     II=1, depth=20, interval=65       (integer div = long depth)
+  K_LOOP_D_LOOP (weighted_sum):  II=1, depth=7,  interval=32769    (64 k × 4096/8 = 32768 + drain)
+  WRITE_LOOP (output):           II=1, depth=3,  interval=4097
+
+Total function latency: 168,507 cycles = 0.674 ms at 250 MHz.
+
+--- utilization (Versal xcvc1902) ---
+                Used        Avail         Util%
+LUT             13,272      899,840       1.5%
+FF               8,590    1,799,680       0.5%
+DSP                 12        1,968       0.6%
+BRAM_18K             9        1,934       0.5%
+URAM                 0          463       0.0%
+
+Breakdown by submodule:
+  topk_engine:               0 BRAM,   0 DSP,   2597 FF,   7250 LUT
+  q_kt_matmul inner:         0 BRAM,   4 DSP,    211 FF,    705 LUT
+  weighted_sum inner:        0 BRAM,   8 DSP,    289 FF,    646 LUT
+  INIT_LOOP / WRITE_LOOP:    0 BRAM,   0 DSP,     67 FF,    255 LUT
+  softmax (max+shift+norm):  0 BRAM,   0 DSP,   3867 FF,   3763 LUT
+  scores buffer:             1 BRAM
+  weighted_sum acc buffer:   8 BRAM (cyclic-partitioned 8 ways)
+  multiplexer + register:    0 BRAM,   0 DSP,   1559 FF,    640 LUT
+
+DSP usage: only 4+8 = 12 DSP58 total — INT8 *  INT8 inferred per slot. Way below the 600 cap.
+
+WARNING during synth: HLS 214-340 "bind_storage on top-level function argument is unsupported".
+  → K and V (passed as top-level args) cannot be force-mapped to URAM via BIND_STORAGE.
+  → They become external ap_memory ports in the IP — fine for csim (testbench supplies
+    them) but means a parent IP/SoC integration MUST provide them via DRAM/BRAM/URAM
+    upstream. For a stand-alone version we'd need an explicit `read_K_into_uram`
+    preface block, OR use m_axi interface with separate read engine. Defer to v1.
+
+--- acceptance criteria ---
+  status == DONE:                       PASS
+  result.csim_pass == true:             PASS  (3/3 cases cosine 1.0)
+  result.csynth_pass == true:           PASS
+  result.dsp_used < 600:                PASS  (12, 98% headroom)
+  result.lut_used < 80000:              PASS  (13272, 83% headroom)
+  result.ii <= 8:                       PASS  (every loop achieved II=1)
+
+--- human_ack_required_on check ---
+  dsp_above_500:                NOT triggered (12)
+  latency_above_5000_cycles:    *** TRIGGERED *** (168,507 cycles >> 5000)
+  csim_pass == false:           NOT triggered (csim passed)
+
+→ acceptance_criteria_passed = true
+→ human_ack_needed         = true    (because latency >5000 cycles triggered)
+→ Orchestrator must ACK before any v1 task that depends on this number.
+
+--- numbers for paper §V Table V ---
+Module          DSP   BRAM   LUT     FF      Fmax(MHz)   Latency(cycles)   Latency(ms@250MHz)
+xmod_attn_v0     12      9   13272   8590    351         168507            0.674
+  └─ matmul       4      0     705    211    -           131073            0.524
+  └─ topk         0      0    7250   2597    -              328            0.001
+  └─ softmax      0      0    3763   3867    -              215            0.001
+  └─ wsum         8      8     646    289    -            32768            0.131
+  └─ (other)      0      1     908    626    -                ~            ~
+
+--- v0 → v1 optimization candidates ---
+1. Latency: dominant cost is the matmul (78%). Parallelise OUTER t-loop too,
+   e.g. compute 4 t's in parallel → 4× speedup → 32k matmul cycles. Cost: 4× DSP (16 → 64).
+2. Latency: weighted_sum is 20% — similar parallelisation possible.
+3. softmax NORM_LOOP depth=20 from integer division — could swap for fixed-point
+   reciprocal + multiply to cut depth, but doesn't change interval.
+4. Resource headroom is enormous (12/600 DSP, 13k/80k LUT) — we could go MUCH
+   more aggressive without violating caps.
+
+CONCLUSION: v0 IP is FUNCTIONALLY CORRECT, all resource caps satisfied, but
+latency-heavy as expected for a first cut. Lean utilization gives room to
+optimize aggressively in v1 if Orch chooses to proceed.
