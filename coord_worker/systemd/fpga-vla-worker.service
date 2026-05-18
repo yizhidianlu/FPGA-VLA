@@ -1,0 +1,24 @@
+[Unit]
+Description=FPGA-VLA Remote Worker daemon
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/FPGA-VLA
+Environment=FPGA_VLA_REPO=/root/FPGA-VLA
+Environment=FPGA_VLA_WORKER_ID=remote_vitis_box
+Environment=FPGA_VLA_TICK_SEC=30
+# Forward Xilinx env so handlers can find tools without re-source
+EnvironmentFile=-/etc/fpga-vla-worker.env
+ExecStart=/bin/bash /root/FPGA-VLA/coord_worker/remote_worker.sh
+Restart=on-failure
+RestartSec=15
+StandardOutput=append:/var/log/fpga-vla-worker.log
+StandardError=append:/var/log/fpga-vla-worker.log
+# Don't kill on shutdown until current task drains (best effort)
+TimeoutStopSec=600
+
+[Install]
+WantedBy=multi-user.target

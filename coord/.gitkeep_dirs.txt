@@ -1,0 +1,12 @@
+# Directories listed here are guaranteed to exist (touched .gitkeep inside each)
+coord/tasks/pending
+coord/tasks/claimed
+coord/tasks/completed
+coord/tasks/_failed
+coord/reports
+coord/inbox
+coord/inbox/_processed
+coord/ack
+coord/ack/_processed
+coord/heartbeat
+coord/data

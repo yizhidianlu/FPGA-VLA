@@ -1,0 +1,21 @@
+task_id: T0012
+created_by: orchestrator
+created_at: 2026-05-19T00:00:00Z
+type: hls_blank_smoke
+priority: P0
+depends_on: [T0011]
+deadline_minutes: 15
+params:
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+acceptance_criteria:
+  - status: "== DONE"
+  - result.csim_pass: true
+  - result.csynth_pass: true
+human_ack_required_on:
+  - csim_fail
+  - csynth_fail
+notes: |
+  Minimal MAC kernel HLS smoke test for Versal VCK190.
+  Validates full csim+csynth pipeline works end-to-end before any real IP work.
+  ~5-10 min.

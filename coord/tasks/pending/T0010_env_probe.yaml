@@ -1,0 +1,16 @@
+task_id: T0010
+created_by: orchestrator
+created_at: 2026-05-19T00:00:00Z
+type: env_probe
+priority: P0
+depends_on: []
+deadline_minutes: 5
+params: {}
+acceptance_criteria:
+  - status: "== DONE"
+  - result.gpu_name: "!= none"
+human_ack_required_on: []
+notes: |
+  First sanity probe after worker install.
+  Verifies GPU/disk/Vitis/Vivado/AIE versions are reachable.
+  Expected duration: ~30 seconds.

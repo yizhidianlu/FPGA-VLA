@@ -1,0 +1,21 @@
+# Worker runtime working dirs (not in repo, per-task scratch)
+/runs/
+
+# Per-task report artefacts >100 MB go via git LFS or skipped
+/coord/reports/**/*.dcp
+/coord/reports/**/*.bit
+/coord/reports/**/*.pdi
+/coord/reports/**/*.xpr
+
+# Python
+__pycache__/
+*.pyc
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

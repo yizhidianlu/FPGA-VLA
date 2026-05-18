@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fpga-vla/task.schema.json",
+  "title": "Task envelope",
+  "type": "object",
+  "required": ["task_id", "type", "created_at"],
+  "properties": {
+    "task_id":          {"type":"string", "pattern":"^T[0-9]{4}"},
+    "created_by":       {"type":"string"},
+    "created_at":       {"type":"string", "format":"date-time"},
+    "type":             {"type":"string", "description":"see PROTOCOL.md §7"},
+    "priority":         {"enum":["P0","P1","P2"]},
+    "depends_on":       {"type":"array", "items":{"type":"string"}, "default": []},
+    "deadline_minutes": {"type":"integer", "minimum": 1, "default": 60},
+    "params":           {"type":"object"},
+    "acceptance_criteria":   {"type":"array", "items":{"type":"object"}},
+    "human_ack_required_on": {"type":"array", "items":{"type":"string"}, "default": []},
+    "notes":            {"type":"string"}
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fpga-vla/result.schema.json",
+  "title": "Result envelope",
+  "type": "object",
+  "required": ["task_id", "status"],
+  "properties": {
+    "task_id":     {"type":"string"},
+    "status":      {"enum":["DONE","FAILED","TIMEOUT"]},
+    "claimed_at":  {"type":"string"},
+    "finished_at": {"type":"string"},
+    "duration_sec":{"type":"integer"},
+    "machine":     {"type":"string"},
+    "worker_version": {"type":"string"},
+    "result":      {"type":"object"},
+    "acceptance_criteria_passed": {"type":"boolean"},
+    "human_ack_needed": {"type":"boolean"},
+    "human_ack_reasons":{"type":"array"},
+    "artefacts":   {"type":"array", "items":{"type":"string"}},
+    "next_task_suggestion": {"type":"string"},
+    "error":       {"type":["string","null"]}
+  }
+}
