@@ -1,0 +1,74 @@
+task_id: T0027
+created_by: orchestrator
+created_at: 2026-05-19T11:30:00Z
+type: hls_csynth
+priority: P1
+depends_on: [T0022]   # parallel with T0024-T0026, depends on basic xmod_attn baseline
+deadline_minutes: 90
+params:
+  module_name: vit_patch_embed
+  description: |
+    PL-only vision encoder front-end (NO AIE). Per AMD/user decision 2026-05-19:
+    AIE will be deferred; do all vision on PL fabric for the v1 paper baseline.
+    AIE acceleration will be re-measured later as §V.G ablation row.
+
+    THIS TASK: ViT patch embedding stage (DinoSigLIP-S compatible).
+      Input:   224x224x3 RGB image (INT8)
+      Patch:   16x16 stride 16 → 14x14 = 196 patches
+      Embed:   linear projection 768 (3*16*16) → 1024 dim INT8 per patch
+      Output:  196 patches × 1024 dim activations
+
+    Algorithm (Claude picks best):
+      Option A: HLS conv2d 16x16 stride 16 (uses DSP for MAC line)
+      Option B: HLS systolic on flattened patches (one matmul of 196x768 by 768x1024)
+      Reference: Auto-ViT-Acc [C2], EQViTA [C6] - PL-only ViT patterns
+
+    Pragmas to consider:
+      - #pragma HLS PIPELINE II=1 on inner MAC loop
+      - #pragma HLS DATAFLOW between patch extract and embedding
+      - #pragma HLS ARRAY_PARTITION cyclic factor=16 on weight matrix
+      - INT8 with bias
+
+    This is one of 3-4 stages needed for full DinoSigLIP-S (later):
+      Stage 1: patch_embed (THIS task)
+      Stage 2: pos_embed + first 4 transformer layers
+      Stage 3: middle 4 transformer layers
+      Stage 4: last 4 transformer layers + LN + projection
+
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+  resource_caps:
+    latency_max: 50000        # 196 patches × ~256 cycles/patch
+    dsp_max: 320              # 256 MAC + 64 bias = 320 DSP58 worst case
+    lut_max: 60000            # ~30% of VCK190 LUT
+    bram_max: 64              # weight tile + activation buffer
+    ii_max: 1
+acceptance_criteria:
+  - status: "== DONE"
+  - result.csim_pass: true
+  - result.csynth_pass: true
+  - result.dsp_used: "< 320"
+  - result.lut_used: "< 60000"
+  - result.latency_cycles: "< 50000"
+human_ack_required_on:
+  - dsp_above_250
+  - lut_above_50000
+notes: |
+  This kicks off the PL-only vision path (decision 2026-05-19: defer AIE).
+
+  Subsequent tasks (will be pushed after this):
+    T0028 hls_csynth_vit_transformer_layer  (one full Multi-Head Attn + FFN block)
+    T0029 hls_csynth_vit_encoder_stack       (chain 4-12 layers)
+    T0030 vivado_synth_full_vision_path      (integrate patch+transformer+output)
+
+  Source files write to runs/T0027/:
+    - vit_patch_embed.cpp/.hpp
+    - vit_patch_embed_tb.cpp (test against python golden DinoSigLIP-S patch embed)
+    - run_hls.tcl
+  Copy synth_util.rpt to coord/reports/T0027/
+
+  *** Critical: this validates whether DinoSigLIP-S can plausibly fit PL fabric ***
+  If DSP/LUT blows cap, we need to either:
+    a) Reduce vision encoder size (use ViT-Tiny instead of DinoSigLIP-S)
+    b) Time-multiplex (process 1 patch at a time, slower)
+    c) Re-discuss whether AIE is needed after all
