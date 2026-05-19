@@ -1,0 +1,66 @@
+task_id: T0028
+created_by: orchestrator
+created_at: 2026-05-19T12:45:00Z
+type: hls_csynth
+priority: P1
+depends_on: [T0027]
+deadline_minutes: 90
+params:
+  module_name: vit_transformer_layer
+  description: |
+    One full ViT transformer block (Multi-Head Self-Attention + FFN), PL-only.
+    Building block for DinoSigLIP-S vision encoder integration (per user
+    decision 2026-05-19: PL-only as transitional + future AIE ablation).
+
+    Layer config (DinoSigLIP-S compatible):
+      Input:    [256 patches, 384 dim] INT8 activations
+      Head config: 6 heads x 64 dim each
+      FFN:      384 → 1536 (hidden) → 384 expand-collapse
+      Output:   [256 patches, 384 dim] INT8
+
+    Architecture choices (Claude picks):
+      MHA:
+        - 256x256 attention matrix (intra-patch attention)
+        - reuse T0024's xmod_attn_v1 sparse pattern? No — vision-vision is DENSE
+          (per ReconVLA [D13] — within-modal dispersed, not sparse)
+        - implement as dense systolic matmul
+      FFN:
+        - linear 384->1536 (256x384x1536 matmul)
+        - GeLU activation (HLS approximation)
+        - linear 1536->384
+
+    Pragmas:
+      #pragma HLS DATAFLOW between MHA → FFN stages
+      #pragma HLS PIPELINE II=1 on inner MAC loops
+      #pragma HLS ARRAY_PARTITION cyclic factor=16 on weights
+      INT8 throughout
+
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+  resource_caps:
+    latency_max: 100000     # one layer; full encoder = 12 × this
+    dsp_max: 480            # MHA QKV+output + FFN expand+collapse
+    lut_max: 80000
+    bram_max: 96
+    ii_max: 1
+acceptance_criteria:
+  - status: "== DONE"
+  - result.csim_pass: true
+  - result.csynth_pass: true
+  - result.dsp_used: "< 480"
+  - result.lut_used: "< 80000"
+human_ack_required_on:
+  - latency_above_70000
+  - dsp_above_400
+notes: |
+  This is one layer of DinoSigLIP-S's 12-layer ViT-S stack.
+  Per-layer resource × 12 = full vision encoder (with weight sharing across layers,
+  can amortise weights into BRAM but recompute activations).
+
+  Test golden: feed random 256x384 input, run python ViT layer (PyTorch DinoV2-S
+  config) for ground truth, csim cos sim ≥ 0.99 acceptable.
+
+  Subsequent tasks:
+    T0029 hls_csynth_vit_encoder_12layer  (stack 12 of these, time-multiplex)
+    T0030 vivado_synth_vision_full        (integrate with T0027 patch_embed
+                                           → full DinoSigLIP-S PL implementation)
