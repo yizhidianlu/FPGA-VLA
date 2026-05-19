@@ -1,0 +1,47 @@
+task_id: T0029
+created_by: orchestrator
+created_at: 2026-05-19T13:55:00Z
+type: hls_csynth
+priority: P1
+depends_on: [T0028]
+deadline_minutes: 120
+params:
+  module_name: vit_encoder_12layer
+  description: |
+    Full DinoSigLIP-S ViT encoder: 12 transformer layers stacked, time-multiplexed.
+    Reuses T0028's vit_transformer_layer module 12 times in sequence (NOT 12 parallel
+    copies — time-multiplex one physical layer across 12 invocations to save area).
+
+    Top-level pipeline:
+      [256 patches, 384] (from T0027 patch_embed)
+            ↓ (12 iterations: time-multiplexed vit_transformer_layer)
+      [256 patches, 384] (encoded features ready for cross-modal attn)
+
+    Algorithm:
+      - Wrap T0028 in a 12-iteration loop
+      - Layer weights cycled from BRAM (12 sets of weights, ~5MB total)
+      - #pragma HLS DATAFLOW between iterations (so next iter starts as current finishes)
+      - Or: time-shared single instance with state machine
+
+    This is the LAST stage for PL-only vision encoder before connecting to cross-modal.
+
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+  resource_caps:
+    latency_max: 1200000      # 12 × T0028 latency (~100K each) = 1.2M cycles
+    dsp_max: 480              # same as T0028 (time-multiplexed, no parallel scale-up)
+    lut_max: 100000           # +20K vs T0028 for control state machine
+    bram_max: 256             # 12 layer weights cached in BRAM
+acceptance_criteria:
+  - status: "== DONE"
+  - result.csim_pass: true
+  - result.csynth_pass: true
+  - result.dsp_used: "< 480"
+  - result.bram_used: "< 256"
+human_ack_required_on:
+  - latency_above_900000
+  - bram_above_192
+notes: |
+  Critical W3 task — closes the PL-only vision encoder. After this,
+  W4 (T0030 multi-rate scheduler) integrates everything.
+  Per AIE deferral decision: PL-only is transitional; AIE encoder may compare later.

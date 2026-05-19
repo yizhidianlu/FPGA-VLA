@@ -1,0 +1,46 @@
+task_id: T0031
+created_by: orchestrator
+created_at: 2026-05-19T13:55:00Z
+type: vivado_synth
+priority: P0
+depends_on: [T0024, T0025, T0026, T0027, T0029, T0030]
+deadline_minutes: 180
+params:
+  module_name: mr_vla_full_top
+  description: |
+    **The headline result — full MR-VLA bitstream synthesis.**
+    Integrates all real IPs (no stubs) under the multi-rate scheduler.
+
+    Top hierarchy:
+      mr_vla_top
+        ├─ pll_250mhz                  (clock)
+        ├─ rate_enable_gen (T0021)     (vision/lang/action enables)
+        ├─ axi_fifo × 3                (cross-rate sync FIFOs)
+        ├─ vit_encoder_12layer (T0029) (PL-only vision encoder)
+        ├─ xmod_attn_v1 (T0024)        (cross-modal sparse attn)
+        ├─ gvsa_matmul (T0025)         (language backbone tile)
+        ├─ action_diff_head (T0026)    (ManiFlow 1-step)
+        └─ ps_axi_bridge               (Cortex-A72 control interface)
+
+    This task produces the master post-synth utilization + timing reports that
+    populate paper Table V (resource utilization) and §V.A (timing).
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+acceptance_criteria:
+  - status: "== DONE"
+  - result.synth_ok: true
+  - result.timing_met: true
+  - result.wns_ns: ">= 0"
+  - result.lut_pct: "< 80"
+  - result.dsp_pct: "< 85"
+  - result.bram_pct: "< 75"
+human_ack_required_on:
+  - lut_pct_above_70
+  - dsp_pct_above_80
+  - wns_below_0_2
+notes: |
+  Camera-ready quality target. Resource report → Table V (replaces [HLS-EST]
+  with [HW-EST]).
+
+  If timing fails at 250 MHz: drop to 200 MHz, re-synthesize, document in
+  §V.A as [HW-EST PARTIAL].

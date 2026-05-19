@@ -1,0 +1,54 @@
+task_id: T0030
+created_by: orchestrator
+created_at: 2026-05-19T13:55:00Z
+type: vivado_synth
+priority: P0
+depends_on: [T0021, T0022]
+deadline_minutes: 90
+params:
+  module_name: multi_rate_scheduler_v1
+  description: |
+    **Closes C1 (multi-rate AIE+PL architecture) hardware validation.**
+    T0021 toy scheduler validated single-PLL+3-enable topology (WNS=+0.509ns).
+    This task replaces toy MAC blocks with REAL IPs from T0022/T0024 (xmod_attn)
+    + stubs for T0025 (GVSA matmul) + T0026 (action diff head).
+
+    Architecture:
+      Single 250 MHz PLL → 3 clock-enable state machines:
+        vision_enable   (1/8.33M cycles → 30 Hz effective rate)
+        language_enable (1/250M cycles  → 1 Hz)
+        action_enable   (1/2.5M cycles  → 100 Hz)
+      AXI-Stream sync FIFOs between rate domains:
+        vision → xmod_attn:  64KB (1 frame's vision tokens)
+        language → xmod_attn: 32KB (KV cache)
+        xmod_attn → action:   8KB (top-k attn output)
+      Compute units (instantiated as gated):
+        - Stub vision encoder (placeholder for T0027-T0029)
+        - T0022/T0024 xmod_attn_v1 (real IP)
+        - Stub GVSA matmul (placeholder for T0025)
+        - Stub action diff head (placeholder for T0026)
+
+    Goal: PROVE the multi-rate topology timing-closes with REAL IPs (not toy).
+    If T0021 PASSED but this FAILS, we know real IPs need re-architecting.
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+  rtl_style: SystemVerilog
+acceptance_criteria:
+  - status: "== DONE"
+  - result.synth_ok: true
+  - result.timing_met: true
+  - result.wns_ns: ">= 0"
+human_ack_required_on:
+  - wns_below_0_3
+  - resource_over_60pct
+notes: |
+  result.json fields:
+    synth_ok, timing_met, wns_ns, whs_ns, target_part_used
+    lut_used, lut_pct, ff_used, ff_pct, bram_used, dsp_used
+    cdc_warnings_count, clock_constraints_met
+
+  Use the rate_enable_gen module from T0021. Add AXI-Stream sync FIFO IPs
+  (Vivado catalog block). Integrate xmod_attn_v1 from T0024's exported IP.
+
+  If timing meets ≥ 250 MHz: paper §III.B + §V.A H1 evidence becomes [HW-EST] +
+  cross-validates T0021 result.
