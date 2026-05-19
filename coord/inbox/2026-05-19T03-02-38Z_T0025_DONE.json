@@ -1,0 +1,44 @@
+{
+  "task_id": "T0025",
+  "status": "DONE",
+  "headline": "gvsa_matmul v0 one-shot pass: csim 0/1M mismatches, csynth Fmax 367MHz, DSP=32 / LUT=3657 / BRAM=0 — all hard acceptance pass. Latency 1.05M cycles (4.19ms) triggers soft warning.",
+  "claimed_at": "2026-05-19T03:00:00Z",
+  "finished_at": "2026-05-19T03:02:38Z",
+  "duration_sec": 158,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_exact_mismatches": 0,
+    "csim_total_elements": 1048576,
+    "csynth_pass": true,
+    "fmax_estimated_mhz": 367.71,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "latency_cycles": 1048583,
+    "latency_ms_at_250mhz": 4.194,
+    "ii": 1,
+    "lut_used": 3657,
+    "ff_used": 732,
+    "dsp_used": 32,
+    "bram_used": 0,
+    "dsp58_int8_packing_observed": true
+  },
+  "acceptance_criteria_passed": true,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "latency_above_70000 soft warning: 1.05M cycles >> 70k. Math: <70k needs >1024 MACs/cycle = 512+ DSPs, conflicts with strict <512 DSP cap."
+  ],
+  "artefacts": [
+    "coord/reports/T0025/stdout.log",
+    "coord/reports/T0025/result.json",
+    "coord/reports/T0025/gvsa_matmul.cpp",
+    "coord/reports/T0025/gvsa_matmul.hpp",
+    "coord/reports/T0025/gvsa_matmul_tb.cpp",
+    "coord/reports/T0025/run_hls.tcl",
+    "coord/reports/T0025/hls.log",
+    "coord/reports/T0025/gvsa_matmul_csynth.rpt"
+  ],
+  "next_task_suggestion": "T0026 still pending; ack on T0024 first then T0026.",
+  "error": null,
+  "notes_for_orch": "CLEAN one-shot pass on hard acceptance — DSP=32 (1.6% used vs cap 512), LUT=3.6k (2.4% used vs cap 150k), BRAM=0. HUGE resource headroom.\n\nKEY DISCOVERY: HLS 2024.1 automatically applies DSP58 INT8x2 packing when k-unroll=64 with INT8 operands. Specified 64 MACs/cycle, got 32 DSPs. This is GOOD news for paper §V — Versal's DSP58 packing roughly halves DSP count vs DSP48E5. Worth flagging in paper text.\n\nLATENCY SOFT WARNING:\n  v0 latency is 1.05M cycles (4.19 ms @ 250 MHz, 239 Hz throughput). Trip count = output size = 1024² = 1M outputs at II=1. To hit <70k cycles soft cap would need >1024 MACs/cycle (16× more parallel). Math:\n     <70k cycles × 200 MHz = 14M ops/sec required\n     67M ops total / 14M ops/sec = need 4.8x more parallelism → 16× MACs/cycle\n     16× current 64 = 1024 MACs/cycle = 512 DSPs after packing\n     Falls right at strict <512 cap — would need scope_change dsp_max → 600 to fit.\n\n  Same architectural-pattern issue as T0024 (latency cap vs DSP cap inconsistent).\n\nORCH OPTIONS:\n  A — ACK proceed on v0. 4.19 ms per 1024² matmul is fine for Llama-1B inference at\n      typical token rates (10-50 tok/s requires < 100 ms per layer matmul; we have\n      ~200 ms/sec compute, 5× headroom).\n  B — scope_change dsp_max → 600, then v1 with j-unroll=16 hits ~65k cycles (clears\n      70k soft warning). 5x more LUT but well within 150k cap.\n\nMY RECOMMENDATION: A. The v0 numbers are already paper-worthy. v1 is a 'nice to have' optimization that orch can request later if J/step metric needs to improve.\n\nNEXT: T0026 (action_diff_head) is the only remaining pending. Has formal [T0014] dep met, but notes say it wants to reuse xmod_attn engine — that depends on T0024 ACK outcome. If T0024 v2 is acceptable to orch, T0026 can call it directly. If not, T0026 needs to wait or implement its own cross-attn."
+}

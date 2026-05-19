@@ -1,0 +1,274 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2024.1 (64-bit)
+  **** SW Build 5069499 on May 21 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 19 11:01:30 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source E:/Applaction/Xilinx/Vitis_HLS/2024.1/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] For user 'jielu' on host 'yizhidianlu' (Windows NT_amd64 version 10.0) on Tue May 19 11:01:31 +0800 2026
+INFO: [HLS 200-10] In directory 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025'
+WARNING: [HLS 200-2053] The vitis_hls executable is deprecated. Consider using vitis-run --mode hls --tcl
+Sourcing Tcl script 'run_hls.tcl'
+INFO: [HLS 200-1510] Running: open_project gvsa_hls -reset 
+INFO: [HLS 200-10] Creating and opening project 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls'.
+INFO: [HLS 200-1510] Running: set_top gvsa_matmul 
+INFO: [HLS 200-1510] Running: add_files gvsa_matmul.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding design file 'gvsa_matmul.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb gvsa_matmul_tb.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding test bench file 'gvsa_matmul_tb.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution sol1 -flow_target vivado 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1'.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcvc1902-vsva2197-2MP-e-S 
+INFO: [HLS 200-1611] Setting target device to 'xcvc1902-vsva2197-2MP-e-S'
+INFO: [HLS 200-1510] Running: create_clock -period 4.0 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [HLS 200-1510] Running: csim_design 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../gvsa_matmul_tb.cpp in debug mode
+   Compiling ../../../../gvsa_matmul.cpp in debug mode
+   Generating csim.exe
+--- case 0 ---
+exact_mismatches=0/1048576  max_abs_diff=0
+=== summary ===
+cases_failed=0/1
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-2161] Finished Command csim_design Elapsed time: 00:00:02; Allocated memory: 1.234 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.212 seconds; current allocated memory: 230.207 MB.
+INFO: [HLS 200-10] Analyzing design file 'gvsa_matmul.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 1.637 seconds; current allocated memory: 231.883 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 63 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 544 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 535 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 531 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 531 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 8,595 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 531 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 531 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 531 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 531 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 531 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 531 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 531 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 531 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 789 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 797 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0025/gvsa_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 214-291] Loop 'K_LOOP' is marked as complete unroll implied by the pipeline pragma (gvsa_matmul.cpp:39:21)
+INFO: [HLS 214-186] Unrolling loop 'K_LOOP' (gvsa_matmul.cpp:39:21) in function 'gvsa_matmul' completely with a factor of 64 (gvsa_matmul.cpp:27:0)
+INFO: [HLS 214-178] Inlining function 'sat8_(int)' into 'gvsa_matmul(signed char const (*) [64], signed char const (*) [1024], signed char (*) [1024])' (gvsa_matmul.cpp:27:0)
+INFO: [HLS 214-248] Applying array_partition to 'Q': Complete partitioning on dimension 2. (gvsa_matmul.cpp:27:0)
+INFO: [HLS 214-248] Applying array_partition to 'Kmat': Complete partitioning on dimension 1. (gvsa_matmul.cpp:27:0)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 7.917 seconds; current allocated memory: 234.348 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.018 seconds; current allocated memory: 234.348 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.05 seconds; current allocated memory: 240.148 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.06 seconds; current allocated memory: 242.789 MB.
+INFO: [XFORM 203-11] Balancing expressions in function 'gvsa_matmul' (gvsa_matmul.cpp:20:17)...63 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.262 seconds; current allocated memory: 266.539 MB.
+INFO: [HLS 200-2061] Successfully converted nested loops 'I_LOOP'(gvsa_matmul.cpp:35:10) and 'J_LOOP'(gvsa_matmul.cpp:36:17) in function 'gvsa_matmul' into perfectly nested loops.
+INFO: [XFORM 203-541] Flattening a loop nest 'I_LOOP' (gvsa_matmul.cpp:35:10) in function 'gvsa_matmul'.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.177 seconds; current allocated memory: 266.570 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'gvsa_matmul' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'gvsa_matmul' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_57) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_54) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_53) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_50) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_49) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_47) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_46) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_41) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_39) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_38) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_35) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_34) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_31) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_25) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_23) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_22) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_19) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_18) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_16) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln41) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'I_LOOP_J_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 7, loop 'I_LOOP_J_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 3 seconds. CPU system time: 1 seconds. Elapsed time: 2.919 seconds; current allocated memory: 277.344 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 4 seconds. CPU system time: 0 seconds. Elapsed time: 4.905 seconds; current allocated memory: 278.883 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'gvsa_matmul' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_16' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_17' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_18' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_19' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_20' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_21' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_22' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_23' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_24' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_25' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_26' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_27' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_28' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_29' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_30' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_31' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_32' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_33' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_34' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_35' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_36' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_37' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_38' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_39' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_40' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_41' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_42' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_43' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_44' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_45' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_46' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_47' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_48' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_49' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_50' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_51' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_52' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_53' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_54' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_55' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_56' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_57' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_58' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_59' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_60' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_61' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_62' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Q_63' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_16' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_17' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_18' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_19' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_20' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_21' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_22' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_23' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_24' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_25' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_26' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_27' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_28' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_29' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_30' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_31' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_32' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_33' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_34' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_35' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_36' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_37' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_38' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_39' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_40' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_41' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_42' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_43' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_44' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_45' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_46' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_47' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_48' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_49' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_50' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_51' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_52' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_53' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_54' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_55' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_56' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_57' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_58' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_59' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_60' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_61' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_62' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/Kmat_63' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'gvsa_matmul/P' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'gvsa_matmul' to 'ap_ctrl_hs'.
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'gvsa_matmul' pipeline 'I_LOOP_J_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 32 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 32 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'gvsa_matmul'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 14 seconds. CPU system time: 0 seconds. Elapsed time: 14.602 seconds; current allocated memory: 286.340 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 18 seconds. CPU system time: 5 seconds. Elapsed time: 23.05 seconds; current allocated memory: 303.023 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 4 seconds. CPU system time: 2 seconds. Elapsed time: 6.093 seconds; current allocated memory: 317.828 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for gvsa_matmul.
+INFO: [VLOG 209-307] Generating Verilog RTL for gvsa_matmul.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 367.71 MHz
+INFO: [HLS 200-2161] Finished Command csynth_design Elapsed time: 00:01:01; Allocated memory: 88.055 MB.
+INFO: [HLS 200-112] Total CPU user time: 46 seconds. Total CPU system time: 10 seconds. Total elapsed time: 67.754 seconds; peak allocated memory: 317.906 MB.
