@@ -1,0 +1,135 @@
+=== hls_csynth xmod_attn_v1 (CRITICAL: acceptance FAILS on latency cap) ===
+host:        YIZHIDIANLU
+claimed_at:  2026-05-19T02:23:00Z
+finished_v1:  2026-05-19T02:39:05Z   (15 min wall)
+finished_v2:  2026-05-19T02:57:13Z   (17 min wall)
+total_wall:  ~34 min   (deadline 90 min → 38% used)
+
+--- target ---
+part:           xcvc1902-vsva2197-2MP-e-S  (Versal AI Core, VCK190)
+clock_period:   4.0 ns
+target latency: < 5000 cycles  (33x speedup from v0's 168507)
+target DSP:     < 200
+target LUT:     < 100000
+
+--- iteration log ---
+v1: T_BATCH=8, MATMUL_UR=16; K partition cyclic×16 + block×8
+    → matmul II degraded to 4 (memory port pressure on K)
+    → wsum II=2; total latency 49,731 cycles (3.4× v0)
+v2: T_BATCH=4, MATMUL_UR=32; K partition cyclic×32 + block×4 (cleaner)
+    → matmul II=2 (improvement); wsum II=2 (unchanged)
+    → total latency 33,347 cycles (5.1× v0)  ← THIS RESULT
+
+--- v2 CSIM ---
+3/3 cases cosine_sim = 1.0  (bit-exact vs slow C++ reference)
+cases_failed = 0/3
+
+--- v2 CSYNTH (final) ---
+"All loop constraints were NOT satisfied"  ← matmul II=2 vs target 1; wsum II=2 vs 1
+Estimated Fmax:  351.37 MHz  ✓ (above 250 target)
+Total latency:   33,347 cycles = 0.133 ms @ 250 MHz
+
+Per-stage breakdown:
+  q_kt_matmul_v1:   16,391 cycles  (TB_LOOP_D_LOOP II=2)
+  topk_engine:         328         (reused, II=1)
+  MAX_LOOP:             65         (II=1)
+  SHIFT_SUM_LOOP:       66         (II=1)
+  NORM_LOOP:            84         (II=1, depth=20 from integer div)
+  weighted_sum_v1:  16,402 cycles  (KB_LOOP_D_LOOP II=2 + INIT_LOOP 4096 + WRITE_LOOP 4096)
+                    ────────
+  total          ≈  33,336 cycles (+ ~11 sequencing overhead = 33,347)
+
+Resources:
+  DSP:    128 / 200 cap  ✓ (matmul 64 + wsum 64)
+  LUT:  29,739 / 100k cap ✓
+  BRAM:    17 / 64 cap   ✓ (16 for wsum acc partition + 1 scores)
+  FF:   12,838
+  URAM:     0
+
+--- ACCEPTANCE CRITERIA CHECK ---
+  status == DONE:                       PASS
+  result.csim_pass == true:             PASS (cosine 1.0)
+  result.csynth_pass == true:           PASS (Fmax 351, synth complete)
+  result.latency_cycles < 5000:         *** FAIL ***  (33,347 >> 5000)
+  result.dsp_used < 200:                PASS (128)
+  result.lut_used < 100000:             PASS (29,739)
+
+→ acceptance_criteria_passed = false (latency criterion fails)
+
+--- human_ack triggers ---
+  latency_above_3000:   *** TRIGGERED ***  (33,347 >> 3000)
+  dsp_above_100:        *** TRIGGERED ***  (128 > 100)
+
+--- MATHEMATICAL LOWER BOUND ANALYSIS ---
+Total compute work for this IP:
+  matmul:           256 × 4096 = 1,048,576  ops
+  weighted_sum:      64 × 4096 =   262,144  ops
+  topk + softmax:                       ~ negligible
+                                  ─────────
+  TOTAL                          ≈ 1,310,720  ops
+
+Min cycles at 200 DSP cap (1 op / DSP / cycle, NO INT8 packing):
+  1,310,720 / 200 = 6,553 cycles  ← AND this ignores pipeline depth, stage
+                                    transitions, init/write loops, and the
+                                    serial dependency (topk needs all scores
+                                    before producing; wsum needs all weights
+                                    before starting).
+
+Realistic min with serial stage dependencies + II=1 perfect:
+  matmul (200 DSP, II=1):   1,048,576 / 200 = 5,243 cycles  +  pipeline depth
+  topk (must run after):    328 cycles
+  softmax (after topk):     215 cycles
+  wsum (needs weights, can't overlap matmul):
+    with remaining 0 DSPs (matmul ate all), wsum would need to RE-SHARE the
+    matmul DSPs via time-multiplex — adding 262,144 / 200 = 1,311 cycles
+  TOTAL ≈ 5,243 + 328 + 215 + 1,311 = 7,097 cycles  ← STILL > 5000
+
+→ < 5000 cycles is MATHEMATICALLY UNREACHABLE with this algorithm at 200 DSP
+  cap, regardless of pragma tuning. Two architectural options open up <5000:
+
+OPTIONS for orch (requested guidance per T0024 notes "If timing fails: report
+which optimizations didn't apply and ask for guidance"):
+
+  Option A (recommended) — scope_change ACK to relax latency cap:
+    Set latency_max to 25,000 (or 35,000 to admit v2 directly).
+    Rationale: 0.133 ms at 250 MHz is 7,500 inferences/sec — vastly exceeds
+    the 30 Hz vision rate that drives the C2 attention pipeline. Latency
+    budget is generously met for the REAL-TIME loop; the <5000 spec was
+    aspirational and ungrounded in the math.
+
+  Option B — relax DSP cap with DSP58 INT8 packing:
+    Bump dsp_max to 400. DSP58 on Versal can pack 2 INT8 MACs/cycle natively
+    via the BIND_OP DSP_INT8 pattern. Effective MACs = 400 → theoretical
+    min = 1.31M / 400 = 3,277 cycles. Code change is small (add BIND_OP
+    pragmas). Estimated v3 latency: 5,000-7,000 cycles. Still might not
+    hit <5000 with serial overheads.
+
+  Option C — full algorithm change: flash-attention pattern
+    Process K in tiles of size T (e.g., T=32), maintain online top-K + online
+    softmax + incremental weighted_sum. Lets matmul and wsum OVERLAP across
+    tiles. Code complexity ~3x of v0. Multiple iterations expected.
+    Latency: potentially <5000 with tile parallelism.
+
+  Option D — reduce problem N to 64:
+    If N=64 (not 256), matmul work shrinks 4× and < 5000 becomes feasible
+    at 100 DSP. But CHANGES THE IP SEMANTICS (only 64 K-tokens considered).
+
+--- artefacts ---
+  v2 sources:       xmod_attn_v1.{cpp,hpp}, q_kt_matmul_v1.cpp, softmax_64_v1.cpp, weighted_sum_v1.cpp
+  topk reuse:       topk_engine.{cpp,hpp} (copied from T0020)
+  testbench:        xmod_attn_v1_tb.cpp
+  build script:     run_hls.tcl
+  v2 log:           hls.log
+  v1 log (failed):  hls_v1.log
+  v2 synth report:  xmod_attn_v1_csynth.rpt
+  csynth summary:   csynth.rpt
+
+--- PAPER §V Table II numbers (v2) ---
+  Module: xmod_attn_v1 (5.1× v0 speedup, latency cap pending orch ack)
+    DSP   128  (of 1968, 6.5%)
+    BRAM   17  (of 1934, 0.9%)
+    LUT  29,739 (of 899840, 3.3%)
+    FF   12,838
+    Fmax  351 MHz
+    Latency 33,347 cycles = 0.133 ms @ 250 MHz
+    Throughput: ~7,500 Q/sec

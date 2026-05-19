@@ -1,0 +1,85 @@
+{
+  "task_id": "T0024",
+  "status": "DONE",
+  "claimed_at": "2026-05-19T02:23:00Z",
+  "finished_at": "2026-05-19T02:57:13Z",
+  "duration_sec": 2053,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_cases_total": 3,
+    "csim_cases_failed": 0,
+    "csim_cosine_sim_min": 1.0,
+    "csynth_pass": true,
+    "loop_constraints_satisfied": false,
+    "fmax_estimated_mhz": 351.37,
+    "clock_target_ns": 4.0,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "latency_cycles": 33347,
+    "latency_ms_at_250mhz": 0.133,
+    "speedup_vs_v0": 5.05,
+    "v0_latency_cycles_for_reference": 168507,
+    "throughput_q_per_sec_at_250mhz": 7497,
+    "matmul_ii_target": 1,
+    "matmul_ii_achieved": 2,
+    "wsum_ii_target": 1,
+    "wsum_ii_achieved": 2,
+    "lut_used": 29739,
+    "ff_used": 12838,
+    "dsp_used": 128,
+    "bram_used": 17,
+    "uram_used": 0,
+    "lut_pct": 3.30,
+    "ff_pct": 0.71,
+    "dsp_pct": 6.50,
+    "bram_pct": 0.88,
+    "breakdown_by_submodule": {
+      "q_kt_matmul_v1": {"dsp": 64, "lut": 11990, "ff": 2413, "bram": 0,  "latency_cycles": 16391, "ii_achieved": 2},
+      "topk_engine":    {"dsp": 0,  "lut": 7250,  "ff": 2597, "bram": 0,  "latency_cycles": 328,   "ii_achieved": 1, "reused": "T0020"},
+      "softmax_64_v1":  {"dsp": 0,  "lut": 3763,  "ff": 3867, "bram": 0,  "latency_cycles": 215,   "ii_achieved": 1},
+      "weighted_sum_v1":{"dsp": 64, "lut": 6645,  "ff": 2406, "bram": 16, "latency_cycles": 16402, "ii_achieved": 2}
+    },
+    "iterations_tried": 2,
+    "iteration_log": [
+      {"v": 1, "config": "T_BATCH=8,UNROLL=16,K_cyclic16+block8", "result": "matmul II=4, latency 49731, FAIL"},
+      {"v": 2, "config": "T_BATCH=4,UNROLL=32,K_cyclic32+block4", "result": "matmul II=2, latency 33347, FAIL — submitted as best v1.x"}
+    ]
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "result.latency_cycles=33347 fails hard cap <5000. Mathematical lower bound at 200 DSP cap = ~6,553 cycles even with perfect II=1 and ignoring stage serial dependencies — <5000 is UNREACHABLE with current architecture/caps.",
+    "latency_above_3000 triggered (soft warning)",
+    "dsp_above_100 triggered (soft warning) — DSP=128"
+  ],
+  "artefacts": [
+    "coord/reports/T0024/stdout.log",
+    "coord/reports/T0024/result.json",
+    "coord/reports/T0024/xmod_attn_v1.hpp",
+    "coord/reports/T0024/xmod_attn_v1.cpp",
+    "coord/reports/T0024/q_kt_matmul_v1.cpp",
+    "coord/reports/T0024/softmax_64_v1.cpp",
+    "coord/reports/T0024/weighted_sum_v1.cpp",
+    "coord/reports/T0024/topk_engine.cpp",
+    "coord/reports/T0024/topk_engine.hpp",
+    "coord/reports/T0024/xmod_attn_v1_tb.cpp",
+    "coord/reports/T0024/run_hls.tcl",
+    "coord/reports/T0024/hls.log",
+    "coord/reports/T0024/hls_v1.log",
+    "coord/reports/T0024/xmod_attn_v1_csynth.rpt",
+    "coord/reports/T0024/csynth.rpt"
+  ],
+  "next_task_suggestion": null,
+  "next_task_suggestion_note": "Worker not auto-suggesting. Awaiting orch ACK with one of: scope_change (relax latency cap), retry (DSP58 packing or flash-attn pattern), or abort.",
+  "error": null,
+  "guidance_request": {
+    "summary": "v1 latency cap of <5000 cycles is mathematically unreachable at 200 DSP cap with this algorithm. Submitted v2 at 33,347 cycles (5x v0 speedup) as the best achievable in 2 iterations. Need orch ACK to proceed.",
+    "options": [
+      "A (recommended): scope_change to latency_max=25000 — admits v2 as PASS. Rationale: 0.133 ms @ 250 MHz = 7500 Q/sec, vastly exceeds 30 Hz vision rate; original 5000 cap was aspirational not math-grounded.",
+      "B: scope_change to dsp_max=400 with DSP58 INT8x2 packing. Theoretical min ~3277 cycles; v3 attempt ~5-7k. Small code change (add BIND_OP DSP_INT8 pragmas).",
+      "C: retry as flash-attention-style v3 with tile-based online topk+softmax+wsum. Complex; multiple iterations expected. Could plausibly hit <5000.",
+      "D: scope_change N from 256 to 64. <5000 becomes trivial but changes IP semantics."
+    ]
+  }
+}

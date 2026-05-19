@@ -1,0 +1,683 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2024.1 (64-bit)
+  **** SW Build 5069499 on May 21 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 19 10:24:22 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source E:/Applaction/Xilinx/Vitis_HLS/2024.1/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] For user 'jielu' on host 'yizhidianlu' (Windows NT_amd64 version 10.0) on Tue May 19 10:24:23 +0800 2026
+INFO: [HLS 200-10] In directory 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024'
+WARNING: [HLS 200-2053] The vitis_hls executable is deprecated. Consider using vitis-run --mode hls --tcl
+Sourcing Tcl script 'run_hls.tcl'
+INFO: [HLS 200-1510] Running: open_project xmod_attn_v1_hls -reset 
+INFO: [HLS 200-10] Creating and opening project 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls'.
+INFO: [HLS 200-1510] Running: set_top xmod_attn_v1 
+INFO: [HLS 200-1510] Running: add_files xmod_attn_v1.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding design file 'xmod_attn_v1.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files q_kt_matmul_v1.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding design file 'q_kt_matmul_v1.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files softmax_64_v1.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding design file 'softmax_64_v1.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files weighted_sum_v1.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding design file 'weighted_sum_v1.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files topk_engine.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding design file 'topk_engine.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb xmod_attn_v1_tb.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding test bench file 'xmod_attn_v1_tb.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution sol1 -flow_target vivado 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1'.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcvc1902-vsva2197-2MP-e-S 
+INFO: [HLS 200-1611] Setting target device to 'xcvc1902-vsva2197-2MP-e-S'
+INFO: [HLS 200-1510] Running: create_clock -period 4.0 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [HLS 200-1510] Running: csim_design 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../xmod_attn_v1_tb.cpp in debug mode
+   Compiling ../../../../topk_engine.cpp in debug mode
+   Compiling ../../../../weighted_sum_v1.cpp in debug mode
+   Compiling ../../../../softmax_64_v1.cpp in debug mode
+   Compiling ../../../../q_kt_matmul_v1.cpp in debug mode
+   Compiling ../../../../xmod_attn_v1.cpp in debug mode
+   Generating csim.exe
+--- case 0 ---
+cosine_sim_vs_ref=1
+exact_mismatch=0/4096  max_abs_diff=0
+--- case 1 ---
+cosine_sim_vs_ref=1
+exact_mismatch=0/4096  max_abs_diff=0
+--- case 2 ---
+cosine_sim_vs_ref=1
+exact_mismatch=0/4096  max_abs_diff=0
+=== summary ===
+min_cosine_sim_across_cases=1
+cases_failed=0/3
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-2161] Finished Command csim_design Elapsed time: 00:00:05; Allocated memory: 1.078 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.179 seconds; current allocated memory: 230.066 MB.
+INFO: [HLS 200-10] Analyzing design file 'topk_engine.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file 'weighted_sum_v1.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file 'softmax_64_v1.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file 'q_kt_matmul_v1.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file 'xmod_attn_v1.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 7.295 seconds; current allocated memory: 232.500 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 548 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,318 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 3,580 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 3,115 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 3,114 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 28,076 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,010 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,010 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,010 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,525 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,138 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 4,872 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 4,872 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 4,872 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,194 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,237 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 214-291] Loop 'K_INNER' is marked as complete unroll implied by the pipeline pragma (weighted_sum_v1.cpp:48:11)
+INFO: [HLS 214-291] Loop 'UR_LOOP' is marked as complete unroll implied by the pipeline pragma (weighted_sum_v1.cpp:50:11)
+INFO: [HLS 214-291] Loop 'COMPARE_LOOP' is marked as complete unroll implied by the pipeline pragma (topk_engine.cpp:69:16)
+INFO: [HLS 214-291] Loop 'SHIFT_LOOP' is marked as complete unroll implied by the pipeline pragma (topk_engine.cpp:81:14)
+INFO: [HLS 214-291] Loop 'COMMIT_LOOP' is marked as complete unroll implied by the pipeline pragma (topk_engine.cpp:102:22)
+INFO: [HLS 214-291] Loop 'T_INNER' is marked as complete unroll implied by the pipeline pragma (q_kt_matmul_v1.cpp:40:11)
+INFO: [HLS 214-291] Loop 'UR_LOOP' is marked as complete unroll implied by the pipeline pragma (q_kt_matmul_v1.cpp:43:26)
+INFO: [HLS 214-186] Unrolling loop 'LOAD_BATCH' (weighted_sum_v1.cpp:40:14) in function 'weighted_sum_v1' completely with a factor of 4 (weighted_sum_v1.cpp:18:0)
+INFO: [HLS 214-186] Unrolling loop 'K_INNER' (weighted_sum_v1.cpp:48:11) in function 'weighted_sum_v1' completely with a factor of 4 (weighted_sum_v1.cpp:18:0)
+INFO: [HLS 214-186] Unrolling loop 'UR_LOOP' (weighted_sum_v1.cpp:50:11) in function 'weighted_sum_v1' completely with a factor of 16 (weighted_sum_v1.cpp:18:0)
+INFO: [HLS 214-186] Unrolling loop 'COMPARE_LOOP' (topk_engine.cpp:69:16) in function 'topk_engine' completely with a factor of 64 (topk_engine.cpp:36:0)
+INFO: [HLS 214-186] Unrolling loop 'SHIFT_LOOP' (topk_engine.cpp:81:14) in function 'topk_engine' completely with a factor of 64 (topk_engine.cpp:36:0)
+INFO: [HLS 214-186] Unrolling loop 'COMMIT_LOOP' (topk_engine.cpp:102:22) in function 'topk_engine' completely with a factor of 64 (topk_engine.cpp:36:0)
+INFO: [HLS 214-186] Unrolling loop 'INIT_LOOP' (topk_engine.cpp:54:13) in function 'topk_engine' completely with a factor of 64 (topk_engine.cpp:36:0)
+INFO: [HLS 214-186] Unrolling loop 'INIT_ACC' (q_kt_matmul_v1.cpp:33:12) in function 'q_kt_matmul_v1' completely with a factor of 8 (q_kt_matmul_v1.cpp:21:0)
+INFO: [HLS 214-186] Unrolling loop 'T_INNER' (q_kt_matmul_v1.cpp:40:11) in function 'q_kt_matmul_v1' completely with a factor of 8 (q_kt_matmul_v1.cpp:21:0)
+INFO: [HLS 214-186] Unrolling loop 'UR_LOOP' (q_kt_matmul_v1.cpp:43:26) in function 'q_kt_matmul_v1' completely with a factor of 16 (q_kt_matmul_v1.cpp:21:0)
+INFO: [HLS 214-186] Unrolling loop 'WRITE_T' (q_kt_matmul_v1.cpp:51:18) in function 'q_kt_matmul_v1' completely with a factor of 8 (q_kt_matmul_v1.cpp:21:0)
+INFO: [HLS 214-178] Inlining function 'sat16_(int)' into 'q_kt_matmul_v1(signed char const*, signed char const (*) [4096], short*)' (q_kt_matmul_v1.cpp:21:0)
+INFO: [HLS 214-178] Inlining function 'sat8_(int)' into 'weighted_sum_v1(short const*, unsigned short const*, signed char const (*) [4096], signed char*)' (weighted_sum_v1.cpp:18:0)
+INFO: [HLS 214-178] Inlining function 'softmax_64_v1(short const*, short*)' into 'xmod_attn_v1(signed char const*, signed char const (*) [4096], signed char const (*) [4096], signed char*)' (xmod_attn_v1.cpp:27:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZ15weighted_sum_v1PKsPKtPA4096_KaPaE3acc': Cyclic partitioning with factor 16 on dimension 1. (weighted_sum_v1.cpp:23:0)
+INFO: [HLS 214-248] Applying array_partition to 'top_v': Complete partitioning on dimension 1. (topk_engine.cpp:48:10)
+INFO: [HLS 214-248] Applying array_partition to 'top_i': Complete partitioning on dimension 1. (topk_engine.cpp:49:14)
+INFO: [HLS 214-248] Applying array_partition to 'new_v': Complete partitioning on dimension 1. (topk_engine.cpp:77:17)
+INFO: [HLS 214-248] Applying array_partition to 'new_i': Complete partitioning on dimension 1. (topk_engine.cpp:78:18)
+INFO: [HLS 214-248] Applying array_partition to 'shifted.i': Complete partitioning on dimension 1. (softmax_64_v1.cpp:15:13)
+INFO: [HLS 214-248] Applying array_partition to 'top_scores': Complete partitioning on dimension 1. (xmod_attn_v1.cpp:31:13)
+INFO: [HLS 214-248] Applying array_partition to 'top_indices': Complete partitioning on dimension 1. (xmod_attn_v1.cpp:32:14)
+INFO: [HLS 214-248] Applying array_partition to 'weights': Complete partitioning on dimension 1. (xmod_attn_v1.cpp:33:13)
+INFO: [HLS 214-248] Applying array_partition to 'Q': Cyclic partitioning with factor 16 on dimension 1. (xmod_attn_v1.cpp:27:0)
+INFO: [HLS 214-248] Applying array_partition to 'K': Block partitioning with factor 8 on dimension 1. Cyclic partitioning with factor 16 on dimension 2. (xmod_attn_v1.cpp:27:0)
+INFO: [HLS 214-248] Applying array_partition to 'V': Cyclic partitioning with factor 16 on dimension 2. (xmod_attn_v1.cpp:27:0)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 12.879 seconds; current allocated memory: 235.496 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.046 seconds; current allocated memory: 235.504 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.827 seconds; current allocated memory: 248.527 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.734 seconds; current allocated memory: 260.188 MB.
+INFO: [XFORM 203-11] Balancing expressions in function 'weighted_sum_v1' (weighted_sum_v1.cpp:10:14)...64 expression(s) balanced.
+INFO: [XFORM 203-11] Balancing expressions in function 'q_kt_matmul_v1' (q_kt_matmul_v1.cpp:14:11)...128 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 3 seconds. CPU system time: 0 seconds. Elapsed time: 3.906 seconds; current allocated memory: 297.809 MB.
+INFO: [HLS 200-2061] Successfully converted nested loops 'KB_LOOP'(weighted_sum_v1.cpp:34:14) and 'D_LOOP'(weighted_sum_v1.cpp:46:17) in function 'weighted_sum_v1' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'TB_LOOP'(q_kt_matmul_v1.cpp:29:11) and 'D_LOOP'(q_kt_matmul_v1.cpp:38:17) in function 'q_kt_matmul_v1' into perfectly nested loops.
+INFO: [XFORM 203-541] Flattening a loop nest 'KB_LOOP' (weighted_sum_v1.cpp:34:14) in function 'weighted_sum_v1'.
+INFO: [XFORM 203-541] Flattening a loop nest 'TB_LOOP' (q_kt_matmul_v1.cpp:29:11) in function 'q_kt_matmul_v1'.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 3 seconds. CPU system time: 0 seconds. Elapsed time: 2.853 seconds; current allocated memory: 423.062 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'xmod_attn_v1' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'q_kt_matmul_v1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_123) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_122) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_120) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_119) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_116) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_115) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_113) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_112) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_107) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_106) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_104) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_103) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_100) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_99) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_97) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_96) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_91) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_90) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_88) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_87) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_84) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_83) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_81) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_80) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_75) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_74) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_72) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_71) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_68) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_67) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_65) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_64) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_59) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_58) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_55) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_52) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_51) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_49) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_48) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_43) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_40) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_39) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_36) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_35) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_33) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_27) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_24) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_23) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_20) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_19) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_17) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_16) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln47) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'TB_LOOP_D_LOOP'.
+WARNING: [HLS 200-885] The II Violation in module 'q_kt_matmul_v1' (loop 'TB_LOOP_D_LOOP'): Unable to schedule 'load' operation 8 bit ('K_0_1_load_1', q_kt_matmul_v1.cpp:45) on array 'K_0_1' due to limited memory ports (II = 1). Please consider using a memory core with more ports or partitioning the array 'K_0_1'.
+Resolution: For help on HLS 200-885 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-885.html
+WARNING: [HLS 200-885] The II Violation in module 'q_kt_matmul_v1' (loop 'TB_LOOP_D_LOOP'): Unable to schedule 'load' operation 8 bit ('K_0_1_load_3', q_kt_matmul_v1.cpp:45) on array 'K_0_1' due to limited memory ports (II = 2). Please consider using a memory core with more ports or partitioning the array 'K_0_1'.
+Resolution: For help on HLS 200-885 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-885.html
+WARNING: [HLS 200-885] The II Violation in module 'q_kt_matmul_v1' (loop 'TB_LOOP_D_LOOP'): Unable to schedule 'load' operation 8 bit ('K_0_1_load_5', q_kt_matmul_v1.cpp:45) on array 'K_0_1' due to limited memory ports (II = 3). Please consider using a memory core with more ports or partitioning the array 'K_0_1'.
+Resolution: For help on HLS 200-885 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-885.html
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 4, Depth = 11, loop 'TB_LOOP_D_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 194 seconds. CPU system time: 4 seconds. Elapsed time: 199.925 seconds; current allocated memory: 428.723 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 23 seconds. CPU system time: 0 seconds. Elapsed time: 23.809 seconds; current allocated memory: 428.723 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'topk_engine_Pipeline_MAIN_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'MAIN_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'MAIN_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 74 seconds. CPU system time: 2 seconds. Elapsed time: 77.427 seconds; current allocated memory: 428.723 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.874 seconds; current allocated memory: 428.723 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'topk_engine_Pipeline_WRITE_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'WRITE_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'WRITE_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.352 seconds; current allocated memory: 428.723 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.292 seconds; current allocated memory: 428.723 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'topk_engine' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.289 seconds; current allocated memory: 428.723 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.183 seconds; current allocated memory: 428.723 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'xmod_attn_v1_Pipeline_MAX_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'MAX_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'MAX_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.849 seconds; current allocated memory: 428.723 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.073 seconds; current allocated memory: 428.723 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'xmod_attn_v1_Pipeline_SHIFT_SUM_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'SHIFT_SUM_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'SHIFT_SUM_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.879 seconds; current allocated memory: 428.723 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.311 seconds; current allocated memory: 428.723 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'xmod_attn_v1_Pipeline_NORM_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'NORM_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 20, loop 'NORM_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 9 seconds. CPU system time: 1 seconds. Elapsed time: 9.17 seconds; current allocated memory: 428.723 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.512 seconds; current allocated memory: 428.723 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'weighted_sum_v1_Pipeline_INIT_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'INIT_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, loop 'INIT_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 5 seconds. CPU system time: 0 seconds. Elapsed time: 4.744 seconds; current allocated memory: 429.277 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.062 seconds; current allocated memory: 430.418 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'weighted_sum_v1_Pipeline_KB_LOOP_D_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_62) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_61) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_60) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_58) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_57) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_54) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_53) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_52) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_50) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_49) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_48) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_46) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_45) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_44) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_41) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_40) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_38) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_37) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_36) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_34) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_33) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_30) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_29) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_28) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_25) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_24) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_22) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_21) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_20) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_18) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_17) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_16) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_14) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_13) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_12) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_9) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_6) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_5) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_2) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln52) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'KB_LOOP_D_LOOP'.
+WARNING: [HLS 200-885] The II Violation in module 'weighted_sum_v1_Pipeline_KB_LOOP_D_LOOP' (loop 'KB_LOOP_D_LOOP'): Unable to schedule 'load' operation 8 bit ('V_0_load', weighted_sum_v1.cpp:52) on array 'V_0' due to limited memory ports (II = 1). Please consider using a memory core with more ports or partitioning the array 'V_0'.
+Resolution: For help on HLS 200-885 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-885.html
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 2, Depth = 10, loop 'KB_LOOP_D_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 17 seconds. CPU system time: 0 seconds. Elapsed time: 18.097 seconds; current allocated memory: 438.059 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 8 seconds. CPU system time: 0 seconds. Elapsed time: 8.541 seconds; current allocated memory: 438.074 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'weighted_sum_v1_Pipeline_WRITE_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'WRITE_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'WRITE_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 27 seconds. CPU system time: 1 seconds. Elapsed time: 27.642 seconds; current allocated memory: 438.488 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.125 seconds; current allocated memory: 438.492 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'weighted_sum_v1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.227 seconds; current allocated memory: 438.801 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 9 seconds. CPU system time: 0 seconds. Elapsed time: 8.875 seconds; current allocated memory: 439.285 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'xmod_attn_v1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 26 seconds. CPU system time: 1 seconds. Elapsed time: 26.817 seconds; current allocated memory: 443.969 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 28 seconds. CPU system time: 0 seconds. Elapsed time: 29.06 seconds; current allocated memory: 445.051 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'q_kt_matmul_v1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'q_kt_matmul_v1' pipeline 'TB_LOOP_D_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 64 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 64 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_17_3_8_1_1': 64 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'q_kt_matmul_v1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 84 seconds. CPU system time: 3 seconds. Elapsed time: 86.865 seconds; current allocated memory: 470.191 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'topk_engine_Pipeline_MAIN_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'topk_engine_Pipeline_MAIN_LOOP' pipeline 'MAIN_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'topk_engine_Pipeline_MAIN_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 62 seconds. CPU system time: 15 seconds. Elapsed time: 79.162 seconds; current allocated memory: 536.457 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'topk_engine_Pipeline_WRITE_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_129_6_16_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_129_6_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'topk_engine_Pipeline_WRITE_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 5 seconds. Elapsed time: 7.393 seconds; current allocated memory: 558.160 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'topk_engine' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'topk_engine'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 2.141 seconds; current allocated memory: 565.195 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'xmod_attn_v1_Pipeline_MAX_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_127_6_16_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'xmod_attn_v1_Pipeline_MAX_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.787 seconds; current allocated memory: 573.445 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'xmod_attn_v1_Pipeline_SHIFT_SUM_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'xmod_attn_v1_Pipeline_SHIFT_SUM_LOOP' pipeline 'SHIFT_SUM_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_129_6_16_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'xmod_attn_v1_Pipeline_SHIFT_SUM_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 1.978 seconds; current allocated memory: 575.590 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'xmod_attn_v1_Pipeline_NORM_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'xmod_attn_v1_Pipeline_NORM_LOOP' pipeline 'NORM_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'sdiv_31ns_22s_16_19_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_129_6_16_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'xmod_attn_v1_Pipeline_NORM_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 1 seconds. Elapsed time: 2.639 seconds; current allocated memory: 587.688 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'weighted_sum_v1_Pipeline_INIT_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'weighted_sum_v1_Pipeline_INIT_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 1 seconds. Elapsed time: 3.004 seconds; current allocated memory: 604.320 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'weighted_sum_v1_Pipeline_KB_LOOP_D_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'weighted_sum_v1_Pipeline_KB_LOOP_D_LOOP' pipeline 'KB_LOOP_D_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_16s_8s_24s_25_4_1': 16 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_16s_8s_25s_25_4_1': 16 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_16s_8s_32s_32_4_1': 16 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_16s_8s_24_1_1': 16 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_33_6_16_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_33_6_8_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'weighted_sum_v1_Pipeline_KB_LOOP_D_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 1.362 seconds; current allocated memory: 607.047 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'weighted_sum_v1_Pipeline_WRITE_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'weighted_sum_v1_Pipeline_WRITE_LOOP' pipeline 'WRITE_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_33_4_32_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'weighted_sum_v1_Pipeline_WRITE_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 27 seconds. CPU system time: 3 seconds. Elapsed time: 29.632 seconds; current allocated memory: 625.672 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'weighted_sum_v1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SYN 201-210] Renamed object name 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_const_4096_9_RAM_AUTO_1R1W' to 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_bkb' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_const_4096_8_RAM_AUTO_1R1W' to 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_cud' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_const_4096_7_RAM_AUTO_1R1W' to 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_dEe' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_const_4096_6_RAM_AUTO_1R1W' to 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_eOg' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_const_4096_5_RAM_AUTO_1R1W' to 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_fYi' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_const_4096_4_RAM_AUTO_1R1W' to 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_g8j' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_const_4096_3_RAM_AUTO_1R1W' to 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_hbi' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_const_4096_2_RAM_AUTO_1R1W' to 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_ibs' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_const_4096_1_RAM_AUTO_1R1W' to 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_jbC' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_const_4096_RAM_AUTO_1R1W' to 'weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_kbM' due to the length limit 80
+INFO: [RTGEN 206-100] Finished creating RTL model for 'weighted_sum_v1'.
+INFO: [RTMG 210-278] Implementing memory 'xmod_attn_v1_weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_bkb' using auto RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 1.286 seconds; current allocated memory: 626.688 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'xmod_attn_v1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/Q_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_0_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_1_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_2_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_3_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_4_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_5_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_6_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/K_7_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/V_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'xmod_attn_v1/out_r' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'xmod_attn_v1' to 'ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'xmod_attn_v1'.
+INFO: [RTMG 210-278] Implementing memory 'xmod_attn_v1_scores_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 51 seconds. CPU system time: 1 seconds. Elapsed time: 54.267 seconds; current allocated memory: 641.117 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 101 seconds. CPU system time: 4 seconds. Elapsed time: 105.941 seconds; current allocated memory: 661.637 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 26 seconds. CPU system time: 2 seconds. Elapsed time: 28.678 seconds; current allocated memory: 708.133 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for xmod_attn_v1.
+INFO: [VLOG 209-307] Generating Verilog RTL for xmod_attn_v1.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were NOT satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 351.37 MHz
+INFO: [HLS 200-2161] Finished Command csynth_design Elapsed time: 00:14:34; Allocated memory: 478.355 MB.
+INFO: [HLS 200-112] Total CPU user time: 797 seconds. Total CPU system time: 50 seconds. Total elapsed time: 882.968 seconds; peak allocated memory: 708.133 MB.

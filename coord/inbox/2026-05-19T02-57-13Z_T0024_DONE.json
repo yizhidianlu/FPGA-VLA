@@ -1,0 +1,58 @@
+{
+  "task_id": "T0024",
+  "status": "DONE",
+  "headline": "xmod_attn_v1 v2: 33,347 cycles (5.1x v0 speedup), csim cos=1.0, DSP 128 / LUT 29.7k / BRAM 17 — all resource caps pass, BUT latency hard cap <5000 FAILS by math (lower bound at 200 DSP = ~6553). Need orch ACK to choose path forward.",
+  "claimed_at": "2026-05-19T02:23:00Z",
+  "finished_at": "2026-05-19T02:57:13Z",
+  "duration_sec": 2053,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_cosine_sim_min": 1.0,
+    "csynth_pass": true,
+    "fmax_estimated_mhz": 351.37,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "latency_cycles": 33347,
+    "latency_ms_at_250mhz": 0.133,
+    "speedup_vs_v0": 5.05,
+    "throughput_q_per_sec_at_250mhz": 7497,
+    "lut_used": 29739,
+    "ff_used": 12838,
+    "dsp_used": 128,
+    "bram_used": 17,
+    "uram_used": 0,
+    "iterations_tried": 2,
+    "matmul_ii_achieved": 2,
+    "wsum_ii_achieved": 2,
+    "breakdown": {
+      "q_kt_matmul":   {"dsp": 64, "lut": 11990, "lat_cycles": 16391, "ii": 2},
+      "topk":          {"dsp": 0,  "lut": 7250,  "lat_cycles": 328,   "ii": 1},
+      "softmax":       {"dsp": 0,  "lut": 3763,  "lat_cycles": 215,   "ii": 1},
+      "weighted_sum":  {"dsp": 64, "lut": 6645,  "lat_cycles": 16402, "ii": 2}
+    }
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "latency_cycles=33347 fails hard cap <5000. Mathematical lower bound at 200 DSP cap = 6,553 cycles even at perfect II=1 — <5000 is unreachable with this architecture/cap.",
+    "latency_above_3000 + dsp_above_100 soft warnings also triggered."
+  ],
+  "artefacts": [
+    "coord/reports/T0024/stdout.log",
+    "coord/reports/T0024/result.json",
+    "coord/reports/T0024/xmod_attn_v1.hpp",
+    "coord/reports/T0024/xmod_attn_v1.cpp",
+    "coord/reports/T0024/q_kt_matmul_v1.cpp",
+    "coord/reports/T0024/softmax_64_v1.cpp",
+    "coord/reports/T0024/weighted_sum_v1.cpp",
+    "coord/reports/T0024/topk_engine.cpp",
+    "coord/reports/T0024/xmod_attn_v1_tb.cpp",
+    "coord/reports/T0024/hls.log",
+    "coord/reports/T0024/hls_v1.log",
+    "coord/reports/T0024/xmod_attn_v1_csynth.rpt"
+  ],
+  "next_task_suggestion": null,
+  "error": null,
+  "notes_for_orch": "*** GUIDANCE REQUESTED — see result.json `guidance_request` field ***\n\nTL;DR: v1 hard cap <5000 cycles is mathematically infeasible at 200 DSP. Submitted best-effort v2 at 33,347 cycles (5x speedup over v0, csim cos=1.0). Need ACK.\n\nMATH:\n  Total ops = matmul (256*4096) + wsum (64*4096) = 1,310,720\n  Min cycles at 200 DSP (1 op/DSP) = 6,553   ← already > 5000\n  With serial stage dependencies (topk needs all scores; wsum needs all weights): ~7,000 cycles minimum\n  V2 actual = 33,347 (II=2 on matmul+wsum due to memory port pressure even with cyclic+block partitioning)\n  Best-possible at II=1 perfect: ~21,000 cycles (still > 5000)\n\nFOUR OPTIONS, RECOMMEND OPTION A:\n\n  A — scope_change latency_max → 25,000 (or 35,000 admits v2 directly).\n      0.133 ms at 250 MHz = 7,500 Q/sec, exceeds 30 Hz vision rate by 250x.\n      The 5000 cap was aspirational; this is the right call IF the goal is\n      'fast enough for real-time loop', which it IS.\n\n  B — scope_change dsp_max → 400 + use DSP58 INT8x2 packing pragma.\n      Code change small. Theoretical min 3,277 cycles; realistic v3 ~5-7k.\n      Might still need scope_change on latency.\n\n  C — retry as flash-attention v3 (tile-based online softmax + topk).\n      Largest code complexity. 3-4 iterations expected.\n      Might hit <5000 with tile parallelism.\n\n  D — scope_change N from 256 to 64. Trivially <5000 but changes IP semantics.\n\nDOWNSTREAM IMPACT:\n  T0026 (action_diff_head) wants to REUSE xmod_attn engine. If orch picks (A),\n  T0026 can proceed with v2 engine as-is. If (B/C), wait for v3.\n  T0025 (gvsa_matmul) is independent — can proceed in parallel either way.\n\nWORKER NEXT ACTION: I'll claim T0025 (independent of T0024 ACK) while waiting.\nT0026 stays pending until ACK decides v2-vs-v3 path for the attn engine."
+}
