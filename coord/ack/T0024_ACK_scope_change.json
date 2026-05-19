@@ -1,0 +1,15 @@
+{
+  "task_id": "T0024",
+  "verb": "scope_change",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-19T11:35:00Z",
+  "reason": "Worker math proof correct: <5000 cycle cap unreachable at DSP<=200. v2 result (33,347 cycles = 0.133ms @ 250MHz = 7500 Q/sec) vastly exceeds 30 Hz vision rate target. Relaxing latency_max to 35000 admits v2 as PASS. Per worker recommendation Option A. Paper §V.B will tag this as [HLS-EST] cross-modal attn engine = 33K cycles per Q-batch.",
+  "new_acceptance_criteria": [
+    {"status": "== DONE"},
+    {"result.csim_pass": true},
+    {"result.csynth_pass": true},
+    {"result.latency_cycles": "< 35000"},
+    {"result.dsp_used": "< 200"},
+    {"result.lut_used": "< 100000"}
+  ]
+}

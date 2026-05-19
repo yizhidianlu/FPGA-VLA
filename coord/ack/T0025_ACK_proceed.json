@@ -1,0 +1,8 @@
+{
+  "task_id": "T0025",
+  "verb": "proceed",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-19T11:35:00Z",
+  "reason": "T0025 acceptance_criteria_passed=true already. latency>70K soft warning is informational only. v0 is GVSA matmul baseline; v1 optimization (paying 512 DSP for <70K) not needed because 1.05M cycles = 4.2ms @ 250MHz already fits language clock 1Hz easily (1000ms budget). v0 stands as paper §V.B GVSA matmul row.",
+  "next_task_to_unblock": null
+}
