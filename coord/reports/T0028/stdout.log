@@ -1,0 +1,176 @@
+=== hls_csynth vit_transformer_layer (DinoSigLIP-S compatible) ===
+host:        YIZHIDIANLU
+claimed_at:  2026-05-19T15:08:00Z   (approx)
+v1 started:  2026-05-19T15:48:43Z   (failed rc=1 on CLANG compile — pragma after `{`)
+v2 started:  2026-05-19T15:49:25Z
+v2 finished: 2026-05-19T17:17:46Z
+wall_clock:  v2 alone = 88 min;  total since claim = ~130 min  (over 90 min deadline)
+
+DEADLINE OVERRUN: status=DONE (work completed) but exceeded 90 min by ~40 min
+due to v1 compile error + long v2 synth. Submitting as DONE; if orch wants
+TIMEOUT semantics please advise on retry policy for compile-error iterations.
+
+--- target ---
+part:           xcvc1902-vsva2197-2MP-e-S
+clock_period:   4.0 ns (250 MHz)
+top:            vit_transformer_layer
+input:          x[256][384] INT8 + 4 weight matrices (W_qkv, W_out, W_ffn1, W_ffn2)
+output:         out[256][384] INT8
+total compute:  ~510M MACs across 6 matmul stages + softmax
+
+--- design (v0/v2 simplifications, paper-faithful version is v1.x) ---
+- SINGLE-HEAD attention (D=384 dim) rather than 6-head × 64. Compute-equivalent
+  total MACs; multi-head v1 changes softmax math not resource shape.
+- No LayerNorm, no residual connections (v0 baseline).
+- Shifted-linear softmax approx (same pattern T0022/T0024/T0026).
+- 7 sequential stages:
+    1. QKV projection (x · W_qkv → qkv[256][1152])
+    2. Scores = Q · K^T  ([256][256] int16)
+    3. Softmax (max, shift, sum, normalize)
+    4. ATTN_O = attn_w · V (chunked-c-tile pattern from T0026)
+    5. Output projection (attn_o · W_out → mha_out)
+    6. FFN1 + ReLU (mha_out · W_ffn1 → ffn_h)
+    7. FFN2 (ffn_h · W_ffn2 → out)
+- K_UR=64 unroll on inner k-loop, j-loop PIPELINE II=1.
+
+--- v1 vs v2 ---
+v1 — same algorithm as v2 BUT had a CLANG compile error: `#pragma HLS UNROLL`
+     placed on the same line as `{` of an inner for-loop body. CLANG rejected
+     this syntax. Fix: move pragma onto its own line. Took 1 line of edits.
+     v1 log preserved as `hls_v1_compile_err.log`.
+
+--- v2 csim ---
+1 case, LCG-seeded inputs.
+mismatches  = 0 / 98,304   (256 × 384 outputs)
+max_abs_diff = 0
+PASS — bit-exact DUT vs slow C++ reference.
+
+--- v2 csynth ---
+"All loop constraints were NOT satisfied"  ← II degraded on multiple stages
+Estimated Fmax: 350.14 MHz  ✓ (above 250 MHz target)
+Total latency: 4,254,785 cycles = 17.019 ms @ 250 MHz
+
+Per-stage breakdown:
+  QKV_J           (3460 trip,  II=3, depth=11):    3,465 cycles
+  SCORES_I_J      (65537 trip, II=1, depth=12):    65,547 cycles
+  SM_MAX                                                257 cycles
+  SM_SHIFT                                              259 cycles
+  SM_NORM                                               276 cycles
+  ATTN_O_I_TILE_J (393217 trip, II=1, depth=7):    393,223 cycles ← TILE PATTERN WORKED
+  OUT_I_J         (294915 trip, II=3, depth=13):   294,922 cycles
+  FFN1_I_J        (1179651 trip, II=3, depth=13):  1,179,658 cycles ← dominant
+  FFN2_I_J        (1179660 trip, II=12, depth=29): 1,179,665 cycles ← dominant + WORST II
+  P_LOOPs and overhead:                              137,000 cycles approx
+                                                    ─────────
+  total                                              4,254,785 cycles ≈ 17.02 ms
+
+II degradation causes:
+  - QKV/OUT/FFN1 II=3: W_qkv/W_out/W_ffn1 each have cyclic×64 dim=1 partition
+    but the 256/384/1536 columns × K_UR=64 reads create memory port pressure.
+    HLS schedules time-shared access → II=3 (= each j-iter takes 3 cycles).
+  - FFN2 II=12: D_FFN=1536 outer dimension makes things worse. Per-j-output
+    needs 64 W_ffn2 reads from a 1536-row × 384-column array. The cyclic×64
+    on dim=1 gives 64 banks of 24 rows each — but 24 rows are spread across
+    768 BRAM entries which can only serve 2 reads/cycle. 64 reads → 32 banks
+    feeding 2 reads each → II=12 effectively.
+
+--- v2 utilization (Versal xcvc1902) — *** SEVERAL HARD ACCEPTANCE FAILS *** ---
+                Used    Available    Util%       Cap     Status
+DSP58           1600     1968        81.30%      <480    *** FAIL by 3.3× ***
+LUT          92,659    899,840       10.30%   <80,000    *** FAIL by 16% ***
+FF           64,586  1,799,680        3.59%
+BRAM_18K        193     1,934         9.98%      <96     fail (resource_cap, not strict acceptance)
+URAM            776       463       *167.6%*  not capped *** PHYSICALLY IMPOSSIBLE ***
+
+DSP breakdown by stage:
+  ATTN_O_TILE:        64
+  QKV_J:             128
+  SCORES_I_J:        384
+  OUT_I_J:           384
+  FFN1_I_J:          128
+  FFN2_I_J:          512
+  sat16 etc:           0
+                    ────
+                   1,600 (matches reported total — stages do NOT share DSPs)
+
+*** URAM CRITICAL FAILURE ***
+The design requested 776 URAMs but Versal xcvc1902 only has 463. This is
+PHYSICALLY UN-IMPLEMENTABLE — vivado place-and-route would fail.
+
+Root cause: my `ffn_h[256][1536]` array (384 KB total) had:
+    #pragma HLS BIND_STORAGE variable=ffn_h type=RAM_T2P impl=URAM
+    #pragma HLS ARRAY_PARTITION variable=ffn_h cyclic factor=64 dim=2
+Together these create 64 separate URAM banks, each at MINIMUM 1 URAM (32 KB)
+even though each bank only holds ~6 KB of data. 64 banks × ~12 URAMs per bank
+for true-2-port = 768 URAMs. Plus 8 more for some metadata.
+
+The intent was "store ffn_h in URAM to avoid BRAM pressure", but partitioning
+into 64 banks made it WORSE than BRAM.
+
+--- ACCEPTANCE CRITERIA CHECK ---
+  status == DONE:                       PASS
+  result.csim_pass == true:             PASS  (bit-exact, 0/98304)
+  result.csynth_pass == true:           PASS  (synth ran to completion)
+  result.dsp_used < 480:                *** FAIL ***  (1600, 3.3× over)
+  result.lut_used < 80000:              *** FAIL ***  (92659, 16% over)
+
+→ acceptance_criteria_passed = FALSE  (two hard cap fails + URAM physically unfit)
+
+--- human_ack_required_on CHECK ---
+  latency_above_70000:   *** TRIGGERED ***  (4,254,785 >> 70,000 — 60× over)
+  dsp_above_400:         *** TRIGGERED ***  (1600 >> 400)
+
+--- v3 FIX PATH (concrete, not theoretical) ---
+
+The v0/v2 was over-aggressive: K_UR=64 + cyclic×64 partitions in 6 stages
+created the DSP and URAM blowup. v3 should be MUCH more modest:
+
+1. K_UR = 8 (not 64) in ALL matmul stages.
+   → 8 INT8 MACs/cycle/stage → ~4 DSPs/stage after DSP58 packing.
+   → 6 matmul stages × 4 DSPs = 24 DSPs total (5% of cap of 480) ✓
+   → LUT estimate: 6 × ~3k = 18k LUT (vs 80k cap) ✓
+
+2. Remove `BIND_STORAGE ffn_h ... impl=URAM`. Let HLS use BRAM (~12 BRAM18 for
+   384 KB without partition, or ~50 with cyclic×8). Stays under 96 BRAM cap.
+
+3. Cyclic×8 partition on weight matrices to match K_UR=8.
+
+4. Expected v3 numbers:
+   - DSP: ~24 (95% under cap)
+   - LUT: ~18k (78% under cap)
+   - BRAM: ~50 (within cap with margin)
+   - URAM: 0
+   - Latency: ~30M cycles = 120 ms @ 250 MHz (8× v2 latency due to less unrolling)
+     → triggers latency_above_70000 soft warning, but acceptance only needs csim+csynth+DSP+LUT
+
+Expected runtime for v3 csim+csynth: ~30 min (smaller design than v2).
+
+--- OPTIONS FOR ORCH ---
+A — retry v3 with the fix above (recommended). ~30 min for csim+csynth.
+B — scope_change dsp_max → 2000, lut_max → 100000. Admits v2 directly.
+    But URAM=776 still physically un-implementable; would need either drop
+    URAM bind or scope_change separately. Real-world, v3 is still needed.
+C — ACK proceed with v2 numbers for paper §V baseline, defer integration to
+    when T0029 (12-layer stack) is designed. But T0029 inlines T0028 so
+    URAM overflow propagates × 12 = 9000 URAMs requested vs 463 available.
+    NOT VIABLE.
+
+MY STRONG RECOMMENDATION: A (do v3). The v2 result is paper-acceptable as
+"v0 baseline showing the algorithm correctness" but ACTUAL HARDWARE NUMBERS
+need v3 because v2 won't place-and-route.
+
+--- numbers for paper §V (informational ONLY — v2 doesn't fit on chip) ---
+Module                  DSP  BRAM  LUT     FF     Fmax  Latency  Per-layer
+vit_transformer_layer   1600 193  92659  64586   350   4.25M   17.02 ms
+                        (cap 480)(96)(80000)
+                        ⚠️ DOES NOT PLACE-AND-ROUTE (776 URAM vs 463 avail)
+                        v3 expected: ~24 DSP / 50 BRAM / 18k LUT / 30M cycles
+
+--- artefacts ---
+  vit_transformer_layer.{cpp,hpp}  (v2 source — currently un-implementable)
+  vit_transformer_layer_tb.cpp     (testbench)
+  run_hls.tcl
+  hls.log                          (v2 synth log)
+  hls_v1_compile_err.log           (v1 compile fail forensics)
+  vit_transformer_layer_csynth.rpt
+  csynth.rpt

@@ -1,0 +1,51 @@
+{
+  "task_id": "T0028",
+  "status": "DONE",
+  "note_on_status": "Marked DONE (not FAIL) because work completed: csim bit-exact PASS, csynth produced numbers. But acceptance_criteria_passed=FALSE on DSP+LUT, AND URAM is over physical limit (776 > 463) — design will NOT place-and-route. Inbox filename uses _FAIL.json to highlight to orch.",
+  "headline": "vit_transformer_layer v2: csim bit-exact correct, BUT DSP=1600 (cap 480), LUT=92659 (cap 80k), URAM=776 (avail 463) — DESIGN PHYSICALLY UN-IMPLEMENTABLE. v3 fix needed (K_UR 64→8, drop URAM bind). Wall 130 min, over 90 min deadline.",
+  "claimed_at": "2026-05-19T15:08:00Z",
+  "finished_at": "2026-05-19T17:17:46Z",
+  "duration_sec": 7786,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_exact_mismatches": 0,
+    "csynth_pass": true,
+    "fmax_estimated_mhz": 350.14,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "latency_cycles": 4254785,
+    "latency_ms_at_250mhz": 17.019,
+    "lut_used": 92659,
+    "ff_used": 64586,
+    "dsp_used": 1600,
+    "bram_used": 193,
+    "uram_used": 776,
+    "uram_available": 463,
+    "physically_implementable": false,
+    "iterations_tried": 2
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "dsp_used=1600 > 480 cap (3.3× over)",
+    "lut_used=92659 > 80000 cap (16% over)",
+    "URAM 776 > 463 available — design WILL NOT place-and-route",
+    "latency_above_70000 and dsp_above_400 soft warnings also triggered",
+    "wall overran 90 min deadline by ~40 min (v1 compile error retry contributed)"
+  ],
+  "artefacts": [
+    "coord/reports/T0028/stdout.log",
+    "coord/reports/T0028/result.json",
+    "coord/reports/T0028/vit_transformer_layer.cpp",
+    "coord/reports/T0028/vit_transformer_layer.hpp",
+    "coord/reports/T0028/vit_transformer_layer_tb.cpp",
+    "coord/reports/T0028/run_hls.tcl",
+    "coord/reports/T0028/hls.log",
+    "coord/reports/T0028/hls_v1_compile_err.log",
+    "coord/reports/T0028/vit_transformer_layer_csynth.rpt"
+  ],
+  "next_task_suggestion": null,
+  "error": null,
+  "notes_for_orch": "*** CRITICAL: this v2 design is NOT PHYSICALLY IMPLEMENTABLE ***\n\nURAM allocation 776 exceeds the 463 URAMs on Versal xcvc1902 by 67%. Vivado place-and-route would fail. The bug is in my pragma combination on ffn_h[256][1536]:\n    #pragma HLS BIND_STORAGE variable=ffn_h type=RAM_T2P impl=URAM\n    #pragma HLS ARRAY_PARTITION variable=ffn_h cyclic factor=64 dim=2\nThese create 64 URAM banks, each ≥32 KB minimum, even though each bank holds only ~6 KB. Total 64 × 12 = 768 URAMs allocated for 384 KB of data.\n\nALSO ACCEPTANCE FAILS:\n  DSP 1600 vs cap 480 (3.3× over). Caused by K_UR=64 across 6 sequential stages; HLS doesn't share DSPs between stages.\n  LUT 92659 vs cap 80000 (16% over). Similar overshoot.\n\nMY RECOMMENDATION: orch ACK 'retry v3' — I'll rewrite with:\n  - K_UR=8 (not 64) across all stages\n  - Remove BIND_STORAGE URAM on ffn_h (let HLS pick BRAM, ~12 BRAM18 with no partition)\n  - Reduce all partition factors to match K_UR=8\n  Expected: DSP ~24, LUT ~18k, BRAM ~50, URAM 0, latency ~30M cycles (120 ms).\n  All hard caps pass; only latency_above_70000 soft warning.\n\nALTERNATIVE: scope_change dsp_max → 2000 + lut_max → 100000 + URAM fix separately. But the URAM bug needs code fix regardless of scope_change.\n\nIMPORTANT FOR T0029: T0029 spec says it stacks 12 of T0028. If we inline 12 copies of v2, URAM goes to 9300 vs 463 — impossible. If we 'time-multiplex one physical layer 12×' as the spec hints, we still need a fixed T0028 instance that fits. EITHER WAY v3 fix is mandatory before T0029.\n\nDEADLINE OVERRUN: 130 min vs 90 min deadline. Partly because v1 hit a CLANG compile error (#pragma after { on same line) requiring a re-run. Submitting as DONE anyway since the work has results worth recording.\n\nWORKER NEXT: idling at T0028, waiting for orch ACK to know whether to do v3 (most likely) or scope_change route. Heartbeat loop (PID 27892, 15 min cadence) continues."
+}

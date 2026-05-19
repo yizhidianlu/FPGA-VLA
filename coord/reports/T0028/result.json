@@ -1,0 +1,120 @@
+{
+  "task_id": "T0028",
+  "status": "DONE",
+  "claimed_at": "2026-05-19T15:08:00Z",
+  "finished_at": "2026-05-19T17:17:46Z",
+  "duration_sec": 7786,
+  "duration_note": "Over 90 min deadline by ~40 min due to v1 compile error + long v2 synth. Submitting as DONE since work completed.",
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_exact_mismatches": 0,
+    "csim_total_elements": 98304,
+    "csim_max_abs_diff": 0,
+    "csynth_pass": true,
+    "loop_constraints_satisfied": false,
+    "fmax_estimated_mhz": 350.14,
+    "clock_target_ns": 4.0,
+    "clock_estimated_ns": 2.856,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "module_name": "vit_transformer_layer",
+    "shape": "x[256][384] + 4 weights → out[256][384] INT8",
+    "design_simplifications_for_v0": [
+      "single-head attention (D=384) instead of 6 heads × 64 dim",
+      "no LayerNorm",
+      "no residual connections",
+      "shifted-linear softmax approx (no exp)"
+    ],
+    "latency_cycles": 4254785,
+    "latency_ms_at_250mhz": 17.019,
+    "ii_summary": {
+      "QKV_J": 3,
+      "SCORES_I_J": 1,
+      "softmax_max_shift_norm": 1,
+      "ATTN_O_TILE": 1,
+      "OUT_I_J": 3,
+      "FFN1_I_J": 3,
+      "FFN2_I_J": 12
+    },
+    "stage_latency_cycles": {
+      "QKV_J": 3465,
+      "SCORES_I_J": 65547,
+      "softmax_3sub": 792,
+      "ATTN_O_TILE_J": 393223,
+      "OUT_I_J": 294922,
+      "FFN1_I_J": 1179658,
+      "FFN2_I_J": 1179665
+    },
+    "stage_dsp": {
+      "QKV_J": 128,
+      "SCORES_I_J": 384,
+      "ATTN_O_TILE": 64,
+      "OUT_I_J": 384,
+      "FFN1_I_J": 128,
+      "FFN2_I_J": 512,
+      "softmax_etc": 0
+    },
+    "lut_used": 92659,
+    "ff_used": 64586,
+    "dsp_used": 1600,
+    "bram_used": 193,
+    "uram_used": 776,
+    "uram_available": 463,
+    "uram_overflow_factor": 1.676,
+    "lut_pct": 10.30,
+    "ff_pct": 3.59,
+    "dsp_pct": 81.30,
+    "bram_pct": 9.98,
+    "uram_pct": 167.6,
+    "physically_implementable": false,
+    "physically_implementable_reason": "URAM request 776 > 463 available on xcvc1902. Caused by BIND_STORAGE URAM + cyclic×64 partition on ffn_h[256][1536]: 64 banks × ~12 URAM/bank for T2P = 768 URAMs allocated, even though raw data fits in 12 URAMs unpartitioned.",
+    "iterations_tried": 2,
+    "iteration_log": [
+      {"v": 1, "result": "FAIL compile rc=1", "fix": "CLANG rejected #pragma after `{` on same line — moved pragma to next line"},
+      {"v": 2, "result": "csim PASS / csynth completes but multiple acceptance fails + URAM physically infeasible"}
+    ],
+    "v3_fix_path": {
+      "summary": "Drop K_UR from 64 → 8 across all stages, remove BIND_STORAGE URAM on ffn_h, reduce partition factors to match new K_UR.",
+      "expected_v3_dsp": 24,
+      "expected_v3_lut": 18000,
+      "expected_v3_bram": 50,
+      "expected_v3_uram": 0,
+      "expected_v3_latency_cycles": 30000000,
+      "expected_v3_runtime_min": 30
+    }
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "result.dsp_used=1600 > 480 cap by 3.3× — over-aggressive K_UR=64 across 6 sequential stages",
+    "result.lut_used=92659 > 80000 cap by 16%",
+    "URAM allocation 776 > 463 physically available — design WILL NOT place-and-route. Caused by BIND_STORAGE URAM + cyclic×64 partition combination on ffn_h",
+    "latency_above_70000 soft warning: 4.25M >> 70k (60× over)",
+    "dsp_above_400 soft warning: 1600 >> 400",
+    "Wall-clock overran deadline_minutes=90 by ~40 min (130 min total since claim, partly due to v1 compile-error retry)"
+  ],
+  "artefacts": [
+    "coord/reports/T0028/stdout.log",
+    "coord/reports/T0028/result.json",
+    "coord/reports/T0028/vit_transformer_layer.hpp",
+    "coord/reports/T0028/vit_transformer_layer.cpp",
+    "coord/reports/T0028/vit_transformer_layer_tb.cpp",
+    "coord/reports/T0028/run_hls.tcl",
+    "coord/reports/T0028/hls.log",
+    "coord/reports/T0028/hls_v1_compile_err.log",
+    "coord/reports/T0028/vit_transformer_layer_csynth.rpt",
+    "coord/reports/T0028/csynth.rpt"
+  ],
+  "next_task_suggestion": null,
+  "next_task_suggestion_note": "DO NOT proceed to T0029 with v2 numbers — T0029 (12-layer stack) would scale URAM to 9300 requested vs 463 available. Need v3 of T0028 first, OR scope_change + fix URAM. Recommend orch decision.",
+  "error": null,
+  "guidance_request": {
+    "summary": "T0028 v2: csim bit-exact correct but FAILS DSP/LUT acceptance AND has URAM overallocation that makes the design un-implementable. Need v3 retry with smaller unroll factor + no URAM bind.",
+    "options": [
+      "A (recommended): retry v3 (K_UR=8, no URAM bind). Expected ~24 DSP / 50 BRAM / 30M cycles latency (= 120 ms). All caps pass; only latency_above_70000 soft warning.",
+      "B: scope_change dsp_max → 2000, lut_max → 100000 AND fix URAM separately. Two-step. v2 results stand for DSP/LUT but URAM still requires code fix.",
+      "C: ACK as-is for v2 — only viable if T0029 will explicitly NOT inline 12 copies of T0028 (i.e., truly time-multiplex a single instance). Even then T0028 alone doesn't fit (URAM 776 > 463)."
+    ]
+  }
+}
