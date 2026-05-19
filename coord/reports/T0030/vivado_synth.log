@@ -1,0 +1,564 @@
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 19 23:40:47 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source build_synth.tcl
+# set part "xcvc1902-vsva2197-2MP-e-S"
+# set top  "mr_vla_top"
+# puts ">>> build_synth.tcl start"
+>>> build_synth.tcl start
+# puts ">>> target part: $part"
+>>> target part: xcvc1902-vsva2197-2MP-e-S
+# puts ">>> top:         $top"
+>>> top:         mr_vla_top
+# read_verilog -sv ../rtl/rate_enable_gen.sv
+read_verilog: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 643.855 ; gain = 198.887
+# read_verilog -sv ../rtl/mac_unit.sv
+# read_verilog -sv ../rtl/bram_axis_fifo.sv
+# read_verilog -sv ../rtl/mr_vla_top.sv
+# read_xdc ../constraints/mr_vla_top.xdc
+# puts ">>> running synth_design -top $top -part $part"
+>>> running synth_design -top mr_vla_top -part xcvc1902-vsva2197-2MP-e-S
+# synth_design -top $top -part $part -mode out_of_context
+Command: synth_design -top mr_vla_top -part xcvc1902-vsva2197-2MP-e-S -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-86] Your Synthesis license expires in 20 day(s)
+INFO: [Device 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 31748
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2081.852 ; gain = 446.621
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_top' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/mr_vla_top.sv:27]
+INFO: [Synth 8-6157] synthesizing module 'rate_enable_gen' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/rate_enable_gen.sv:12]
+	Parameter VISION_CYCLES bound to: 32'sb00000000011111110010100000010101 
+	Parameter LANGUAGE_CYCLES bound to: 32'sb00001110111001101011001010000000 
+	Parameter ACTION_CYCLES bound to: 32'sb00000000001001100010010110100000 
+INFO: [Synth 8-6155] done synthesizing module 'rate_enable_gen' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/rate_enable_gen.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'bram_axis_fifo' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/bram_axis_fifo.sv:11]
+	Parameter WIDTH bound to: 32'sb00000000000000000000000000100000 
+	Parameter DEPTH bound to: 32'sb00000000000000000100000000000000 
+INFO: [Synth 8-6155] done synthesizing module 'bram_axis_fifo' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/bram_axis_fifo.sv:11]
+INFO: [Synth 8-6157] synthesizing module 'mac_unit' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/mac_unit.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'mac_unit' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/mac_unit.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'bram_axis_fifo__parameterized0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/bram_axis_fifo.sv:11]
+	Parameter WIDTH bound to: 32'sb00000000000000000000000000100000 
+	Parameter DEPTH bound to: 32'sb00000000000000000010000000000000 
+INFO: [Synth 8-6155] done synthesizing module 'bram_axis_fifo__parameterized0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/bram_axis_fifo.sv:11]
+INFO: [Synth 8-6157] synthesizing module 'bram_axis_fifo__parameterized1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/bram_axis_fifo.sv:11]
+	Parameter WIDTH bound to: 32'sb00000000000000000000000000100000 
+	Parameter DEPTH bound to: 32'sb00000000000000000000100000000000 
+INFO: [Synth 8-6155] done synthesizing module 'bram_axis_fifo__parameterized1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/bram_axis_fifo.sv:11]
+INFO: [Synth 8-6155] done synthesizing module 'mr_vla_top' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/mr_vla_top.sv:27]
+WARNING: [Synth 8-7129] Port m_action_tready in module mr_vla_top is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2193.844 ; gain = 558.613
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2193.844 ; gain = 558.613
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2193.844 ; gain = 558.613
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 2193.844 ; gain = 0.000
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Applaction/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/constraints/mr_vla_top.xdc]
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2394.770 ; gain = 33.707
+Finished Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/constraints/mr_vla_top.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2394.770 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 2394.770 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2394.770 ; gain = 759.539
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcvc1902-vsva2197-2MP-e-S
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2394.770 ; gain = 759.539
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2394.770 ; gain = 759.539
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3936] Found unconnected internal register 'prod_w_reg' and it is trimmed from '64' to '32' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/rtl/mac_unit.sv:21]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2394.770 ; gain = 759.539
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   15 Bit       Adders := 3     
+	   2 Input   14 Bit       Adders := 3     
+	   2 Input   12 Bit       Adders := 3     
++---Registers : 
+	               32 Bit    Registers := 7     
+	               15 Bit    Registers := 2     
+	               14 Bit    Registers := 2     
+	               12 Bit    Registers := 2     
+	                1 Bit    Registers := 6     
++---Multipliers : 
+	              32x32  Multipliers := 4     
++---RAMs : 
+	             512K Bit	(16384 X 32 bit)          RAMs := 1     
+	             256K Bit	(8192 X 32 bit)          RAMs := 1     
+	              64K Bit	(2048 X 32 bit)          RAMs := 1     
++---Muxes : 
+	   2 Input    1 Bit        Muxes := 3     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1968 (col length:164)
+BRAMs: 1934 (col length: RAMB18 168 RAMB36 84)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP u_gvsa_matmul_stub/prod_w0, operation Mode is: A2*B.
+DSP Report: register u_gvsa_matmul_stub/prod_w0 is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: operator u_gvsa_matmul_stub/prod_w0 is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: operator u_gvsa_matmul_stub/prod_w0 is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: Generating DSP u_gvsa_matmul_stub/prod_w0, operation Mode is: (PCIN>>23)+A*B2.
+DSP Report: register u_vision_encoder_stub/acc_reg is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: operator u_gvsa_matmul_stub/prod_w0 is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: operator u_gvsa_matmul_stub/prod_w0 is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: Generating DSP u_gvsa_matmul_stub/prod_w0, operation Mode is: A*B2.
+DSP Report: register u_gvsa_matmul_stub/prod_w0 is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: operator u_gvsa_matmul_stub/prod_w0 is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: operator u_gvsa_matmul_stub/prod_w0 is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: Generating DSP u_gvsa_matmul_stub/prod_w0, operation Mode is: (PCIN>>23)+A*B2.
+DSP Report: register u_vision_encoder_stub/acc_reg is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: operator u_gvsa_matmul_stub/prod_w0 is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: operator u_gvsa_matmul_stub/prod_w0 is absorbed into DSP u_gvsa_matmul_stub/prod_w0.
+DSP Report: Generating DSP u_xmod_attn_stub/prod_w0, operation Mode is: A2*B2.
+DSP Report: register u_vision_encoder_stub/acc_reg is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: register u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: operator u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: operator u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: Generating DSP u_xmod_attn_stub/prod_w0, operation Mode is: (PCIN>>23)+A2*B2.
+DSP Report: register u_gvsa_matmul_stub/acc_reg is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: register u_vision_encoder_stub/acc_reg is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: operator u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: operator u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: Generating DSP u_xmod_attn_stub/prod_w0, operation Mode is: A2*B2.
+DSP Report: register u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: register u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: operator u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: operator u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: Generating DSP u_xmod_attn_stub/prod_w0, operation Mode is: (PCIN>>23)+A2*B2.
+DSP Report: register u_gvsa_matmul_stub/acc_reg is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: register u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: operator u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+DSP Report: operator u_xmod_attn_stub/prod_w0 is absorbed into DSP u_xmod_attn_stub/prod_w0.
+WARNING: [Synth 8-7129] Port m_action_tready in module mr_vla_top is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2485.105 ; gain = 849.875
+---------------------------------------------------------------------------------
+ Sort Area is  u_xmod_attn_stub/prod_w0_6 : 0 0 : 4054 5910 : Used 1 time 0
+ Sort Area is  u_xmod_attn_stub/prod_w0_6 : 0 1 : 1856 5910 : Used 1 time 0
+ Sort Area is  u_gvsa_matmul_stub/prod_w0_0 : 0 0 : 4030 5862 : Used 1 time 0
+ Sort Area is  u_gvsa_matmul_stub/prod_w0_0 : 0 1 : 1832 5862 : Used 1 time 0
+ Sort Area is  u_xmod_attn_stub/prod_w0_9 : 0 0 : 1831 2762 : Used 1 time 0
+ Sort Area is  u_xmod_attn_stub/prod_w0_9 : 0 1 : 931 2762 : Used 1 time 0
+ Sort Area is  u_gvsa_matmul_stub/prod_w0_3 : 0 0 : 1821 2742 : Used 1 time 0
+ Sort Area is  u_gvsa_matmul_stub/prod_w0_3 : 0 1 : 921 2742 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++------------+----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|Module Name | RTL Object                 | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights | 
++------------+----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|mr_vla_top  | u_vision_fifo/mem_reg      | 16 K x 32(READ_FIRST)  | W |   | 16 K x 32(WRITE_FIRST) |   | R | Port A and B     | 0      | 16     | 4,4,4,4         | 
+|mr_vla_top  | u_language_fifo/mem_reg    | 8 K x 32(READ_FIRST)   | W |   | 8 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 8      | 2,2,2,2         | 
+|mr_vla_top  | u_xmod_action_fifo/mem_reg | 2 K x 32(READ_FIRST)   | W |   | 2 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 2      | 1,1             | 
++------------+----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping      | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|mr_vla_top  | A2*B             | 24     | 10     | -      | -      | 58     | 1    | 0    | -    | -    | -     | 0    | 0    | 
+|mr_vla_top  | (PCIN>>23)+A*B2  | 10     | 10     | -      | -      | 58     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|mr_vla_top  | A*B2             | 24     | 24     | -      | -      | 58     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|mr_vla_top  | (PCIN>>23)+A*B2  | 24     | 10     | -      | -      | 58     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|mr_vla_top  | A2*B2            | 24     | 10     | -      | -      | 58     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|mr_vla_top  | (PCIN>>23)+A2*B2 | 10     | 10     | -      | -      | 58     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|mr_vla_top  | A2*B2            | 24     | 24     | -      | -      | 58     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|mr_vla_top  | (PCIN>>23)+A2*B2 | 24     | 10     | -      | -      | 58     | 1    | 1    | -    | -    | -     | 0    | 0    | 
++------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:40 ; elapsed = 00:00:44 . Memory (MB): peak = 3167.797 ; gain = 1532.566
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5556] The block RAM "mr_vla_top/u_vision_fifo/mem_reg" may be mapped as a cascade chain, because it is not timing critical.
+INFO: [Synth 8-6900] The block RAM "mr_vla_top/u_language_fifo/mem_reg" originally mapped as a shallow cascade chain, is remapped into deep cascade chain of height 2 for following reason(s): The timing constraints suggest that the chosen mapping will yield better timing results.
+INFO: [Synth 8-5556] The block RAM "mr_vla_top/u_xmod_action_fifo/mem_reg" may be mapped as a cascade chain, because it is not timing critical.
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:41 ; elapsed = 00:00:45 . Memory (MB): peak = 3187.562 ; gain = 1552.332
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++------------+----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|Module Name | RTL Object                 | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights | 
++------------+----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|mr_vla_top  | u_vision_fifo/mem_reg      | 16 K x 32(READ_FIRST)  | W |   | 16 K x 32(WRITE_FIRST) |   | R | Port A and B     | 0      | 16     | 4,4,4,4         | 
+|mr_vla_top  | u_language_fifo/mem_reg    | 8 K x 32(READ_FIRST)   | W |   | 8 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 8      | 2,2,2,2         | 
+|mr_vla_top  | u_xmod_action_fifo/mem_reg | 2 K x 32(READ_FIRST)   | W |   | 2 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 2      | 1,1             | 
++------------+----------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+RETIMING: backward move register u_gvsa_matmul_stub/prod_w_reg[29] from retiming_backward is deleted already 
+RETIMING: backward move register u_gvsa_matmul_stub/prod_w_reg[27] from retiming_backward is deleted already 
+RETIMING: backward move register u_gvsa_matmul_stub/prod_w_reg[25] from retiming_backward is deleted already 
+INFO: [Synth 8-5816] Retiming module `mr_vla_top`
+   Worst Slack before retiming is -0.995 ns and worst slack after retiming is 0.068 ns
+   Numbers of local forward move = 0, and local backward move = 1
+
+	Retimed registers names:
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__0
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__1
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__10
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__11
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__12
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__13
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__14
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__15
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__16
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__17
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__2
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__3
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__4
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__5
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__6
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__7
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__8
+		u_gvsa_matmul_stub/prod_w_reg[31]_bret__9
+ 
+
+INFO: [Synth 8-5816] Retiming module `mr_vla_top' done
+
+
+INFO: [Synth 8-7052] The timing for the instance u_language_fifo/mem_reg_bram_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance u_language_fifo/mem_reg_bram_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance u_language_fifo/mem_reg_bram_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance u_language_fifo/mem_reg_bram_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:42 ; elapsed = 00:00:46 . Memory (MB): peak = 3216.945 ; gain = 1581.715
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:46 ; elapsed = 00:00:50 . Memory (MB): peak = 3224.445 ; gain = 1589.215
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:46 ; elapsed = 00:00:50 . Memory (MB): peak = 3224.445 ; gain = 1589.215
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:46 ; elapsed = 00:00:50 . Memory (MB): peak = 3224.445 ; gain = 1589.215
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:46 ; elapsed = 00:00:50 . Memory (MB): peak = 3224.445 ; gain = 1589.215
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:46 ; elapsed = 00:00:50 . Memory (MB): peak = 3224.445 ; gain = 1589.215
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:46 ; elapsed = 00:00:50 . Memory (MB): peak = 3224.445 ; gain = 1589.215
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Retiming Report:
++--------------------+----+
+|Retiming summary:   |    | 
++--------------------+----+
+|Forward Retiming    | 0  | 
+|Backward Retiming   | 1  | 
+|New registers added | 19 | 
+|Registers deleted   | 10 | 
++--------------------+----+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping      | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|mr_vla_top  | (A'*B)'          | 23     | 9      | -      | -      | 58     | 1    | 0    | -    | -    | -     | 0    | 1    | 
+|mr_vla_top  | A*B'             | 23     | 23     | -      | -      | 58     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|mr_vla_top  | (PCIN>>23+A*B')' | 0      | 9      | -      | -      | 58     | 0    | 1    | -    | -    | -     | 0    | 1    | 
+|mr_vla_top  | A'*B'            | 23     | 9      | -      | -      | 58     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|mr_vla_top  | A'*B'            | 23     | 23     | -      | -      | 58     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|mr_vla_top  | PCIN>>23+A'*B'   | 23     | 9      | -      | -      | 58     | 1    | 1    | -    | -    | -     | 0    | 0    | 
++------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------------------+------+
+|      |Cell              |Count |
++------+------------------+------+
+|1     |DSP_ALUADD        |     6|
+|2     |DSP_ALUMUX        |     6|
+|3     |DSP_ALUREG        |     6|
+|4     |DSP_A_B_DATA58    |     6|
+|8     |DSP_C_DATA58      |     6|
+|9     |DSP_MULTIPLIER58  |     6|
+|10    |DSP_M_DATA58      |     6|
+|11    |DSP_OUTPUT58      |     6|
+|13    |DSP_PATDET        |     6|
+|14    |DSP_PREADD58      |     6|
+|15    |DSP_PREADD_DATA58 |     6|
+|18    |DSP_SRCMX_OPTINV  |     6|
+|19    |LOOKAHEAD8        |    44|
+|24    |LUT1              |    11|
+|25    |LUT2              |    27|
+|26    |LUT3              |    19|
+|27    |LUT4              |    23|
+|28    |LUT5              |    21|
+|29    |LUT6              |    37|
+|30    |LUT6CY            |   326|
+|31    |LUT6              |     1|
+|32    |RAMB36E5_INT      |    26|
+|37    |FDRE              |   344|
++------+------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:46 ; elapsed = 00:00:50 . Memory (MB): peak = 3224.445 ; gain = 1589.215
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 3 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:32 ; elapsed = 00:00:41 . Memory (MB): peak = 3224.445 ; gain = 1388.289
+Synthesis Optimization Complete : Time (s): cpu = 00:00:47 ; elapsed = 00:00:51 . Memory (MB): peak = 3224.445 ; gain = 1589.215
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 3224.445 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 359 Unisim elements for replacement
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_language_fifo/mem_reg_bram_0' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_language_fifo/mem_reg_bram_0' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_language_fifo/mem_reg_bram_0' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_language_fifo/mem_reg_bram_1' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_language_fifo/mem_reg_bram_1' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_language_fifo/mem_reg_bram_1' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_language_fifo/mem_reg_bram_2' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_language_fifo/mem_reg_bram_2' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_language_fifo/mem_reg_bram_2' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_language_fifo/mem_reg_bram_3' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_language_fifo/mem_reg_bram_3' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_language_fifo/mem_reg_bram_3' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_language_fifo/mem_reg_bram_4' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_language_fifo/mem_reg_bram_4' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_language_fifo/mem_reg_bram_4' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_language_fifo/mem_reg_bram_5' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_language_fifo/mem_reg_bram_5' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_language_fifo/mem_reg_bram_5' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_language_fifo/mem_reg_bram_6' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_language_fifo/mem_reg_bram_6' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_language_fifo/mem_reg_bram_6' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_language_fifo/mem_reg_bram_7' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_language_fifo/mem_reg_bram_7' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_language_fifo/mem_reg_bram_7' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5__0_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_0' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_0' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_0' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_1' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_1' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_1' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_10' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_10' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_10' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_11' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_11' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_11' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_12' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_12' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_12' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_13' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_13' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_13' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_14' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_14' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_14' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_15' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_15' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_15' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_2' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_2' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_2' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_3' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_3' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_3' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_4' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_4' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_4' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_5' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_5' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_5' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_6' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_6' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_6' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_2_i_4_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_7' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_7' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_7' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_3_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_8' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_8' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_8' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_0_i_3_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_vision_fifo/mem_reg_bram_9' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_vision_fifo/mem_reg_bram_9' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[1]' on instance 'u_vision_fifo/mem_reg_bram_9' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'mem_reg_bram_1_i_5_n_0' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_xmod_action_fifo/mem_reg_bram_0' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'rst_n' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_xmod_action_fifo/mem_reg_bram_0' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'rst_n' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[3]' on instance 'u_xmod_action_fifo/mem_reg_bram_1' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'rst_n' that is connected to this pin will not be connected to the replacement instance.
+WARNING: [Netlist 29-151] Pin 'WEA[2]' on instance 'u_xmod_action_fifo/mem_reg_bram_1' of cell type 'RAMB36E5' does not have an equivalent function on the new cell type 'RAMB36E5_INT'. Net 'rst_n' that is connected to this pin will not be connected to the replacement instance.
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/constraints/mr_vla_top.xdc]
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3224.445 ; gain = 0.000
+Finished Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/constraints/mr_vla_top.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3224.445 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 359 instances were transformed.
+  DSP58 => DSP58 (DSP_ALUADD, DSP_ALUMUX, DSP_ALUREG, DSP_A_B_DATA58, DSP_C_DATA58, DSP_MULTIPLIER58, DSP_M_DATA58, DSP_OUTPUT58, DSP_PATDET, DSP_PREADD58, DSP_PREADD_DATA58, DSP_SRCMX_OPTINV, VCC): 6 instances
+  LUT6CY => LUT6CY (LUTCY1, LUTCY2): 326 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 1 instance 
+  RAMB36E5 => RAMB36E5_INT: 26 instances
+
+Synth Design complete | Checksum: 58c90a14
+INFO: [Common 17-83] Releasing license: Synthesis
+44 Infos, 80 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:05 ; elapsed = 00:01:14 . Memory (MB): peak = 3224.445 ; gain = 2580.590
+# puts ">>> reporting utilization, timing, clocks, clock_interaction"
+>>> reporting utilization, timing, clocks, clock_interaction
+# report_utilization        -file synth_util.rpt
+# report_timing_summary     -file timing_summary.rpt -warn_on_violation -no_header
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2MP, Temperature grade: E, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "clk" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+report_timing_summary: Time (s): cpu = 00:00:43 ; elapsed = 00:00:45 . Memory (MB): peak = 4009.750 ; gain = 785.305
+# report_clock_interaction  -file clock_interaction.rpt -delay_type min_max
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2MP, Temperature grade: E, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+# report_clocks             -file clocks.rpt
+# set wns_paths [get_timing_paths -setup -max_paths 1 -nworst 1]
+# if {[llength $wns_paths] > 0} { set wns [get_property SLACK [lindex $wns_paths 0]] } else { set wns "n/a" }
+# set whs_paths [get_timing_paths -hold  -max_paths 1 -nworst 1]
+# if {[llength $whs_paths] > 0} { set whs [get_property SLACK [lindex $whs_paths 0]] } else { set whs "n/a" }
+# set fp [open "result_summary.txt" w]
+# puts $fp "WNS=$wns"
+# puts $fp "WHS=$whs"
+# puts $fp "part=$part"
+# puts $fp "top=$top"
+# close $fp
+# puts ">>> WNS_NS=$wns"
+>>> WNS_NS=0.304
+# puts ">>> WHS_NS=$whs"
+>>> WHS_NS=0.110
+# write_checkpoint -force top_synth.dcp
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 4021.539 ; gain = 0.164
+INFO: [Common 17-1381] The checkpoint 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0030/vivado/top_synth.dcp' has been generated.
+# puts ">>> build_synth.tcl done"
+>>> build_synth.tcl done
+# exit 0
+INFO: [Common 17-206] Exiting Vivado at Tue May 19 23:42:58 2026...

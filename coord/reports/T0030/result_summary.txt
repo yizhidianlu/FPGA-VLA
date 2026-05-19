@@ -1,0 +1,4 @@
+WNS=0.304
+WHS=0.110
+part=xcvc1902-vsva2197-2MP-e-S
+top=mr_vla_top

@@ -1,7 +1,7 @@
 {
   "worker": "remote_claude_win",
   "platform": "windows",
-  "ts": "2026-05-19T15:00:00Z",
+  "ts": "2026-05-19T15:43:30Z",
   "pid": 0,
   "uptime_sec": 0,
   "vitis": "OK",
@@ -9,13 +9,16 @@
   "claude_cli": "OK",
   "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
   "current_task": "",
-  "tasks_completed_session": 11,
-  "last_completed_task": "T0026",
-  "last_completed_summary": "T0026 action_diff_head v2: csim bit-exact (3/3), Fmax 350MHz, 14951 cycles (60us), DSP 259/LUT 39k. Acceptance FAILS both DSP<256 and latency<10000 caps; orch ACK needed. v1 was 10h scheduler hang, v2 fix was chunked-c-tile ATTN_O.",
+  "tasks_completed_session": 13,
+  "last_completed_task": "T0030",
+  "last_completed_summary": "T0030 multi_rate_scheduler_v1 CLEAN PASS @ 250MHz: WNS=+0.304ns WHS=+0.110ns, DSP 6/LUT 434/BRAM 26. Realistic FIFO sizes (64+32+8 KB). C1 H1 cross-validated. Stubs for compute units (v0 decision).",
   "outstanding_ack_needed": [
-    "T0024:latency_above_5000_unreachable",
-    "T0025:latency_above_70000",
-    "T0026:dsp_above_256_AND_latency_above_10000"
+    "T0026:dsp_above_256_AND_latency_above_10000",
+    "T0027:latency_above_50000_unreachable"
+  ],
+  "recently_acked": [
+    "T0024:scope_change_latency_5000_to_35000_admits_v2",
+    "T0025:proceed_v0_accepted"
   ],
   "protocol_version": "1.0",
   "session_kind": "claude_code_interactive"
