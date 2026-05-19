@@ -1,0 +1,17 @@
+{
+  "task_id": "T0027",
+  "verb": "scope_change",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-20T00:35:30Z",
+  "reason": "Worker math proof correct: 154M total ops / 640 packed DSP58 INT8 MACs => 240,847 cycle theoretical minimum at 320 DSP. Physical floor 200,704 writes. The <50,000 cycle cap is mathematically unreachable at any DSP budget below ~1500. v0 result (278,517 cyc = 1.114 ms = 897 image/s) is only 15.6% above the absolute theoretical minimum — IP is essentially optimal at the DSP cap. Vision rate target is 30 Hz; we are at 897 Hz (30× margin). Relaxing latency_max to 300,000 admits v0 directly. Worker Option A accepted. Paper §V will report v0 as [HLS-EST] ViT patch_embed = 278K cyc, DSP 257 (DSP58 INT8-packed), Fmax 374 MHz.",
+  "new_acceptance_criteria": [
+    {"status": "== DONE"},
+    {"result.csim_pass": true},
+    {"result.csim_exact_mismatches": "== 0"},
+    {"result.csynth_pass": true},
+    {"result.fmax_estimated_mhz": ">= 250"},
+    {"result.latency_cycles": "< 300000"},
+    {"result.dsp_used": "< 300"},
+    {"result.lut_used": "< 50000"}
+  ]
+}

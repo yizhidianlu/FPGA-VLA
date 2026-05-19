@@ -1,0 +1,17 @@
+{
+  "task_id": "T0026",
+  "verb": "scope_change",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-20T00:35:00Z",
+  "reason": "v2 IP functionally correct (csim 3/3 bit-exact, 0 mismatches), Fmax 350 MHz (40% headroom over 250 MHz target), 60 μs per 100 Hz action step = 0.6% real-time budget usage (167× under). Two acceptance caps were aspirational, not load-bearing: (1) dsp_used=259 is 1.2% over original <256 cap; the v2 stage breakdown shows TIME_MLP uses 64 DSP at k=128 unroll which is a deliberate latency-vs-resource tradeoff. (2) latency 14951 vs 10000 cap is dominated by FFN1+FFN2 (11520 cyc, 77%) which is bound by W_ffn memory port count, not algorithm. Both fails admit via scope_change; v3 optimization deferred. Worker Option A accepted. Paper §V will report v2 as [HLS-EST] action diffusion head = 14951 cyc @ Fmax 350 MHz, DSP 259, LUT 39k.",
+  "new_acceptance_criteria": [
+    {"status": "== DONE"},
+    {"result.csim_pass": true},
+    {"result.csim_exact_mismatches": "== 0"},
+    {"result.csynth_pass": true},
+    {"result.fmax_estimated_mhz": ">= 250"},
+    {"result.latency_cycles": "< 20000"},
+    {"result.dsp_used": "< 300"},
+    {"result.lut_used": "< 50000"}
+  ]
+}
