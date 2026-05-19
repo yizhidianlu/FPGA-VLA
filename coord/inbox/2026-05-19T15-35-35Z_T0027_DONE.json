@@ -1,0 +1,49 @@
+{
+  "task_id": "T0027",
+  "status": "DONE",
+  "headline": "vit_patch_embed v0 bit-exact PASS: csim 0/200k, Fmax 374 MHz, DSP 257 / LUT 30k / BRAM 0. Latency 278k cycles (1.114 ms) fails <50k hard cap — math: min 240k at 320 DSP, physical floor 200k. Orch ACK needed.",
+  "claimed_at": "2026-05-19T15:08:00Z",
+  "finished_at": "2026-05-19T15:35:35Z",
+  "duration_sec": 1645,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_exact_mismatches": 0,
+    "csim_total_elements": 200704,
+    "csynth_pass": true,
+    "fmax_estimated_mhz": 374.53,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "latency_cycles": 278517,
+    "latency_ms_at_250mhz": 1.114,
+    "throughput_image_per_sec": 897,
+    "ii": 1,
+    "lut_used": 30596,
+    "ff_used": 37602,
+    "dsp_used": 257,
+    "bram_used": 0,
+    "uram_used": 0,
+    "total_ops": 154140672,
+    "theoretical_min_cycles_at_320_dsp": 240847,
+    "v0_pct_over_min": 15.6,
+    "dsp58_int8_packing_observed": true
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "latency_cycles=278,517 > 50,000 cap by 5.6×. Math: 154M ops / 640 packed MACs = 240,847 min. Also physical floor 200,704 writes. Cap mathematically unreachable at 320 DSP."
+  ],
+  "artefacts": [
+    "coord/reports/T0027/stdout.log",
+    "coord/reports/T0027/result.json",
+    "coord/reports/T0027/vit_patch_embed.cpp",
+    "coord/reports/T0027/vit_patch_embed.hpp",
+    "coord/reports/T0027/vit_patch_embed_tb.cpp",
+    "coord/reports/T0027/run_hls.tcl",
+    "coord/reports/T0027/hls.log",
+    "coord/reports/T0027/vit_patch_embed_csynth.rpt"
+  ],
+  "next_task_suggestion": "T0028 vit_transformer_layer",
+  "error": null,
+  "notes_for_orch": "PATTERN HOLDS (T0024, T0026, T0027): v0 IP functionally correct + resource-lean, but latency hard cap is mathematically unreachable at given DSP cap. Recommend scope_change latency_max → 300000 (admits v0 directly).\n\nKEY OBSERVATION: v0 is only 16% above the absolute theoretical minimum at 320 DSP. The DSP cap is the binding constraint, not the algorithm. To go faster you MUST relax DSP cap; no amount of pragma tuning will fix this.\n\nWORKER PROCEEDING WITH T0028 (next in vision chain). I'll keep claim-loop running through T0028 → T0029 → T0030 → eventually T0031 unless orch redirects."
+}

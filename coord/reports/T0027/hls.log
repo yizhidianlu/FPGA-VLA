@@ -1,0 +1,778 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2024.1 (64-bit)
+  **** SW Build 5069499 on May 21 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 19 23:14:12 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source E:/Applaction/Xilinx/Vitis_HLS/2024.1/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] For user 'jielu' on host 'yizhidianlu' (Windows NT_amd64 version 10.0) on Tue May 19 23:14:13 +0800 2026
+INFO: [HLS 200-10] In directory 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027'
+WARNING: [HLS 200-2053] The vitis_hls executable is deprecated. Consider using vitis-run --mode hls --tcl
+Sourcing Tcl script 'run_hls.tcl'
+INFO: [HLS 200-1510] Running: open_project vit_patch_hls -reset 
+INFO: [HLS 200-10] Creating and opening project 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls'.
+INFO: [HLS 200-1510] Running: set_top vit_patch_embed 
+INFO: [HLS 200-1510] Running: add_files vit_patch_embed.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding design file 'vit_patch_embed.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb vit_patch_embed_tb.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding test bench file 'vit_patch_embed_tb.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution sol1 -flow_target vivado 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1'.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcvc1902-vsva2197-2MP-e-S 
+INFO: [HLS 200-1611] Setting target device to 'xcvc1902-vsva2197-2MP-e-S'
+INFO: [HLS 200-1510] Running: create_clock -period 4.0 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [HLS 200-1510] Running: csim_design 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../vit_patch_embed_tb.cpp in debug mode
+   Compiling ../../../../vit_patch_embed.cpp in debug mode
+   Generating csim.exe
+running DUT...
+running REF...
+mismatches=0/200704 max_abs_diff=0
+PASS
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-2161] Finished Command csim_design Elapsed time: 00:00:04; Allocated memory: 1.098 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.169 seconds; current allocated memory: 243.598 MB.
+INFO: [HLS 200-10] Analyzing design file 'vit_patch_embed.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 1.498 seconds; current allocated memory: 245.418 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 77 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 9,159 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,236 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,233 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,233 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+WARNING: [HLS 200-1995] There were 300,377 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,233 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,233 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,233 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,233 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,233 instructions in the design after the 'Performance' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,233 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,233 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,233 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 7,007 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 7,016 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0027/vit_patch_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 214-291] Loop 'K_LOOP' is marked as complete unroll implied by the pipeline pragma (vit_patch_embed.cpp:43:21)
+INFO: [HLS 214-186] Unrolling loop 'K_LOOP' (vit_patch_embed.cpp:43:21) in function 'vit_patch_embed' completely with a factor of 768 (vit_patch_embed.cpp:30:0)
+INFO: [HLS 214-178] Inlining function 'sat8(int)' into 'vit_patch_embed(signed char const (*) [224][3], signed char const (*) [1024], int const*, signed char (*) [1024])' (vit_patch_embed.cpp:30:0)
+INFO: [HLS 214-248] Applying array_partition to 'W': Cyclic partitioning with factor 384 on dimension 1. (vit_patch_embed.cpp:30:0)
+INFO: [HLS 214-437] Automatically disabling loop flattening for loop 'P_LOOP'. (vit_patch_embed.cpp:36:10)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 22.798 seconds; current allocated memory: 247.625 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.012 seconds; current allocated memory: 247.629 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 2.12 seconds; current allocated memory: 264.395 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.652 seconds; current allocated memory: 270.031 MB.
+INFO: [XFORM 203-11] Balancing expressions in function 'vit_patch_embed' (vit_patch_embed.cpp:25:33)...768 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 9 seconds. CPU system time: 0 seconds. Elapsed time: 8.465 seconds; current allocated memory: 300.277 MB.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 4 seconds. CPU system time: 0 seconds. Elapsed time: 4.785 seconds; current allocated memory: 348.211 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'vit_patch_embed' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_patch_embed_Pipeline_J_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_760) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_754) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_753) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_748) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_747) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_743) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_742) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_736) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_735) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_731) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_730) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_725) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_724) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_720) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_719) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_712) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_711) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_707) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_706) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_701) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_700) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_696) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_695) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_689) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_688) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_684) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_683) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_678) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_677) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_673) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_672) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_664) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_663) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_659) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_658) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_653) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_652) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_648) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_647) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_641) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_640) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_636) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_635) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_630) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_629) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_625) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_624) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_617) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_616) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_612) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_611) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_606) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_605) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_601) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_600) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_594) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_593) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_589) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_588) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_583) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_582) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_578) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_577) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_568) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_567) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_563) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_562) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_557) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_556) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_552) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_551) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_545) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_544) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_540) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_539) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_534) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_533) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_529) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_528) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_521) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_520) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_516) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_515) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_510) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_509) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_505) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_504) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_498) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_497) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_493) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_492) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_487) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_486) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_482) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_481) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_473) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_472) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_468) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_467) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_462) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_461) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_457) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_456) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_450) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_449) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_445) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_444) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_439) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_438) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_434) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_433) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_426) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_425) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_421) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_420) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_415) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_414) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_410) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_409) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_403) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_402) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_398) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_397) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_392) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_391) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_387) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_386) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_376) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_375) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_371) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_370) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_365) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_364) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_360) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_359) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_353) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_352) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_348) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_347) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_342) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_341) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_337) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_336) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_329) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_328) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_324) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_323) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_318) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_317) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_313) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_312) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_306) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_305) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_301) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_300) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_295) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_294) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_290) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_289) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_281) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_280) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_276) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_275) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_270) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_269) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_265) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_264) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_258) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_257) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_253) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_252) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_247) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_246) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_242) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_241) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_234) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_233) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_229) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_228) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_223) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_222) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_218) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_217) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_211) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_210) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_206) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_205) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_200) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_199) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_195) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_194) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_185) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_184) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_180) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_179) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_174) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_173) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_169) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_168) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_162) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_161) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_157) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_156) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_151) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_150) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_146) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_145) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_138) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_137) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_133) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_132) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_127) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_126) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_122) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_121) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_115) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_114) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_110) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_109) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_104) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_103) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_99) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_98) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_90) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_89) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_85) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_84) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_79) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_78) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_74) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_73) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_67) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_66) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_62) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_61) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_55) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_51) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_50) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_43) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_38) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_37) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_31) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_27) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_20) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_19) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_14) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_9) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_758) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50_757) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln50) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'J_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 10, loop 'J_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 14 seconds. CPU system time: 1 seconds. Elapsed time: 14.014 seconds; current allocated memory: 433.965 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 70 seconds. CPU system time: 1 seconds. Elapsed time: 71.971 seconds; current allocated memory: 433.965 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_patch_embed' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 289 seconds. CPU system time: 3 seconds. Elapsed time: 295.341 seconds; current allocated memory: 442.695 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 67 seconds. CPU system time: 0 seconds. Elapsed time: 67.705 seconds; current allocated memory: 443.199 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_patch_embed_Pipeline_J_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_patch_embed_Pipeline_J_LOOP' pipeline 'J_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-104] Estimated max fanout for 'vit_patch_embed_Pipeline_J_LOOP' is 12355 from HDL expression: ((1'b0 == ap_block_pp0_stage0_11001) & (1'b1 == ap_CS_fsm_pp0_stage0))
+INFO: [RTGEN 206-100] Generating core module 'dsp_dotpra3_8s_8s_8s_8s_8s_8s_17_4_1': 126 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'dsp_dotpra3add_8s_8s_8s_8s_8s_8s_17s_18_4_1': 126 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'dsp_dotpra3add_8s_8s_8s_8s_8s_8s_18s_18_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'dsp_dotpra3add_8s_8s_8s_8s_8s_8s_32s_32_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 3 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 3 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_patch_embed_Pipeline_J_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 196 seconds. CPU system time: 2 seconds. Elapsed time: 200.149 seconds; current allocated memory: 492.781 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_patch_embed' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/img' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_16' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_17' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_18' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_19' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_20' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_21' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_22' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_23' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_24' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_25' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_26' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_27' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_28' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_29' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_30' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_31' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_32' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_33' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_34' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_35' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_36' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_37' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_38' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_39' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_40' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_41' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_42' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_43' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_44' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_45' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_46' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_47' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_48' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_49' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_50' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_51' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_52' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_53' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_54' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_55' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_56' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_57' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_58' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_59' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_60' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_61' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_62' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_63' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_64' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_65' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_66' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_67' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_68' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_69' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_70' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_71' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_72' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_73' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_74' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_75' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_76' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_77' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_78' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_79' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_80' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_81' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_82' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_83' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_84' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_85' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_86' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_87' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_88' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_89' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_90' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_91' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_92' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_93' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_94' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_95' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_96' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_97' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_98' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_99' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_100' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_101' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_102' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_103' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_104' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_105' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_106' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_107' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_108' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_109' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_110' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_111' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_112' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_113' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_114' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_115' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_116' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_117' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_118' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_119' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_120' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_121' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_122' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_123' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_124' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_125' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_126' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_127' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_128' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_129' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_130' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_131' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_132' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_133' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_134' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_135' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_136' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_137' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_138' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_139' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_140' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_141' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_142' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_143' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_144' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_145' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_146' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_147' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_148' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_149' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_150' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_151' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_152' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_153' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_154' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_155' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_156' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_157' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_158' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_159' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_160' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_161' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_162' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_163' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_164' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_165' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_166' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_167' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_168' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_169' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_170' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_171' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_172' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_173' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_174' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_175' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_176' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_177' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_178' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_179' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_180' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_181' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_182' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_183' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_184' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_185' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_186' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_187' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_188' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_189' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_190' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_191' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_192' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_193' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_194' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_195' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_196' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_197' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_198' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_199' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_200' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_201' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_202' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_203' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_204' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_205' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_206' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_207' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_208' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_209' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_210' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_211' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_212' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_213' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_214' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_215' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_216' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_217' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_218' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_219' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_220' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_221' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_222' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_223' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_224' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_225' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_226' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_227' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_228' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_229' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_230' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_231' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_232' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_233' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_234' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_235' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_236' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_237' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_238' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_239' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_240' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_241' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_242' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_243' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_244' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_245' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_246' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_247' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_248' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_249' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_250' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_251' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_252' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_253' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_254' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_255' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_256' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_257' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_258' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_259' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_260' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_261' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_262' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_263' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_264' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_265' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_266' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_267' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_268' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_269' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_270' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_271' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_272' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_273' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_274' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_275' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_276' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_277' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_278' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_279' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_280' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_281' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_282' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_283' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_284' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_285' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_286' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_287' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_288' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_289' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_290' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_291' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_292' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_293' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_294' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_295' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_296' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_297' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_298' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_299' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_300' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_301' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_302' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_303' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_304' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_305' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_306' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_307' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_308' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_309' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_310' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_311' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_312' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_313' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_314' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_315' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_316' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_317' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_318' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_319' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_320' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_321' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_322' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_323' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_324' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_325' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_326' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_327' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_328' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_329' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_330' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_331' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_332' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_333' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_334' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_335' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_336' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_337' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_338' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_339' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_340' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_341' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_342' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_343' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_344' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_345' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_346' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_347' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_348' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_349' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_350' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_351' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_352' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_353' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_354' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_355' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_356' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_357' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_358' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_359' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_360' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_361' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_362' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_363' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_364' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_365' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_366' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_367' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_368' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_369' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_370' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_371' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_372' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_373' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_374' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_375' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_376' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_377' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_378' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_379' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_380' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_381' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_382' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/W_383' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/bias' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_patch_embed/out_r' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'vit_patch_embed' to 'ap_ctrl_hs'.
+INFO: [RTGEN 206-104] Estimated max fanout for 'vit_patch_embed' is 9255 from HDL expression: (1'b1 == ap_CS_fsm_state388)
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_patch_embed'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 200 seconds. CPU system time: 27 seconds. Elapsed time: 229.027 seconds; current allocated memory: 651.867 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 199 seconds. CPU system time: 22 seconds. Elapsed time: 222.665 seconds; current allocated memory: 744.223 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 128 seconds. CPU system time: 4 seconds. Elapsed time: 133.428 seconds; current allocated memory: 852.973 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for vit_patch_embed.
+INFO: [VLOG 209-307] Generating Verilog RTL for vit_patch_embed.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 374.53 MHz
+INFO: [HLS 200-2161] Finished Command csynth_design Elapsed time: 00:21:14; Allocated memory: 609.762 MB.
+INFO: [HLS 200-112] Total CPU user time: 1181 seconds. Total CPU system time: 62 seconds. Total elapsed time: 1282.43 seconds; peak allocated memory: 852.973 MB.

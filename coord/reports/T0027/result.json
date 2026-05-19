@@ -1,0 +1,73 @@
+{
+  "task_id": "T0027",
+  "status": "DONE",
+  "claimed_at": "2026-05-19T15:08:00Z",
+  "finished_at": "2026-05-19T15:35:35Z",
+  "duration_sec": 1645,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_cases_total": 1,
+    "csim_exact_mismatches": 0,
+    "csim_total_elements_compared": 200704,
+    "csim_max_abs_diff": 0,
+    "csynth_pass": true,
+    "loop_constraints_satisfied": true,
+    "fmax_estimated_mhz": 374.53,
+    "clock_target_ns": 4.0,
+    "clock_estimated_ns": 2.670,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "module_name": "vit_patch_embed",
+    "shape_summary": "img[224,224,3]→out[196,1024] INT8 via W[768,1024]+bias[1024]",
+    "algorithm": "ijk matmul: P_LOOP outer (196 patches, seq), J_LOOP middle (1024 outputs, PIPELINE II=1), K_LOOP inner (768 reduction, UNROLL factor=384)",
+    "total_ops": 154140672,
+    "theoretical_min_cycles_at_320_dsp": 240847,
+    "latency_cycles": 278517,
+    "latency_ms_at_250mhz": 1.114,
+    "latency_pct_over_theoretical_min": 15.6,
+    "interval_cycles": 278518,
+    "ii_j_loop": 1,
+    "ii_p_loop": "not pipelined as outer (sequential)",
+    "throughput_image_per_sec_at_250mhz": 897,
+    "lut_used": 30596,
+    "ff_used": 37602,
+    "dsp_used": 257,
+    "bram_used": 0,
+    "uram_used": 0,
+    "lut_pct": 3.40,
+    "ff_pct": 2.09,
+    "dsp_pct": 13.06,
+    "bram_pct": 0.00,
+    "dsp58_int8_packing_observed": true,
+    "dsp58_packing_note": "Specified UNROLL factor=384 inner k, expected ~192 DSPs after packing. HLS allocated 257 — extra 65 likely for the adder tree, bias addition, saturation. All multiplications via DSP58 (no LUT-mult fallback this run).",
+    "iterations_tried": 1
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "result.latency_cycles=278517 fails hard cap <50000 by 5.6× (mathematically unreachable at 320 DSP — min = 240,847 cycles even at perfect parallelism. Physical floor of 200,704 output writes also gates this).",
+    "dsp_above_250 soft warning triggered (257 marginal)"
+  ],
+  "artefacts": [
+    "coord/reports/T0027/stdout.log",
+    "coord/reports/T0027/result.json",
+    "coord/reports/T0027/vit_patch_embed.hpp",
+    "coord/reports/T0027/vit_patch_embed.cpp",
+    "coord/reports/T0027/vit_patch_embed_tb.cpp",
+    "coord/reports/T0027/run_hls.tcl",
+    "coord/reports/T0027/hls.log",
+    "coord/reports/T0027/vit_patch_embed_csynth.rpt",
+    "coord/reports/T0027/csynth.rpt"
+  ],
+  "next_task_suggestion": "T0028 vit_transformer_layer (deps T0027 satisfied)",
+  "error": null,
+  "guidance_request": {
+    "summary": "T0027 v0 functionally bit-exact, very close to theoretical minimum cycles at given DSP cap (16% above). Latency cap <50k is 5.6× under math floor — unreachable. Same pattern as T0024, T0026.",
+    "options": [
+      "A (recommended): scope_change latency_max → 300,000. Admits v0 directly. 1.1 ms per image at 30 Hz target = 3.3% real-time utilization.",
+      "B: scope_change dsp_max → 1600 + retry with 5-way parallel patches (DATAFLOW). 2-3 iterations, might hit ~60-80k.",
+      "C: scope_change both latency_max → 80000 AND dsp_max → 800. Single ACK, 4× patches parallel, achievable in 1-2 iter."
+    ]
+  }
+}

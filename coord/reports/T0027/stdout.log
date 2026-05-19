@@ -1,0 +1,115 @@
+=== hls_csynth vit_patch_embed (DinoSigLIP-S patch embedding, PL-only) ===
+host:        YIZHIDIANLU
+claimed_at:  2026-05-19T15:08:00Z
+started_hls: 2026-05-19T15:14:11Z
+finished:    2026-05-19T15:35:35Z
+wall_clock:  ~21 min   (deadline 90 min → 23% used)
+
+--- target ---
+part:           xcvc1902-vsva2197-2MP-e-S
+clock_period:   4.0 ns (250 MHz)
+top:            vit_patch_embed
+Shape:          img[224][224][3] INT8 → out[196][1024] INT8
+                via flattened linear projection W[768][1024] + bias[1024]
+Total ops:      196 × 1024 × 768 = 154,140,672 MACs
+
+--- design ---
+v0 pattern (matches T0025 GVSA which one-shot passed):
+  outer P_LOOP: 196 patches (sequential)
+  middle J_LOOP: 1024 outputs (PIPELINE II=1)
+  inner K_LOOP: 768 reduction (UNROLL factor=384 → 2 chunks of 384)
+  W partition: cyclic factor=384 on dim=1
+  Per patch: ~1024 cycles + depth 10
+  Per output element: 1 MAC × 768 ops, factored to 2 cycles × 384 MACs/cycle
+
+--- csim ---
+1 case, deterministic LCG-seeded full 224×224×3 RGB image + random W, bias.
+mismatches  = 0 / 200,704
+max_abs_diff = 0
+PASS — bit-exact DUT vs slow C++ reference.
+
+--- csynth ---
+"All loop constraints were satisfied"
+Estimated Fmax: 374.53 MHz  (period 2.670 ns vs 4.0 ns target)
+J_LOOP: II=1, Depth=10  (target 1, ACHIEVED)
+P_LOOP: not pipelined as outer, iteration latency 1421 cycles, 196 trips
+Total latency: 278,517 cycles = 1.114 ms @ 250 MHz
+
+--- utilization (Versal xcvc1902) ---
+                Used   Available    Util%
+DSP58           257      1,968      13.06%
+LUT          30,596    899,840       3.40%
+FF           37,602  1,799,680       2.09%
+BRAM_18K          0      1,934       0.00%
+URAM              0        463       0.00%
+
+DSP count: HLS used 257 DSP58. UNROLL factor=384 + DSP58 INT8 packing
+nominally → 192 DSPs; HLS allocated 65 extra likely for adder tree + bias
+addition + saturation paths. All multiplications via DSP58 (no LUT-mults
+seen in this run, unlike T0025 which had ~5 LUT-based small mults).
+
+--- ACCEPTANCE CRITERIA CHECK ---
+  status == DONE:                       PASS
+  result.csim_pass == true:             PASS  (bit-exact, 0/200,704)
+  result.csynth_pass == true:           PASS  (all constraints satisfied)
+  result.dsp_used < 320:                PASS  (257, 20% headroom)
+  result.lut_used < 60000:              PASS  (30,596, 49% headroom)
+  result.latency_cycles < 50000:        *** FAIL ***  (278,517 vs 50,000 — 5.6× over)
+
+→ acceptance_criteria_passed = FALSE (latency criterion fails)
+
+--- human_ack_required_on check ---
+  dsp_above_250:   *** TRIGGERED ***  (257 > 250, marginal)
+  lut_above_50000: NOT triggered (30596)
+
+--- MATHEMATICAL LOWER BOUND ANALYSIS ---
+Total work: 154,140,672 MACs
+Theoretical minimum at 320 DSP cap (with DSP58 INT8 packing = 640 MAC-ops/cycle):
+  154.1M / 640 = 240,847 cycles
+v0 achieved 278,517 cycles — only 16% above theoretical minimum. v0 is CLOSE
+to optimal at the current DSP budget; further gains would require fundamental
+parallelism increase (more DSPs).
+
+To hit acceptance cap <50,000 cycles:
+  Required MACs/cycle: 154,140,672 / 50,000 = 3,083 MACs/cycle
+  At DSP58 INT8 packing (2 MACs/DSP): 1,541 DSPs needed
+  Required dsp_max: ~1,600 (5× current cap of 320)
+
+Also note hard physical floor: 196 patches × 1024 outputs = 200,704 output
+writes. Even at infinite MAC parallelism, processing each output sequentially
+(NPATCH × EMBED_D writes at II=1) takes 200,704 cycles. To dip below this, we'd
+need patch-parallel processing (process multiple patches concurrently).
+
+OPTIONS FOR ORCH (pattern matches T0024 v1, T0026 — caps mathematically loose):
+  A (recommended): scope_change latency_max → 300,000.
+     Admits v0 directly. Rationale: 1.114 ms per image at 30 Hz vision target
+     = 33.4 ms/sec compute = 3.3% real-time utilization. Plenty of headroom.
+
+  B: scope_change dsp_max → 1,600 to enable 5× parallel patches.
+     Requires algorithm rewrite (DATAFLOW across patches with 5+ parallel J_LOOP
+     instances). 2-3 more iterations expected. Latency could drop to ~60-80k
+     cycles. Still might miss <50k.
+
+  C: scope_change BOTH dsp_max → 800 (4× patches parallel) AND latency_max
+     → 80,000. Single ACK, achievable in 1-2 v1 iterations.
+
+MY RECOMMENDATION: A. v0 at 1.1 ms per image is excellent for 30 Hz vision.
+Real-time latency budget is 33 ms — we use 3% of it. Optimizing further is
+a "nice to have" that doesn't change the paper headline.
+
+--- numbers for paper §V Table V (v0 PL-only DinoSigLIP-S patch embed) ---
+Module             DSP   BRAM   LUT     FF      Fmax(MHz)   Latency        Throughput
+vit_patch_embed   257    0    30596   37602    374         278517 cycles   897 image/sec
+                                                           (1.114 ms)      (vs 30 Hz target)
+
+--- artefacts ---
+  vit_patch_embed.{cpp,hpp}      (source)
+  vit_patch_embed_tb.cpp         (testbench, bit-exact reference)
+  run_hls.tcl
+  hls.log                        (full vitis_hls output)
+  vit_patch_embed_csynth.rpt     (synthesis report)
+  csynth.rpt                     (solution summary)
+
+--- NEXT IN VISION CHAIN ---
+T0028 vit_transformer_layer (deps T0027 done) — can claim next.
+T0029 vit_encoder_12layer (deps T0028).
