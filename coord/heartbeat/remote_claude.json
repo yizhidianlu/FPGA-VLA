@@ -1,7 +1,7 @@
 {
   "worker": "remote_claude_win",
   "platform": "windows",
-  "ts": "2026-05-19T03:03:00Z",
+  "ts": "2026-05-19T15:00:00Z",
   "pid": 0,
   "uptime_sec": 0,
   "vitis": "OK",
@@ -9,10 +9,14 @@
   "claude_cli": "OK",
   "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
   "current_task": "",
-  "tasks_completed_session": 10,
-  "last_completed_task": "T0025",
-  "last_completed_summary": "T0025 gvsa_matmul v0: 32 DSP, 3657 LUT, csim 0/1M mismatches, Fmax 367MHz, 1.05M cycles. Acceptance PASS, only latency_above_70000 soft ack triggered.",
-  "outstanding_ack_needed": ["T0024:latency_above_5000_unreachable", "T0025:latency_above_70000"],
+  "tasks_completed_session": 11,
+  "last_completed_task": "T0026",
+  "last_completed_summary": "T0026 action_diff_head v2: csim bit-exact (3/3), Fmax 350MHz, 14951 cycles (60us), DSP 259/LUT 39k. Acceptance FAILS both DSP<256 and latency<10000 caps; orch ACK needed. v1 was 10h scheduler hang, v2 fix was chunked-c-tile ATTN_O.",
+  "outstanding_ack_needed": [
+    "T0024:latency_above_5000_unreachable",
+    "T0025:latency_above_70000",
+    "T0026:dsp_above_256_AND_latency_above_10000"
+  ],
   "protocol_version": "1.0",
   "session_kind": "claude_code_interactive"
 }

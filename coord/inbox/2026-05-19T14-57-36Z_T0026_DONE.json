@@ -1,0 +1,67 @@
+{
+  "task_id": "T0026",
+  "status": "DONE",
+  "headline": "action_diff_head v2: csim bit-exact (3/3, 0 mismatches), csynth Fmax 350 MHz, latency 14,951 cycles (60 μs), DSP 259 / LUT 39k / BRAM 3 — acceptance fails by margins (DSP +3, latency +5k). Orch ACK requested.",
+  "claimed_at": "2026-05-19T03:05:00Z",
+  "finished_at": "2026-05-19T14:57:36Z",
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_exact_mismatches": 0,
+    "csim_cases_total": 3,
+    "csynth_pass": true,
+    "fmax_estimated_mhz": 349.90,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "latency_cycles": 14951,
+    "latency_us_at_250mhz": 59.804,
+    "ii": 1,
+    "lut_used": 39184,
+    "ff_used": 10433,
+    "dsp_used": 259,
+    "bram_used": 3,
+    "uram_used": 0,
+    "iterations_tried": 2,
+    "v1_failure_mode": "HLS scheduler hung in ATTN_O_LOOP (~10h wall, rc=58, II→67). Fixed in v2 by chunked-c-tile rewrite.",
+    "stage_latency_breakdown": {
+      "time_mlp": 263,
+      "act_proj": 263,
+      "qkt_matmul": 1031,
+      "softmax_3sub": 792,
+      "attn_o": 1029,
+      "ffn1": 7168,
+      "ffn2": 4352,
+      "out_proj": 35
+    },
+    "stage_dsp_breakdown": {
+      "time_mlp": 64,
+      "act_proj": 3,
+      "qkt_matmul": 32,
+      "attn_o": 64,
+      "ffn1": 32,
+      "ffn2": 32,
+      "out_proj": 32
+    }
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "dsp_used=259 > 256 cap (by 3, 1.2% over)",
+    "latency_cycles=14951 > 10000 cap (by ~5k, 50% over)",
+    "latency_above_8000 soft warning also triggered"
+  ],
+  "artefacts": [
+    "coord/reports/T0026/stdout.log",
+    "coord/reports/T0026/result.json",
+    "coord/reports/T0026/action_diff_head.cpp",
+    "coord/reports/T0026/action_diff_head.hpp",
+    "coord/reports/T0026/action_diff_head_tb.cpp",
+    "coord/reports/T0026/run_hls.tcl",
+    "coord/reports/T0026/hls.log",
+    "coord/reports/T0026/hls_v1_hung.log",
+    "coord/reports/T0026/action_diff_head_csynth.rpt"
+  ],
+  "next_task_suggestion": null,
+  "error": null,
+  "notes_for_orch": "*** T0026 v2 LANDED — GUIDANCE REQUESTED ON BOTH ACCEPTANCE FAILS ***\n\nIP IS FUNCTIONALLY CORRECT AND RESOURCE-LEAN:\n  - csim 3/3 cases bit-exact vs slow C++ reference (0 mismatches, max_abs_diff=0)\n  - Fmax 350 MHz (40% headroom over 250 MHz target)\n  - All loops achieved II=1\n  - 13% DSP utilization on Versal xcvc1902, 4% LUT — VERY lean\n  - 60 μs per action step at 100 Hz target rate = 0.6% real-time loop utilization\n\nTWO HARD ACCEPTANCE FAILS:\n  1. DSP 259 vs cap <256. Just 3 over — barely. Stages don't share DSPs in HLS\n     (sequential stages each get own allocation). TIME_LOOP is the biggest user\n     at 64 DSP (k=128 fully unrolled). Cuttable to 32 by reducing unroll.\n  2. latency_cycles 14951 vs cap <10000. Dominated by FFN1 (7168) + FFN2 (4352)\n     = 11520 cycles (77% of total). Both have inner k-loop pipelined II=1 but\n     outer f/c loop is sequential. To shrink would need pipelining the outer\n     loop with more memory ports on W_ffn1/W_ffn2.\n\nV1 FORENSICS (worth knowing for future tasks):\n  Stage 3c (ATTN_O_LOOP) originally written as `for c PIPELINE II=1; for n seq`.\n  HLS auto-unrolled inner n-loop to satisfy outer II=1 but couldn't because\n  `context` array only had ~16 memory ports (cyclic×64 dim=2). Scheduler hung\n  trying II = 1, 2, 3, ..., 67 for 10 hours wall time. Harness killed with rc=58.\n  v2 fix: chunked-c-tile pattern (TILE_C=64, outer n-loop PIPELINE II=1).\n  LESSON: when an inner reduction is large and the outer is PIPELINE II=1,\n  the loop structure MUST match the array partition geometry. If they don't,\n  HLS may hang trying every II value rather than gracefully bailing.\n\nORCH OPTIONS (recommend A):\n  A — scope_change dsp_max → 300, latency_max → 20000. Admits v2 directly,\n      with both fails covered by ONE ACK. Rationale: real-time budget at 100 Hz\n      is 10 ms; we're at 60 μs (167× under). Both caps were aspirational.\n  B — retry v3: drop TIME unroll k=128→64 (-32 DSP, +250 cyc) AND restructure\n      FFN with outer pipelining (FFN1+FFN2 from ~11.5k to ~4-5k cyc). 1-2 more\n      iterations expected.\n  C — proceed as-is, document v2 as paper number, defer optimization.\n\nMY RECOMMENDATION: A. The numbers are paper-publishable as-is. Real-time fit is\nexcellent. Further optimization is 'nice to have' but doesn't change the headline.\n\nWORKER STATUS AFTER THIS PUSH: all pending tasks drained. Idle, awaiting orch.\n\nOUTSTANDING ACK QUEUE (for orch attention):\n  - T0024 latency<5000 unreachable (proposed A: scope_change 25000)\n  - T0025 latency_above_70000 soft warning (proposed A: ACK proceed)\n  - T0026 BOTH dsp<256 and latency<10000 fail (proposed A: scope_change both)"
+}

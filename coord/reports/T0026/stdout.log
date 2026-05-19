@@ -1,0 +1,149 @@
+=== hls_csynth action_diff_head (1-step ManiFlow flow-matching action head) ===
+host:        YIZHIDIANLU
+claimed_at:  2026-05-19T03:05:00Z
+v1 started:  2026-05-19T03:08:11Z
+v1 hung:     ATTN_O_LOOP scheduler did not converge (II→67 then ^C, rc=58)
+v2 started:  2026-05-19T14:34:09Z
+v2 finished: 2026-05-19T14:57:36Z
+v2 wall:     ~23 min
+
+--- target ---
+part:           xcvc1902-vsva2197-2MP-e-S
+clock_period:   4.0 ns (250 MHz)
+top:            action_diff_head
+shapes:         context[256][256], noisy_action[7], timestep_emb[128],
+                W_time[128][256], W_act_proj[7][256], W_ffn1[256][512],
+                W_ffn2[512][256], W_out[256][7], out[7]
+all INT8
+
+--- iteration log ---
+v1: All 5 stages with k=K_UR=64 unroll + outer-loop PIPELINE II=1.
+    Stage 3c (ATTN_O_LOOP) written as `for c: PIPELINE II=1, for n: seq`.
+    HLS tried to auto-unroll inner n-loop for II=1, but `context` array
+    (cyclic×64 dim=2 only) had insufficient memory ports. Scheduler hung
+    iterating II = 1, 2, 3, ..., 67 for ~10 hours, killed by harness rc=58.
+    Log: hls_v1_hung.log
+
+v2: Stage 3c rewritten with chunked-tile pattern:
+      for c0 in 0..256 step 64:
+        init acc_t[64]
+        for n in 0..256:
+          PIPELINE II=1
+          broadcast attn_w[n], update 64 acc_t[ct] in parallel
+        write acc_t[] to attn_o[c0..c0+63]
+    Matches the existing cyclic×64 dim=2 partition perfectly.
+    Result: ATTN_O_TILE_ATTN_O_N_LOOP II=1, Depth=5, 1029 cycles per tile-pass.
+
+--- v2 csim ---
+3 cases, deterministic LCG-seeded inputs.
+case 0: dut=[127,-128,127,-128,-128,127,-128]  ref=[same]  mismatches=0/7
+case 1: dut=[-128,-128,-128,-128,127,127,127]  ref=[same]  mismatches=0/7
+case 2: dut=[-128,127,127,-128,127,29,-128]     ref=[same]  mismatches=0/7
+cases_failed=0/3   →  bit-exact match between DUT and slow C++ ref.
+
+NOTE: many outputs saturate to ±128 — expected for randomly-seeded INT8
+inputs without realistic weight initialization. Indicates the saturation
+chain is exercising; pre-trained weights would land mid-range.
+
+--- v2 csynth ---
+"All loop constraints were satisfied"
+Estimated Fmax: 349.90 MHz  ✓
+Total latency: 14,951 cycles = 59.804 us @ 250 MHz
+
+Per-stage breakdown (II=1 all):
+  TIME_LOOP (time embed MLP):       263 cycles (k=128 unrolled fully → 64 DSP)
+  ACTP_LOOP (action up-proj):       263 cycles (k=7 unrolled → 3 DSP)
+  QKT_LOOP (cross-attn Q.K^T):     1031 cycles (k=256 chunked by 64 → 32 DSP)
+  MAX_S (softmax max):              257 cycles
+  SHIFT_S (softmax shift):          259 cycles
+  NORM_S (softmax normalize):       276 cycles (depth=20 from int div)
+  ATTN_O_TILE (cross-attn output): 1029 cycles (4 tiles × 256 n, → 64 DSP — the v2 fix)
+  FFN1_LOOP:                       7168 cycles (512 f × 14 cycle/iter, k chunked → 32 DSP)
+  FFN2_LOOP:                       4352 cycles (256 c × 17 cycle/iter, k chunked → 32 DSP)
+  OUT_LOOP:                          35 cycles (k=256 chunked → 32 DSP)
+
+Latency dominated by FFN1 (48%) and FFN2 (29%). Cross-attn (Q.K^T + ATTN_O) is only 14%.
+
+--- v2 utilization (Versal xcvc1902) ---
+                Used   Available    Util%
+DSP58           259      1,968      13.2%
+LUT          39,184    899,840       4.4%
+FF           10,433  1,799,680       0.6%
+BRAM_18K          3      1,934       0.2%
+URAM              0        463       0.0%
+
+DSP breakdown by stage (sequential stages do NOT share DSPs in HLS by default —
+each gets its own allocation):
+  TIME_LOOP:    64    (k=128 unrolled, DSP58 packing × 2 → 64)
+  ACTP_LOOP:     3    (k=7 unrolled, no packing benefit)
+  QKT_LOOP:     32    (k=64 chunked + packing)
+  ATTN_O_TILE:  64    (64-way tile UNROLL on c + DSP58 packing)
+  FFN1_LOOP:    32    (k=64 chunked + packing, output f-loop sequential)
+  FFN2_LOOP:    32    (k=64 chunked + packing)
+  OUT_LOOP:     32    (k=64 chunked + packing)
+                ───
+  Sum:        259    (= total reported)
+
+--- ACCEPTANCE CRITERIA CHECK ---
+  status == DONE:                       PASS
+  result.csim_pass == true:             PASS  (bit-exact, 3/3 cases)
+  result.csynth_pass == true:           PASS  (all loops II=1, constraints satisfied)
+  result.dsp_used < 256:                *** FAIL ***  (259, over by 3)
+  result.latency_cycles < 10000:        *** FAIL ***  (14,951, over by ~5k)
+
+→ acceptance_criteria_passed = FALSE  (two hard cap fails)
+
+--- human_ack_required_on check ---
+  latency_above_8000:   *** TRIGGERED ***  (14,951 > 8,000)
+
+--- ROOT-CAUSE ANALYSIS (per "If timing fails: report what didn't apply") ---
+1. DSP cap (259 vs 256, +1.2%):
+   TIME_LOOP uses 64 DSP because k=128 fully unrolled. Could drop to 32 DSP
+   by unrolling only k=64 (2 inner k-iters per output). Cost: +250 cycles.
+   v3 with this tweak: DSP=227 (passes); latency=15,200 (still fails).
+
+2. Latency cap (14,951 vs 10,000, +50%):
+   Dominated by FFN1+FFN2 (11,520 cycles total). Each has 256/512 outputs
+   sequentially produced (not pipelined as outer loop). To shrink:
+     a) PIPELINE the OUTER f-loop too — would need more memory ports on
+        W_ffn1/W_ffn2 (currently cyclic×64 only on dim=1).
+     b) DATAFLOW the FFN stages overlapping with cross-attn — adds FIFO
+        overhead and changes the IP boundary.
+
+3. Mathematical bound at 256 DSP cap:
+   Total work ≈ 426k ops. Min cycles at 256 DSP (1 op/DSP/cycle, no packing):
+   426k / 256 = 1,664 cycles.
+   With realistic serial stage dependencies + pipeline depths: ≈ 5,000-8,000
+   cycles. So <10,000 IS achievable but requires careful FFN restructuring
+   (probably 2-3 more iterations).
+
+OPTIONS for orch (similar to T0024 ack request):
+  A — scope_change latency_max from 10,000 → 20,000.
+      Rationale: 60 μs per action step at 100 Hz target = 6 ms/sec compute
+      = 0.6% utilization. The 10k cap was aspirational; current latency is
+      already excellent for the real-time loop.
+  B — scope_change dsp_max to 300 to admit DSP=259, AND latency to 20,000.
+      One ACK that covers both bumps.
+  C — retry as v3 with TIME_LOOP unroll dropped + FFN pipeline-outer.
+      Expected ~227 DSP, ~8k cycles. 2-3 more iterations.
+
+MY RECOMMENDATION: B (single ACK, admits both fails). The IP is already very
+performant for its target use case (100 Hz action stream). Further latency
+reduction is "nice to have" but not load-bearing.
+
+--- numbers for paper §V Table II ---
+Module             DSP   BRAM   LUT     FF     Fmax(MHz)   Latency       Throughput
+action_diff_head   259    3    39184  10433   349         14951 cycles  16,727 step/sec
+                                                          (59.8 μs)     (vs 100 Hz target)
+
+Cross-attn (only): 96 DSP, 11.8k LUT (QKT + ATTN_O contribution to module)
+FFN (only):        64 DSP, 6.9k LUT (FFN1 + FFN2)
+
+--- artefacts ---
+  action_diff_head.{cpp,hpp}     (v2 source with fixed ATTN_O_TILE)
+  action_diff_head_tb.cpp        (testbench, bit-exact reference)
+  run_hls.tcl
+  hls.log                        (v2 successful synth log)
+  hls_v1_hung.log                (v1 forensics — scheduler hang)
+  action_diff_head_csynth.rpt    (synthesis report)
+  csynth.rpt                     (solution summary)

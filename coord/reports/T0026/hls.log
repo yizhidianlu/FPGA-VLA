@@ -1,0 +1,1168 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2024.1 (64-bit)
+  **** SW Build 5069499 on May 21 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 19 22:34:11 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source E:/Applaction/Xilinx/Vitis_HLS/2024.1/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] For user 'jielu' on host 'yizhidianlu' (Windows NT_amd64 version 10.0) on Tue May 19 22:34:12 +0800 2026
+INFO: [HLS 200-10] In directory 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026'
+WARNING: [HLS 200-2053] The vitis_hls executable is deprecated. Consider using vitis-run --mode hls --tcl
+Sourcing Tcl script 'run_hls.tcl'
+INFO: [HLS 200-1510] Running: open_project action_diff_hls -reset 
+INFO: [HLS 200-10] Creating and opening project 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls'.
+INFO: [HLS 200-1510] Running: set_top action_diff_head 
+INFO: [HLS 200-1510] Running: add_files action_diff_head.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding design file 'action_diff_head.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb action_diff_head_tb.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding test bench file 'action_diff_head_tb.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution sol1 -flow_target vivado 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1'.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcvc1902-vsva2197-2MP-e-S 
+INFO: [HLS 200-1611] Setting target device to 'xcvc1902-vsva2197-2MP-e-S'
+INFO: [HLS 200-1510] Running: create_clock -period 4.0 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [HLS 200-1510] Running: csim_design 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../action_diff_head_tb.cpp in debug mode
+   Compiling ../../../../action_diff_head.cpp in debug mode
+   Generating csim.exe
+--- case 0 ---
+case 0: dut=[127,-128,127,-128,-128,127,-128] ref=[127,-128,127,-128,-128,127,-128] mismatches=0/7 max_abs_diff=0
+--- case 1 ---
+case 1: dut=[-128,-128,-128,-128,127,127,127] ref=[-128,-128,-128,-128,127,127,127] mismatches=0/7 max_abs_diff=0
+--- case 2 ---
+case 2: dut=[-128,127,127,-128,127,29,-128] ref=[-128,127,127,-128,127,29,-128] mismatches=0/7 max_abs_diff=0
+=== summary ===
+cases_failed=0/3
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-2161] Finished Command csim_design Elapsed time: 00:01:16; Allocated memory: 0.961 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.17 seconds; current allocated memory: 243.512 MB.
+INFO: [HLS 200-10] Analyzing design file 'action_diff_head.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 50.709 seconds; current allocated memory: 246.234 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 564 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,383 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 5,213 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 4,816 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 4,816 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 68,052 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,597 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,597 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,597 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,667 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,667 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,597 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,597 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,597 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 7,651 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 6,930 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0026/action_diff_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_222_10' is marked as complete unroll implied by the pipeline pragma (action_diff_head.cpp:222:36)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_203_8' is marked as complete unroll implied by the pipeline pragma (action_diff_head.cpp:203:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_183_6' is marked as complete unroll implied by the pipeline pragma (action_diff_head.cpp:183:35)
+INFO: [HLS 214-291] Loop 'INNER_C' is marked as complete unroll implied by the pipeline pragma (action_diff_head.cpp:161:26)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_101_4' is marked as complete unroll implied by the pipeline pragma (action_diff_head.cpp:101:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_81_2' is marked as complete unroll implied by the pipeline pragma (action_diff_head.cpp:81:30)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_64_1' is marked as complete unroll implied by the pipeline pragma (action_diff_head.cpp:64:30)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_222_10' (action_diff_head.cpp:222:36) in function 'action_diff_head' completely with a factor of 64 (action_diff_head.cpp:52:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_203_8' (action_diff_head.cpp:203:35) in function 'action_diff_head' completely with a factor of 64 (action_diff_head.cpp:52:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_183_6' (action_diff_head.cpp:183:35) in function 'action_diff_head' completely with a factor of 64 (action_diff_head.cpp:52:0)
+INFO: [HLS 214-186] Unrolling loop 'INIT_ACC_T' (action_diff_head.cpp:154:14) in function 'action_diff_head' completely with a factor of 64 (action_diff_head.cpp:52:0)
+INFO: [HLS 214-186] Unrolling loop 'INNER_C' (action_diff_head.cpp:161:26) in function 'action_diff_head' completely with a factor of 64 (action_diff_head.cpp:52:0)
+INFO: [HLS 214-186] Unrolling loop 'WRITE_TILE' (action_diff_head.cpp:166:25) in function 'action_diff_head' completely with a factor of 64 (action_diff_head.cpp:52:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_101_4' (action_diff_head.cpp:101:35) in function 'action_diff_head' completely with a factor of 64 (action_diff_head.cpp:52:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_81_2' (action_diff_head.cpp:81:30) in function 'action_diff_head' completely with a factor of 7 (action_diff_head.cpp:52:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_64_1' (action_diff_head.cpp:64:30) in function 'action_diff_head' completely with a factor of 128 (action_diff_head.cpp:52:0)
+INFO: [HLS 214-178] Inlining function 'sat16(int)' into 'action_diff_head(signed char const (*) [256], signed char const*, signed char const*, signed char const (*) [256], signed char const (*) [256], signed char const (*) [512], signed char const (*) [256], signed char const (*) [7], signed char*)' (action_diff_head.cpp:52:0)
+INFO: [HLS 214-248] Applying array_partition to 'act_q': Cyclic partitioning with factor 64 on dimension 1. (action_diff_head.cpp:74:12)
+INFO: [HLS 214-248] Applying array_partition to 'attn_o': Cyclic partitioning with factor 64 on dimension 1. (action_diff_head.cpp:147:12)
+INFO: [HLS 214-248] Applying array_partition to 'h': Cyclic partitioning with factor 64 on dimension 1. (action_diff_head.cpp:174:12)
+INFO: [HLS 214-248] Applying array_partition to 'ffn_out': Cyclic partitioning with factor 64 on dimension 1. (action_diff_head.cpp:194:12)
+INFO: [HLS 214-248] Applying array_partition to 'context': Cyclic partitioning with factor 64 on dimension 2. (action_diff_head.cpp:52:0)
+INFO: [HLS 214-248] Applying array_partition to 'noisy_action': Complete partitioning on dimension 1. (action_diff_head.cpp:52:0)
+INFO: [HLS 214-248] Applying array_partition to 'timestep_emb': Complete partitioning on dimension 1. (action_diff_head.cpp:52:0)
+INFO: [HLS 214-248] Applying array_partition to 'W_time': Complete partitioning on dimension 1. (action_diff_head.cpp:52:0)
+INFO: [HLS 214-248] Applying array_partition to 'W_act_proj': Complete partitioning on dimension 1. (action_diff_head.cpp:52:0)
+INFO: [HLS 214-248] Applying array_partition to 'W_ffn1': Cyclic partitioning with factor 64 on dimension 1. (action_diff_head.cpp:52:0)
+INFO: [HLS 214-248] Applying array_partition to 'W_ffn2': Cyclic partitioning with factor 64 on dimension 1. (action_diff_head.cpp:52:0)
+INFO: [HLS 214-248] Applying array_partition to 'W_out': Cyclic partitioning with factor 64 on dimension 1. (action_diff_head.cpp:52:0)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 32.546 seconds; current allocated memory: 247.977 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.013 seconds; current allocated memory: 247.977 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.356 seconds; current allocated memory: 264.656 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.717 seconds; current allocated memory: 270.105 MB.
+INFO: [XFORM 203-11] Balancing expressions in function 'action_diff_head' (action_diff_head.cpp:37:13)...515 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 3 seconds. CPU system time: 0 seconds. Elapsed time: 3.153 seconds; current allocated memory: 301.984 MB.
+INFO: [HLS 200-2061] Successfully converted nested loops 'QKT_LOOP'(action_diff_head.cpp:96:12) and 'VITIS_LOOP_98_3'(action_diff_head.cpp:98:30) in function 'action_diff_head' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'ATTN_O_TILE'(action_diff_head.cpp:151:22) and 'ATTN_O_N_LOOP'(action_diff_head.cpp:158:28) in function 'action_diff_head' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'OUT_LOOP'(action_diff_head.cpp:217:12) and 'VITIS_LOOP_219_9'(action_diff_head.cpp:219:31) in function 'action_diff_head' into perfectly nested loops.
+INFO: [XFORM 203-541] Flattening a loop nest 'QKT_LOOP' (action_diff_head.cpp:96:12) in function 'action_diff_head'.
+INFO: [XFORM 203-541] Flattening a loop nest 'ATTN_O_TILE' (action_diff_head.cpp:151:22) in function 'action_diff_head'.
+WARNING: [HLS 200-960] Cannot flatten loop 'FFN1_LOOP' (action_diff_head.cpp:178:13) in function 'action_diff_head' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+Resolution: For help on HLS 200-960 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-960.html
+WARNING: [HLS 200-960] Cannot flatten loop 'FFN2_LOOP' (action_diff_head.cpp:198:13) in function 'action_diff_head' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+Resolution: For help on HLS 200-960 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-960.html
+INFO: [XFORM 203-541] Flattening a loop nest 'OUT_LOOP' (action_diff_head.cpp:217:12) in function 'action_diff_head'.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 2.244 seconds; current allocated memory: 429.840 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'action_diff_head' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'sat8' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'sat8'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 1, function 'sat8'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 0.373 seconds; current allocated memory: 435.238 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.043 seconds; current allocated memory: 436.371 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head_Pipeline_TIME_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_120) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_119) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_117) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_116) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_113) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_112) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_110) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_109) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_105) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_104) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_102) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_101) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_98) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_97) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_95) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_94) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_89) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_88) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_86) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_85) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_82) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_81) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_79) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_78) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_74) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_73) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_71) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_70) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_67) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_66) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_64) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_63) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_57) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_54) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_53) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_50) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_49) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_47) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_46) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_41) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_39) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_38) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_35) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_34) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_31) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_25) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_23) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_22) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_19) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_18) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_16) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln66) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'TIME_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 7, loop 'TIME_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 2.499 seconds; current allocated memory: 452.477 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.66 seconds; current allocated memory: 452.605 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head_Pipeline_ACTP_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=acc) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln83_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln83_2) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'ACTP_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 7, loop 'ACTP_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.661 seconds; current allocated memory: 453.250 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.522 seconds; current allocated memory: 453.273 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head_Pipeline_QKT_LOOP_VITIS_LOOP_98_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_57) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_54) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_53) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_50) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_49) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_47) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_46) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_41) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_39) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_38) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_35) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_34) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_31) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_25) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_23) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_22) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_19) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_18) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_16) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln105) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'QKT_LOOP_VITIS_LOOP_98_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 7, loop 'QKT_LOOP_VITIS_LOOP_98_3'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 3 seconds. CPU system time: 0 seconds. Elapsed time: 3.292 seconds; current allocated memory: 461.176 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 8 seconds. CPU system time: 1 seconds. Elapsed time: 8.619 seconds; current allocated memory: 461.250 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head_Pipeline_MAX_S' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'MAX_S'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'MAX_S'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 25 seconds. CPU system time: 0 seconds. Elapsed time: 25.325 seconds; current allocated memory: 461.375 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.114 seconds; current allocated memory: 461.379 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head_Pipeline_SHIFT_S' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'SHIFT_S'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'SHIFT_S'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.605 seconds; current allocated memory: 461.414 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.117 seconds; current allocated memory: 461.414 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head_Pipeline_NORM_S' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'NORM_S'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 20, loop 'NORM_S'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.594 seconds; current allocated memory: 461.680 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.18 seconds; current allocated memory: 461.875 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head_Pipeline_ATTN_O_TILE_ATTN_O_N_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_63) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_62) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_61) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_60) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_59) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_58) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_57) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_55) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_54) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_53) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_52) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_51) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_50) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_49) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_48) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_47) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_46) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_45) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_44) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_43) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_41) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_40) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_39) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_38) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_37) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_36) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_35) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_34) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_33) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_31) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_30) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_29) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_28) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_27) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_25) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_24) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_23) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_22) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_21) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_20) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_19) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_18) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_17) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_16) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_14) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_13) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_12) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_9) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_6) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_5) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_2) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln163) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'ATTN_O_TILE_ATTN_O_N_LOOP'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 5, loop 'ATTN_O_TILE_ATTN_O_N_LOOP'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 11 seconds. CPU system time: 0 seconds. Elapsed time: 10.85 seconds; current allocated memory: 477.195 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 8 seconds. CPU system time: 0 seconds. Elapsed time: 8.82 seconds; current allocated memory: 477.367 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head_Pipeline_VITIS_LOOP_180_5' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_57) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_54) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_53) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_50) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_49) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_47) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_46) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_41) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_39) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_38) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_35) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_34) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_31) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_25) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_23) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_22) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_19) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_18) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_16) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln187) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_180_5'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 6, loop 'VITIS_LOOP_180_5'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 27 seconds. CPU system time: 1 seconds. Elapsed time: 26.896 seconds; current allocated memory: 480.539 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 8 seconds. CPU system time: 0 seconds. Elapsed time: 8.528 seconds; current allocated memory: 480.641 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head_Pipeline_VITIS_LOOP_200_7' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_57) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_54) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_53) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_50) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_49) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_47) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_46) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_41) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_39) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_38) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_35) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_34) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_31) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_25) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_23) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_22) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_19) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_18) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_16) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln207) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_200_7'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 6, loop 'VITIS_LOOP_200_7'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 26 seconds. CPU system time: 0 seconds. Elapsed time: 26.612 seconds; current allocated memory: 487.336 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 8 seconds. CPU system time: 0 seconds. Elapsed time: 8.535 seconds; current allocated memory: 487.488 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head_Pipeline_OUT_LOOP_VITIS_LOOP_219_9' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_57) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_54) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_53) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_50) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_49) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_47) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_46) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_41) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_39) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_38) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_35) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_34) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_31) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_25) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_23) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_22) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_19) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_18) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_16) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln226) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'OUT_LOOP_VITIS_LOOP_219_9'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 7, loop 'OUT_LOOP_VITIS_LOOP_219_9'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 27 seconds. CPU system time: 1 seconds. Elapsed time: 26.943 seconds; current allocated memory: 494.293 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 12 seconds. CPU system time: 0 seconds. Elapsed time: 12.475 seconds; current allocated memory: 494.500 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'action_diff_head' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 38 seconds. CPU system time: 0 seconds. Elapsed time: 38.773 seconds; current allocated memory: 508.547 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 46 seconds. CPU system time: 1 seconds. Elapsed time: 47.246 seconds; current allocated memory: 508.977 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'sat8' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'sat8'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 136 seconds. CPU system time: 2 seconds. Elapsed time: 139.555 seconds; current allocated memory: 509.094 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head_Pipeline_TIME_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'action_diff_head_Pipeline_TIME_LOOP' pipeline 'TIME_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 64 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 64 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head_Pipeline_TIME_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.384 seconds; current allocated memory: 509.094 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head_Pipeline_ACTP_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'action_diff_head_Pipeline_ACTP_LOOP' pipeline 'ACTP_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'dsp_dotpra3add_8s_8s_8s_8s_8s_8s_18s_18_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head_Pipeline_ACTP_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 4 seconds. Elapsed time: 6.829 seconds; current allocated memory: 509.094 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head_Pipeline_QKT_LOOP_VITIS_LOOP_98_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'action_diff_head_Pipeline_QKT_LOOP_VITIS_LOOP_98_3' pipeline 'QKT_LOOP_VITIS_LOOP_98_3' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 32 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 32 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head_Pipeline_QKT_LOOP_VITIS_LOOP_98_3'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 2 seconds. Elapsed time: 3.207 seconds; current allocated memory: 509.094 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head_Pipeline_MAX_S' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'action_diff_head_Pipeline_MAX_S' pipeline 'MAX_S' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head_Pipeline_MAX_S'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 27 seconds. CPU system time: 3 seconds. Elapsed time: 30.81 seconds; current allocated memory: 509.094 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head_Pipeline_SHIFT_S' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'action_diff_head_Pipeline_SHIFT_S' pipeline 'SHIFT_S' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head_Pipeline_SHIFT_S'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 1.654 seconds; current allocated memory: 509.094 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head_Pipeline_NORM_S' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'action_diff_head_Pipeline_NORM_S' pipeline 'NORM_S' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'sdiv_31ns_24s_16_19_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head_Pipeline_NORM_S'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.379 seconds; current allocated memory: 509.094 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head_Pipeline_ATTN_O_TILE_ATTN_O_N_LOOP' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'action_diff_head_Pipeline_ATTN_O_TILE_ATTN_O_N_LOOP' pipeline 'ATTN_O_TILE_ATTN_O_N_LOOP' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_16s_8s_32s_32_4_1': 64 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head_Pipeline_ATTN_O_TILE_ATTN_O_N_LOOP'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 1.88 seconds; current allocated memory: 509.094 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head_Pipeline_VITIS_LOOP_180_5' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'action_diff_head_Pipeline_VITIS_LOOP_180_5' pipeline 'VITIS_LOOP_180_5' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 32 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 32 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head_Pipeline_VITIS_LOOP_180_5'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 28 seconds. CPU system time: 5 seconds. Elapsed time: 33.129 seconds; current allocated memory: 519.762 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head_Pipeline_VITIS_LOOP_200_7' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'action_diff_head_Pipeline_VITIS_LOOP_200_7' pipeline 'VITIS_LOOP_200_7' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 32 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 32 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head_Pipeline_VITIS_LOOP_200_7'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 26 seconds. CPU system time: 3 seconds. Elapsed time: 29.346 seconds; current allocated memory: 535.008 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head_Pipeline_OUT_LOOP_VITIS_LOOP_219_9' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'action_diff_head_Pipeline_OUT_LOOP_VITIS_LOOP_219_9' pipeline 'OUT_LOOP_VITIS_LOOP_219_9' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 32 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 32 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head_Pipeline_OUT_LOOP_VITIS_LOOP_219_9'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 25 seconds. CPU system time: 4 seconds. Elapsed time: 29.32 seconds; current allocated memory: 552.105 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'action_diff_head' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_16' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_17' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_18' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_19' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_20' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_21' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_22' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_23' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_24' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_25' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_26' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_27' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_28' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_29' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_30' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_31' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_32' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_33' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_34' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_35' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_36' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_37' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_38' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_39' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_40' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_41' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_42' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_43' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_44' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_45' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_46' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_47' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_48' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_49' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_50' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_51' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_52' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_53' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_54' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_55' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_56' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_57' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_58' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_59' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_60' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_61' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_62' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/context_63' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/noisy_action_0' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/noisy_action_1' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/noisy_action_2' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/noisy_action_3' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/noisy_action_4' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/noisy_action_5' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/noisy_action_6' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_0' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_1' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_2' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_3' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_4' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_5' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_6' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_7' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_8' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_9' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_10' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_11' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_12' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_13' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_14' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_15' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_16' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_17' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_18' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_19' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_20' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_21' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_22' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_23' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_24' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_25' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_26' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_27' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_28' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_29' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_30' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_31' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_32' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_33' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_34' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_35' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_36' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_37' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_38' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_39' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_40' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_41' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_42' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_43' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_44' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_45' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_46' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_47' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_48' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_49' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_50' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_51' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_52' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_53' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_54' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_55' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_56' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_57' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_58' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_59' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_60' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_61' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_62' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_63' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_64' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_65' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_66' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_67' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_68' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_69' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_70' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_71' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_72' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_73' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_74' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_75' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_76' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_77' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_78' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_79' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_80' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_81' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_82' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_83' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_84' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_85' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_86' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_87' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_88' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_89' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_90' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_91' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_92' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_93' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_94' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_95' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_96' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_97' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_98' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_99' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_100' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_101' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_102' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_103' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_104' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_105' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_106' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_107' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_108' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_109' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_110' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_111' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_112' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_113' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_114' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_115' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_116' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_117' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_118' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_119' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_120' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_121' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_122' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_123' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_124' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_125' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_126' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/timestep_emb_127' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_16' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_17' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_18' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_19' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_20' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_21' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_22' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_23' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_24' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_25' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_26' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_27' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_28' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_29' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_30' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_31' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_32' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_33' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_34' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_35' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_36' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_37' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_38' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_39' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_40' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_41' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_42' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_43' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_44' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_45' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_46' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_47' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_48' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_49' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_50' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_51' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_52' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_53' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_54' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_55' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_56' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_57' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_58' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_59' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_60' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_61' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_62' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_63' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_64' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_65' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_66' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_67' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_68' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_69' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_70' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_71' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_72' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_73' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_74' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_75' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_76' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_77' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_78' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_79' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_80' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_81' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_82' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_83' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_84' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_85' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_86' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_87' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_88' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_89' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_90' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_91' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_92' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_93' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_94' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_95' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_96' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_97' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_98' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_99' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_100' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_101' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_102' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_103' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_104' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_105' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_106' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_107' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_108' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_109' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_110' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_111' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_112' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_113' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_114' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_115' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_116' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_117' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_118' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_119' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_120' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_121' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_122' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_123' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_124' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_125' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_126' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_time_127' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_act_proj_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_act_proj_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_act_proj_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_act_proj_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_act_proj_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_act_proj_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_act_proj_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_16' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_17' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_18' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_19' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_20' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_21' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_22' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_23' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_24' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_25' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_26' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_27' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_28' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_29' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_30' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_31' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_32' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_33' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_34' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_35' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_36' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_37' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_38' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_39' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_40' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_41' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_42' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_43' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_44' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_45' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_46' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_47' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_48' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_49' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_50' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_51' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_52' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_53' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_54' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_55' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_56' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_57' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_58' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_59' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_60' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_61' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_62' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn1_63' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_16' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_17' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_18' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_19' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_20' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_21' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_22' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_23' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_24' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_25' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_26' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_27' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_28' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_29' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_30' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_31' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_32' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_33' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_34' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_35' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_36' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_37' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_38' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_39' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_40' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_41' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_42' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_43' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_44' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_45' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_46' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_47' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_48' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_49' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_50' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_51' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_52' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_53' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_54' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_55' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_56' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_57' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_58' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_59' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_60' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_61' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_62' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_ffn2_63' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_8' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_9' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_10' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_11' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_12' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_13' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_14' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_15' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_16' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_17' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_18' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_19' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_20' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_21' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_22' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_23' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_24' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_25' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_26' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_27' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_28' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_29' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_30' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_31' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_32' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_33' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_34' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_35' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_36' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_37' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_38' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_39' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_40' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_41' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_42' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_43' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_44' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_45' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_46' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_47' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_48' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_49' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_50' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_51' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_52' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_53' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_54' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_55' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_56' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_57' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_58' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_59' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_60' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_61' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_62' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/W_out_63' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'action_diff_head/out_r' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'action_diff_head' to 'ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'action_diff_head'.
+INFO: [RTMG 210-278] Implementing memory 'action_diff_head_time_proj_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'action_diff_head_act_q_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'action_diff_head_scores_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'action_diff_head_h_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 43 seconds. CPU system time: 4 seconds. Elapsed time: 47.708 seconds; current allocated memory: 591.527 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 587 seconds. CPU system time: 11 seconds. Elapsed time: 603.348 seconds; current allocated memory: 625.734 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 43 seconds. CPU system time: 2 seconds. Elapsed time: 45.68 seconds; current allocated memory: 696.289 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for action_diff_head.
+INFO: [VLOG 209-307] Generating Verilog RTL for action_diff_head.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 349.90 MHz
+INFO: [HLS 200-2161] Finished Command csynth_design Elapsed time: 00:22:04; Allocated memory: 453.027 MB.
+INFO: [HLS 200-112] Total CPU user time: 1186 seconds. Total CPU system time: 49 seconds. Total elapsed time: 1404.12 seconds; peak allocated memory: 696.289 MB.
