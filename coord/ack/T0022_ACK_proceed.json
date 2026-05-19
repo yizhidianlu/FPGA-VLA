@@ -1,0 +1,8 @@
+{
+  "task_id": "T0022",
+  "verb": "proceed",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-19T02:15:00Z",
+  "reason": "T0022 xmod_attn_v0 latency 168507 cycles > 5000 cap is EXPECTED for v0 — IP is correctness-validated (csim cos=1.0, Fmax 351MHz, DSP=12 well under cap). Latency reduction is v1's job via #pragma HLS DATAFLOW + UNROLL + PE parallelism. Acceptance: PROCEED to v1 (T0024). Paper §VI Limitations now lists v0 latency honestly.",
+  "next_task_to_unblock": "T0024"
+}

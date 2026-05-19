@@ -1,0 +1,55 @@
+task_id: T0024
+created_by: orchestrator
+created_at: 2026-05-19T02:15:00Z
+type: hls_csynth
+priority: P0
+depends_on: [T0022]
+deadline_minutes: 90
+params:
+  module_name: xmod_attn_v1
+  description: |
+    Pipelined version of cross-modal sparse attention (T0022 was v0).
+
+    v0 result (T0022 baseline): latency 168507 cycles, DSP=12, BRAM=9, LUT=13272
+    v1 target:                  latency < 5000 cycles (>33x speedup), DSP < 200, LUT < 100K
+
+    Required optimizations (Claude picks):
+      - #pragma HLS DATAFLOW at top function (overlap top-k selection + softmax + matmul)
+      - #pragma HLS PIPELINE II=1 on inner loops where data dep allows
+      - #pragma HLS UNROLL factor=8 on attention score loop
+      - #pragma HLS ARRAY_PARTITION cyclic factor=16 on score/value arrays
+      - Reuse T0020 topk_engine as-is (already optimized, Fmax 384MHz)
+
+    Latency budget breakdown (target):
+      - top-k selection: 64 cycles (parallel cmp+swap network for k=64)
+      - softmax over k=64: 128 cycles (sequential exp+normalize)
+      - V projection over k=64: 64 cycles (parallel MAC)
+      - dataflow overlap: ~256 cycles total per (Q,K) tile
+      - with 16 query tokens per action chunk: ~4096 cycles
+
+    Test harness (csim):
+      - Reuse T0022's golden tensor (cos sim 1.0 should still hold)
+      - Add latency assertion: assert(latency_cycles < 5000)
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+  resource_caps:
+    latency_max: 5000
+    dsp_max: 200
+    lut_max: 100000
+    bram_max: 64
+acceptance_criteria:
+  - status: "== DONE"
+  - result.csim_pass: true
+  - result.csynth_pass: true
+  - result.latency_cycles: "< 5000"
+  - result.dsp_used: "< 200"
+  - result.lut_used: "< 100000"
+human_ack_required_on:
+  - latency_above_3000   # softer warning
+  - dsp_above_100
+notes: |
+  This is the killer demo IP for paper §V Table II. v1 latency directly becomes
+  the J/step input for the cross-modal attention contribution (C2).
+
+  If timing fails: report which optimizations didn't apply and ask for guidance.
+  Multiple iterations OK (we expect 2-3 try cycles like T0020 needed).

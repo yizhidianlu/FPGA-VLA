@@ -1,0 +1,46 @@
+task_id: T0025
+created_by: orchestrator
+created_at: 2026-05-19T02:15:00Z
+type: hls_csynth
+priority: P1
+depends_on: [T0014]
+deadline_minutes: 90
+params:
+  module_name: gvsa_matmul
+  description: |
+    Group Vector Systolic Array (GVSA) matmul kernel for Llama-2-1B language
+    backbone. Pattern per MLA-LLM [B6] (ASAP'25): tile size 64x64, 4 parallel
+    GVSA columns, INT4 KV cache + INT8 weights.
+
+    Workload: 1024 x 1024 matmul (typical Llama hidden_dim slice)
+    Input  : Q[1024 x 64], K[64 x 1024] (INT8)
+    Output : P[1024 x 1024] (INT8 attention scores)
+
+    Algorithm: standard systolic matmul with column-vector broadcast.
+    Pragmas:
+      - #pragma HLS PIPELINE II=1 on inner accumulate loop
+      - #pragma HLS ARRAY_PARTITION block factor=8 on input arrays
+      - #pragma HLS UNROLL factor=8 on MAC line
+
+    Reference: MLA-LLM [B6] reports 64.20 tokens/s on LLaMA2-7B with similar
+    GVSA pattern. Our 1B target should be ~7x faster per token.
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+  resource_caps:
+    latency_max: 50000      # 1024x1024 = ~1M ops; at II=1 + 8-way unroll = ~131K cycles ideal
+    dsp_max: 512            # MAC unrolled 8x = 8 DSPs per PE x 64 PEs = 512
+    bram_max: 256
+    lut_max: 150000
+acceptance_criteria:
+  - status: "== DONE"
+  - result.csim_pass: true
+  - result.csynth_pass: true
+  - result.dsp_used: "< 512"
+  - result.lut_used: "< 150000"
+human_ack_required_on:
+  - latency_above_70000
+  - dsp_above_400
+notes: |
+  Building block for the language backbone integration (W3-W4).
+  v0 — focus on correctness + Fmax >= 250MHz. Optimization for ASAP/MLA-LLM
+  pattern level in v1.

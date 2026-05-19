@@ -1,0 +1,48 @@
+task_id: T0026
+created_by: orchestrator
+created_at: 2026-05-19T02:15:00Z
+type: hls_csynth
+priority: P1
+depends_on: [T0014]
+deadline_minutes: 90
+params:
+  module_name: action_diff_head
+  description: |
+    Action diffusion head — ManiFlow [D10] single-step flow-matching pattern.
+    Per Ma et al. [A1] reference: spatial dataflow with action_clk-gated MAC.
+
+    Workload: 1-step flow matching for 7-DOF action vector (6 DOF + gripper)
+    Input  : conditioning context [256 tokens x 256 dim INT8]
+              + noisy action [7 dim INT8]
+              + timestep embedding [1 x 128 dim INT8]
+    Output : denoised action [7 dim INT8]
+
+    Architecture (1-step ManiFlow):
+      1. Time embed MLP: 128 -> 256 (one matmul + GeLU)
+      2. Cross-attn: action [1x256] to context [256x256] (use top-k=64 from T0022's engine!)
+      3. FFN: 256 -> 512 -> 256 (two matmuls)
+      4. Output proj: 256 -> 7 (one matmul)
+
+    Pragmas:
+      - #pragma HLS DATAFLOW between stages
+      - #pragma HLS PIPELINE on each MLP stage
+      - Reuse xmod_attn engine for cross-attn (via T0024 v1 ideally)
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+  resource_caps:
+    latency_max: 10000     # 1 step at 100Hz = 10ms = 2.5M cycles budget; aim < 10K = 40us
+    dsp_max: 256
+    bram_max: 64
+    lut_max: 80000
+acceptance_criteria:
+  - status: "== DONE"
+  - result.csim_pass: true
+  - result.csynth_pass: true
+  - result.dsp_used: "< 256"
+  - result.latency_cycles: "< 10000"
+human_ack_required_on:
+  - latency_above_8000
+notes: |
+  Implements the action_clk path of MR-VLA (C1 multi-rate architecture).
+  At 100Hz action rate with < 10K cycles latency, we have 99.96% idle utilization
+  — supports H1's "rate-decoupled execution" claim from the BLOCK-1 reformulation.
