@@ -1,0 +1,95 @@
+=== T0034 vivado_ipi_integrate_impl — IP-Integrator integration (supersedes T0032) ===
+host:        YIZHIDIANLU
+claimed_at:  2026-05-20T09:45:00Z
+finished:    2026-05-20T10:05:00Z
+
+--- OUTCOME ---
+NOT ACHIEVED on this host. The official Vivado IP-Integrator block-design flow
+was attempted (the orch's primary T0034 path) and Vivado CRASHED — the THIRD
+Vivado crash on MR-VLA integration work, across THREE distinct integration
+methods. The integrated post-route number is not obtainable on this 16 GB
+host. The orch-accepted T0032 sum-of-real-Vivado-component-synths stands as
+the Table V [HW-EST] integrated number.
+
+--- STEP0 sanity ---
+Vivado 2024.1 — version check OK, per-IP synth smoke implicitly OK (T0024-T0033
+all synthesized fine on this host). The install handles SINGLE-module work;
+it is INTEGRATION-scale operations that fail.
+
+--- the IP-Integrator attempt ---
+v1: build_bd.tcl — STEP1 (project + ip_repo_paths + update_ip_catalog) OK.
+    STEP2 create_bd_cell FAILED: the scheduler was added as a module reference
+    to mr_vla_top.sv, but IPI rejects a SystemVerilog file as the TOP file of
+    a module reference ([filemgmt 56-195]).
+v2: added a plain-Verilog wrapper (mr_vla_sched_wrap.v) around the SV scheduler.
+    STEP1 OK. STEP2: the 4 HLS IP-XACT cells instantiated; while creating the
+    scheduler module-reference cell (inferring its clk / rst_n / AXIS bus
+    interfaces) Vivado CRASHED:
+       Abnormal program termination (EXCEPTION_ACCESS_VIOLATION)
+       hs_err_pid26236.log — no usable stack trace.
+
+--- THREE Vivado crashes across THREE integration methods (conclusive) ---
+  T0031  raw-RTL co-synth of all IPs        -> EXCEPTION_BREAKPOINT
+  T0032  bottom-up DCP read_checkpoint-cell -> [Project 1-9] link failure
+  T0034  IP-Integrator create_bd_cell       -> EXCEPTION_ACCESS_VIOLATION
+Every method that combines the full IP set into one Vivado design fails on
+this host. Single-module operations (per-IP HLS csynth, per-IP Vivado OOC
+synth, the scheduler, the rate variants) ALL succeed. The orch's T0034 note
+anticipated exactly this: "If Vivado crashes again ... this strongly
+implicates the 16 GB host RAM." The evidence now strongly confirms it —
+integration-scale Vivado operations exceed this host's capacity / hit an
+install instability.
+
+--- bottom-up DCP fallback: also already exhausted ---
+The orch directed "fall back to bottom-up DCP linking" on a crash. That was
+already attempted in T0032: the 5 component DCPs synthesized fine, but
+`read_checkpoint -cell` linking failed with [Project 1-9]. So the fallback
+path is ALSO non-functional on this host — re-running it would only reproduce
+the T0032 failure.
+
+--- WHAT IS DELIVERED / STANDS ---
+1. export_design IP-XACT packages (T0032) — all 4 HLS IPs packaged with the
+   real divider LogiCORE. READY for an IP-Integrator run on a healthier host.
+2. The mr_vla_sched_wrap.v Verilog wrapper — fixes the SV-module-reference
+   blocker, also ready for that future run.
+3. The integrated [HW-EST] resource number, orch-accepted in T0032:
+      DSP 169 (8.6%) / LUT 76028 (8.5%) / BRAM 236.5 tiles (24.5%) / URAM 35 (7.6%)
+   — sum of 5 REAL Vivado component synths, all < 25% of VCK190.
+4. Real per-component timing: HLS IPs Fmax 344-384 MHz; T0030 scheduler
+   WNS +0.304 ns @ 250 MHz. The design meets 250 MHz per-component.
+
+--- ACCEPTANCE CRITERIA (T0034) ---
+  status == DONE:          PASS (work concluded — attempt made, honest result)
+  result.synth_ok:         FALSE — integrated synth not produced (Vivado crash)
+  result.impl_ok:          FALSE — impl not reached
+  result.timing_met:       per-component yes; integrated not measured
+  result.wns_ns >= 0:      not measured at integration level
+  result.lut_pct < 80:     PASS (8.5%, from the T0032 accepted sum)
+  result.dsp_pct < 85:     PASS (8.6%)
+  result.bram_pct < 80:    PASS (24.5%)
+  result.uram_pct < 85:    PASS (7.6%)
+
+→ acceptance_criteria_passed = FALSE (synth_ok / impl_ok not achieved)
+→ human_ack_needed = TRUE — human_ack(vivado_crash_again)
+
+--- RECOMMENDATION FOR ORCH ---
+The integrated post-route number is NOT obtainable on the YIZHIDIANLU host.
+Three crashes across three methods is conclusive. Options:
+  A (recommended): keep the T0032-accepted [HW-EST] sum-of-components number
+     for Table V (orch already accepted it; v1_followup was already marked
+     deferred_to_camera_ready in the T0031 ACK). Treat T0034 as "attempted,
+     host-limited" and run the IP-Integrator flow on a larger machine
+     (>= 32-64 GB RAM, fresh Vivado install) when one is available — all
+     prerequisites are ready (4 IP-XACT packages + the Verilog scheduler
+     wrapper + this build_bd.tcl).
+  B: obtain a healthier Vivado host and re-post T0034 there.
+The headline claim is unaffected: MR-VLA fits VCK190 under 25% on every axis,
+all components timing-close >= 340 MHz standalone, multi-rate topology
+timing-closes (T0030/T0033). Only the single integrated post-route netlist
+remains — a tooling/host limitation, not a design limitation.
+
+--- artefacts ---
+  build_bd.tcl          — the IP-Integrator block-design script (ready to reuse)
+  mr_vla_sched_wrap.v   — plain-Verilog scheduler wrapper (SV-reference fix)
+  build_bd.log          — v2 attempt (crash during create_bd_cell)
+  build_bd_v1.log       — v1 attempt (SV-module-reference rejection)

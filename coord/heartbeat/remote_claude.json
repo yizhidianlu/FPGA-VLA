@@ -1,24 +1,20 @@
-﻿{
-    "worker":  "remote_claude_win",
-    "platform":  "windows",
-    "ts":  "2026-05-20T09:37:33Z",
-    "pid":  0,
-    "uptime_sec":  0,
-    "vitis":  "OK",
-    "vivado":  "OK",
-    "claude_cli":  "OK",
-    "gpu":  "NVIDIA GeForce RTX 3060 Laptop GPU",
-    "current_task":  "",
-    "tasks_completed_session":  18,
-    "last_completed_task":  "T0032",
-    "last_completed_summary":  "T0032 accepted by orch. Hardware design phase W1-W8 COMPLETE.",
-    "outstanding_ack_needed":  [
-
-                               ],
-    "protocol_version":  "1.0",
-    "session_kind":  "claude_code_interactive",
-    "worker_state":  "IDLE / heartbeat-only 鈥?per T0032 ACK worker_directive. Hardware design phase W1-W8 COMPLETE; orch moved to W9-W12 evaluation phase (GPU-side). No pending tasks. Worker stands by; a future v1 IP-Integrator BD task may be posted to pending/.",
-    "heartbeat_note":  "Auto heartbeat loop PID 27892 keeps ts fresh every 15 min.",
-    "heartbeat_tick_count":  4,
-    "last_heartbeat_source":  "heartbeat_loop.ps1 (auto)"
+{
+  "worker": "remote_claude_win",
+  "platform": "windows",
+  "ts": "2026-05-20T10:06:00Z",
+  "pid": 0,
+  "uptime_sec": 0,
+  "vitis": "OK",
+  "vivado": "OK",
+  "claude_cli": "OK",
+  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+  "current_task": "",
+  "tasks_completed_session": 21,
+  "last_completed_task": "T0034",
+  "last_completed_summary": "T0034 IP-Integrator: Vivado crashed (EXCEPTION_ACCESS_VIOLATION) — 3rd integration crash across 3 methods. Integrated co-synth not achievable on this 16GB host. T0032 component-sum stands. W8 class-A batch (T0033/34/35) done.",
+  "outstanding_ack_needed": ["T0034:vivado_crash_again_host_limited", "T0035:latency_above_200000_benign"],
+  "protocol_version": "1.0",
+  "session_kind": "claude_code_interactive",
+  "worker_state": "IDLE - all pending tasks processed (T0010..T0035, 21 tasks this session). Awaiting orch.",
+  "heartbeat_note": "Auto heartbeat loop PID 27892 keeps ts fresh every 15 min."
 }

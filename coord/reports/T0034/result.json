@@ -1,0 +1,59 @@
+{
+  "task_id": "T0034",
+  "status": "DONE",
+  "claimed_at": "2026-05-20T09:45:00Z",
+  "finished_at": "2026-05-20T10:05:00Z",
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "deliverable_kind": "attempt_host_limited",
+    "synth_ok": false,
+    "impl_ok": false,
+    "timing_met": false,
+    "timing_met_detail": "per-component: HLS IPs Fmax 344-384 MHz, T0030 scheduler WNS +0.304 ns @ 250 MHz — design meets 250 MHz per component. Integrated synth/impl not produced (Vivado crash).",
+    "wns_ns": null,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "ipi_attempt": {
+      "step0_sanity": "Vivado 2024.1 OK",
+      "step1_project_ip_repo": "OK — 4 IP-XACT repos + scheduler sources, update_ip_catalog OK",
+      "step2_create_bd_cells": "CRASHED — v1 hit [filemgmt 56-195] (SV not allowed as module-reference top); v2 added a Verilog wrapper, then Vivado crashed EXCEPTION_ACCESS_VIOLATION while creating the scheduler module-reference cell",
+      "step3_onward": "not reached"
+    },
+    "vivado_crash_again": true,
+    "crash_history": [
+      {"task": "T0031", "method": "raw-RTL co-synth of all IPs", "result": "EXCEPTION_BREAKPOINT"},
+      {"task": "T0032", "method": "bottom-up DCP read_checkpoint -cell", "result": "[Project 1-9] link failure"},
+      {"task": "T0034", "method": "IP-Integrator create_bd_cell", "result": "EXCEPTION_ACCESS_VIOLATION"}
+    ],
+    "host_limitation_conclusion": "Three Vivado failures across three distinct integration methods. Every operation combining the full IP set into one design fails on the YIZHIDIANLU host (16 GB RAM, Vivado 2024.1). Single-module operations all succeed. The integrated post-route number is not obtainable on this host.",
+    "integrated_resource_hw_est": {
+      "note": "orch-accepted T0032 sum-of-5-real-Vivado-component-synths — stands as the Table V [HW-EST] number",
+      "dsp": 169, "dsp_pct": 8.6,
+      "lut": 76028, "lut_pct": 8.5,
+      "bram_tiles": 236.5, "bram_pct": 24.5,
+      "uram": 35, "uram_pct": 7.6
+    },
+    "deliverables_ready_for_future_run": [
+      "4 IP-XACT packages (T0032 export_design) with real divider LogiCORE bundled",
+      "mr_vla_sched_wrap.v — plain-Verilog scheduler wrapper (fixes the SV-module-reference blocker)",
+      "build_bd.tcl — the IP-Integrator block-design script, ready to reuse on a healthier host"
+    ]
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "vivado_crash_again: 3rd Vivado crash on integration work (T0031 EXCEPTION_BREAKPOINT, T0032 read_checkpoint-cell [Project 1-9], T0034 IP-Integrator EXCEPTION_ACCESS_VIOLATION). Conclusive: the integrated co-synth is not achievable on this 16 GB host across any of the 3 methods tried.",
+    "synth_ok=false, impl_ok=false — integrated synth/impl not produced. All resource percentages (8.6/8.5/24.5/7.6%) pass from the T0032-accepted component sum; the failure is host/tooling, not capacity.",
+    "Recommend running the IP-Integrator flow (all prerequisites ready) on a >=32-64 GB host with a fresh Vivado install. Per the T0031 ACK this integrated post-route number was already deferred_to_camera_ready."
+  ],
+  "artefacts": [
+    "coord/reports/T0034/stdout.log",
+    "coord/reports/T0034/result.json",
+    "coord/reports/T0034/build_bd.tcl",
+    "coord/reports/T0034/mr_vla_sched_wrap.v",
+    "coord/reports/T0034/build_bd.log",
+    "coord/reports/T0034/build_bd_v1.log"
+  ],
+  "next_task_suggestion": null,
+  "error": "Vivado IP-Integrator create_bd_cell crashed (EXCEPTION_ACCESS_VIOLATION) — 3rd integration crash across 3 methods on this host. Integrated post-route number not obtainable here; needs a larger-RAM host. T0032-accepted component-sum stands for Table V."
+}

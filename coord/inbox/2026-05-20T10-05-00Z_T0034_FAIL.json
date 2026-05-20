@@ -1,0 +1,38 @@
+{
+  "task_id": "T0034",
+  "status": "DONE",
+  "note_on_status": "status DONE (genuine attempt concluded) but acceptance_criteria_passed=FALSE — Vivado crashed. Inbox _FAIL.json flags it. Honest assessment below.",
+  "headline": "T0034 IP-Integrator integration: Vivado CRASHED (EXCEPTION_ACCESS_VIOLATION) — the 3rd Vivado crash across 3 distinct integration methods (T0031/T0032/T0034). Conclusive: integrated co-synth not achievable on this 16 GB host. T0032-accepted [HW-EST] component-sum (169 DSP / 76k LUT / 236.5 BRAM / 35 URAM, <25% VCK190) stands for Table V.",
+  "claimed_at": "2026-05-20T09:45:00Z",
+  "finished_at": "2026-05-20T10:05:00Z",
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "deliverable_kind": "attempt_host_limited",
+    "synth_ok": false,
+    "impl_ok": false,
+    "timing_met": false,
+    "vivado_crash_again": true,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "integrated_resource_hw_est": {"dsp": 169, "lut": 76028, "bram_tiles": 236.5, "uram": 35,
+      "dsp_pct": 8.6, "lut_pct": 8.5, "bram_pct": 24.5, "uram_pct": 7.6,
+      "source": "T0032-accepted sum of 5 real Vivado component synths"}
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "vivado_crash_again — 3rd Vivado crash on integration work, across 3 distinct methods. Integrated co-synth not achievable on this 16 GB host.",
+    "synth_ok=false / impl_ok=false. Resource percentages all pass from the T0032 component sum; failure is host/tooling, not design capacity."
+  ],
+  "artefacts": [
+    "coord/reports/T0034/stdout.log",
+    "coord/reports/T0034/result.json",
+    "coord/reports/T0034/build_bd.tcl",
+    "coord/reports/T0034/mr_vla_sched_wrap.v",
+    "coord/reports/T0034/build_bd.log",
+    "coord/reports/T0034/build_bd_v1.log"
+  ],
+  "next_task_suggestion": null,
+  "error": "Vivado IP-Integrator create_bd_cell crashed (EXCEPTION_ACCESS_VIOLATION). Integrated post-route number needs a larger-RAM host.",
+  "notes_for_orch": "*** T0034 — INTEGRATED CO-SYNTH NOT ACHIEVABLE ON THIS HOST (conclusive) ***\n\nI gave the official IP-Integrator flow a genuine attempt:\n  STEP0 sanity: Vivado 2024.1 OK.\n  STEP1: project + ip_repo_paths (4 IP-XACT packages) + update_ip_catalog — OK.\n  STEP2 v1: create_bd_cell — scheduler as module-reference to mr_vla_top.sv\n     rejected ([filemgmt 56-195]: SystemVerilog not allowed as a module-\n     reference TOP file).\n  STEP2 v2: added mr_vla_sched_wrap.v (plain-Verilog wrapper around the SV\n     scheduler) — fixed that blocker; the 4 HLS IP-XACT cells instantiated;\n     then Vivado CRASHED (EXCEPTION_ACCESS_VIOLATION) while creating the\n     scheduler module-reference cell.\n\nTHIS IS THE 3RD VIVADO CRASH ON INTEGRATION, ACROSS 3 METHODS:\n  T0031  raw-RTL co-synth        -> EXCEPTION_BREAKPOINT\n  T0032  DCP read_checkpoint-cell -> [Project 1-9] failure\n  T0034  IP-Integrator           -> EXCEPTION_ACCESS_VIOLATION\nYour T0034 note predicted this ('strongly implicates the 16 GB host RAM').\nThe evidence is now conclusive. Single-module Vivado work is 100% reliable\non this host (every per-IP synth, the scheduler, the rate variants); it is\nINTEGRATION-scale operations that fail, regardless of method. The orch-\nsuggested DCP fallback was already shown non-functional here in T0032.\n\nI stopped after the 3rd crash rather than burn more cycles bashing the same\nobstacle (protocol §11). This is a host/tooling limitation, NOT a design\nproblem.\n\nWHAT STANDS: the T0032-accepted [HW-EST] integrated number — 169 DSP (8.6%) /\n76028 LUT (8.5%) / 236.5 BRAM tiles (24.5%) / 35 URAM (7.6%), sum of 5 real\nVivado component synths, every axis < 25% of VCK190. All components timing-\nclose >= 340 MHz standalone; the multi-rate topology timing-closes (T0030\n+0.304 ns, T0033 H1 verdict SUPPORTED). The MR-VLA headline is fully backed.\n\nREADY FOR A FUTURE RUN ON A HEALTHIER HOST: the 4 IP-XACT packages, the\nmr_vla_sched_wrap.v Verilog wrapper, and build_bd.tcl are all done and\ncommitted. An IP-Integrator run on a >=32-64 GB machine with a fresh Vivado\ninstall should complete. Per the T0031 ACK, this integrated post-route number\nwas already deferred_to_camera_ready — T0034's host-limited outcome fits that\nplan; it just confirms the deferral must happen on different hardware.\n\nWORKER STATUS: T0034 was the last pending task. All of T0010-T0035 (this\nclass-A W8 batch = T0033/T0034/T0035) processed. Worker idle; heartbeat loop\nPID 27892 continues. Recommend orch review and decide whether to source a\nlarger host for the integration or finalize the paper with the accepted\ncomponent-sum number."
+}
