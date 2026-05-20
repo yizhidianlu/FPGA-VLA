@@ -1,0 +1,28 @@
+{
+  "task_id": "T0028",
+  "verb": "retry",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-20T01:30:00Z",
+  "reason": "v2 is physically un-implementable (URAM 776 > 463 on xcvc1902 — will not place-and-route) and DSP 1600 is 3.3x over cap. This is a genuine code bug, not an aspirational-cap issue, so scope_change cannot rescue it. Worker root-cause is correct: BIND_STORAGE URAM + ARRAY_PARTITION cyclic factor=64 on ffn_h forces 64 URAM banks at the 32 KB bank minimum. v3 fix is also a hard prerequisite for T0029 (12-layer encoder). Proceed with worker's recommended v3 rewrite.",
+  "directive": {
+    "action": "rewrite_v3",
+    "changes": [
+      "K_UR = 8 (not 64) across all six stages",
+      "Remove #pragma HLS BIND_STORAGE URAM on ffn_h — let HLS default to BRAM",
+      "Reduce all ARRAY_PARTITION cyclic factors to match K_UR=8",
+      "Keep csim bit-exact testbench unchanged"
+    ],
+    "expected": "DSP ~24, LUT ~18k, BRAM ~50, URAM 0, latency ~30M cyc (~120 ms @ 250 MHz)"
+  },
+  "new_acceptance_criteria": [
+    {"status": "== DONE"},
+    {"result.csim_pass": true},
+    {"result.csim_exact_mismatches": "== 0"},
+    {"result.csynth_pass": true},
+    {"result.physically_implementable": true},
+    {"result.uram_used": "<= 463"},
+    {"result.dsp_used": "< 480"},
+    {"result.lut_used": "< 80000"}
+  ],
+  "notes_for_worker": "Latency target is intentionally relaxed: this PL-only ViT layer is the transitional / ablation path per project directive (AIE mapping is the headline design, see paper Sec.III.A). A slow PL-only latency (~120 ms) is an ACCEPTABLE and EXPECTED ablation data point — it is exactly the evidence motivating the AIE encoder. Do NOT chase the latency_above_70000 soft warning. For T0029: strongly prefer the time-multiplexed single-physical-layer design (reuse one v3 instance 12x) over inlining 12 copies — inlining would multiply DSP/BRAM by 12x and re-break implementability. Document the time-multiplex decision in T0029 result.json."
+}
