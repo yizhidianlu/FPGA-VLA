@@ -1,20 +1,24 @@
-{
-  "worker": "remote_claude_win",
-  "platform": "windows",
-  "ts": "2026-05-20T08:41:00Z",
-  "pid": 0,
-  "uptime_sec": 0,
-  "vitis": "OK",
-  "vivado": "OK",
-  "claude_cli": "OK",
-  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
-  "current_task": "",
-  "tasks_completed_session": 18,
-  "last_completed_task": "T0032",
-  "last_completed_summary": "T0032 accepted by orch. Hardware design phase W1-W8 COMPLETE.",
-  "outstanding_ack_needed": [],
-  "protocol_version": "1.0",
-  "session_kind": "claude_code_interactive",
-  "worker_state": "IDLE / heartbeat-only — per T0032 ACK worker_directive. Hardware design phase W1-W8 COMPLETE; orch moved to W9-W12 evaluation phase (GPU-side). No pending tasks. Worker stands by; a future v1 IP-Integrator BD task may be posted to pending/.",
-  "heartbeat_note": "Auto heartbeat loop PID 27892 keeps ts fresh every 15 min."
+﻿{
+    "worker":  "remote_claude_win",
+    "platform":  "windows",
+    "ts":  "2026-05-20T08:51:37Z",
+    "pid":  0,
+    "uptime_sec":  0,
+    "vitis":  "OK",
+    "vivado":  "OK",
+    "claude_cli":  "OK",
+    "gpu":  "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "current_task":  "",
+    "tasks_completed_session":  18,
+    "last_completed_task":  "T0032",
+    "last_completed_summary":  "T0032 accepted by orch. Hardware design phase W1-W8 COMPLETE.",
+    "outstanding_ack_needed":  [
+
+                               ],
+    "protocol_version":  "1.0",
+    "session_kind":  "claude_code_interactive",
+    "worker_state":  "IDLE / heartbeat-only 鈥?per T0032 ACK worker_directive. Hardware design phase W1-W8 COMPLETE; orch moved to W9-W12 evaluation phase (GPU-side). No pending tasks. Worker stands by; a future v1 IP-Integrator BD task may be posted to pending/.",
+    "heartbeat_note":  "Auto heartbeat loop PID 27892 keeps ts fresh every 15 min.",
+    "heartbeat_tick_count":  1,
+    "last_heartbeat_source":  "heartbeat_loop.ps1 (auto)"
 }
