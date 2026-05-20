@@ -1,19 +1,23 @@
-{
-  "worker": "remote_claude_win",
-  "platform": "windows",
-  "ts": "2026-05-20T02:28:00Z",
-  "pid": 0,
-  "uptime_sec": 0,
-  "vitis": "OK",
-  "vivado": "OK",
-  "claude_cli": "OK",
-  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
-  "current_task": "",
-  "tasks_completed_session": 16,
-  "last_completed_task": "T0029",
-  "last_completed_summary": "T0029 vit_encoder_12layer CLEAN PASS: 12 layers time-multiplexed on ONE instance, DSP 36 (= single layer), LUT 9398, BRAM 1, URAM 79, Fmax 344MHz, csim bit-exact. T0031 now unblocked.",
-  "outstanding_ack_needed": ["T0029:latency_above_900000 (PL-only ablation, expected)"],
-  "protocol_version": "1.0",
-  "session_kind": "claude_code_interactive",
-  "heartbeat_note": "ASCII-only content to avoid the heartbeat_loop.ps1 ConvertTo-Json roundtrip mangling non-ASCII chars. Auto heartbeat loop PID 27892 keeps ts fresh every 15 min."
+﻿{
+    "worker":  "remote_claude_win",
+    "platform":  "windows",
+    "ts":  "2026-05-20T02:34:25Z",
+    "pid":  0,
+    "uptime_sec":  0,
+    "vitis":  "OK",
+    "vivado":  "OK",
+    "claude_cli":  "OK",
+    "gpu":  "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "current_task":  "",
+    "tasks_completed_session":  16,
+    "last_completed_task":  "T0029",
+    "last_completed_summary":  "T0029 vit_encoder_12layer CLEAN PASS: 12 layers time-multiplexed on ONE instance, DSP 36 (= single layer), LUT 9398, BRAM 1, URAM 79, Fmax 344MHz, csim bit-exact. T0031 now unblocked.",
+    "outstanding_ack_needed":  [
+                                   "T0029:latency_above_900000 (PL-only ablation, expected)"
+                               ],
+    "protocol_version":  "1.0",
+    "session_kind":  "claude_code_interactive",
+    "heartbeat_note":  "ASCII-only content to avoid the heartbeat_loop.ps1 ConvertTo-Json roundtrip mangling non-ASCII chars. Auto heartbeat loop PID 27892 keeps ts fresh every 15 min.",
+    "heartbeat_tick_count":  1,
+    "last_heartbeat_source":  "heartbeat_loop.ps1 (auto)"
 }
