@@ -1,0 +1,1379 @@
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed May 20 10:34:38 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source build_synth.tcl
+# set part "xcvc1902-vsva2197-2MP-e-S"
+# set top  "mr_vla_full_top"
+# puts ">>> T0031 build_synth.tcl start â€? MR-VLA full integration"
+>>> T0031 build_synth.tcl start â€? MR-VLA full integration
+# puts ">>> part: $part   top: $top"
+>>> part: xcvc1902-vsva2197-2MP-e-S   top: mr_vla_full_top
+# set_param general.maxThreads 1
+# set vfiles [glob ../rtl/*.v]
+# puts ">>> reading [llength $vfiles] HLS Verilog files"
+>>> reading 90 HLS Verilog files
+# foreach f $vfiles {
+#     read_verilog $f
+# }
+read_verilog: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 646.840 ; gain = 202.062
+# read_verilog -sv ../rtl/rate_enable_gen.sv
+# read_verilog -sv ../rtl/bram_axis_fifo.sv
+# read_verilog -sv ../rtl/mr_vla_full_top.sv
+# puts ">>> synth_design -top $top"
+>>> synth_design -top mr_vla_full_top
+# synth_design -top $top -part $part -mode out_of_context
+Command: synth_design -top mr_vla_full_top -part xcvc1902-vsva2197-2MP-e-S -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-86] Your Synthesis license expires in 19 day(s)
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 1 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 34244
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1105.102 ; gain = 455.254
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_full_top' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:34]
+INFO: [Synth 8-6157] synthesizing module 'rate_enable_gen' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/rate_enable_gen.sv:12]
+	Parameter VISION_CYCLES bound to: 32'sb00000000011111110010100000010101 
+	Parameter LANGUAGE_CYCLES bound to: 32'sb00001110111001101011001010000000 
+	Parameter ACTION_CYCLES bound to: 32'sb00000000001001100010010110100000 
+INFO: [Synth 8-6155] done synthesizing module 'rate_enable_gen' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/rate_enable_gen.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'bram_axis_fifo' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/bram_axis_fifo.sv:11]
+	Parameter WIDTH bound to: 32'sb00000000000000000000000000100000 
+	Parameter DEPTH bound to: 32'sb00000000000000000100000000000000 
+INFO: [Synth 8-6155] done synthesizing module 'bram_axis_fifo' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/bram_axis_fifo.sv:11]
+INFO: [Synth 8-6157] synthesizing module 'bram_axis_fifo__parameterized0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/bram_axis_fifo.sv:11]
+	Parameter WIDTH bound to: 32'sb00000000000000000000000000100000 
+	Parameter DEPTH bound to: 32'sb00000000000000000010000000000000 
+INFO: [Synth 8-6155] done synthesizing module 'bram_axis_fifo__parameterized0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/bram_axis_fifo.sv:11]
+INFO: [Synth 8-6157] synthesizing module 'bram_axis_fifo__parameterized1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/bram_axis_fifo.sv:11]
+	Parameter WIDTH bound to: 32'sb00000000000000000000000000100000 
+	Parameter DEPTH bound to: 32'sb00000000000000000000100000000000 
+INFO: [Synth 8-6155] done synthesizing module 'bram_axis_fifo__parameterized1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/bram_axis_fifo.sv:11]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb.v:7]
+	Parameter DataWidth bound to: 8 - type: integer 
+	Parameter AddressWidth bound to: 15 - type: integer 
+	Parameter AddressRange bound to: 24576 - type: integer 
+INFO: [Synth 8-3876] $readmem data file './vit_encoder_12layer_vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb.dat' is read successfully [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb.v:40]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb.v:7]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_buf_out_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_buf_out_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 8 - type: integer 
+	Parameter AddressWidth bound to: 17 - type: integer 
+	Parameter AddressRange bound to: 98304 - type: integer 
+INFO: [Synth 8-3876] $readmem data file './vit_encoder_12layer_buf_out_RAM_AUTO_1R1W.dat' is read successfully [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_buf_out_RAM_AUTO_1R1W.v:31]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_buf_out_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_buf_out_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_flow_control_loop_pipe_sequential_init' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_flow_control_loop_pipe_sequential_init.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_flow_control_loop_pipe_sequential_init' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_flow_control_loop_pipe_sequential_init.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_qkv_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_qkv_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 16 - type: integer 
+	Parameter AddressWidth bound to: 16 - type: integer 
+	Parameter AddressRange bound to: 36864 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_qkv_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_qkv_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_scores_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_scores_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 16 - type: integer 
+	Parameter AddressWidth bound to: 16 - type: integer 
+	Parameter AddressRange bound to: 65536 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_scores_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_scores_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_attn_o_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_attn_o_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 16 - type: integer 
+	Parameter AddressWidth bound to: 14 - type: integer 
+	Parameter AddressRange bound to: 12288 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_attn_o_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_attn_o_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_mha_out_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_mha_out_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 8 - type: integer 
+	Parameter AddressWidth bound to: 14 - type: integer 
+	Parameter AddressRange bound to: 12288 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_mha_out_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_mha_out_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_ffn_h_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_ffn_h_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 7 - type: integer 
+	Parameter AddressWidth bound to: 16 - type: integer 
+	Parameter AddressRange bound to: 49152 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_ffn_h_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_ffn_h_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_shifted_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_shifted_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 16 - type: integer 
+	Parameter AddressWidth bound to: 8 - type: integer 
+	Parameter AddressRange bound to: 256 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_shifted_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_shifted_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_SCORES_I_SCORES_J_SCORES_K' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SCORES_I_SCORES_J_SCORES_K.v:9]
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mul_16s_16s_32_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mul_16s_16s_32_1_1.v:5]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 16 - type: integer 
+	Parameter dout_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mul_16s_16s_32_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mul_16s_16s_32_1_1.v:5]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mac_muladd_16s_16s_32s_32_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_16s_32s_32_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 16 - type: integer 
+	Parameter din2_WIDTH bound to: 32 - type: integer 
+	Parameter dout_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mac_muladd_16s_16s_32s_32_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_16s_32s_32_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mac_muladd_16s_16s_32s_32_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_16s_32s_32_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mac_muladd_16s_16s_32s_32_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_16s_32s_32_4_1.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_SCORES_I_SCORES_J_SCORES_K' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SCORES_I_SCORES_J_SCORES_K.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_QKV_K' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_QKV_K.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mul_8s_8s_16_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mul_8s_8s_16_1_1.v:5]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mul_8s_8s_16_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mul_8s_8s_16_1_1.v:5]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mac_muladd_8s_8s_16s_17_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_8s_8s_16s_17_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 16 - type: integer 
+	Parameter dout_WIDTH bound to: 17 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mac_muladd_8s_8s_16s_17_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_8s_8s_16s_17_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mac_muladd_8s_8s_16s_17_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_8s_8s_16s_17_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mac_muladd_8s_8s_16s_17_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_8s_8s_16s_17_4_1.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_QKV_K' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_QKV_K.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_ATTN_O_I_ATTN_O_TILE_ATTN_O_J' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_ATTN_O_I_ATTN_O_TILE_ATTN_O_J.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mac_muladd_16s_16s_32ns_32_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_16s_32ns_32_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 16 - type: integer 
+	Parameter din2_WIDTH bound to: 32 - type: integer 
+	Parameter dout_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mac_muladd_16s_16s_32ns_32_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_16s_32ns_32_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mac_muladd_16s_16s_32ns_32_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_16s_32ns_32_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mac_muladd_16s_16s_32ns_32_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_16s_32ns_32_4_1.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_ATTN_O_I_ATTN_O_TILE_ATTN_O_J' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_ATTN_O_I_ATTN_O_TILE_ATTN_O_J.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_MAX' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_MAX.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_MAX' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_MAX.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_SHIFT' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_SHIFT.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_SHIFT' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_SHIFT.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_NORM' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_NORM.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_sdiv_31ns_24s_16_19_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_sdiv_31ns_24s_16_19_1.v:5]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 19 - type: integer 
+	Parameter din0_WIDTH bound to: 31 - type: integer 
+	Parameter din1_WIDTH bound to: 24 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_sdiv_31ns_24s_16_19_1_ip' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/divider_ip_stubs.v:49]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_sdiv_31ns_24s_16_19_1_ip' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/divider_ip_stubs.v:49]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_sdiv_31ns_24s_16_19_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_sdiv_31ns_24s_16_19_1.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_NORM' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_NORM.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_OUT_K' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_OUT_K.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mul_16s_8s_24_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mul_16s_8s_24_1_1.v:5]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter dout_WIDTH bound to: 24 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mul_16s_8s_24_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mul_16s_8s_24_1_1.v:5]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mac_muladd_16s_8s_24s_25_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_8s_24s_25_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 24 - type: integer 
+	Parameter dout_WIDTH bound to: 25 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mac_muladd_16s_8s_24s_25_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_8s_24s_25_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mac_muladd_16s_8s_24s_25_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_8s_24s_25_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mac_muladd_16s_8s_24s_25_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_16s_8s_24s_25_4_1.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_OUT_K' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_OUT_K.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_FFN2_I_FFN2_J_FFN2_K' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_FFN2_I_FFN2_J_FFN2_K.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mul_8s_7ns_15_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mul_8s_7ns_15_1_1.v:5]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 7 - type: integer 
+	Parameter dout_WIDTH bound to: 15 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mul_8s_7ns_15_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mul_8s_7ns_15_1_1.v:5]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mac_muladd_8s_7ns_15s_16_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_8s_7ns_15s_16_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 7 - type: integer 
+	Parameter din2_WIDTH bound to: 15 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_mac_muladd_8s_7ns_15s_16_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_8s_7ns_15s_16_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mac_muladd_8s_7ns_15s_16_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_8s_7ns_15s_16_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_mac_muladd_8s_7ns_15s_16_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_mac_muladd_8s_7ns_15s_16_4_1.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_FFN2_I_FFN2_J_FFN2_K' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_FFN2_I_FFN2_J_FFN2_K.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_FFN1_K' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_FFN1_K.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer_Pipeline_FFN1_K' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_FFN1_K.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_transformer_layer' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_encoder_12layer_Pipeline_STORE_P_STORE_D' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_encoder_12layer_Pipeline_STORE_P_STORE_D.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_sparsemux_9_2_8_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_sparsemux_9_2_8_1_1.v:9]
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 8 - type: integer 
+	Parameter din3_WIDTH bound to: 8 - type: integer 
+	Parameter def_WIDTH bound to: 8 - type: integer 
+	Parameter sel_WIDTH bound to: 2 - type: integer 
+	Parameter dout_WIDTH bound to: 8 - type: integer 
+	Parameter CASE0 bound to: 2'b00 
+	Parameter CASE1 bound to: 2'b01 
+	Parameter CASE2 bound to: 2'b10 
+	Parameter CASE3 bound to: 2'b11 
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+INFO: [Synth 8-226] default block is never used [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_sparsemux_9_2_8_1_1.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_sparsemux_9_2_8_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_sparsemux_9_2_8_1_1.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_encoder_12layer_Pipeline_STORE_P_STORE_D' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_encoder_12layer_Pipeline_STORE_P_STORE_D.v:9]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer_vit_encoder_12layer_Pipeline_COPY_P_COPY_D' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_encoder_12layer_Pipeline_COPY_P_COPY_D.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer_vit_encoder_12layer_Pipeline_COPY_P_COPY_D' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_encoder_12layer_Pipeline_COPY_P_COPY_D.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'vit_encoder_12layer' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer.v:9]
+WARNING: [Synth 8-7071] port 'x_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'x_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'x_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_0_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_0_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_0_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_1_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_1_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_1_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_2_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_2_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_2_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_3_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_3_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_3_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_4_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_4_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_4_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_5_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_5_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_5_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_6_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_6_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_6_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_7_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_7_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_qkv_all_7_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_0_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_0_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_0_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_1_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_1_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_1_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_2_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_2_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_2_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_3_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_3_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_3_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_4_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_4_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_4_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_5_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_5_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_5_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_6_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_6_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_6_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_7_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_7_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_out_all_7_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_0_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_0_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_0_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_1_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_1_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_1_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_2_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_2_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_2_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_3_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_3_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_3_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_4_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_4_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_4_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_5_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_5_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_5_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_6_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_6_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_6_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_7_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_7_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_7_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_0_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_0_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_0_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_1_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_1_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_1_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_2_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_2_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_2_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_3_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_3_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_3_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_4_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_4_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_4_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_5_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_5_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_5_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_6_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_6_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_6_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_7_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_7_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_7_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+WARNING: [Synth 8-7071] port 'out_r_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+INFO: [Common 17-14] Message 'Synth 8-7071' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Synth 8-7023] instance 'u_vit_encoder' of module 'vit_encoder_12layer' has 109 connections declared, but only 6 given [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:105]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_scores_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_scores_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 16 - type: integer 
+	Parameter AddressWidth bound to: 8 - type: integer 
+	Parameter AddressRange bound to: 256 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_scores_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_scores_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_q_kt_matmul_v1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_q_kt_matmul_v1.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_sparsemux_9_2_8_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_9_2_8_1_1.v:9]
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 8 - type: integer 
+	Parameter din3_WIDTH bound to: 8 - type: integer 
+	Parameter def_WIDTH bound to: 8 - type: integer 
+	Parameter sel_WIDTH bound to: 2 - type: integer 
+	Parameter dout_WIDTH bound to: 8 - type: integer 
+	Parameter CASE0 bound to: 2'b00 
+	Parameter CASE1 bound to: 2'b01 
+	Parameter CASE2 bound to: 2'b10 
+	Parameter CASE3 bound to: 2'b11 
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+INFO: [Synth 8-226] default block is never used [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_9_2_8_1_1.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_sparsemux_9_2_8_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_9_2_8_1_1.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_mul_8s_8s_16_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mul_8s_8s_16_1_1.v:5]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_mul_8s_8s_16_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mul_8s_8s_16_1_1.v:5]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_mac_muladd_8s_8s_16s_17_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_8s_8s_16s_17_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 16 - type: integer 
+	Parameter dout_WIDTH bound to: 17 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_mac_muladd_8s_8s_16s_17_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_8s_8s_16s_17_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_mac_muladd_8s_8s_16s_17_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_8s_8s_16s_17_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_mac_muladd_8s_8s_16s_17_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_8s_8s_16s_17_4_1.v:55]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_flow_control_loop_pipe_sequential_init' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_flow_control_loop_pipe_sequential_init.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_flow_control_loop_pipe_sequential_init' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_flow_control_loop_pipe_sequential_init.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_q_kt_matmul_v1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_q_kt_matmul_v1.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_topk_engine' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_topk_engine.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_topk_engine_Pipeline_MAIN_LOOP' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_topk_engine_Pipeline_MAIN_LOOP.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_topk_engine_Pipeline_MAIN_LOOP' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_topk_engine_Pipeline_MAIN_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_topk_engine_Pipeline_WRITE_LOOP' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_topk_engine_Pipeline_WRITE_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_sparsemux_129_6_16_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_129_6_16_1_1.v:9]
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 16 - type: integer 
+	Parameter din2_WIDTH bound to: 16 - type: integer 
+	Parameter din3_WIDTH bound to: 16 - type: integer 
+	Parameter din4_WIDTH bound to: 16 - type: integer 
+	Parameter din5_WIDTH bound to: 16 - type: integer 
+	Parameter din6_WIDTH bound to: 16 - type: integer 
+	Parameter din7_WIDTH bound to: 16 - type: integer 
+	Parameter din8_WIDTH bound to: 16 - type: integer 
+	Parameter din9_WIDTH bound to: 16 - type: integer 
+	Parameter din10_WIDTH bound to: 16 - type: integer 
+	Parameter din11_WIDTH bound to: 16 - type: integer 
+	Parameter din12_WIDTH bound to: 16 - type: integer 
+	Parameter din13_WIDTH bound to: 16 - type: integer 
+	Parameter din14_WIDTH bound to: 16 - type: integer 
+	Parameter din15_WIDTH bound to: 16 - type: integer 
+	Parameter din16_WIDTH bound to: 16 - type: integer 
+	Parameter din17_WIDTH bound to: 16 - type: integer 
+	Parameter din18_WIDTH bound to: 16 - type: integer 
+	Parameter din19_WIDTH bound to: 16 - type: integer 
+	Parameter din20_WIDTH bound to: 16 - type: integer 
+	Parameter din21_WIDTH bound to: 16 - type: integer 
+	Parameter din22_WIDTH bound to: 16 - type: integer 
+	Parameter din23_WIDTH bound to: 16 - type: integer 
+	Parameter din24_WIDTH bound to: 16 - type: integer 
+	Parameter din25_WIDTH bound to: 16 - type: integer 
+	Parameter din26_WIDTH bound to: 16 - type: integer 
+	Parameter din27_WIDTH bound to: 16 - type: integer 
+	Parameter din28_WIDTH bound to: 16 - type: integer 
+	Parameter din29_WIDTH bound to: 16 - type: integer 
+	Parameter din30_WIDTH bound to: 16 - type: integer 
+	Parameter din31_WIDTH bound to: 16 - type: integer 
+	Parameter din32_WIDTH bound to: 16 - type: integer 
+	Parameter din33_WIDTH bound to: 16 - type: integer 
+	Parameter din34_WIDTH bound to: 16 - type: integer 
+	Parameter din35_WIDTH bound to: 16 - type: integer 
+	Parameter din36_WIDTH bound to: 16 - type: integer 
+	Parameter din37_WIDTH bound to: 16 - type: integer 
+	Parameter din38_WIDTH bound to: 16 - type: integer 
+	Parameter din39_WIDTH bound to: 16 - type: integer 
+	Parameter din40_WIDTH bound to: 16 - type: integer 
+	Parameter din41_WIDTH bound to: 16 - type: integer 
+	Parameter din42_WIDTH bound to: 16 - type: integer 
+	Parameter din43_WIDTH bound to: 16 - type: integer 
+	Parameter din44_WIDTH bound to: 16 - type: integer 
+	Parameter din45_WIDTH bound to: 16 - type: integer 
+	Parameter din46_WIDTH bound to: 16 - type: integer 
+	Parameter din47_WIDTH bound to: 16 - type: integer 
+	Parameter din48_WIDTH bound to: 16 - type: integer 
+	Parameter din49_WIDTH bound to: 16 - type: integer 
+	Parameter din50_WIDTH bound to: 16 - type: integer 
+	Parameter din51_WIDTH bound to: 16 - type: integer 
+	Parameter din52_WIDTH bound to: 16 - type: integer 
+	Parameter din53_WIDTH bound to: 16 - type: integer 
+	Parameter din54_WIDTH bound to: 16 - type: integer 
+	Parameter din55_WIDTH bound to: 16 - type: integer 
+	Parameter din56_WIDTH bound to: 16 - type: integer 
+	Parameter din57_WIDTH bound to: 16 - type: integer 
+	Parameter din58_WIDTH bound to: 16 - type: integer 
+	Parameter din59_WIDTH bound to: 16 - type: integer 
+	Parameter din60_WIDTH bound to: 16 - type: integer 
+	Parameter din61_WIDTH bound to: 16 - type: integer 
+	Parameter din62_WIDTH bound to: 16 - type: integer 
+	Parameter din63_WIDTH bound to: 16 - type: integer 
+	Parameter def_WIDTH bound to: 16 - type: integer 
+	Parameter sel_WIDTH bound to: 6 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+	Parameter CASE0 bound to: 6'b000000 
+	Parameter CASE1 bound to: 6'b000001 
+	Parameter CASE2 bound to: 6'b000010 
+	Parameter CASE3 bound to: 6'b000011 
+	Parameter CASE4 bound to: 6'b000100 
+	Parameter CASE5 bound to: 6'b000101 
+	Parameter CASE6 bound to: 6'b000110 
+	Parameter CASE7 bound to: 6'b000111 
+	Parameter CASE8 bound to: 6'b001000 
+	Parameter CASE9 bound to: 6'b001001 
+	Parameter CASE10 bound to: 6'b001010 
+	Parameter CASE11 bound to: 6'b001011 
+	Parameter CASE12 bound to: 6'b001100 
+	Parameter CASE13 bound to: 6'b001101 
+	Parameter CASE14 bound to: 6'b001110 
+	Parameter CASE15 bound to: 6'b001111 
+	Parameter CASE16 bound to: 6'b010000 
+	Parameter CASE17 bound to: 6'b010001 
+	Parameter CASE18 bound to: 6'b010010 
+	Parameter CASE19 bound to: 6'b010011 
+	Parameter CASE20 bound to: 6'b010100 
+	Parameter CASE21 bound to: 6'b010101 
+	Parameter CASE22 bound to: 6'b010110 
+	Parameter CASE23 bound to: 6'b010111 
+	Parameter CASE24 bound to: 6'b011000 
+	Parameter CASE25 bound to: 6'b011001 
+	Parameter CASE26 bound to: 6'b011010 
+	Parameter CASE27 bound to: 6'b011011 
+	Parameter CASE28 bound to: 6'b011100 
+	Parameter CASE29 bound to: 6'b011101 
+	Parameter CASE30 bound to: 6'b011110 
+	Parameter CASE31 bound to: 6'b011111 
+	Parameter CASE32 bound to: 6'b100000 
+	Parameter CASE33 bound to: 6'b100001 
+	Parameter CASE34 bound to: 6'b100010 
+	Parameter CASE35 bound to: 6'b100011 
+	Parameter CASE36 bound to: 6'b100100 
+	Parameter CASE37 bound to: 6'b100101 
+	Parameter CASE38 bound to: 6'b100110 
+	Parameter CASE39 bound to: 6'b100111 
+	Parameter CASE40 bound to: 6'b101000 
+	Parameter CASE41 bound to: 6'b101001 
+	Parameter CASE42 bound to: 6'b101010 
+	Parameter CASE43 bound to: 6'b101011 
+	Parameter CASE44 bound to: 6'b101100 
+	Parameter CASE45 bound to: 6'b101101 
+	Parameter CASE46 bound to: 6'b101110 
+	Parameter CASE47 bound to: 6'b101111 
+	Parameter CASE48 bound to: 6'b110000 
+	Parameter CASE49 bound to: 6'b110001 
+	Parameter CASE50 bound to: 6'b110010 
+	Parameter CASE51 bound to: 6'b110011 
+	Parameter CASE52 bound to: 6'b110100 
+	Parameter CASE53 bound to: 6'b110101 
+	Parameter CASE54 bound to: 6'b110110 
+	Parameter CASE55 bound to: 6'b110111 
+	Parameter CASE56 bound to: 6'b111000 
+	Parameter CASE57 bound to: 6'b111001 
+	Parameter CASE58 bound to: 6'b111010 
+	Parameter CASE59 bound to: 6'b111011 
+	Parameter CASE60 bound to: 6'b111100 
+	Parameter CASE61 bound to: 6'b111101 
+	Parameter CASE62 bound to: 6'b111110 
+	Parameter CASE63 bound to: 6'b111111 
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+INFO: [Synth 8-226] default block is never used [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_129_6_16_1_1.v:415]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_sparsemux_129_6_16_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_129_6_16_1_1.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_sparsemux_129_6_8_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_129_6_8_1_1.v:9]
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 8 - type: integer 
+	Parameter din3_WIDTH bound to: 8 - type: integer 
+	Parameter din4_WIDTH bound to: 8 - type: integer 
+	Parameter din5_WIDTH bound to: 8 - type: integer 
+	Parameter din6_WIDTH bound to: 8 - type: integer 
+	Parameter din7_WIDTH bound to: 8 - type: integer 
+	Parameter din8_WIDTH bound to: 8 - type: integer 
+	Parameter din9_WIDTH bound to: 8 - type: integer 
+	Parameter din10_WIDTH bound to: 8 - type: integer 
+	Parameter din11_WIDTH bound to: 8 - type: integer 
+	Parameter din12_WIDTH bound to: 8 - type: integer 
+	Parameter din13_WIDTH bound to: 8 - type: integer 
+	Parameter din14_WIDTH bound to: 8 - type: integer 
+	Parameter din15_WIDTH bound to: 8 - type: integer 
+	Parameter din16_WIDTH bound to: 8 - type: integer 
+	Parameter din17_WIDTH bound to: 8 - type: integer 
+	Parameter din18_WIDTH bound to: 8 - type: integer 
+	Parameter din19_WIDTH bound to: 8 - type: integer 
+	Parameter din20_WIDTH bound to: 8 - type: integer 
+	Parameter din21_WIDTH bound to: 8 - type: integer 
+	Parameter din22_WIDTH bound to: 8 - type: integer 
+	Parameter din23_WIDTH bound to: 8 - type: integer 
+	Parameter din24_WIDTH bound to: 8 - type: integer 
+	Parameter din25_WIDTH bound to: 8 - type: integer 
+	Parameter din26_WIDTH bound to: 8 - type: integer 
+	Parameter din27_WIDTH bound to: 8 - type: integer 
+	Parameter din28_WIDTH bound to: 8 - type: integer 
+	Parameter din29_WIDTH bound to: 8 - type: integer 
+	Parameter din30_WIDTH bound to: 8 - type: integer 
+	Parameter din31_WIDTH bound to: 8 - type: integer 
+	Parameter din32_WIDTH bound to: 8 - type: integer 
+	Parameter din33_WIDTH bound to: 8 - type: integer 
+	Parameter din34_WIDTH bound to: 8 - type: integer 
+	Parameter din35_WIDTH bound to: 8 - type: integer 
+	Parameter din36_WIDTH bound to: 8 - type: integer 
+	Parameter din37_WIDTH bound to: 8 - type: integer 
+	Parameter din38_WIDTH bound to: 8 - type: integer 
+	Parameter din39_WIDTH bound to: 8 - type: integer 
+	Parameter din40_WIDTH bound to: 8 - type: integer 
+	Parameter din41_WIDTH bound to: 8 - type: integer 
+	Parameter din42_WIDTH bound to: 8 - type: integer 
+	Parameter din43_WIDTH bound to: 8 - type: integer 
+	Parameter din44_WIDTH bound to: 8 - type: integer 
+	Parameter din45_WIDTH bound to: 8 - type: integer 
+	Parameter din46_WIDTH bound to: 8 - type: integer 
+	Parameter din47_WIDTH bound to: 8 - type: integer 
+	Parameter din48_WIDTH bound to: 8 - type: integer 
+	Parameter din49_WIDTH bound to: 8 - type: integer 
+	Parameter din50_WIDTH bound to: 8 - type: integer 
+	Parameter din51_WIDTH bound to: 8 - type: integer 
+	Parameter din52_WIDTH bound to: 8 - type: integer 
+	Parameter din53_WIDTH bound to: 8 - type: integer 
+	Parameter din54_WIDTH bound to: 8 - type: integer 
+	Parameter din55_WIDTH bound to: 8 - type: integer 
+	Parameter din56_WIDTH bound to: 8 - type: integer 
+	Parameter din57_WIDTH bound to: 8 - type: integer 
+	Parameter din58_WIDTH bound to: 8 - type: integer 
+	Parameter din59_WIDTH bound to: 8 - type: integer 
+	Parameter din60_WIDTH bound to: 8 - type: integer 
+	Parameter din61_WIDTH bound to: 8 - type: integer 
+	Parameter din62_WIDTH bound to: 8 - type: integer 
+	Parameter din63_WIDTH bound to: 8 - type: integer 
+	Parameter def_WIDTH bound to: 8 - type: integer 
+	Parameter sel_WIDTH bound to: 6 - type: integer 
+	Parameter dout_WIDTH bound to: 8 - type: integer 
+	Parameter CASE0 bound to: 6'b000000 
+	Parameter CASE1 bound to: 6'b000001 
+	Parameter CASE2 bound to: 6'b000010 
+	Parameter CASE3 bound to: 6'b000011 
+	Parameter CASE4 bound to: 6'b000100 
+	Parameter CASE5 bound to: 6'b000101 
+	Parameter CASE6 bound to: 6'b000110 
+	Parameter CASE7 bound to: 6'b000111 
+	Parameter CASE8 bound to: 6'b001000 
+	Parameter CASE9 bound to: 6'b001001 
+	Parameter CASE10 bound to: 6'b001010 
+	Parameter CASE11 bound to: 6'b001011 
+	Parameter CASE12 bound to: 6'b001100 
+	Parameter CASE13 bound to: 6'b001101 
+	Parameter CASE14 bound to: 6'b001110 
+	Parameter CASE15 bound to: 6'b001111 
+	Parameter CASE16 bound to: 6'b010000 
+	Parameter CASE17 bound to: 6'b010001 
+	Parameter CASE18 bound to: 6'b010010 
+	Parameter CASE19 bound to: 6'b010011 
+	Parameter CASE20 bound to: 6'b010100 
+	Parameter CASE21 bound to: 6'b010101 
+	Parameter CASE22 bound to: 6'b010110 
+	Parameter CASE23 bound to: 6'b010111 
+	Parameter CASE24 bound to: 6'b011000 
+	Parameter CASE25 bound to: 6'b011001 
+	Parameter CASE26 bound to: 6'b011010 
+	Parameter CASE27 bound to: 6'b011011 
+	Parameter CASE28 bound to: 6'b011100 
+	Parameter CASE29 bound to: 6'b011101 
+	Parameter CASE30 bound to: 6'b011110 
+	Parameter CASE31 bound to: 6'b011111 
+	Parameter CASE32 bound to: 6'b100000 
+	Parameter CASE33 bound to: 6'b100001 
+	Parameter CASE34 bound to: 6'b100010 
+	Parameter CASE35 bound to: 6'b100011 
+	Parameter CASE36 bound to: 6'b100100 
+	Parameter CASE37 bound to: 6'b100101 
+	Parameter CASE38 bound to: 6'b100110 
+	Parameter CASE39 bound to: 6'b100111 
+	Parameter CASE40 bound to: 6'b101000 
+	Parameter CASE41 bound to: 6'b101001 
+	Parameter CASE42 bound to: 6'b101010 
+	Parameter CASE43 bound to: 6'b101011 
+	Parameter CASE44 bound to: 6'b101100 
+	Parameter CASE45 bound to: 6'b101101 
+	Parameter CASE46 bound to: 6'b101110 
+	Parameter CASE47 bound to: 6'b101111 
+	Parameter CASE48 bound to: 6'b110000 
+	Parameter CASE49 bound to: 6'b110001 
+	Parameter CASE50 bound to: 6'b110010 
+	Parameter CASE51 bound to: 6'b110011 
+	Parameter CASE52 bound to: 6'b110100 
+	Parameter CASE53 bound to: 6'b110101 
+	Parameter CASE54 bound to: 6'b110110 
+	Parameter CASE55 bound to: 6'b110111 
+	Parameter CASE56 bound to: 6'b111000 
+	Parameter CASE57 bound to: 6'b111001 
+	Parameter CASE58 bound to: 6'b111010 
+	Parameter CASE59 bound to: 6'b111011 
+	Parameter CASE60 bound to: 6'b111100 
+	Parameter CASE61 bound to: 6'b111101 
+	Parameter CASE62 bound to: 6'b111110 
+	Parameter CASE63 bound to: 6'b111111 
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+INFO: [Synth 8-226] default block is never used [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_129_6_8_1_1.v:415]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_sparsemux_129_6_8_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_129_6_8_1_1.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_topk_engine_Pipeline_WRITE_LOOP' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_topk_engine_Pipeline_WRITE_LOOP.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_topk_engine' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_topk_engine.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_xmod_attn_v1_Pipeline_MAX_LOOP' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_xmod_attn_v1_Pipeline_MAX_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_sparsemux_127_6_16_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_127_6_16_1_1.v:9]
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 16 - type: integer 
+	Parameter din2_WIDTH bound to: 16 - type: integer 
+	Parameter din3_WIDTH bound to: 16 - type: integer 
+	Parameter din4_WIDTH bound to: 16 - type: integer 
+	Parameter din5_WIDTH bound to: 16 - type: integer 
+	Parameter din6_WIDTH bound to: 16 - type: integer 
+	Parameter din7_WIDTH bound to: 16 - type: integer 
+	Parameter din8_WIDTH bound to: 16 - type: integer 
+	Parameter din9_WIDTH bound to: 16 - type: integer 
+	Parameter din10_WIDTH bound to: 16 - type: integer 
+	Parameter din11_WIDTH bound to: 16 - type: integer 
+	Parameter din12_WIDTH bound to: 16 - type: integer 
+	Parameter din13_WIDTH bound to: 16 - type: integer 
+	Parameter din14_WIDTH bound to: 16 - type: integer 
+	Parameter din15_WIDTH bound to: 16 - type: integer 
+	Parameter din16_WIDTH bound to: 16 - type: integer 
+	Parameter din17_WIDTH bound to: 16 - type: integer 
+	Parameter din18_WIDTH bound to: 16 - type: integer 
+	Parameter din19_WIDTH bound to: 16 - type: integer 
+	Parameter din20_WIDTH bound to: 16 - type: integer 
+	Parameter din21_WIDTH bound to: 16 - type: integer 
+	Parameter din22_WIDTH bound to: 16 - type: integer 
+	Parameter din23_WIDTH bound to: 16 - type: integer 
+	Parameter din24_WIDTH bound to: 16 - type: integer 
+	Parameter din25_WIDTH bound to: 16 - type: integer 
+	Parameter din26_WIDTH bound to: 16 - type: integer 
+	Parameter din27_WIDTH bound to: 16 - type: integer 
+	Parameter din28_WIDTH bound to: 16 - type: integer 
+	Parameter din29_WIDTH bound to: 16 - type: integer 
+	Parameter din30_WIDTH bound to: 16 - type: integer 
+	Parameter din31_WIDTH bound to: 16 - type: integer 
+	Parameter din32_WIDTH bound to: 16 - type: integer 
+	Parameter din33_WIDTH bound to: 16 - type: integer 
+	Parameter din34_WIDTH bound to: 16 - type: integer 
+	Parameter din35_WIDTH bound to: 16 - type: integer 
+	Parameter din36_WIDTH bound to: 16 - type: integer 
+	Parameter din37_WIDTH bound to: 16 - type: integer 
+	Parameter din38_WIDTH bound to: 16 - type: integer 
+	Parameter din39_WIDTH bound to: 16 - type: integer 
+	Parameter din40_WIDTH bound to: 16 - type: integer 
+	Parameter din41_WIDTH bound to: 16 - type: integer 
+	Parameter din42_WIDTH bound to: 16 - type: integer 
+	Parameter din43_WIDTH bound to: 16 - type: integer 
+	Parameter din44_WIDTH bound to: 16 - type: integer 
+	Parameter din45_WIDTH bound to: 16 - type: integer 
+	Parameter din46_WIDTH bound to: 16 - type: integer 
+	Parameter din47_WIDTH bound to: 16 - type: integer 
+	Parameter din48_WIDTH bound to: 16 - type: integer 
+	Parameter din49_WIDTH bound to: 16 - type: integer 
+	Parameter din50_WIDTH bound to: 16 - type: integer 
+	Parameter din51_WIDTH bound to: 16 - type: integer 
+	Parameter din52_WIDTH bound to: 16 - type: integer 
+	Parameter din53_WIDTH bound to: 16 - type: integer 
+	Parameter din54_WIDTH bound to: 16 - type: integer 
+	Parameter din55_WIDTH bound to: 16 - type: integer 
+	Parameter din56_WIDTH bound to: 16 - type: integer 
+	Parameter din57_WIDTH bound to: 16 - type: integer 
+	Parameter din58_WIDTH bound to: 16 - type: integer 
+	Parameter din59_WIDTH bound to: 16 - type: integer 
+	Parameter din60_WIDTH bound to: 16 - type: integer 
+	Parameter din61_WIDTH bound to: 16 - type: integer 
+	Parameter din62_WIDTH bound to: 16 - type: integer 
+	Parameter def_WIDTH bound to: 16 - type: integer 
+	Parameter sel_WIDTH bound to: 6 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+	Parameter CASE0 bound to: 6'b000001 
+	Parameter CASE1 bound to: 6'b000010 
+	Parameter CASE2 bound to: 6'b000011 
+	Parameter CASE3 bound to: 6'b000100 
+	Parameter CASE4 bound to: 6'b000101 
+	Parameter CASE5 bound to: 6'b000110 
+	Parameter CASE6 bound to: 6'b000111 
+	Parameter CASE7 bound to: 6'b001000 
+	Parameter CASE8 bound to: 6'b001001 
+	Parameter CASE9 bound to: 6'b001010 
+	Parameter CASE10 bound to: 6'b001011 
+	Parameter CASE11 bound to: 6'b001100 
+	Parameter CASE12 bound to: 6'b001101 
+	Parameter CASE13 bound to: 6'b001110 
+	Parameter CASE14 bound to: 6'b001111 
+	Parameter CASE15 bound to: 6'b010000 
+	Parameter CASE16 bound to: 6'b010001 
+	Parameter CASE17 bound to: 6'b010010 
+	Parameter CASE18 bound to: 6'b010011 
+	Parameter CASE19 bound to: 6'b010100 
+	Parameter CASE20 bound to: 6'b010101 
+	Parameter CASE21 bound to: 6'b010110 
+	Parameter CASE22 bound to: 6'b010111 
+	Parameter CASE23 bound to: 6'b011000 
+	Parameter CASE24 bound to: 6'b011001 
+	Parameter CASE25 bound to: 6'b011010 
+	Parameter CASE26 bound to: 6'b011011 
+	Parameter CASE27 bound to: 6'b011100 
+	Parameter CASE28 bound to: 6'b011101 
+	Parameter CASE29 bound to: 6'b011110 
+	Parameter CASE30 bound to: 6'b011111 
+	Parameter CASE31 bound to: 6'b100000 
+	Parameter CASE32 bound to: 6'b100001 
+	Parameter CASE33 bound to: 6'b100010 
+	Parameter CASE34 bound to: 6'b100011 
+	Parameter CASE35 bound to: 6'b100100 
+	Parameter CASE36 bound to: 6'b100101 
+	Parameter CASE37 bound to: 6'b100110 
+	Parameter CASE38 bound to: 6'b100111 
+	Parameter CASE39 bound to: 6'b101000 
+	Parameter CASE40 bound to: 6'b101001 
+	Parameter CASE41 bound to: 6'b101010 
+	Parameter CASE42 bound to: 6'b101011 
+	Parameter CASE43 bound to: 6'b101100 
+	Parameter CASE44 bound to: 6'b101101 
+	Parameter CASE45 bound to: 6'b101110 
+	Parameter CASE46 bound to: 6'b101111 
+	Parameter CASE47 bound to: 6'b110000 
+	Parameter CASE48 bound to: 6'b110001 
+	Parameter CASE49 bound to: 6'b110010 
+	Parameter CASE50 bound to: 6'b110011 
+	Parameter CASE51 bound to: 6'b110100 
+	Parameter CASE52 bound to: 6'b110101 
+	Parameter CASE53 bound to: 6'b110110 
+	Parameter CASE54 bound to: 6'b110111 
+	Parameter CASE55 bound to: 6'b111000 
+	Parameter CASE56 bound to: 6'b111001 
+	Parameter CASE57 bound to: 6'b111010 
+	Parameter CASE58 bound to: 6'b111011 
+	Parameter CASE59 bound to: 6'b111100 
+	Parameter CASE60 bound to: 6'b111101 
+	Parameter CASE61 bound to: 6'b111110 
+	Parameter CASE62 bound to: 6'b111111 
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_sparsemux_127_6_16_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_127_6_16_1_1.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_xmod_attn_v1_Pipeline_MAX_LOOP' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_xmod_attn_v1_Pipeline_MAX_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_xmod_attn_v1_Pipeline_SHIFT_SUM_LOOP' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_xmod_attn_v1_Pipeline_SHIFT_SUM_LOOP.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_xmod_attn_v1_Pipeline_SHIFT_SUM_LOOP' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_xmod_attn_v1_Pipeline_SHIFT_SUM_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_xmod_attn_v1_Pipeline_NORM_LOOP' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_xmod_attn_v1_Pipeline_NORM_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_sdiv_31ns_22s_16_19_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sdiv_31ns_22s_16_19_1.v:5]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 19 - type: integer 
+	Parameter din0_WIDTH bound to: 31 - type: integer 
+	Parameter din1_WIDTH bound to: 22 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_sdiv_31ns_22s_16_19_1_ip' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/divider_ip_stubs.v:75]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_sdiv_31ns_22s_16_19_1_ip' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/divider_ip_stubs.v:75]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_sdiv_31ns_22s_16_19_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sdiv_31ns_22s_16_19_1.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_xmod_attn_v1_Pipeline_NORM_LOOP' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_xmod_attn_v1_Pipeline_NORM_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_weighted_sum_v1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_bkb' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_bkb.v:7]
+	Parameter DataWidth bound to: 32 - type: integer 
+	Parameter AddressWidth bound to: 8 - type: integer 
+	Parameter AddressRange bound to: 256 - type: integer 
+INFO: [Synth 8-3876] $readmem data file './xmod_attn_v1_weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_bkb.dat' is read successfully [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_bkb.v:40]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_bkb' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_bkb.v:7]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_weighted_sum_v1_Pipeline_INIT_LOOP' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_Pipeline_INIT_LOOP.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_weighted_sum_v1_Pipeline_INIT_LOOP' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_Pipeline_INIT_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_weighted_sum_v1_Pipeline_KB_LOOP_D_LOOP' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_Pipeline_KB_LOOP_D_LOOP.v:9]
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+WARNING: [Synth 8-5974] attribute "use_dsp48" has been deprecated, please use "use_dsp" instead 
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_sparsemux_33_6_16_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_33_6_16_1_1.v:9]
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 16 - type: integer 
+	Parameter din2_WIDTH bound to: 16 - type: integer 
+	Parameter din3_WIDTH bound to: 16 - type: integer 
+	Parameter din4_WIDTH bound to: 16 - type: integer 
+	Parameter din5_WIDTH bound to: 16 - type: integer 
+	Parameter din6_WIDTH bound to: 16 - type: integer 
+	Parameter din7_WIDTH bound to: 16 - type: integer 
+	Parameter din8_WIDTH bound to: 16 - type: integer 
+	Parameter din9_WIDTH bound to: 16 - type: integer 
+	Parameter din10_WIDTH bound to: 16 - type: integer 
+	Parameter din11_WIDTH bound to: 16 - type: integer 
+	Parameter din12_WIDTH bound to: 16 - type: integer 
+	Parameter din13_WIDTH bound to: 16 - type: integer 
+	Parameter din14_WIDTH bound to: 16 - type: integer 
+	Parameter din15_WIDTH bound to: 16 - type: integer 
+	Parameter def_WIDTH bound to: 16 - type: integer 
+	Parameter sel_WIDTH bound to: 6 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+	Parameter CASE0 bound to: 6'b000000 
+	Parameter CASE1 bound to: 6'b000100 
+	Parameter CASE2 bound to: 6'b001000 
+	Parameter CASE3 bound to: 6'b001100 
+	Parameter CASE4 bound to: 6'b010000 
+	Parameter CASE5 bound to: 6'b010100 
+	Parameter CASE6 bound to: 6'b011000 
+	Parameter CASE7 bound to: 6'b011100 
+	Parameter CASE8 bound to: 6'b100000 
+	Parameter CASE9 bound to: 6'b100100 
+	Parameter CASE10 bound to: 6'b101000 
+	Parameter CASE11 bound to: 6'b101100 
+	Parameter CASE12 bound to: 6'b110000 
+	Parameter CASE13 bound to: 6'b110100 
+	Parameter CASE14 bound to: 6'b111000 
+	Parameter CASE15 bound to: 6'b111100 
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_sparsemux_33_6_16_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_33_6_16_1_1.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_sparsemux_33_6_8_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_33_6_8_1_1.v:9]
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 8 - type: integer 
+	Parameter din3_WIDTH bound to: 8 - type: integer 
+	Parameter din4_WIDTH bound to: 8 - type: integer 
+	Parameter din5_WIDTH bound to: 8 - type: integer 
+	Parameter din6_WIDTH bound to: 8 - type: integer 
+	Parameter din7_WIDTH bound to: 8 - type: integer 
+	Parameter din8_WIDTH bound to: 8 - type: integer 
+	Parameter din9_WIDTH bound to: 8 - type: integer 
+	Parameter din10_WIDTH bound to: 8 - type: integer 
+	Parameter din11_WIDTH bound to: 8 - type: integer 
+	Parameter din12_WIDTH bound to: 8 - type: integer 
+	Parameter din13_WIDTH bound to: 8 - type: integer 
+	Parameter din14_WIDTH bound to: 8 - type: integer 
+	Parameter din15_WIDTH bound to: 8 - type: integer 
+	Parameter def_WIDTH bound to: 8 - type: integer 
+	Parameter sel_WIDTH bound to: 6 - type: integer 
+	Parameter dout_WIDTH bound to: 8 - type: integer 
+	Parameter CASE0 bound to: 6'b000000 
+	Parameter CASE1 bound to: 6'b000100 
+	Parameter CASE2 bound to: 6'b001000 
+	Parameter CASE3 bound to: 6'b001100 
+	Parameter CASE4 bound to: 6'b010000 
+	Parameter CASE5 bound to: 6'b010100 
+	Parameter CASE6 bound to: 6'b011000 
+	Parameter CASE7 bound to: 6'b011100 
+	Parameter CASE8 bound to: 6'b100000 
+	Parameter CASE9 bound to: 6'b100100 
+	Parameter CASE10 bound to: 6'b101000 
+	Parameter CASE11 bound to: 6'b101100 
+	Parameter CASE12 bound to: 6'b110000 
+	Parameter CASE13 bound to: 6'b110100 
+	Parameter CASE14 bound to: 6'b111000 
+	Parameter CASE15 bound to: 6'b111100 
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_sparsemux_33_6_8_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_33_6_8_1_1.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_mul_16s_8s_24_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mul_16s_8s_24_1_1.v:5]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter dout_WIDTH bound to: 24 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_mul_16s_8s_24_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mul_16s_8s_24_1_1.v:5]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_24s_25_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_24s_25_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 24 - type: integer 
+	Parameter dout_WIDTH bound to: 25 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_24s_25_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_24s_25_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_24s_25_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_24s_25_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_24s_25_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_24s_25_4_1.v:55]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_32s_32_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_32s_32_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 32 - type: integer 
+	Parameter dout_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_32s_32_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_32s_32_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_32s_32_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_32s_32_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_32s_32_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_32s_32_4_1.v:55]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_25s_25_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_25s_25_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 25 - type: integer 
+	Parameter dout_WIDTH bound to: 25 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_25s_25_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_25s_25_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_25s_25_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_25s_25_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_mac_muladd_16s_8s_25s_25_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_mac_muladd_16s_8s_25s_25_4_1.v:55]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_weighted_sum_v1_Pipeline_KB_LOOP_D_LOOP' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_Pipeline_KB_LOOP_D_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_weighted_sum_v1_Pipeline_WRITE_LOOP' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_Pipeline_WRITE_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1_sparsemux_33_4_32_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_33_4_32_1_1.v:9]
+	Parameter din0_WIDTH bound to: 32 - type: integer 
+	Parameter din1_WIDTH bound to: 32 - type: integer 
+	Parameter din2_WIDTH bound to: 32 - type: integer 
+	Parameter din3_WIDTH bound to: 32 - type: integer 
+	Parameter din4_WIDTH bound to: 32 - type: integer 
+	Parameter din5_WIDTH bound to: 32 - type: integer 
+	Parameter din6_WIDTH bound to: 32 - type: integer 
+	Parameter din7_WIDTH bound to: 32 - type: integer 
+	Parameter din8_WIDTH bound to: 32 - type: integer 
+	Parameter din9_WIDTH bound to: 32 - type: integer 
+	Parameter din10_WIDTH bound to: 32 - type: integer 
+	Parameter din11_WIDTH bound to: 32 - type: integer 
+	Parameter din12_WIDTH bound to: 32 - type: integer 
+	Parameter din13_WIDTH bound to: 32 - type: integer 
+	Parameter din14_WIDTH bound to: 32 - type: integer 
+	Parameter din15_WIDTH bound to: 32 - type: integer 
+	Parameter def_WIDTH bound to: 32 - type: integer 
+	Parameter sel_WIDTH bound to: 4 - type: integer 
+	Parameter dout_WIDTH bound to: 32 - type: integer 
+	Parameter CASE0 bound to: 4'b0000 
+	Parameter CASE1 bound to: 4'b0001 
+	Parameter CASE2 bound to: 4'b0010 
+	Parameter CASE3 bound to: 4'b0011 
+	Parameter CASE4 bound to: 4'b0100 
+	Parameter CASE5 bound to: 4'b0101 
+	Parameter CASE6 bound to: 4'b0110 
+	Parameter CASE7 bound to: 4'b0111 
+	Parameter CASE8 bound to: 4'b1000 
+	Parameter CASE9 bound to: 4'b1001 
+	Parameter CASE10 bound to: 4'b1010 
+	Parameter CASE11 bound to: 4'b1011 
+	Parameter CASE12 bound to: 4'b1100 
+	Parameter CASE13 bound to: 4'b1101 
+	Parameter CASE14 bound to: 4'b1110 
+	Parameter CASE15 bound to: 4'b1111 
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+INFO: [Synth 8-226] default block is never used [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_33_4_32_1_1.v:127]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_sparsemux_33_4_32_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_sparsemux_33_4_32_1_1.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_weighted_sum_v1_Pipeline_WRITE_LOOP' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_Pipeline_WRITE_LOOP.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1_weighted_sum_v1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'xmod_attn_v1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1.v:9]
+WARNING: [Synth 8-7023] instance 'u_xmod_attn' of module 'xmod_attn_v1' has 1258 connections declared, but only 6 given [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:114]
+INFO: [Synth 8-6157] synthesizing module 'gvsa_matmul' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul.v:9]
+INFO: [Synth 8-6157] synthesizing module 'gvsa_matmul_mul_8s_8s_16_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul_mul_8s_8s_16_1_1.v:5]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'gvsa_matmul_mul_8s_8s_16_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul_mul_8s_8s_16_1_1.v:5]
+INFO: [Synth 8-6157] synthesizing module 'gvsa_matmul_mac_muladd_8s_8s_16s_17_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul_mac_muladd_8s_8s_16s_17_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 16 - type: integer 
+	Parameter dout_WIDTH bound to: 17 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'gvsa_matmul_mac_muladd_8s_8s_16s_17_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul_mac_muladd_8s_8s_16s_17_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'gvsa_matmul_mac_muladd_8s_8s_16s_17_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul_mac_muladd_8s_8s_16s_17_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'gvsa_matmul_mac_muladd_8s_8s_16s_17_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul_mac_muladd_8s_8s_16s_17_4_1.v:55]
+INFO: [Synth 8-6157] synthesizing module 'gvsa_matmul_flow_control_loop_pipe' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul_flow_control_loop_pipe.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'gvsa_matmul_flow_control_loop_pipe' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul_flow_control_loop_pipe.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'gvsa_matmul' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul.v:9]
+WARNING: [Synth 8-7023] instance 'u_gvsa_matmul' of module 'gvsa_matmul' has 394 connections declared, but only 6 given [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:123]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head.v:9]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_time_proj_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_time_proj_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 8 - type: integer 
+	Parameter AddressWidth bound to: 8 - type: integer 
+	Parameter AddressRange bound to: 256 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_time_proj_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_time_proj_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_act_q_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_act_q_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 8 - type: integer 
+	Parameter AddressWidth bound to: 2 - type: integer 
+	Parameter AddressRange bound to: 4 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_act_q_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_act_q_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_scores_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_scores_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 16 - type: integer 
+	Parameter AddressWidth bound to: 8 - type: integer 
+	Parameter AddressRange bound to: 256 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_scores_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_scores_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_h_RAM_AUTO_1R1W' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_h_RAM_AUTO_1R1W.v:7]
+	Parameter DataWidth bound to: 8 - type: integer 
+	Parameter AddressWidth bound to: 3 - type: integer 
+	Parameter AddressRange bound to: 8 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_h_RAM_AUTO_1R1W' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_h_RAM_AUTO_1R1W.v:7]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_action_diff_head_Pipeline_TIME_LOOP' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_mul_8s_8s_16_1_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_mul_8s_8s_16_1_1.v:5]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 1 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_mul_8s_8s_16_1_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_mul_8s_8s_16_1_1.v:5]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_mac_muladd_8s_8s_16s_17_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_mac_muladd_8s_8s_16s_17_4_1.v:55]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 16 - type: integer 
+	Parameter dout_WIDTH bound to: 17 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_mac_muladd_8s_8s_16s_17_4_1_DSP48_0' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_mac_muladd_8s_8s_16s_17_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_mac_muladd_8s_8s_16s_17_4_1_DSP48_0' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_mac_muladd_8s_8s_16s_17_4_1.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_mac_muladd_8s_8s_16s_17_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_mac_muladd_8s_8s_16s_17_4_1.v:55]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_flow_control_loop_pipe_sequential_init' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_flow_control_loop_pipe_sequential_init.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_flow_control_loop_pipe_sequential_init' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_flow_control_loop_pipe_sequential_init.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_action_diff_head_Pipeline_TIME_LOOP' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_action_diff_head_Pipeline_ACTP_LOOP' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ACTP_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_dsp_dotpra3add_8s_8s_8s_8s_8s_8s_18s_18_4_1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_dsp_dotpra3add_8s_8s_8s_8s_8s_8s_18s_18_4_1.v:10]
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 8 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 8 - type: integer 
+	Parameter din3_WIDTH bound to: 8 - type: integer 
+	Parameter din4_WIDTH bound to: 8 - type: integer 
+	Parameter din5_WIDTH bound to: 8 - type: integer 
+	Parameter din6_WIDTH bound to: 18 - type: integer 
+	Parameter dout_WIDTH bound to: 18 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_dsp_dotpra3add_8s_8s_8s_8s_8s_8s_18s_18_4_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_dsp_dotpra3add_8s_8s_8s_8s_8s_8s_18s_18_4_1.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_action_diff_head_Pipeline_ACTP_LOOP' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ACTP_LOOP.v:9]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_action_diff_head_Pipeline_QKT_LOOP_VITIS_LOOP_98_3' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_QKT_LOOP_VITIS_LOOP_98_3.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_action_diff_head_Pipeline_QKT_LOOP_VITIS_LOOP_98_3' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_QKT_LOOP_VITIS_LOOP_98_3.v:9]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_action_diff_head_Pipeline_MAX_S' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_MAX_S.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_action_diff_head_Pipeline_MAX_S' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_MAX_S.v:9]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_action_diff_head_Pipeline_SHIFT_S' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_SHIFT_S.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_action_diff_head_Pipeline_SHIFT_S' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_SHIFT_S.v:9]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head_action_diff_head_Pipeline_NORM_S' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:9]
+INFO: [Common 17-14] Message 'Synth 8-6157' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 19 - type: integer 
+	Parameter din0_WIDTH bound to: 31 - type: integer 
+	Parameter din1_WIDTH bound to: 24 - type: integer 
+	Parameter dout_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_sdiv_31ns_24s_16_19_1_ip' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/divider_ip_stubs.v:62]
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_sdiv_31ns_24s_16_19_1' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_sdiv_31ns_24s_16_19_1.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'action_diff_head_action_diff_head_Pipeline_NORM_S' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:9]
+INFO: [Common 17-14] Message 'Synth 8-6155' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+	Parameter ID bound to: 1 - type: integer 
+	Parameter NUM_STAGE bound to: 4 - type: integer 
+	Parameter din0_WIDTH bound to: 16 - type: integer 
+	Parameter din1_WIDTH bound to: 8 - type: integer 
+	Parameter din2_WIDTH bound to: 32 - type: integer 
+	Parameter dout_WIDTH bound to: 32 - type: integer 
+WARNING: [Synth 8-7023] instance 'u_action_diff' of module 'action_diff_head' has 1318 connections declared, but only 6 given [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/mr_vla_full_top.sv:132]
+WARNING: [Synth 8-3936] Found unconnected internal register 'acc_1_reg_1393_reg' and it is trimmed from '32' to '24' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SCORES_I_SCORES_J_SCORES_K.v:592]
+WARNING: [Synth 8-6014] Unused sequential element icmp_ln61_reg_8531_pp0_iter2_reg_reg was removed.  [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:3955]
+WARNING: [Synth 8-6014] Unused sequential element icmp_ln61_reg_8531_pp0_iter3_reg_reg was removed.  [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:3956]
+WARNING: [Synth 8-6014] Unused sequential element icmp_ln61_reg_8531_pp0_iter4_reg_reg was removed.  [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:3957]
+WARNING: [Synth 8-6014] Unused sequential element icmp_ln61_reg_8531_pp0_iter5_reg_reg was removed.  [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:3958]
+WARNING: [Synth 8-6014] Unused sequential element icmp_ln61_reg_8531_reg was removed.  [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:3970]
+WARNING: [Synth 8-6014] Unused sequential element icmp_ln61_reg_8531_pp0_iter1_reg_reg was removed.  [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:3971]
+WARNING: [Synth 8-6014] Unused sequential element icmp_ln151_reg_8999_reg was removed.  [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ATTN_O_TILE_ATTN_O_N_LOOP.v:4189]
+WARNING: [Synth 8-6014] Unused sequential element icmp_ln151_reg_8999_pp0_iter1_reg_reg was removed.  [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ATTN_O_TILE_ATTN_O_N_LOOP.v:4190]
+WARNING: [Synth 8-6014] Unused sequential element icmp_ln151_reg_8999_pp0_iter2_reg_reg was removed.  [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ATTN_O_TILE_ATTN_O_N_LOOP.v:4203]
+WARNING: [Synth 8-6014] Unused sequential element icmp_ln151_reg_8999_pp0_iter3_reg_reg was removed.  [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ATTN_O_TILE_ATTN_O_N_LOOP.v:4204]
+WARNING: [Synth 8-7129] Port rst in module action_diff_head_mac_muladd_8s_8s_16s_17_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port grp_sat8_fu_6004_p_ready in module action_diff_head_action_diff_head_Pipeline_OUT_LOOP_VITIS_LOOP_219_9 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ap_rst in module action_diff_head_sat8 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module action_diff_head_mac_muladd_16s_8s_32s_32_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port grp_sat8_fu_6004_p_ready in module action_diff_head_action_diff_head_Pipeline_ATTN_O_TILE_ATTN_O_N_LOOP is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module action_diff_head_sdiv_31ns_24s_16_19_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module action_diff_head_dsp_dotpra3add_8s_8s_8s_8s_8s_8s_18s_18_4_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ce in module action_diff_head_dsp_dotpra3add_8s_8s_8s_8s_8s_8s_18s_18_4_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port grp_sat8_fu_6004_p_ready in module action_diff_head_action_diff_head_Pipeline_ACTP_LOOP is either unconnected or has no load
+WARNING: [Synth 8-7129] Port grp_sat8_fu_6004_p_ready in module action_diff_head_action_diff_head_Pipeline_TIME_LOOP is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module action_diff_head_act_q_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module action_diff_head_h_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module action_diff_head_scores_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module action_diff_head_time_proj_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ap_done_int in module gvsa_matmul_flow_control_loop_pipe is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module gvsa_matmul_mac_muladd_8s_8s_16s_17_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module xmod_attn_v1_mac_muladd_16s_8s_25s_25_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module xmod_attn_v1_mac_muladd_16s_8s_24s_25_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module xmod_attn_v1_mac_muladd_16s_8s_32s_32_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module xmod_attn_v1_weighted_sum_v1_weighted_sum_v1_short_const_unsigned_short_const_signed_char_bkb is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module xmod_attn_v1_sdiv_31ns_22s_16_19_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module xmod_attn_v1_mac_muladd_8s_8s_16s_17_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module xmod_attn_v1_scores_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module vit_encoder_12layer_mac_muladd_8s_8s_16s_17_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module vit_encoder_12layer_mac_muladd_8s_7ns_15s_16_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module vit_encoder_12layer_mac_muladd_16s_8s_24s_25_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module vit_encoder_12layer_sdiv_31ns_24s_16_19_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module vit_encoder_12layer_mac_muladd_16s_16s_32ns_32_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rst in module vit_encoder_12layer_mac_muladd_16s_16s_32s_32_4_1_DSP48_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module vit_encoder_12layer_vit_transformer_layer_shifted_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module vit_encoder_12layer_vit_transformer_layer_ffn_h_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module vit_encoder_12layer_vit_transformer_layer_mha_out_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module vit_encoder_12layer_vit_transformer_layer_attn_o_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module vit_encoder_12layer_vit_transformer_layer_scores_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module vit_encoder_12layer_vit_transformer_layer_qkv_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module vit_encoder_12layer_buf_out_RAM_AUTO_1R1W is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset in module vit_encoder_12layer_vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1578.820 ; gain = 928.973
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1578.820 ; gain = 928.973
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcvc1902-vsva2197-2MP-e-S
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1578.820 ; gain = 928.973
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+WARNING: [Synth 8-3936] Found unconnected internal register 'j_1_reg_294_pp0_iter1_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_SHIFT.v:198]
+WARNING: [Synth 8-3936] Found unconnected internal register 'j_1_reg_294_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/vit_encoder_12layer_vit_transformer_layer_Pipeline_SM_SHIFT.v:197]
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+WARNING: [Synth 8-3936] Found unconnected internal register 'd_1_reg_647_pp0_iter1_reg_reg' and it is trimmed from '13' to '12' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_Pipeline_WRITE_LOOP.v:352]
+WARNING: [Synth 8-3936] Found unconnected internal register 'd_1_reg_647_reg' and it is trimmed from '13' to '12' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/xmod_attn_v1_weighted_sum_v1_Pipeline_WRITE_LOOP.v:351]
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln35_reg_4894_reg' and it is trimmed from '11' to '10' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul.v:2331]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln36_reg_5090_reg' and it is trimmed from '11' to '10' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/gvsa_matmul.v:2332]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln61_reg_8535_pp0_iter5_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:3962]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln61_reg_8535_pp0_iter4_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:3961]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln61_reg_8535_pp0_iter3_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:3960]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln61_reg_8535_pp0_iter2_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:3959]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln61_reg_8535_pp0_iter1_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:4101]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln61_reg_8535_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_TIME_LOOP.v:4100]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln78_reg_2065_pp0_iter4_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ACTP_LOOP.v:1200]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln78_reg_2065_pp0_iter3_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ACTP_LOOP.v:1199]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln78_reg_2065_pp0_iter2_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ACTP_LOOP.v:1198]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln78_reg_2065_pp0_iter1_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ACTP_LOOP.v:1118]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln78_reg_2065_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_ACTP_LOOP.v:1117]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln122_reg_273_pp0_iter1_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_SHIFT_S.v:193]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln122_reg_273_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_SHIFT_S.v:192]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter18_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:516]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter17_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:515]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter16_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:514]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter15_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:513]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter14_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:512]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter13_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:511]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter12_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:510]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter11_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:509]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter10_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:508]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter9_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:508]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter8_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:523]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter7_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:522]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter6_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:521]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter5_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:520]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter4_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:519]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter3_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:518]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter2_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:517]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_pp0_iter1_reg_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:536]
+WARNING: [Synth 8-3936] Found unconnected internal register 'zext_ln129_reg_214_reg' and it is trimmed from '9' to '8' bits. [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/rtl/action_diff_head_action_diff_head_Pipeline_NORM_S.v:535]
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-5800] Cascade chain of height 8 reduced to 6 because memory depth for RAM "vit_encoder_12layer_vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb:/ram_reg" is not power of 2. 
+INFO: [Synth 8-6794] RAM ("vit_encoder_12layer_buf_out_RAM_AUTO_1R1W:/ram_reg") will be automatically implemented using URAM. 
+INFO: [Synth 8-5780] Default cascade height of 8 will be used for URAM '"vit_encoder_12layer_buf_out_RAM_AUTO_1R1W:/ram_reg"'.
+INFO: [Synth 8-5800] Cascade chain of height 4 reduced to 1 because memory depth for RAM "vit_encoder_12layer_vit_transformer_layer_qkv_RAM_AUTO_1R1W:/ram_reg" is not power of 2. 
+INFO: [Synth 8-5800] Cascade chain of height 4 reduced to 1 because memory depth for RAM "vit_encoder_12layer_vit_transformer_layer_qkv_RAM_AUTO_1R1W:/ram_reg" is not power of 2. 
+INFO: [Synth 8-6794] RAM ("vit_encoder_12layer_vit_transformer_layer_scores_RAM_AUTO_1R1W:/ram_reg") will be automatically implemented using URAM. 
+INFO: [Synth 8-5780] Default cascade height of 8 will be used for URAM '"vit_encoder_12layer_vit_transformer_layer_scores_RAM_AUTO_1R1W:/ram_reg"'.
+INFO: [Synth 8-6794] RAM ("vit_encoder_12layer_vit_transformer_layer_attn_o_RAM_AUTO_1R1W:/ram_reg") will be automatically implemented using URAM. 
+INFO: [Synth 8-5780] Default cascade height of 3 will be used for URAM '"vit_encoder_12layer_vit_transformer_layer_attn_o_RAM_AUTO_1R1W:/ram_reg"'.
+INFO: [Synth 8-5800] Cascade chain of height 4 reduced to 3 because memory depth for RAM "vit_encoder_12layer_vit_transformer_layer_mha_out_RAM_AUTO_1R1W:/ram_reg" is not power of 2. 
+INFO: [Synth 8-6794] RAM ("vit_encoder_12layer_vit_transformer_layer_ffn_h_RAM_AUTO_1R1W:/ram_reg") will be automatically implemented using URAM. 
+INFO: [Synth 8-5780] Default cascade height of 8 will be used for URAM '"vit_encoder_12layer_vit_transformer_layer_ffn_h_RAM_AUTO_1R1W:/ram_reg"'.
+INFO: [Synth 8-3971] The signal "xmod_attn_v1_scores_RAM_AUTO_1R1W:/ram_reg" was recognized as a true dual port RAM template.
+INFO: [Synth 8-6904] The RAM "action_diff_head_time_proj_RAM_AUTO_1R1W:/ram_reg" of size (depth=256 x width=8) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "action_diff_head_act_q_RAM_AUTO_1R1W:/ram_reg" of size (depth=4 x width=8) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "action_diff_head_h_RAM_AUTO_1R1W:/ram_reg" of size (depth=8 x width=8) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:29 ; elapsed = 00:00:25 . Memory (MB): peak = 1940.012 ; gain = 1290.164
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   5 Input   32 Bit       Adders := 1     
+	   2 Input   32 Bit       Adders := 22    
+	   2 Input   31 Bit       Adders := 3     
+	   3 Input   31 Bit       Adders := 3     
+	   3 Input   28 Bit       Adders := 4     
+	   4 Input   27 Bit       Adders := 1     
+	   2 Input   26 Bit       Adders := 1     
+	   5 Input   25 Bit       Adders := 1     
+	   2 Input   24 Bit       Adders := 1     
+	   5 Input   24 Bit       Adders := 2     
+	   9 Input   23 Bit       Adders := 1     
+	   2 Input   22 Bit       Adders := 1     
+	   8 Input   22 Bit       Adders := 1     
+	   4 Input   22 Bit       Adders := 3     
+	   2 Input   21 Bit       Adders := 4     
+	   3 Input   20 Bit       Adders := 1     
+	   4 Input   20 Bit       Adders := 2     
+	   8 Input   20 Bit       Adders := 36    
+	   2 Input   20 Bit       Adders := 2     
+	   4 Input   19 Bit       Adders := 2     
+	   2 Input   18 Bit       Adders := 4     
+	   4 Input   18 Bit       Adders := 2     
+	   3 Input   18 Bit       Adders := 1     
+	   2 Input   17 Bit       Adders := 4     
+	   4 Input   17 Bit       Adders := 4     
+	   2 Input   16 Bit       Adders := 8     
+	   4 Input   16 Bit       Adders := 3     
+	   3 Input   16 Bit       Adders := 2     
+	   4 Input   15 Bit       Adders := 3     
+	   2 Input   15 Bit       Adders := 8     
+	   3 Input   15 Bit       Adders := 1     
+	   4 Input   14 Bit       Adders := 2     
+	   2 Input   14 Bit       Adders := 7     
+	   3 Input   14 Bit       Adders := 2     
+	   2 Input   13 Bit       Adders := 5     
+	   2 Input   12 Bit       Adders := 4     
+	   3 Input   12 Bit       Adders := 1     
+	   2 Input   11 Bit       Adders := 7     
+	   2 Input   10 Bit       Adders := 5     
+	   3 Input   10 Bit       Adders := 1     
+	   2 Input    9 Bit       Adders := 46    
+	   2 Input    7 Bit       Adders := 6     
+	   2 Input    5 Bit       Adders := 1     
+	   4 Input    5 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               56 Bit    Registers := 57    
+	               32 Bit    Registers := 148   
+	               31 Bit    Registers := 3     
+	               27 Bit    Registers := 2     
+	               26 Bit    Registers := 1     
+	               25 Bit    Registers := 9     
+	               24 Bit    Registers := 434   
+	               23 Bit    Registers := 1     
+	               22 Bit    Registers := 3     
+	               20 Bit    Registers := 46    
+	               19 Bit    Registers := 2     
+	               18 Bit    Registers := 7     
+	               17 Bit    Registers := 9     
+	               16 Bit    Registers := 682   
+	               15 Bit    Registers := 10    
+	               14 Bit    Registers := 11    
+	               13 Bit    Registers := 5     
+	               12 Bit    Registers := 6     
+	               11 Bit    Registers := 14    
+	               10 Bit    Registers := 10    
+	                9 Bit    Registers := 73    
+	                8 Bit    Registers := 672   
+	                7 Bit    Registers := 22    
+	                6 Bit    Registers := 42    
+	                5 Bit    Registers := 4     
+	                4 Bit    Registers := 5     
+	                3 Bit    Registers := 14    
+	                2 Bit    Registers := 31    
+	                1 Bit    Registers := 1016  
++---RAMs : 
+	            1024K Bit	(65536 X 16 bit)          RAMs := 2     
+	             768K Bit	(98304 X 8 bit)          RAMs := 1     
+	             576K Bit	(36864 X 16 bit)          RAMs := 8     
+	             512K Bit	(16384 X 32 bit)          RAMs := 1     
+	             336K Bit	(49152 X 7 bit)          RAMs := 8     
+	             256K Bit	(8192 X 32 bit)          RAMs := 1     
+	             192K Bit	(24576 X 8 bit)          RAMs := 4     
+	             192K Bit	(12288 X 16 bit)          RAMs := 8     
+	              96K Bit	(12288 X 8 bit)          RAMs := 8     
+	              64K Bit	(2048 X 32 bit)          RAMs := 1     
+	               8K Bit	(256 X 32 bit)          RAMs := 16    
+	               4K Bit	(256 X 16 bit)          RAMs := 5     
+	               2K Bit	(256 X 8 bit)          RAMs := 1     
+	               64 Bit	(8 X 8 bit)          RAMs := 64    
+	               32 Bit	(4 X 8 bit)          RAMs := 192   
++---Muxes : 
+	   2 Input   56 Bit        Muxes := 3     
+	   2 Input   32 Bit        Muxes := 240   
+	   2 Input   31 Bit        Muxes := 6     
+	   2 Input   28 Bit        Muxes := 4     
+	   2 Input   27 Bit        Muxes := 2     
+	   2 Input   26 Bit        Muxes := 2     
+	   2 Input   25 Bit        Muxes := 1     
+	   2 Input   24 Bit        Muxes := 8     
+	   2 Input   23 Bit        Muxes := 1     
+	   2 Input   22 Bit        Muxes := 1     
+	   2 Input   21 Bit        Muxes := 1     
+	   2 Input   20 Bit        Muxes := 1     
+	   2 Input   19 Bit        Muxes := 2     
+	   2 Input   18 Bit        Muxes := 1     
+	   2 Input   17 Bit        Muxes := 3     
+	   3 Input   16 Bit        Muxes := 10    
+	   2 Input   16 Bit        Muxes := 228   
+	   5 Input   16 Bit        Muxes := 1     
+	   6 Input   16 Bit        Muxes := 63    
+	   2 Input   15 Bit        Muxes := 16    
+	   2 Input   14 Bit        Muxes := 21    
+	   2 Input   13 Bit        Muxes := 4     
+	   2 Input   12 Bit        Muxes := 2     
+	   2 Input   11 Bit        Muxes := 4     
+	   2 Input   10 Bit        Muxes := 64    
+	   2 Input    9 Bit        Muxes := 8     
+	   3 Input    8 Bit        Muxes := 66    
+	   2 Input    8 Bit        Muxes := 49    
+	   4 Input    8 Bit        Muxes := 129   
+	   2 Input    7 Bit        Muxes := 9     
+	   2 Input    6 Bit        Muxes := 2     
+	   2 Input    5 Bit        Muxes := 5     
+	   2 Input    4 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 70    
+	   2 Input    2 Bit        Muxes := 198   
+	   3 Input    2 Bit        Muxes := 2     
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 716   
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1968 (col length:164)
+BRAMs: 1934 (col length: RAMB18 168 RAMB36 84)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+called Tcl_Close on channel with refCount > 0
+Abnormal program termination (EXCEPTION_BREAKPOINT)
+Please check 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0031/vivado/hs_err_pid1628.log' for details

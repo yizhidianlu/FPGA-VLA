@@ -1,0 +1,43 @@
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed May 20 10:31:34 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source build_synth.tcl
+# set part "xcvc1902-vsva2197-2MP-e-S"
+# set top  "mr_vla_full_top"
+# puts ">>> T0031 build_synth.tcl start â€? MR-VLA full integration"
+>>> T0031 build_synth.tcl start â€? MR-VLA full integration
+# puts ">>> part: $part   top: $top"
+>>> part: xcvc1902-vsva2197-2MP-e-S   top: mr_vla_full_top
+# set vfiles [glob ../rtl/*.v]
+# puts ">>> reading [llength $vfiles] HLS Verilog files"
+>>> reading 89 HLS Verilog files
+# foreach f $vfiles {
+#     read_verilog $f
+# }
+read_verilog: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 645.719 ; gain = 199.305
+# read_verilog -sv ../rtl/rate_enable_gen.sv
+# read_verilog -sv ../rtl/bram_axis_fifo.sv
+# read_verilog -sv ../rtl/mr_vla_full_top.sv
+# puts ">>> synth_design -top $top"
+>>> synth_design -top mr_vla_full_top
+# synth_design -top $top -part $part -mode out_of_context
+Command: synth_design -top mr_vla_full_top -part xcvc1902-vsva2197-2MP-e-S -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-86] Your Synthesis license expires in 19 day(s)
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 34144
+couldn't read file "E:/Applaction/Xilinx/Vivado/2024.1/scripts/rt/data/lib_core.tcl": no such file or directory
+INFO: [Common 17-83] Releasing license: Synthesis
+6 Infos, 0 Warnings, 0 Critical Warnings and 1 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Vivado Synthesis failed
+INFO: [Common 17-206] Exiting Vivado at Wed May 20 10:31:53 2026...

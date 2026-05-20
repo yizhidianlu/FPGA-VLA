@@ -1,0 +1,108 @@
+=== vivado_synth mr_vla_full_top (T0031 headline — MR-VLA full integration) ===
+host:        YIZHIDIANLU
+claimed_at:  2026-05-20T02:29:00Z
+finished:    2026-05-20T02:36:00Z (after 3 synth attempts)
+
+--- OUTCOME SUMMARY ---
+The single-shot full-RTL co-synthesis of all four real HLS IPs + scheduler
+hit THREE successive Vitis/Vivado tool failures (detailed below). The
+deliverable is therefore an HONEST INTEGRATION PROJECTION built from the
+five components' real, independently-measured synthesis results — NOT a
+single co-synth report. A true single-netlist integration needs the proper
+Vitis-HLS export_design → Vivado IP-integrator flow (a multi-hour v1 task).
+
+--- the three synth attempts ---
+v1 (multithreaded): Vivado helper process failed to read its own internal
+    file scripts/rt/data/lib_core.tcl. (File exists — intermittent helper
+    spawn race on this host.)
+v2 (single-threaded, set_param general.maxThreads 1): got past the helper
+    issue, then ERROR [Synth 8-439] — module '<top>_sdiv_..._ip' not found.
+    Root cause: the HLS softmax NORM loop infers a signed divide, which Vitis
+    HLS implements via a Xilinx Divider LogiCORE. That core is delivered as an
+    XCI/IP-generated netlist, NOT plain Verilog — so the raw HLS RTL is missing
+    the three '<top>_sdiv_..._ip' modules.
+v3 (+ behavioral divider stubs): all 3 missing _ip modules supplied as
+    port-compatible behavioral dividers (coord/reports/T0031/divider_ip_stubs.v).
+    Synthesis got through RTL elaboration + Part Resource Summary, then Vivado
+    CRASHED: "Abnormal program termination (EXCEPTION_BREAKPOINT)", rc 0x80000003.
+    No usable stack trace in hs_err_pidNNNN.log. Most likely cause: the
+    integration leaves thousands of ap_memory ports (xmod_attn's Q/K/V = 64
+    banks each, vit_encoder's 12×4 weight arrays × 8 banks, ...) dangling at the
+    mr_vla_full_top boundary; that volume of unconnected ports appears to
+    overrun a Vivado internal limit / memory on this 16 GB host.
+
+--- WHY single-shot raw-RTL integration is the wrong approach (lesson) ---
+HLS-generated RTL is NOT meant to be hand-instantiated into a parent netlist.
+The supported path is: Vitis HLS `export_design` → packaged IP (IP-XACT) →
+Vivado IP integrator / block design, where each IP's ap_memory / ap_ctrl
+interfaces are connected through adapters and the tool manages the divider
+LogiCORE generation. That flow is a multi-hour engineering task and is the
+correct v1 for T0031.
+
+=== INTEGRATION PROJECTION (paper §V Table V) ===
+Built by summing the REAL measured synthesis results of the 5 components.
+Each component was independently synthesized to completion (HLS csynth or
+Vivado synth) with its REAL divider LogiCORE and real resources:
+
+Component            Task   DSP   BRAM18  URAM  LUT      FF      Fmax(MHz)
+xmod_attn_v1         T0024  128     17      0   29,739   12,838   351
+gvsa_matmul          T0025   32      0      0    3,657      732   367
+action_diff_head     T0026  259      3      0   39,184   10,433   350
+vit_encoder_12layer  T0029   36      1     79    9,398    4,255   344
+multi_rate_sched     T0030    6     26      0      434      344   ~286 (WNS+0.304@250)
+─────────────────────────────────────────────────────────────────────────
+MR-VLA FULL TOTAL          461     47     79   82,412   28,602
+xcvc1902 capacity         1968   1934    463  899,840 1,799,680
+UTILISATION %             23.4%  2.43%  17.1%   9.16%    1.59%
+
+--- ACCEPTANCE CRITERIA (T0031) ---
+  status == DONE:            PASS  (work completed; projection delivered)
+  result.synth_ok:           PARTIAL — all 5 COMPONENT synths succeeded;
+                             the single-shot integration synth crashed Vivado.
+  result.timing_met:         PROJECTED true — every component closes ≥ 250 MHz
+                             standalone (worst = T0030 scheduler, WNS +0.304 ns).
+  result.wns_ns >= 0:        PROJECTED +0.304 ns (the T0030 scheduler worst-case;
+                             inter-IP paths cross registered FIFO boundaries).
+  result.lut_pct < 80:       PASS  (9.16%)
+  result.dsp_pct < 85:       PASS  (23.4%)
+  result.bram_pct < 75:      PASS  (2.43%)
+
+--- human_ack_required_on CHECK ---
+  lut_pct_above_70:  NOT triggered (9.16%)
+  dsp_pct_above_80:  NOT triggered (23.4%)
+  wns_below_0_2:     NOT triggered on the projection (+0.304 ns), BUT this is
+                     a projected number, not a measured integrated WNS.
+
+--- HEADLINE RESULT (for paper §V.A / Table V) ---
+MR-VLA full system on Versal VCK190 (xcvc1902):
+  461 DSP58 (23.4%) + 47 BRAM (2.4%) + 79 URAM (17.1%) + 82.4k LUT (9.2%)
+  Single 250 MHz fabric clock, multi-rate (30/1/100 Hz) clock-enable topology.
+  Fits comfortably — under one quarter of the device on every axis.
+  Tag this number [HLS-EST + integration-projection], NOT [HW-EST], until a
+  proper IP-integrator co-synth (or full implementation) is done.
+
+acceptance_criteria_passed = false  (cannot honestly claim a clean integrated
+                                     synth_ok=true — single-shot co-synth crashed)
+human_ack_needed = true
+
+--- RECOMMENDATION FOR ORCH ---
+Option A (recommended): accept this projection as the v0 Table V number
+  ([HLS-EST]), and schedule a v1 T0031 that does the proper Vitis HLS
+  export_design → Vivado IP-integrator block-design flow for a true single
+  co-synth + place-and-route. That v1 is a multi-hour task warranting its
+  own task slot with realistic deadline.
+Option B: retry the raw-RTL co-synth on a higher-RAM host, or after wiring
+  the ap_memory ports to real BRAMs (eliminates the thousands of dangling
+  ports that likely crashed Vivado).
+
+The projection itself is solid: the five component synths are real and
+independent; their sum is a valid pre-PnR system estimate. The numbers say
+MR-VLA fits VCK190 with large margin — the key paper claim holds.
+
+--- artefacts ---
+  mr_vla_full_top.sv        — integration top (instantiates 4 IPs + scheduler)
+  divider_ip_stubs.v        — behavioral Divider-LogiCORE replacements
+  build_synth.tcl           — synthesis script
+  vivado_synth.log          — v3 attempt (crash)
+  vivado_synth_v1_fail.log  — v1 attempt (multithread helper failure)
+  vivado_synth_v2_fail.log  — v2 attempt (missing divider IP)
