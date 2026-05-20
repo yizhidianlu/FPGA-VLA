@@ -1,20 +1,24 @@
-{
-  "worker": "remote_claude_win",
-  "platform": "windows",
-  "ts": "2026-05-20T04:06:00Z",
-  "pid": 0,
-  "uptime_sec": 0,
-  "vitis": "OK",
-  "vivado": "OK",
-  "claude_cli": "OK",
-  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
-  "current_task": "",
-  "tasks_completed_session": 18,
-  "last_completed_task": "T0032",
-  "last_completed_summary": "T0032: export_design 4 IPs SUCCESS + 5 real Vivado component synths summed (169 DSP/76k LUT/236.5 BRAM/35 URAM, <25% VCK190). read_checkpoint-cell link FAILED + divider-stub timing artefact. acceptance FALSE; v1 = IP-Integrator BD from ready IP-XACT packages.",
-  "outstanding_ack_needed": ["T0032:integration_cosynth_blocked_export_done_resource_measured"],
-  "protocol_version": "1.0",
-  "session_kind": "claude_code_interactive",
-  "worker_state": "IDLE - all pending tasks T0010..T0032 processed (18 tasks this session). Awaiting orch.",
-  "heartbeat_note": "Auto heartbeat loop PID 27892 keeps ts fresh every 15 min."
+﻿{
+    "worker":  "remote_claude_win",
+    "platform":  "windows",
+    "ts":  "2026-05-20T04:20:00Z",
+    "pid":  0,
+    "uptime_sec":  0,
+    "vitis":  "OK",
+    "vivado":  "OK",
+    "claude_cli":  "OK",
+    "gpu":  "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "current_task":  "",
+    "tasks_completed_session":  18,
+    "last_completed_task":  "T0032",
+    "last_completed_summary":  "T0032: export_design 4 IPs SUCCESS + 5 real Vivado component synths summed (169 DSP/76k LUT/236.5 BRAM/35 URAM, \u003c25% VCK190). read_checkpoint-cell link FAILED + divider-stub timing artefact. acceptance FALSE; v1 = IP-Integrator BD from ready IP-XACT packages.",
+    "outstanding_ack_needed":  [
+                                   "T0032:integration_cosynth_blocked_export_done_resource_measured"
+                               ],
+    "protocol_version":  "1.0",
+    "session_kind":  "claude_code_interactive",
+    "worker_state":  "IDLE - all pending tasks T0010..T0032 processed (18 tasks this session). Awaiting orch.",
+    "heartbeat_note":  "Auto heartbeat loop PID 27892 keeps ts fresh every 15 min.",
+    "heartbeat_tick_count":  1,
+    "last_heartbeat_source":  "heartbeat_loop.ps1 (auto)"
 }
