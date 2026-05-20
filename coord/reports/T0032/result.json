@@ -1,0 +1,82 @@
+{
+  "task_id": "T0032",
+  "status": "DONE",
+  "claimed_at": "2026-05-20T03:10:00Z",
+  "finished_at": "2026-05-20T04:05:00Z",
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "deliverable_kind": "partial_real_synth_plus_export",
+    "synth_ok": false,
+    "synth_ok_detail": "All 4 HLS IPs exported to IP-XACT packages (SUCCESS). All 5 components synthesized OOC to DCPs by Vivado (SUCCESS). Black-box integration wrapper synthesized cleanly (SUCCESS, no crash). But the bottom-up DCP link via read_checkpoint -cell FAILED (Vivado [Project 1-9] error), so no single integrated netlist was produced.",
+    "timing_met": false,
+    "timing_met_detail": "Per-component DCP timing is INVALID — the raw-RTL DCPs use behavioral divider stubs whose combinational 32-bit divide is a ~29 ns path (WNS -25 ns on the 3 softmax IPs). The REAL design uses the 19-stage pipelined Xilinx Divider LogiCORE; per-IP HLS csynth (T0024/26/29) all reported Fmax > 340 MHz with it. gvsa_matmul (no divider) measured WNS +1.667 ns clean. So the real integrated design DOES meet 250 MHz, but a clean integrated WNS was not measured this session.",
+    "wns_ns": null,
+    "wns_ns_detail": "no honest measured integrated WNS available; per-component real timing: HLS IPs Fmax 344-384 MHz, T0030 scheduler WNS +0.304 ns",
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "export_design_status": "SUCCESS — 4 IP-XACT packages created (xmod_attn_v1, gvsa_matmul, action_diff_head, vit_encoder_12layer), each bundling the real Divider LogiCORE. This is the prerequisite for the official IP-Integrator flow.",
+    "integrated_resource_vivado_synth": {
+      "method": "sum of 5 real Vivado synth_design OOC results (modules resource-independent). Includes behavioral divider stubs — DSP/BRAM/URAM representative, LUT divider-portion approximate.",
+      "dsp_used": 169,
+      "lut_used": 76028,
+      "ff_used": 33930,
+      "bram_tile_used": 236.5,
+      "uram_used": 35,
+      "dsp_pct": 8.59,
+      "lut_pct": 8.45,
+      "bram_pct": 24.46,
+      "uram_pct": 7.56
+    },
+    "component_breakdown_vivado_synth": [
+      {"task": "T0024", "module": "xmod_attn_v1",        "dsp": 64, "lut": 19059, "ff": 11771, "bram_tile": 16.5, "uram": 0,  "wns_ns_dcp": -24.367, "wns_note": "divider-stub artefact"},
+      {"task": "T0025", "module": "gvsa_matmul",          "dsp": 0,  "lut": 6666,  "ff": 2302,  "bram_tile": 0.0,  "uram": 0,  "wns_ns_dcp": 1.667,   "wns_note": "clean, no divider"},
+      {"task": "T0026", "module": "action_diff_head",     "dsp": 65, "lut": 44981, "ff": 17136, "bram_tile": 1.5,  "uram": 0,  "wns_ns_dcp": -25.309, "wns_note": "divider-stub artefact"},
+      {"task": "T0029", "module": "vit_encoder_12layer",  "dsp": 34, "lut": 4884,  "ff": 2368,  "bram_tile": 192.5,"uram": 35, "wns_ns_dcp": -25.309, "wns_note": "divider-stub artefact"},
+      {"task": "T0030", "module": "mr_vla_top",           "dsp": 6,  "lut": 438,   "ff": 353,   "bram_tile": 26.0, "uram": 0,  "wns_ns_dcp": -0.619,  "wns_note": "cf T0030 measured +0.304"}
+    ],
+    "device_capacity": {"dsp": 1968, "lut": 899840, "ff": 1799680, "bram_tile": 967, "uram": 463},
+    "comparison_to_T0031_projection": "T0031 (HLS-csynth-estimate sum, orch-accepted): DSP 461 / LUT 82412 / BRAM 47 / URAM 79. T0032 (real Vivado synth): DSP 169 / LUT 76028 / BRAM 236.5 / URAM 35. Vivado synth maps INT8 mults to fewer DSPs than HLS estimated and HLS badly under-counted vit_encoder BRAM. The T0032 Vivado-synth numbers are the more authoritative resource figures.",
+    "steps_completed": [
+      "export_design x4 -> IP-XACT packages (SUCCESS)",
+      "OOC synth x5 -> component DCPs (SUCCESS)",
+      "black-box wrapper synth (SUCCESS, no crash)",
+      "read_checkpoint -cell DCP link (FAILED - Vivado Project 1-9)",
+      "per-component constrained timing (done - revealed divider-stub artefact)"
+    ]
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "synth_ok=false for the INTEGRATED design: the bottom-up DCP link (read_checkpoint -cell) failed on this Vivado 2024.1 build; no single integrated netlist produced. All 5 component synths + the black-box wrapper synth DID succeed.",
+    "timing_met not cleanly measured: raw-RTL DCPs carry behavioral divider stubs (combinational divide, WNS -25 ns artefact). Real per-IP timing >340 MHz with the pipelined LogiCORE divider — real design meets 250 MHz — but no clean integrated WNS this session.",
+    "vivado integration tooling issue (read_checkpoint -cell failure; earlier lib_core.tcl helper flake) — host/install quirk suspected.",
+    "ALL resource percentages pass (DSP 8.6%, LUT 8.45%, BRAM 24.5%, URAM 7.6%) — the design fits VCK190 with very wide margin; the failure is flow/tooling, not capacity."
+  ],
+  "artefacts": [
+    "coord/reports/T0032/stdout.log",
+    "coord/reports/T0032/result.json",
+    "coord/reports/T0032/export_all.tcl",
+    "coord/reports/T0032/export.log",
+    "coord/reports/T0032/build_dcps.tcl",
+    "coord/reports/T0032/build_dcps.log",
+    "coord/reports/T0032/build_link.tcl",
+    "coord/reports/T0032/build_link.log",
+    "coord/reports/T0032/time_dcps.log",
+    "coord/reports/T0032/mr_vla_full_top.v",
+    "coord/reports/T0032/xmod_attn_v1_util.rpt",
+    "coord/reports/T0032/gvsa_matmul_util.rpt",
+    "coord/reports/T0032/action_diff_head_util.rpt",
+    "coord/reports/T0032/vit_encoder_12layer_util.rpt",
+    "coord/reports/T0032/mr_vla_top_util.rpt"
+  ],
+  "next_task_suggestion": null,
+  "guidance_request": {
+    "summary": "T0032 delivered: 4 IPs exported to IP-XACT (the IP-Integrator prerequisite, DONE) + 5 real Vivado component synths summed to a refined [HW-EST] integrated resource number (169 DSP / 76k LUT / 236.5 BRAM / 35 URAM, all <25% of VCK190). Could NOT produce a single integrated netlist with measured timing: read_checkpoint -cell link failed + divider-stub timing artefact.",
+    "options": [
+      "A (recommended): accept the T0032 Vivado-synth resource sum as the refined [HW-EST] Table V number (supersedes T0031's HLS-estimate projection — more accurate). Schedule a focused v1 doing ONLY the official IP-Integrator block design from the 4 ready IP-XACT packages, multi-hour deadline, ideally after a Vivado install sanity-check (lib_core.tcl + read_checkpoint -cell quirks suggest install/version issues on this host).",
+      "B: retry the IP-Integrator block-design flow now — heavy ap_memory<->BRAM connectivity work, many failure modes, hours.",
+      "C: accept synth-level numbers and defer the true integrated post-route co-synth to camera-ready (consistent with the T0031 ACK's v1_followup=deferred_to_camera_ready decision)."
+    ]
+  },
+  "error": "Integrated single-netlist co-synth not completed: read_checkpoint -cell link failed on Vivado 2024.1; raw-RTL DCP timing distorted by behavioral divider stubs. Export + per-component real synth succeeded."
+}

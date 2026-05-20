@@ -1,0 +1,184 @@
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed May 20 12:01:59 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source time_dcps.tcl
+# set_param general.maxThreads 1
+# set DCP "C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp"
+# set comps {xmod_attn_v1 gvsa_matmul action_diff_head vit_encoder_12layer mr_vla_top}
+# foreach c $comps {
+#     puts ">>> ============ timing: $c ============"
+#     if {[catch {
+#         open_checkpoint "$DCP/${c}.dcp"
+#         # primary clock: HLS IPs use ap_clk; scheduler uses clk
+#         set clkport [get_ports -quiet ap_clk]
+#         if {[llength $clkport] == 0} { set clkport [get_ports -quiet clk] }
+#         if {[llength $clkport] > 0} {
+#             create_clock -period 4.000 -name primary $clkport
+#         }
+#         set ff [llength [get_cells -hier -quiet -filter {REF_NAME =~ FD*}]]
+#         set wp [get_timing_paths -quiet -setup -max_paths 1 -nworst 1]
+#         if {[llength $wp] > 0} { set wns [get_property SLACK [lindex $wp 0]] } else { set wns "n/a" }
+#         puts ">>> TIMING $c : WNS=$wns  FF=$ff"
+#         close_design
+#     } err]} {
+#         puts ">>> TIMING_FAIL $c :: $err"
+#         catch {close_design}
+#     }
+# }
+>>> ============ timing: xmod_attn_v1 ============
+Command: open_checkpoint C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/xmod_attn_v1.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.040 . Memory (MB): peak = 462.238 ; gain = 7.277
+INFO: [Device 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.455 . Memory (MB): peak = 1711.914 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 5963 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 2 CPU seconds
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Applaction/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [Project 1-479] Netlist was created with Vivado 2024.1
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.101 . Memory (MB): peak = 2053.797 ; gain = 8.117
+Reading NOC Solution File 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/xmod_attn_v1/xmod_attn_v1.ncr'
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 2681.926 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 5963 instances were transformed.
+  DSP58 => DSP58 (DSP_ALUADD, DSP_ALUMUX, DSP_ALUREG, DSP_A_B_DATA58, DSP_C_DATA58, DSP_MULTIPLIER58, DSP_M_DATA58, DSP_OUTPUT58, DSP_PATDET, DSP_PREADD58, DSP_PREADD_DATA58, DSP_SRCMX_OPTINV, VCC): 64 instances
+  LUT6CY => LUT6CY (LUTCY1, LUTCY2): 5888 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 11 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2024.1 (64-bit) build 5076996
+open_checkpoint: Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 2681.926 ; gain = 2237.273
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2692.359 ; gain = 10.434
+>>> TIMING xmod_attn_v1 : WNS=-24.367  FF=11771
+>>> ============ timing: gvsa_matmul ============
+Command: open_checkpoint C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/gvsa_matmul.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4381.984 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.082 . Memory (MB): peak = 4381.984 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1793 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Applaction/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [Project 1-479] Netlist was created with Vivado 2024.1
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.038 . Memory (MB): peak = 4381.984 ; gain = 0.000
+Reading NOC Solution File 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/gvsa_matmul/gvsa_matmul.ncr'
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 4381.984 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1793 instances were transformed.
+  LUT6CY => LUT6CY (LUTCY1, LUTCY2): 1792 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 1 instance 
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2024.1 (64-bit) build 5076996
+open_checkpoint: Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 4381.984 ; gain = 0.000
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 4381.984 ; gain = 0.000
+>>> TIMING gvsa_matmul : WNS=1.667  FF=2302
+>>> ============ timing: action_diff_head ============
+Command: open_checkpoint C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/action_diff_head.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4381.984 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.680 . Memory (MB): peak = 4381.984 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 14127 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 3 CPU seconds
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Applaction/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [Project 1-479] Netlist was created with Vivado 2024.1
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.241 . Memory (MB): peak = 4381.984 ; gain = 0.000
+Reading NOC Solution File 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/action_diff_head/action_diff_head.ncr'
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.047 . Memory (MB): peak = 4381.984 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 14127 instances were transformed.
+  DSP58 => DSP58 (DSP_ALUADD, DSP_ALUMUX, DSP_ALUREG, DSP_A_B_DATA58, DSP_C_DATA58, DSP_MULTIPLIER58, DSP_M_DATA58, DSP_OUTPUT58, DSP_PATDET, DSP_PREADD58, DSP_PREADD_DATA58, DSP_SRCMX_OPTINV, VCC): 65 instances
+  LUT6CY => LUT6CY (LUTCY1, LUTCY2): 11974 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 8 instances
+  RAM16X1S => RAM32X1S (RAMS32): 2048 instances
+  RAM64X1S => RAM64X1S (RAMS64E5, VCC): 32 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2024.1 (64-bit) build 5076996
+open_checkpoint: Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 4381.984 ; gain = 0.000
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 4381.984 ; gain = 0.000
+>>> TIMING action_diff_head : WNS=-25.309  FF=17136
+>>> ============ timing: vit_encoder_12layer ============
+Command: open_checkpoint C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/vit_encoder_12layer.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4810.062 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.156 . Memory (MB): peak = 4810.062 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 2214 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Applaction/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [Project 1-479] Netlist was created with Vivado 2024.1
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.039 . Memory (MB): peak = 4810.062 ; gain = 0.000
+Reading NOC Solution File 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/vit_encoder_12layer/vit_encoder_12layer.ncr'
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 4810.062 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 2214 instances were transformed.
+  DSP58 => DSP58 (DSP_ALUADD, DSP_ALUMUX, DSP_ALUREG, DSP_A_B_DATA58, DSP_C_DATA58, DSP_MULTIPLIER58, DSP_M_DATA58, DSP_OUTPUT58, DSP_PATDET, DSP_PREADD58, DSP_PREADD_DATA58, DSP_SRCMX_OPTINV, VCC): 34 instances
+  LUT6CY => LUT6CY (LUTCY1, LUTCY2): 2172 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 8 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2024.1 (64-bit) build 5076996
+open_checkpoint: Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 4810.062 ; gain = 0.000
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 4810.062 ; gain = 0.000
+>>> TIMING vit_encoder_12layer : WNS=-25.309  FF=2368
+>>> ============ timing: mr_vla_top ============
+Command: open_checkpoint C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/mr_vla_top.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4810.062 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 4810.062 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 335 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Applaction/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [Project 1-479] Netlist was created with Vivado 2024.1
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 4810.062 ; gain = 0.000
+Reading NOC Solution File 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/mr_vla_top/mr_vla_top.ncr'
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 4810.062 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 335 instances were transformed.
+  DSP58 => DSP58 (DSP_ALUADD, DSP_ALUMUX, DSP_ALUREG, DSP_A_B_DATA58, DSP_C_DATA58, DSP_MULTIPLIER58, DSP_M_DATA58, DSP_OUTPUT58, DSP_PATDET, DSP_PREADD58, DSP_PREADD_DATA58, DSP_SRCMX_OPTINV, VCC): 6 instances
+  LUT6CY => LUT6CY (LUTCY1, LUTCY2): 326 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 3 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2024.1 (64-bit) build 5076996
+open_checkpoint: Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 4810.062 ; gain = 0.000
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 4810.062 ; gain = 0.000
+>>> TIMING mr_vla_top : WNS=-0.619  FF=353
+# puts ">>> time_dcps.tcl done"
+>>> time_dcps.tcl done
+# exit 0
+INFO: [Common 17-206] Exiting Vivado at Wed May 20 12:08:33 2026...

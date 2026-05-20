@@ -1,0 +1,507 @@
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed May 20 11:58:21 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source build_link.tcl
+# set_param general.maxThreads 1
+# set part "xcvc1902-vsva2197-2MP-e-S"
+# set T0032 "C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032"
+# set DCP   "$T0032/dcp"
+# puts ">>> ===== Phase A: synth wrapper with black boxes ====="
+>>> ===== Phase A: synth wrapper with black boxes =====
+# read_verilog "$DCP/mr_vla_top_stub.v"
+read_verilog: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 645.625 ; gain = 200.328
+# read_verilog "$DCP/vit_encoder_12layer_stub.v"
+# read_verilog "$DCP/xmod_attn_v1_stub.v"
+# read_verilog "$DCP/gvsa_matmul_stub.v"
+# read_verilog "$DCP/action_diff_head_stub.v"
+# read_verilog "$T0032/mr_vla_full_top.v"
+# read_xdc     "$T0032/mr_vla_full_top.xdc"
+# synth_design -top mr_vla_full_top -part $part -mode out_of_context
+Command: synth_design -top mr_vla_full_top -part xcvc1902-vsva2197-2MP-e-S -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-86] Your Synthesis license expires in 19 day(s)
+INFO: [Device 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 1 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 30516
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2082.512 ; gain = 446.867
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_full_top' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:23]
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_top' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/mr_vla_top_stub.v:17]
+INFO: [Synth 8-6157] synthesizing module 'vit_encoder_12layer' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/vit_encoder_12layer_stub.v:17]
+WARNING: [Synth 8-7071] port 'ap_idle' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'ap_ready' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'x_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'x_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'x_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_0_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_0_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_0_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_1_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_1_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_1_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_2_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_2_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_2_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_3_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_3_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_3_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_4_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_4_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_4_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_5_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_5_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_5_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_6_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_6_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_6_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_7_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_7_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_qkv_all_7_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_0_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_0_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_0_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_1_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_1_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_1_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_2_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_2_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_2_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_3_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_3_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_3_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_4_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_4_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_4_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_5_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_5_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_5_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_6_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_6_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_6_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_7_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_7_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_out_all_7_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_0_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_0_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_0_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_1_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_1_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_1_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_2_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_2_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_2_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_3_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_3_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_3_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_4_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_4_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_4_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_5_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_5_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_5_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_6_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_6_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_6_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_7_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_7_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn1_all_7_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_0_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_0_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_0_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_1_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_1_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_1_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_2_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_2_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_2_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_3_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_3_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_3_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_4_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_4_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_4_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_5_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_5_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_5_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_6_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_6_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_6_q0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_7_address0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+WARNING: [Synth 8-7071] port 'W_ffn2_all_7_ce0' of module 'vit_encoder_12layer' is unconnected for instance 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+INFO: [Common 17-14] Message 'Synth 8-7071' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Synth 8-7023] instance 'u_vit_encoder' of module 'vit_encoder_12layer' has 109 connections declared, but only 4 given [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+INFO: [Synth 8-6157] synthesizing module 'xmod_attn_v1' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/xmod_attn_v1_stub.v:17]
+WARNING: [Synth 8-7023] instance 'u_xmod_attn' of module 'xmod_attn_v1' has 1258 connections declared, but only 4 given [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:73]
+INFO: [Synth 8-6157] synthesizing module 'gvsa_matmul' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/gvsa_matmul_stub.v:17]
+WARNING: [Synth 8-7023] instance 'u_gvsa_matmul' of module 'gvsa_matmul' has 394 connections declared, but only 4 given [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:78]
+INFO: [Synth 8-6157] synthesizing module 'action_diff_head' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/action_diff_head_stub.v:17]
+WARNING: [Synth 8-7023] instance 'u_action_diff' of module 'action_diff_head' has 1318 connections declared, but only 4 given [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:83]
+INFO: [Synth 8-6155] done synthesizing module 'mr_vla_full_top' (0#1) [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:23]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2210.500 ; gain = 574.855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2210.500 ; gain = 574.855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2210.500 ; gain = 574.855
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.024 . Memory (MB): peak = 2210.500 ; gain = 0.000
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Applaction/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.xdc]
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2329.812 ; gain = 29.699
+Finished Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2330.793 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 2330.793 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2330.793 ; gain = 695.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcvc1902-vsva2197-2MP-e-S
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2330.793 ; gain = 695.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 2330.793 ; gain = 695.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 2330.793 ; gain = 695.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1968 (col length:164)
+BRAMs: 1934 (col length: RAMB18 168 RAMB36 84)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2330.793 ; gain = 695.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 3112.684 ; gain = 1477.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 3112.684 ; gain = 1477.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-11328] No retiming is needed, due to no register satisfying retiming conditions
+INFO: [Synth 8-5816] Retiming module `mr_vla_full_top`
+   Worst Slack before retiming is invalid and worst slack after retiming is invalid
+   Numbers of local forward move = 0, and local backward move = 0
+
+
+INFO: [Synth 8-5816] Retiming module `mr_vla_full_top' done
+
+
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 3132.680 ; gain = 1497.035
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin x_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin x_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin x_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin x_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin x_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin x_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin x_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin x_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_0_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_0_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_0_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_0_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_0_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_0_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_0_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_0_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_1_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_1_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_1_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_1_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_1_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_1_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_1_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_1_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_2_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_2_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_2_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_2_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_2_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_2_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_2_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_2_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_3_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_3_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_3_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_3_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_3_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_3_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_3_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_3_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_4_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_4_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_4_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_4_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_4_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_4_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_4_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_4_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_5_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_5_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_5_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_5_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_5_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_5_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_5_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_5_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_6_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_6_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_6_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_6_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_6_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_6_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_6_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_6_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_7_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_7_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_7_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_7_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_7_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_7_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_7_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_qkv_all_7_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_0_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_0_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_0_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_0_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_0_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_0_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_0_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_0_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_1_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_1_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_1_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_1_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_1_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_1_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_1_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_1_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_2_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_2_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_2_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_2_q0[4]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_2_q0[3]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_2_q0[2]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_2_q0[1]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_2_q0[0]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_3_q0[7]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_3_q0[6]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_3_q0[5]
+CRITICAL WARNING: [Synth 8-4442] BlackBox module u_vit_encoder has unconnected pin W_out_all_3_q0[4]
+INFO: [Common 17-14] Message 'Synth 8-4442' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 3145.672 ; gain = 1510.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 3145.672 ; gain = 1510.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 3145.672 ; gain = 1510.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 3145.672 ; gain = 1510.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 3145.672 ; gain = 1510.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 3145.672 ; gain = 1510.027
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------------+----------+
+|      |BlackBox name       |Instances |
++------+--------------------+----------+
+|1     |mr_vla_top          |         1|
+|2     |vit_encoder_12layer |         1|
+|3     |xmod_attn_v1        |         1|
+|4     |gvsa_matmul         |         1|
+|5     |action_diff_head    |         1|
++------+--------------------+----------+
+
+Report Cell Usage: 
++------+-------------------------+------+
+|      |Cell                     |Count |
++------+-------------------------+------+
+|1     |action_diff_head_bbox    |     1|
+|2     |gvsa_matmul_bbox         |     1|
+|3     |mr_vla_top_bbox          |     1|
+|4     |vit_encoder_12layer_bbox |     1|
+|5     |xmod_attn_v1_bbox        |     1|
+|6     |LUT1                     |     1|
++------+-------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:40 ; elapsed = 00:00:42 . Memory (MB): peak = 3145.672 ; gain = 1510.027
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 8824 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:34 . Memory (MB): peak = 3145.672 ; gain = 1389.734
+Synthesis Optimization Complete : Time (s): cpu = 00:00:40 ; elapsed = 00:00:43 . Memory (MB): peak = 3145.672 ; gain = 1510.027
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.024 . Memory (MB): peak = 3145.672 ; gain = 0.000
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.xdc]
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 3145.672 ; gain = 0.000
+Finished Parsing XDC File [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'action_diff_head' instantiated as 'u_action_diff' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:83]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'gvsa_matmul' instantiated as 'u_gvsa_matmul' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:78]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'mr_vla_top' instantiated as 'u_scheduler' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:58]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'vit_encoder_12layer' instantiated as 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'xmod_attn_v1' instantiated as 'u_xmod_attn' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:73]
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3145.672 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: ced4742c
+INFO: [Common 17-83] Releasing license: Synthesis
+33 Infos, 105 Warnings, 105 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:59 ; elapsed = 00:01:05 . Memory (MB): peak = 3145.672 ; gain = 2500.047
+# write_checkpoint -force "$T0032/wrapper_blackbox.dcp"
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-480] Writing timing data to binary archive.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/wrapper_blackbox.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 3766.270 ; gain = 620.598
+# close_design
+# puts ">>> Phase A done â€? wrapper_blackbox.dcp written"
+>>> Phase A done â€? wrapper_blackbox.dcp written
+# puts ">>> ===== Phase B: open wrapper, link 5 component DCPs ====="
+>>> ===== Phase B: open wrapper, link 5 component DCPs =====
+# open_checkpoint "$T0032/wrapper_blackbox.dcp"
+Command: open_checkpoint C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/wrapper_blackbox.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3766.270 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.024 . Memory (MB): peak = 3766.270 ; gain = 0.000
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Applaction/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [Project 1-479] Netlist was created with Vivado 2024.1
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Reading NOC Solution File 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/wrapper_blackbox/mr_vla_full_top.ncr'
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Project 1-853] Binary constraint restore complete.
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'action_diff_head' instantiated as 'u_action_diff' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:83]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'gvsa_matmul' instantiated as 'u_gvsa_matmul' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:78]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'mr_vla_top' instantiated as 'u_scheduler' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:58]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'vit_encoder_12layer' instantiated as 'u_vit_encoder' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:68]
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'xmod_attn_v1' instantiated as 'u_xmod_attn' [C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/mr_vla_full_top.v:73]
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3766.270 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2024.1 (64-bit) build 5076996
+open_checkpoint: Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 3766.270 ; gain = 0.000
+# read_checkpoint -cell u_scheduler   "$DCP/mr_vla_top.dcp"
+Command: read_checkpoint -cell u_scheduler C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0032/dcp/mr_vla_top.dcp
+WARNING: [Vivado 12-12435] Any Tcl variable pointing to design objects become invalid when read_checkpoint is executed subsequently after open_checkpoint. The content of those variables need to be rebuilt after read_checkpoint. Otherwise this could result in unwanted behavior due to referencing objects that do not exist anymore.
+INFO: [Timing 38-480] Writing timing data to binary archive.
+ERROR: [Project 1-9] Cannot open structural netlist because no structural source files were specified. Edif, ngc ngo and verilog structural netlists are supported.
+INFO: [Common 17-206] Exiting Vivado at Wed May 20 12:00:40 2026...
