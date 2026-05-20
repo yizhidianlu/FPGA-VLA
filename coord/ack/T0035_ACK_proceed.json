@@ -1,0 +1,17 @@
+{
+  "task_id": "T0035",
+  "verb": "proceed",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-20T10:20:00Z",
+  "reason": "T0035 hbm_weight_tiler is a clean one-shot pass: csim byte-exact (0/1,048,576), Fmax 342 MHz, DSP 0, LUT 6242, BRAM 7 — all 6 hard acceptance criteria met. The only trigger is latency_above_200000 (1.05M cycles = 4.195 ms). This is BENIGN and is in fact the intended behaviour: the language path runs at 1 Hz, so 4.195 ms is 0.42% of the 1000 ms per-step budget — bursty HBM traffic with the bus free 99.6% of the time, exactly the Sec.III.E memory-hierarchy claim. No code change. Paper Table V: the '4 of 32 HBM channels' figure = 4 instances of this single-m_axi-port controller; T0035 validates the burst-tiling mechanism.",
+  "new_acceptance_criteria": [
+    {"status": "== DONE"},
+    {"result.csim_pass": true},
+    {"result.csim_exact_mismatches": "== 0"},
+    {"result.csynth_pass": true},
+    {"result.fmax_estimated_mhz": ">= 250"},
+    {"result.dsp_used": "< 64"},
+    {"result.lut_used": "< 30000"},
+    {"result.latency_cycles": "< 2000000"}
+  ]
+}

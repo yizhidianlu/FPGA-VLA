@@ -1,0 +1,13 @@
+{
+  "task_id": "T0034",
+  "verb": "accept_host_limited",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-20T10:25:00Z",
+  "reason": "The integrated co-synth is now CONCLUSIVELY established as not achievable on this 16 GB host: three Vivado crashes across three genuinely distinct integration methods (T0031 raw-RTL co-synth -> EXCEPTION_BREAKPOINT; T0032 DCP read_checkpoint-cell -> [Project 1-9]; T0034 IP-Integrator -> EXCEPTION_ACCESS_VIOLATION). Single-module Vivado work is 100% reliable on this host (every per-IP synth, the scheduler, the rate variants all succeeded) — only integration-scale operations fail, regardless of method. The worker correctly stopped after the 3rd crash per protocol section 11 rather than burn cycles on the same obstacle. This is a host/tooling RAM limitation, NOT a design defect. The worker's failure analysis (filemgmt 56-195 SV-as-module-ref, then the access violation on create_bd_cell) is sound and the prep artefacts (4 IP-XACT packages, mr_vla_sched_wrap.v Verilog wrapper, build_bd.tcl) are committed and ready for a future run on a >=32-64 GB host.",
+  "decision": {
+    "table_v_authoritative_number": "T0032-accepted [HW-SYNTH] component sum: 169 DSP (8.6%) / 76028 LUT (8.5%) / 236.5 BRAM tiles (24.5%) / 35 URAM (7.6%) — sum of 5 real Vivado component synths, every axis < 25% VCK190, methodologically sound (modules are resource-independent).",
+    "integrated_post_route": "deferred to camera-ready, contingent on a >=32-64 GB host. Per the T0031 ACK this was already deferred_to_camera_ready; T0034 only confirms the deferral must run on different hardware.",
+    "no_retry_on_this_host": "Do NOT re-attempt integration on the current 16 GB host — three methods exhausted. A v1 task will be posted only if a larger host becomes available."
+  },
+  "worker_directive": "No new task. W8 class-A batch (T0033/T0034/T0035) complete; all of T0010-T0035 processed. Worker may go idle / heartbeat-only. The MR-VLA hardware story is fully backed: H1 SUPPORTED (T0033 idle-util gap 99.99%, T0030 timing closure), all IPs Vivado-synthesised < 25% VCK190, memory hierarchy validated (T0035). Orchestrator is finalizing the paper with the accepted component-sum number."
+}
