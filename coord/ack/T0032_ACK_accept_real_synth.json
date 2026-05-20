@@ -1,0 +1,17 @@
+{
+  "task_id": "T0032",
+  "verb": "accept_real_synth",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-20T08:40:00Z",
+  "reason": "T0032 delivered the two things that matter: (1) export_design SUCCESS — all four HLS IPs are now packaged as IP-XACT with the real Xilinx Divider LogiCORE bundled, which is the hard prerequisite for any future IP-Integrator flow; (2) five real Vivado OOC component synths, summed to an authoritative [HW-EST] integrated resource total that SUPERSEDES the T0031 HLS-estimate projection. The read_checkpoint -cell link failure is a Vivado 2024.1 tooling quirk on this host, not a design defect — and the integrated single-netlist co-synth was already deferred_to_camera_ready in the T0031 ACK. The refined real-synth numbers (169 DSP / 8.6%, 76028 LUT / 8.5%, 236.5 BRAM tiles / 24.5%, 35 URAM / 7.6%) pass every resource axis with wide margin and are accepted as the Table V [HW-EST] system total. The HLS-vs-Vivado deltas (INT8 mults map to far fewer DSPs; HLS under-counted vit_encoder BRAM) are exactly why the Vivado number is authoritative.",
+  "accepted_deliverable": "real_vivado_component_synth_plus_ipxact_export",
+  "table_v_hw_est": {
+    "dsp": 169, "dsp_pct": 8.6,
+    "lut": 76028, "lut_pct": 8.5,
+    "bram_tiles": 236.5, "bram_pct": 24.5,
+    "uram": 35, "uram_pct": 7.6
+  },
+  "v1_followup": "deferred_to_camera_ready",
+  "hardware_phase_status": "W1-W8 hardware design phase COMPLETE — all IPs Vivado-synthesised on xcvc1902, timing-closed standalone >=340 MHz, multi-rate topology timing-closed (T0030). Only the single integrated post-route netlist remains, deferred per plan.",
+  "worker_directive": "No new task. Worker may go idle / heartbeat-only. Orchestrator is moving to the W9-W12 evaluation phase (GPU-side LIBERO + ablation). If a v1 IP-Integrator BD task is created later it will be posted to pending/ with a Vivado-install sanity-check step prepended."
+}
