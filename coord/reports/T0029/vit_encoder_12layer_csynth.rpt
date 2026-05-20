@@ -1,0 +1,288 @@
+
+
+================================================================
+== Vitis HLS Report for 'vit_encoder_12layer'
+================================================================
+* Date:           Wed May 20 10:26:31 2026
+
+* Version:        2024.1 (Build 5069499 on May 21 2024)
+* Project:        vit_enc_hls
+* Solution:       sol1 (Vivado IP Flow Target)
+* Product family: versalaicore
+* Target device:  xcvc1902-vsva2197-2MP-e-S
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.902 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +-----------+-----------+-----------+-----------+-----------+-----------+---------+
+    |    Latency (cycles)   |   Latency (absolute)  |        Interval       | Pipeline|
+    |    min    |    max    |    min    |    max    |    min    |    max    |   Type  |
+    +-----------+-----------+-----------+-----------+-----------+-----------+---------+
+    |  862636461|  862636461|  3.451 sec|  3.451 sec|  862636462|  862636462|       no|
+    +-----------+-----------+-----------+-----------+-----------+-----------+---------+
+
+    + Detail: 
+        * Instance: 
+        +---------------------------------------------------------+----------------------------------------------+----------+----------+-----------+-----------+----------+----------+-----------------------------------------------+
+        |                                                         |                                              |   Latency (cycles)  |   Latency (absolute)  |       Interval      |                    Pipeline                   |
+        |                         Instance                        |                    Module                    |    min   |    max   |    min    |    max    |    min   |    max   |                      Type                     |
+        +---------------------------------------------------------+----------------------------------------------+----------+----------+-----------+-----------+----------+----------+-----------------------------------------------+
+        |grp_vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D_fu_124    |vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D    |     98307|     98307|   0.393 ms|   0.393 ms|     98305|     98305|  loop auto-rewind stp(delay=0 clock cycles(s))|
+        |grp_vit_transformer_layer_fu_138                         |vit_transformer_layer                         |  71771676|  71771676|  0.287 sec|  0.287 sec|  71771676|  71771676|                                             no|
+        |grp_vit_encoder_12layer_Pipeline_STORE_P_STORE_D_fu_217  |vit_encoder_12layer_Pipeline_STORE_P_STORE_D  |     98307|     98307|   0.393 ms|   0.393 ms|     98305|     98305|  loop auto-rewind stp(delay=0 clock cycles(s))|
+        |grp_vit_encoder_12layer_Pipeline_COPY_P_COPY_D_fu_231    |vit_encoder_12layer_Pipeline_COPY_P_COPY_D    |     98307|     98307|   0.393 ms|   0.393 ms|     98305|     98305|  loop auto-rewind stp(delay=0 clock cycles(s))|
+        +---------------------------------------------------------+----------------------------------------------+----------+----------+-----------+-----------+----------+----------+-----------------------------------------------+
+
+        * Loop: 
+        +--------------+-----------+-----------+----------+-----------+-----------+------+----------+
+        |              |    Latency (cycles)   | Iteration|  Initiation Interval  | Trip |          |
+        |   Loop Name  |    min    |    max    |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------+-----------+-----------+----------+-----------+-----------+------+----------+
+        |- LAYER_LOOP  |  862439844|  862439844|  71869987|          -|          -|    12|        no|
+        +--------------+-----------+-----------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+---------+--------+-----+
+|       Name      | BRAM_18K|  DSP |    FF   |   LUT  | URAM|
++-----------------+---------+------+---------+--------+-----+
+|DSP              |        -|     -|        -|       -|    -|
+|Expression       |        -|     -|        0|       8|    -|
+|FIFO             |        -|     -|        -|       -|    -|
+|Instance         |        1|    36|     4236|    8930|   72|
+|Memory           |        0|     -|        0|       0|    7|
+|Multiplexer      |        -|     -|        0|     460|    -|
+|Register         |        -|     -|       19|       -|    -|
++-----------------+---------+------+---------+--------+-----+
+|Total            |        1|    36|     4255|    9398|   79|
++-----------------+---------+------+---------+--------+-----+
+|Available        |     1934|  1968|  1799680|  899840|  463|
++-----------------+---------+------+---------+--------+-----+
+|Utilization (%)  |       ~0|     1|       ~0|       1|   17|
++-----------------+---------+------+---------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    +---------------------------------------------------------+----------------------------------------------+---------+----+------+------+-----+
+    |                         Instance                        |                    Module                    | BRAM_18K| DSP|  FF  |  LUT | URAM|
+    +---------------------------------------------------------+----------------------------------------------+---------+----+------+------+-----+
+    |grp_vit_encoder_12layer_Pipeline_COPY_P_COPY_D_fu_231    |vit_encoder_12layer_Pipeline_COPY_P_COPY_D    |        0|   0|    57|   307|    0|
+    |grp_vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D_fu_124    |vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D    |        0|   0|    57|   307|    0|
+    |grp_vit_encoder_12layer_Pipeline_STORE_P_STORE_D_fu_217  |vit_encoder_12layer_Pipeline_STORE_P_STORE_D  |        0|   0|    94|   291|    0|
+    |grp_vit_transformer_layer_fu_138                         |vit_transformer_layer                         |        1|  36|  4028|  8025|   72|
+    +---------------------------------------------------------+----------------------------------------------+---------+----+------+------+-----+
+    |Total                                                    |                                              |        1|  36|  4236|  8930|   72|
+    +---------------------------------------------------------+----------------------------------------------+---------+----+------+------+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    +-------------------------------------------------------------------------+----------------------------------------------------------------------------------+---------+---+----+-----+-------+-----+------+-------------+
+    |                                  Memory                                 |                                      Module                                      | BRAM_18K| FF| LUT| URAM| Words | Bits| Banks| W*Bits*Banks|
+    +-------------------------------------------------------------------------+----------------------------------------------------------------------------------+---------+---+----+-----+-------+-----+------+-------------+
+    |buf_out_U                                                                |buf_out_RAM_AUTO_1R1W                                                             |        0|  0|   0|    3|  98304|    8|     1|       786432|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_U  |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb  |        0|  0|   0|    1|  24576|    8|     1|       196608|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_U  |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb  |        0|  0|   0|    1|  24576|    8|     1|       196608|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_U  |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb  |        0|  0|   0|    1|  24576|    8|     1|       196608|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_U    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb  |        0|  0|   0|    1|  24576|    8|     1|       196608|
+    +-------------------------------------------------------------------------+----------------------------------------------------------------------------------+---------+---+----+-----+-------+-----+------+-------------+
+    |Total                                                                    |                                                                                  |        0|  0|   0|    7| 196608|   40|     5|      1572864|
+    +-------------------------------------------------------------------------+----------------------------------------------------------------------------------+---------+---+----+-----+-------+-----+------+-------------+
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------+----------+----+---+----+------------+------------+
+    |    Variable Name    | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------+----------+----+---+----+------------+------------+
+    |add_ln48_fu_264_p2   |         +|   0|  0|   6|           4|           1|
+    |icmp_ln48_fu_270_p2  |      icmp|   0|  0|   2|           4|           4|
+    +---------------------+----------+----+---+----+------------+------------+
+    |Total                |          |   0|  0|   8|           8|           5|
+    +---------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +--------------------------------------------------------------------------------+----+-----------+-----+-----------+
+    |                                      Name                                      | LUT| Input Size| Bits| Total Bits|
+    +--------------------------------------------------------------------------------+----+-----------+-----+-----------+
+    |L_fu_120                                                                        |   8|          2|    4|          8|
+    |ap_NS_fsm                                                                       |  24|          8|    1|          8|
+    |buf_out_address0                                                                |  32|          3|   17|         51|
+    |buf_out_ce0                                                                     |   8|          3|    1|          3|
+    |buf_out_we0                                                                     |   8|          2|    1|          2|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_address0  |  47|          5|   15|         75|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_ce0       |  24|          5|    1|          5|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_ce1       |   8|          2|    1|          2|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_d0        |   8|          3|    8|         24|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_we0       |   8|          3|    1|          3|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_address0  |  47|          5|   15|         75|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_ce0       |  24|          5|    1|          5|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_ce1       |   8|          2|    1|          2|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_d0        |   8|          3|    8|         24|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_we0       |   8|          3|    1|          3|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_address0  |  47|          5|   15|         75|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_ce0       |  24|          5|    1|          5|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_ce1       |   8|          2|    1|          2|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_d0        |   8|          3|    8|         24|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_we0       |   8|          3|    1|          3|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_address0    |  47|          5|   15|         75|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_ce0         |  24|          5|    1|          5|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_ce1         |   8|          2|    1|          2|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_d0          |   8|          3|    8|         24|
+    |vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_we0         |   8|          3|    1|          3|
+    +--------------------------------------------------------------------------------+----+-----------+-----+-----------+
+    |Total                                                                           | 460|         90|  128|        508|
+    +--------------------------------------------------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------------------------------------------+---+----+-----+-----------+
+    |                                 Name                                 | FF| LUT| Bits| Const Bits|
+    +----------------------------------------------------------------------+---+----+-----+-----------+
+    |L_1_reg_298                                                           |  4|   0|    4|          0|
+    |L_fu_120                                                              |  4|   0|    4|          0|
+    |ap_CS_fsm                                                             |  7|   0|    7|          0|
+    |grp_vit_encoder_12layer_Pipeline_COPY_P_COPY_D_fu_231_ap_start_reg    |  1|   0|    1|          0|
+    |grp_vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D_fu_124_ap_start_reg    |  1|   0|    1|          0|
+    |grp_vit_encoder_12layer_Pipeline_STORE_P_STORE_D_fu_217_ap_start_reg  |  1|   0|    1|          0|
+    |grp_vit_transformer_layer_fu_138_ap_start_reg                         |  1|   0|    1|          0|
+    +----------------------------------------------------------------------+---+----+-----+-----------+
+    |Total                                                                 | 19|   0|   19|          0|
+    +----------------------------------------------------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------------+-----+-----+------------+---------------------+--------------+
+|       RTL Ports       | Dir | Bits|  Protocol  |    Source Object    |    C Type    |
++-----------------------+-----+-----+------------+---------------------+--------------+
+|ap_clk                 |   in|    1|  ap_ctrl_hs|  vit_encoder_12layer|  return value|
+|ap_rst                 |   in|    1|  ap_ctrl_hs|  vit_encoder_12layer|  return value|
+|ap_start               |   in|    1|  ap_ctrl_hs|  vit_encoder_12layer|  return value|
+|ap_done                |  out|    1|  ap_ctrl_hs|  vit_encoder_12layer|  return value|
+|ap_idle                |  out|    1|  ap_ctrl_hs|  vit_encoder_12layer|  return value|
+|ap_ready               |  out|    1|  ap_ctrl_hs|  vit_encoder_12layer|  return value|
+|x_address0             |  out|   17|   ap_memory|                    x|         array|
+|x_ce0                  |  out|    1|   ap_memory|                    x|         array|
+|x_q0                   |   in|    8|   ap_memory|                    x|         array|
+|W_qkv_all_0_address0   |  out|   20|   ap_memory|          W_qkv_all_0|         array|
+|W_qkv_all_0_ce0        |  out|    1|   ap_memory|          W_qkv_all_0|         array|
+|W_qkv_all_0_q0         |   in|    8|   ap_memory|          W_qkv_all_0|         array|
+|W_qkv_all_1_address0   |  out|   20|   ap_memory|          W_qkv_all_1|         array|
+|W_qkv_all_1_ce0        |  out|    1|   ap_memory|          W_qkv_all_1|         array|
+|W_qkv_all_1_q0         |   in|    8|   ap_memory|          W_qkv_all_1|         array|
+|W_qkv_all_2_address0   |  out|   20|   ap_memory|          W_qkv_all_2|         array|
+|W_qkv_all_2_ce0        |  out|    1|   ap_memory|          W_qkv_all_2|         array|
+|W_qkv_all_2_q0         |   in|    8|   ap_memory|          W_qkv_all_2|         array|
+|W_qkv_all_3_address0   |  out|   20|   ap_memory|          W_qkv_all_3|         array|
+|W_qkv_all_3_ce0        |  out|    1|   ap_memory|          W_qkv_all_3|         array|
+|W_qkv_all_3_q0         |   in|    8|   ap_memory|          W_qkv_all_3|         array|
+|W_qkv_all_4_address0   |  out|   20|   ap_memory|          W_qkv_all_4|         array|
+|W_qkv_all_4_ce0        |  out|    1|   ap_memory|          W_qkv_all_4|         array|
+|W_qkv_all_4_q0         |   in|    8|   ap_memory|          W_qkv_all_4|         array|
+|W_qkv_all_5_address0   |  out|   20|   ap_memory|          W_qkv_all_5|         array|
+|W_qkv_all_5_ce0        |  out|    1|   ap_memory|          W_qkv_all_5|         array|
+|W_qkv_all_5_q0         |   in|    8|   ap_memory|          W_qkv_all_5|         array|
+|W_qkv_all_6_address0   |  out|   20|   ap_memory|          W_qkv_all_6|         array|
+|W_qkv_all_6_ce0        |  out|    1|   ap_memory|          W_qkv_all_6|         array|
+|W_qkv_all_6_q0         |   in|    8|   ap_memory|          W_qkv_all_6|         array|
+|W_qkv_all_7_address0   |  out|   20|   ap_memory|          W_qkv_all_7|         array|
+|W_qkv_all_7_ce0        |  out|    1|   ap_memory|          W_qkv_all_7|         array|
+|W_qkv_all_7_q0         |   in|    8|   ap_memory|          W_qkv_all_7|         array|
+|W_out_all_0_address0   |  out|   18|   ap_memory|          W_out_all_0|         array|
+|W_out_all_0_ce0        |  out|    1|   ap_memory|          W_out_all_0|         array|
+|W_out_all_0_q0         |   in|    8|   ap_memory|          W_out_all_0|         array|
+|W_out_all_1_address0   |  out|   18|   ap_memory|          W_out_all_1|         array|
+|W_out_all_1_ce0        |  out|    1|   ap_memory|          W_out_all_1|         array|
+|W_out_all_1_q0         |   in|    8|   ap_memory|          W_out_all_1|         array|
+|W_out_all_2_address0   |  out|   18|   ap_memory|          W_out_all_2|         array|
+|W_out_all_2_ce0        |  out|    1|   ap_memory|          W_out_all_2|         array|
+|W_out_all_2_q0         |   in|    8|   ap_memory|          W_out_all_2|         array|
+|W_out_all_3_address0   |  out|   18|   ap_memory|          W_out_all_3|         array|
+|W_out_all_3_ce0        |  out|    1|   ap_memory|          W_out_all_3|         array|
+|W_out_all_3_q0         |   in|    8|   ap_memory|          W_out_all_3|         array|
+|W_out_all_4_address0   |  out|   18|   ap_memory|          W_out_all_4|         array|
+|W_out_all_4_ce0        |  out|    1|   ap_memory|          W_out_all_4|         array|
+|W_out_all_4_q0         |   in|    8|   ap_memory|          W_out_all_4|         array|
+|W_out_all_5_address0   |  out|   18|   ap_memory|          W_out_all_5|         array|
+|W_out_all_5_ce0        |  out|    1|   ap_memory|          W_out_all_5|         array|
+|W_out_all_5_q0         |   in|    8|   ap_memory|          W_out_all_5|         array|
+|W_out_all_6_address0   |  out|   18|   ap_memory|          W_out_all_6|         array|
+|W_out_all_6_ce0        |  out|    1|   ap_memory|          W_out_all_6|         array|
+|W_out_all_6_q0         |   in|    8|   ap_memory|          W_out_all_6|         array|
+|W_out_all_7_address0   |  out|   18|   ap_memory|          W_out_all_7|         array|
+|W_out_all_7_ce0        |  out|    1|   ap_memory|          W_out_all_7|         array|
+|W_out_all_7_q0         |   in|    8|   ap_memory|          W_out_all_7|         array|
+|W_ffn1_all_0_address0  |  out|   20|   ap_memory|         W_ffn1_all_0|         array|
+|W_ffn1_all_0_ce0       |  out|    1|   ap_memory|         W_ffn1_all_0|         array|
+|W_ffn1_all_0_q0        |   in|    8|   ap_memory|         W_ffn1_all_0|         array|
+|W_ffn1_all_1_address0  |  out|   20|   ap_memory|         W_ffn1_all_1|         array|
+|W_ffn1_all_1_ce0       |  out|    1|   ap_memory|         W_ffn1_all_1|         array|
+|W_ffn1_all_1_q0        |   in|    8|   ap_memory|         W_ffn1_all_1|         array|
+|W_ffn1_all_2_address0  |  out|   20|   ap_memory|         W_ffn1_all_2|         array|
+|W_ffn1_all_2_ce0       |  out|    1|   ap_memory|         W_ffn1_all_2|         array|
+|W_ffn1_all_2_q0        |   in|    8|   ap_memory|         W_ffn1_all_2|         array|
+|W_ffn1_all_3_address0  |  out|   20|   ap_memory|         W_ffn1_all_3|         array|
+|W_ffn1_all_3_ce0       |  out|    1|   ap_memory|         W_ffn1_all_3|         array|
+|W_ffn1_all_3_q0        |   in|    8|   ap_memory|         W_ffn1_all_3|         array|
+|W_ffn1_all_4_address0  |  out|   20|   ap_memory|         W_ffn1_all_4|         array|
+|W_ffn1_all_4_ce0       |  out|    1|   ap_memory|         W_ffn1_all_4|         array|
+|W_ffn1_all_4_q0        |   in|    8|   ap_memory|         W_ffn1_all_4|         array|
+|W_ffn1_all_5_address0  |  out|   20|   ap_memory|         W_ffn1_all_5|         array|
+|W_ffn1_all_5_ce0       |  out|    1|   ap_memory|         W_ffn1_all_5|         array|
+|W_ffn1_all_5_q0        |   in|    8|   ap_memory|         W_ffn1_all_5|         array|
+|W_ffn1_all_6_address0  |  out|   20|   ap_memory|         W_ffn1_all_6|         array|
+|W_ffn1_all_6_ce0       |  out|    1|   ap_memory|         W_ffn1_all_6|         array|
+|W_ffn1_all_6_q0        |   in|    8|   ap_memory|         W_ffn1_all_6|         array|
+|W_ffn1_all_7_address0  |  out|   20|   ap_memory|         W_ffn1_all_7|         array|
+|W_ffn1_all_7_ce0       |  out|    1|   ap_memory|         W_ffn1_all_7|         array|
+|W_ffn1_all_7_q0        |   in|    8|   ap_memory|         W_ffn1_all_7|         array|
+|W_ffn2_all_0_address0  |  out|   20|   ap_memory|         W_ffn2_all_0|         array|
+|W_ffn2_all_0_ce0       |  out|    1|   ap_memory|         W_ffn2_all_0|         array|
+|W_ffn2_all_0_q0        |   in|    8|   ap_memory|         W_ffn2_all_0|         array|
+|W_ffn2_all_1_address0  |  out|   20|   ap_memory|         W_ffn2_all_1|         array|
+|W_ffn2_all_1_ce0       |  out|    1|   ap_memory|         W_ffn2_all_1|         array|
+|W_ffn2_all_1_q0        |   in|    8|   ap_memory|         W_ffn2_all_1|         array|
+|W_ffn2_all_2_address0  |  out|   20|   ap_memory|         W_ffn2_all_2|         array|
+|W_ffn2_all_2_ce0       |  out|    1|   ap_memory|         W_ffn2_all_2|         array|
+|W_ffn2_all_2_q0        |   in|    8|   ap_memory|         W_ffn2_all_2|         array|
+|W_ffn2_all_3_address0  |  out|   20|   ap_memory|         W_ffn2_all_3|         array|
+|W_ffn2_all_3_ce0       |  out|    1|   ap_memory|         W_ffn2_all_3|         array|
+|W_ffn2_all_3_q0        |   in|    8|   ap_memory|         W_ffn2_all_3|         array|
+|W_ffn2_all_4_address0  |  out|   20|   ap_memory|         W_ffn2_all_4|         array|
+|W_ffn2_all_4_ce0       |  out|    1|   ap_memory|         W_ffn2_all_4|         array|
+|W_ffn2_all_4_q0        |   in|    8|   ap_memory|         W_ffn2_all_4|         array|
+|W_ffn2_all_5_address0  |  out|   20|   ap_memory|         W_ffn2_all_5|         array|
+|W_ffn2_all_5_ce0       |  out|    1|   ap_memory|         W_ffn2_all_5|         array|
+|W_ffn2_all_5_q0        |   in|    8|   ap_memory|         W_ffn2_all_5|         array|
+|W_ffn2_all_6_address0  |  out|   20|   ap_memory|         W_ffn2_all_6|         array|
+|W_ffn2_all_6_ce0       |  out|    1|   ap_memory|         W_ffn2_all_6|         array|
+|W_ffn2_all_6_q0        |   in|    8|   ap_memory|         W_ffn2_all_6|         array|
+|W_ffn2_all_7_address0  |  out|   20|   ap_memory|         W_ffn2_all_7|         array|
+|W_ffn2_all_7_ce0       |  out|    1|   ap_memory|         W_ffn2_all_7|         array|
+|W_ffn2_all_7_q0        |   in|    8|   ap_memory|         W_ffn2_all_7|         array|
+|out_r_address0         |  out|   17|   ap_memory|                out_r|         array|
+|out_r_ce0              |  out|    1|   ap_memory|                out_r|         array|
+|out_r_we0              |  out|    1|   ap_memory|                out_r|         array|
+|out_r_d0               |  out|    8|   ap_memory|                out_r|         array|
++-----------------------+-----+-----+------------+---------------------+--------------+
+

@@ -1,0 +1,500 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2024.1 (64-bit)
+  **** SW Build 5069499 on May 21 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed May 20 10:21:46 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source E:/Applaction/Xilinx/Vitis_HLS/2024.1/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] For user 'jielu' on host 'yizhidianlu' (Windows NT_amd64 version 10.0) on Wed May 20 10:21:47 +0800 2026
+INFO: [HLS 200-10] In directory 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029'
+WARNING: [HLS 200-2053] The vitis_hls executable is deprecated. Consider using vitis-run --mode hls --tcl
+Sourcing Tcl script 'run_hls.tcl'
+INFO: [HLS 200-1510] Running: open_project vit_enc_hls -reset 
+INFO: [HLS 200-10] Creating and opening project 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls'.
+INFO: [HLS 200-1510] Running: set_top vit_encoder_12layer 
+INFO: [HLS 200-1510] Running: add_files vit_encoder_12layer.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding design file 'vit_encoder_12layer.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files vit_transformer_layer.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding design file 'vit_transformer_layer.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb vit_encoder_12layer_tb.cpp -cflags -std=c++14 -I. 
+INFO: [HLS 200-10] Adding test bench file 'vit_encoder_12layer_tb.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution sol1 -flow_target vivado 
+INFO: [HLS 200-10] Creating and opening solution 'C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1'.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xcvc1902-vsva2197-2MP-e-S 
+INFO: [HLS 200-1611] Setting target device to 'xcvc1902-vsva2197-2MP-e-S'
+INFO: [HLS 200-1510] Running: create_clock -period 4.0 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 4ns.
+INFO: [HLS 200-1510] Running: csim_design 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch CLANG as the compiler.
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../vit_encoder_12layer_tb.cpp in debug mode
+   Compiling ../../../../vit_transformer_layer.cpp in debug mode
+   Compiling ../../../../vit_encoder_12layer.cpp in debug mode
+   Generating csim.exe
+running DUT (12-layer encoder)...
+running REF (12 sequential layers)...
+mismatches=0/98304 max_abs_diff=0
+PASS
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-2161] Finished Command csim_design Elapsed time: 00:00:26; Allocated memory: 1.156 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 0.168 seconds; current allocated memory: 243.539 MB.
+INFO: [HLS 200-10] Analyzing design file 'vit_transformer_layer.cpp' ... 
+INFO: [HLS 200-10] Analyzing design file 'vit_encoder_12layer.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 3.217 seconds; current allocated memory: 246.141 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 717 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,106 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 897 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 773 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 771 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 2,165 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 969 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 969 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 969 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 984 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 984 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 969 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,105 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,027 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,063 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 200-1995] There were 1,162 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details: C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/syn/report/csynth_design_size.rpt
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_201_5' is marked as complete unroll implied by the pipeline pragma (vit_transformer_layer.cpp:201:39)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_181_4' is marked as complete unroll implied by the pipeline pragma (vit_transformer_layer.cpp:181:39)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_161_3' is marked as complete unroll implied by the pipeline pragma (vit_transformer_layer.cpp:161:39)
+INFO: [HLS 214-291] Loop 'ATTN_O_INNER' is marked as complete unroll implied by the pipeline pragma (vit_transformer_layer.cpp:139:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_84_2' is marked as complete unroll implied by the pipeline pragma (vit_transformer_layer.cpp:84:38)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_65_1' is marked as complete unroll implied by the pipeline pragma (vit_transformer_layer.cpp:65:38)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_201_5' (vit_transformer_layer.cpp:201:39) in function 'vit_transformer_layer' completely with a factor of 8 (vit_transformer_layer.cpp:29:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_181_4' (vit_transformer_layer.cpp:181:39) in function 'vit_transformer_layer' completely with a factor of 8 (vit_transformer_layer.cpp:29:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_161_3' (vit_transformer_layer.cpp:161:39) in function 'vit_transformer_layer' completely with a factor of 8 (vit_transformer_layer.cpp:29:0)
+INFO: [HLS 214-186] Unrolling loop 'ATTN_O_INIT' (vit_transformer_layer.cpp:132:15) in function 'vit_transformer_layer' completely with a factor of 8 (vit_transformer_layer.cpp:29:0)
+INFO: [HLS 214-186] Unrolling loop 'ATTN_O_INNER' (vit_transformer_layer.cpp:139:35) in function 'vit_transformer_layer' completely with a factor of 8 (vit_transformer_layer.cpp:29:0)
+INFO: [HLS 214-186] Unrolling loop 'ATTN_O_WRITE' (vit_transformer_layer.cpp:144:31) in function 'vit_transformer_layer' completely with a factor of 8 (vit_transformer_layer.cpp:29:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_84_2' (vit_transformer_layer.cpp:84:38) in function 'vit_transformer_layer' completely with a factor of 8 (vit_transformer_layer.cpp:29:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_65_1' (vit_transformer_layer.cpp:65:38) in function 'vit_transformer_layer' completely with a factor of 8 (vit_transformer_layer.cpp:29:0)
+INFO: [HLS 214-178] Inlining function 'sat16(int)' into 'vit_transformer_layer(signed char const (*) [384], signed char const (*) [1152], signed char const (*) [384], signed char const (*) [1536], signed char const (*) [384], signed char (*) [384])' (vit_transformer_layer.cpp:29:0)
+INFO: [HLS 214-178] Inlining function 'sat8(int)' into 'vit_transformer_layer(signed char const (*) [384], signed char const (*) [1152], signed char const (*) [384], signed char const (*) [1536], signed char const (*) [384], signed char (*) [384])' (vit_transformer_layer.cpp:29:0)
+INFO: [HLS 214-248] Applying array_partition to 'qkv': Cyclic partitioning with factor 8 on dimension 2. (vit_transformer_layer.cpp:36:10)
+INFO: [HLS 214-248] Applying array_partition to 'attn_o': Cyclic partitioning with factor 8 on dimension 2. (vit_transformer_layer.cpp:44:13)
+INFO: [HLS 214-248] Applying array_partition to 'mha_out': Cyclic partitioning with factor 8 on dimension 2. (vit_transformer_layer.cpp:48:9)
+INFO: [HLS 214-248] Applying array_partition to 'ffn_h': Cyclic partitioning with factor 8 on dimension 2. (vit_transformer_layer.cpp:53:9)
+INFO: [HLS 214-248] Applying array_partition to 'W_qkv_all': Cyclic partitioning with factor 8 on dimension 2. (vit_encoder_12layer.cpp:31:0)
+INFO: [HLS 214-248] Applying array_partition to 'W_out_all': Cyclic partitioning with factor 8 on dimension 2. (vit_encoder_12layer.cpp:31:0)
+INFO: [HLS 214-248] Applying array_partition to 'W_ffn1_all': Cyclic partitioning with factor 8 on dimension 2. (vit_encoder_12layer.cpp:31:0)
+INFO: [HLS 214-248] Applying array_partition to 'W_ffn2_all': Cyclic partitioning with factor 8 on dimension 2. (vit_encoder_12layer.cpp:31:0)
+INFO: [HLS 214-437] Automatically disabling loop flattening for loop 'LAYER_LOOP'. (vit_encoder_12layer.cpp:48:17)
+INFO: [HLS 214-270] Inferring pragma 'array_partition type=cyclic factor=4 dim=2' for array 'vit_encoder_12layer(signed char const (*) [384], signed char const (*) [384][1152], signed char const (*) [384][384], signed char const (*) [384][1536], signed char const (*) [1536][384], signed char (*) [384])::buf_in' due to pipeline pragma (vit_transformer_layer.cpp:63:9)
+INFO: [HLS 214-248] Applying array_partition to '_ZZ19vit_encoder_12layerPA384_KaPA384_A1152_S_PA384_S0_PA384_A1536_S_PA1536_S0_PA384_aE6buf_in': Cyclic partitioning with factor 4 on dimension 2. (vit_encoder_12layer.cpp:36:0)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 7.775 seconds; current allocated memory: 248.434 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.021 seconds; current allocated memory: 248.434 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.07 seconds; current allocated memory: 255.035 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.077 seconds; current allocated memory: 258.379 MB.
+INFO: [XFORM 203-11] Balancing expressions in function 'vit_transformer_layer' (vit_transformer_layer.cpp:19:21)...40 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.296 seconds; current allocated memory: 282.336 MB.
+INFO: [HLS 200-2061] Successfully converted nested loops 'SCORES_J'(vit_transformer_layer.cpp:79:23) and 'SCORES_K'(vit_transformer_layer.cpp:81:27) in function 'vit_transformer_layer' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'SCORES_I'(vit_transformer_layer.cpp:78:19) and 'SCORES_J'(vit_transformer_layer.cpp:79:23) in function 'vit_transformer_layer' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'ATTN_O_TILE'(vit_transformer_layer.cpp:129:26) and 'ATTN_O_J'(vit_transformer_layer.cpp:136:27) in function 'vit_transformer_layer' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'ATTN_O_I'(vit_transformer_layer.cpp:127:19) and 'ATTN_O_TILE'(vit_transformer_layer.cpp:129:26) in function 'vit_transformer_layer' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'FFN2_J'(vit_transformer_layer.cpp:196:21) and 'FFN2_K'(vit_transformer_layer.cpp:198:25) in function 'vit_transformer_layer' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'FFN2_I'(vit_transformer_layer.cpp:195:10) and 'FFN2_J'(vit_transformer_layer.cpp:196:21) in function 'vit_transformer_layer' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'LOAD_P'(vit_encoder_12layer.cpp:40:13) and 'LOAD_D'(vit_encoder_12layer.cpp:41:17) in function 'vit_encoder_12layer' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'COPY_P'(vit_encoder_12layer.cpp:58:17) and 'COPY_D'(vit_encoder_12layer.cpp:59:21) in function 'vit_encoder_12layer' into perfectly nested loops.
+INFO: [HLS 200-2061] Successfully converted nested loops 'STORE_P'(vit_encoder_12layer.cpp:67:14) and 'STORE_D'(vit_encoder_12layer.cpp:68:18) in function 'vit_encoder_12layer' into perfectly nested loops.
+WARNING: [HLS 200-960] Cannot flatten loop 'QKV_J' (vit_transformer_layer.cpp:60:20) in function 'vit_transformer_layer' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+Resolution: For help on HLS 200-960 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-960.html
+INFO: [XFORM 203-541] Flattening a loop nest 'SCORES_J' (vit_transformer_layer.cpp:79:23) in function 'vit_transformer_layer'.
+INFO: [XFORM 203-541] Flattening a loop nest 'SCORES_I' (vit_transformer_layer.cpp:78:19) in function 'vit_transformer_layer'.
+INFO: [XFORM 203-541] Flattening a loop nest 'ATTN_O_TILE' (vit_transformer_layer.cpp:129:26) in function 'vit_transformer_layer'.
+INFO: [XFORM 203-541] Flattening a loop nest 'ATTN_O_I' (vit_transformer_layer.cpp:127:19) in function 'vit_transformer_layer'.
+WARNING: [HLS 200-960] Cannot flatten loop 'OUT_J' (vit_transformer_layer.cpp:156:20) in function 'vit_transformer_layer' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+Resolution: For help on HLS 200-960 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-960.html
+WARNING: [HLS 200-960] Cannot flatten loop 'FFN1_J' (vit_transformer_layer.cpp:176:21) in function 'vit_transformer_layer' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+Resolution: For help on HLS 200-960 see docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.1%20English&url=ug1448-hls-guidance&resourceid=200-960.html
+INFO: [XFORM 203-541] Flattening a loop nest 'FFN2_J' (vit_transformer_layer.cpp:196:21) in function 'vit_transformer_layer'.
+INFO: [XFORM 203-541] Flattening a loop nest 'FFN2_I' (vit_transformer_layer.cpp:195:10) in function 'vit_transformer_layer'.
+INFO: [XFORM 203-541] Flattening a loop nest 'LOAD_P' (vit_encoder_12layer.cpp:40:13) in function 'vit_encoder_12layer'.
+INFO: [XFORM 203-541] Flattening a loop nest 'COPY_P' (vit_encoder_12layer.cpp:58:17) in function 'vit_encoder_12layer'.
+INFO: [XFORM 203-541] Flattening a loop nest 'STORE_P' (vit_encoder_12layer.cpp:67:14) in function 'vit_encoder_12layer'.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.373 seconds; current allocated memory: 394.043 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'vit_encoder_12layer' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'LOAD_P_LOAD_D'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'LOAD_P_LOAD_D'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.755 seconds; current allocated memory: 399.258 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.121 seconds; current allocated memory: 400.527 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_transformer_layer_Pipeline_QKV_K' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln69_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln69_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln69_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln69) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'QKV_K'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 7, loop 'QKV_K'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 1.749 seconds; current allocated memory: 401.531 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.339 seconds; current allocated memory: 401.984 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_transformer_layer_Pipeline_SCORES_I_SCORES_J_SCORES_K' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln89_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln89_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln89_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln89) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'SCORES_I_SCORES_J_SCORES_K'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 8, loop 'SCORES_I_SCORES_J_SCORES_K'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 7 seconds. CPU system time: 0 seconds. Elapsed time: 7.284 seconds; current allocated memory: 403.742 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 1.602 seconds; current allocated memory: 404.066 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_transformer_layer_Pipeline_SM_MAX' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'SM_MAX'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'SM_MAX'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 5 seconds. CPU system time: 1 seconds. Elapsed time: 5.024 seconds; current allocated memory: 404.145 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.106 seconds; current allocated memory: 404.160 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_transformer_layer_Pipeline_SM_SHIFT' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'SM_SHIFT'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'SM_SHIFT'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.6 seconds; current allocated memory: 404.496 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.121 seconds; current allocated memory: 404.629 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_transformer_layer_Pipeline_SM_NORM' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'SM_NORM'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 20, loop 'SM_NORM'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.603 seconds; current allocated memory: 404.863 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.179 seconds; current allocated memory: 404.871 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_transformer_layer_Pipeline_ATTN_O_I_ATTN_O_TILE_ATTN_O_J' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln141_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln141_6) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln141_5) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln141_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln141_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln141_2) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln141_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln141) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'ATTN_O_I_ATTN_O_TILE_ATTN_O_J'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 7, loop 'ATTN_O_I_ATTN_O_TILE_ATTN_O_J'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 3 seconds. CPU system time: 0 seconds. Elapsed time: 3.454 seconds; current allocated memory: 408.094 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 1.126 seconds; current allocated memory: 408.297 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_transformer_layer_Pipeline_OUT_K' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln165_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln165_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln165_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln165) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'OUT_K'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 7, loop 'OUT_K'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 3 seconds. CPU system time: 0 seconds. Elapsed time: 3.811 seconds; current allocated memory: 408.871 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 1.595 seconds; current allocated memory: 409.098 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_transformer_layer_Pipeline_FFN1_K' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln185_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln185_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln185_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln185) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'FFN1_K'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 7, loop 'FFN1_K'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 5 seconds. CPU system time: 0 seconds. Elapsed time: 5.255 seconds; current allocated memory: 409.812 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.602 seconds; current allocated memory: 410.402 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_transformer_layer_Pipeline_FFN2_I_FFN2_J_FFN2_K' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln205_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln205_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln205_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln205) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'FFN2_I_FFN2_J_FFN2_K'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 8, loop 'FFN2_I_FFN2_J_FFN2_K'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 6 seconds. CPU system time: 0 seconds. Elapsed time: 5.85 seconds; current allocated memory: 412.020 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 1.62 seconds; current allocated memory: 412.367 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_transformer_layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 7 seconds. CPU system time: 0 seconds. Elapsed time: 7.843 seconds; current allocated memory: 415.090 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 9 seconds. CPU system time: 0 seconds. Elapsed time: 9.158 seconds; current allocated memory: 415.535 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_encoder_12layer_Pipeline_COPY_P_COPY_D' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'COPY_P_COPY_D'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'COPY_P_COPY_D'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 28 seconds. CPU system time: 1 seconds. Elapsed time: 28.481 seconds; current allocated memory: 416.031 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.12 seconds; current allocated memory: 416.078 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_encoder_12layer_Pipeline_STORE_P_STORE_D' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'STORE_P_STORE_D'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 4, loop 'STORE_P_STORE_D'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 1.402 seconds; current allocated memory: 416.480 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.123 seconds; current allocated memory: 416.500 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'vit_encoder_12layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.277 seconds; current allocated memory: 416.660 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 9 seconds. CPU system time: 0 seconds. Elapsed time: 9.278 seconds; current allocated memory: 416.953 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D' pipeline 'LOAD_P_LOAD_D' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_encoder_12layer_Pipeline_LOAD_P_LOAD_D'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 27 seconds. CPU system time: 0 seconds. Elapsed time: 27.444 seconds; current allocated memory: 418.605 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_transformer_layer_Pipeline_QKV_K' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_transformer_layer_Pipeline_QKV_K' pipeline 'QKV_K' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_transformer_layer_Pipeline_QKV_K'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 1 seconds. Elapsed time: 2.138 seconds; current allocated memory: 422.758 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_transformer_layer_Pipeline_SCORES_I_SCORES_J_SCORES_K' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_transformer_layer_Pipeline_SCORES_I_SCORES_J_SCORES_K' pipeline 'SCORES_I_SCORES_J_SCORES_K' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_16s_16s_32s_32_4_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_16s_16s_32_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_transformer_layer_Pipeline_SCORES_I_SCORES_J_SCORES_K'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 5 seconds. CPU system time: 0 seconds. Elapsed time: 5.62 seconds; current allocated memory: 425.676 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_transformer_layer_Pipeline_SM_MAX' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_transformer_layer_Pipeline_SM_MAX' pipeline 'SM_MAX' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_transformer_layer_Pipeline_SM_MAX'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 6 seconds. CPU system time: 1 seconds. Elapsed time: 7.423 seconds; current allocated memory: 428.809 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_transformer_layer_Pipeline_SM_SHIFT' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_transformer_layer_Pipeline_SM_SHIFT' pipeline 'SM_SHIFT' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_transformer_layer_Pipeline_SM_SHIFT'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.276 seconds; current allocated memory: 429.816 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_transformer_layer_Pipeline_SM_NORM' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_transformer_layer_Pipeline_SM_NORM' pipeline 'SM_NORM' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'sdiv_31ns_24s_16_19_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_transformer_layer_Pipeline_SM_NORM'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.344 seconds; current allocated memory: 431.121 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_transformer_layer_Pipeline_ATTN_O_I_ATTN_O_TILE_ATTN_O_J' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_transformer_layer_Pipeline_ATTN_O_I_ATTN_O_TILE_ATTN_O_J' pipeline 'ATTN_O_I_ATTN_O_TILE_ATTN_O_J' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_16s_16s_32ns_32_4_1': 8 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_transformer_layer_Pipeline_ATTN_O_I_ATTN_O_TILE_ATTN_O_J'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 1 seconds. Elapsed time: 1.744 seconds; current allocated memory: 433.891 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_transformer_layer_Pipeline_OUT_K' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_transformer_layer_Pipeline_OUT_K' pipeline 'OUT_K' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_16s_8s_24s_25_4_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_16s_8s_24_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_transformer_layer_Pipeline_OUT_K'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 6 seconds. CPU system time: 1 seconds. Elapsed time: 7.39 seconds; current allocated memory: 439.152 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_transformer_layer_Pipeline_FFN1_K' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_transformer_layer_Pipeline_FFN1_K' pipeline 'FFN1_K' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_8s_16s_17_4_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_8s_16_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_transformer_layer_Pipeline_FFN1_K'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 6 seconds. CPU system time: 0 seconds. Elapsed time: 6.346 seconds; current allocated memory: 442.012 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_transformer_layer_Pipeline_FFN2_I_FFN2_J_FFN2_K' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_transformer_layer_Pipeline_FFN2_I_FFN2_J_FFN2_K' pipeline 'FFN2_I_FFN2_J_FFN2_K' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_8s_7ns_15s_16_4_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8s_7ns_15_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_transformer_layer_Pipeline_FFN2_I_FFN2_J_FFN2_K'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 5 seconds. CPU system time: 1 seconds. Elapsed time: 6.351 seconds; current allocated memory: 445.750 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_transformer_layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_transformer_layer'.
+INFO: [RTMG 210-278] Implementing memory 'vit_encoder_12layer_vit_transformer_layer_qkv_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'vit_encoder_12layer_vit_transformer_layer_scores_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'vit_encoder_12layer_vit_transformer_layer_attn_o_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'vit_encoder_12layer_vit_transformer_layer_mha_out_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'vit_encoder_12layer_vit_transformer_layer_ffn_h_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'vit_encoder_12layer_vit_transformer_layer_shifted_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 7 seconds. CPU system time: 1 seconds. Elapsed time: 8.059 seconds; current allocated memory: 453.238 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_encoder_12layer_Pipeline_COPY_P_COPY_D' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_encoder_12layer_Pipeline_COPY_P_COPY_D' pipeline 'COPY_P_COPY_D' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_encoder_12layer_Pipeline_COPY_P_COPY_D'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 56 seconds. CPU system time: 2 seconds. Elapsed time: 58.307 seconds; current allocated memory: 460.012 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_encoder_12layer_Pipeline_STORE_P_STORE_D' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'vit_encoder_12layer_Pipeline_STORE_P_STORE_D' pipeline 'STORE_P_STORE_D' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_9_2_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_encoder_12layer_Pipeline_STORE_P_STORE_D'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 2.168 seconds; current allocated memory: 461.113 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'vit_encoder_12layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/x' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_qkv_all_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_qkv_all_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_qkv_all_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_qkv_all_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_qkv_all_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_qkv_all_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_qkv_all_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_qkv_all_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_out_all_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_out_all_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_out_all_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_out_all_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_out_all_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_out_all_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_out_all_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_out_all_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn1_all_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn1_all_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn1_all_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn1_all_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn1_all_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn1_all_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn1_all_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn1_all_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn2_all_0' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn2_all_1' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn2_all_2' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn2_all_3' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn2_all_4' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn2_all_5' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn2_all_6' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/W_ffn2_all_7' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'vit_encoder_12layer/out_r' to 'ap_memory'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'vit_encoder_12layer' to 'ap_ctrl_hs'.
+INFO: [SYN 201-210] Renamed object name 'vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTO_1R1W' to 'vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_RAM_AUTO_1R1W' to 'vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_RAM_AUTcud' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_RAM_AUTO_1R1W' to 'vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_RAM_AUTdEe' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_RAM_AUTO_1R1W' to 'vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_RAM_AUTO_eOg' due to the length limit 80
+INFO: [RTGEN 206-100] Finished creating RTL model for 'vit_encoder_12layer'.
+INFO: [RTMG 210-278] Implementing memory 'vit_encoder_12layer_vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_RAM_AUTbkb' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'vit_encoder_12layer_buf_out_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 1.991 seconds; current allocated memory: 463.449 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 60 seconds. CPU system time: 2 seconds. Elapsed time: 61.975 seconds; current allocated memory: 468.195 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 2.554 seconds; current allocated memory: 480.234 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for vit_encoder_12layer.
+INFO: [VLOG 209-307] Generating Verilog RTL for vit_encoder_12layer.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 344.59 MHz
+INFO: [HLS 200-2161] Finished Command csynth_design Elapsed time: 00:05:15; Allocated memory: 237.207 MB.
+INFO: [HLS 200-112] Total CPU user time: 291 seconds. Total CPU system time: 15 seconds. Total elapsed time: 345.025 seconds; peak allocated memory: 480.477 MB.

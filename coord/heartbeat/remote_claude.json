@@ -1,31 +1,19 @@
-﻿{
-    "worker":  "remote_claude_win",
-    "platform":  "windows",
-    "ts":  "2026-05-20T02:19:21Z",
-    "pid":  0,
-    "uptime_sec":  0,
-    "vitis":  "OK",
-    "vivado":  "OK",
-    "claude_cli":  "OK",
-    "gpu":  "NVIDIA GeForce RTX 3060 Laptop GPU",
-    "current_task":  "T0028",
-    "current_task_phase":  "vit_transformer_layer v2 csynth in BIND phase (~864 MB allocated, scheduling done in 111s). v1 had a compile error (CLANG rejected #pragma on same line as `{`); v2 fix in flight.",
-    "current_task_iteration":  2,
-    "current_task_bg_id":  "bam4edhw0",
-    "tasks_completed_session":  13,
-    "last_completed_task":  "T0030",
-    "last_completed_summary":  "T0030 multi_rate_scheduler_v1 CLEAN PASS @ 250MHz: WNS=+0.304ns WHS=+0.110ns, DSP 6/LUT 434/BRAM 26.",
-    "outstanding_ack_needed":  [
-                                   "T0026:dsp_above_256_AND_latency_above_10000",
-                                   "T0027:latency_above_50000_unreachable"
-                               ],
-    "recently_acked":  [
-                           "T0024:scope_change_latency_5000_to_35000_admits_v2",
-                           "T0025:proceed_v0_accepted"
-                       ],
-    "protocol_version":  "1.0",
-    "session_kind":  "claude_code_interactive",
-    "stale_heartbeat_self_diagnosis":  "Previous heartbeat (15:43:30Z) was ~50 min stale due to T0028 long csynth wall + my own loop pacing miss. Per protocol 搂9 this exceeds the 5 min warning / 10 min presumed-dead threshold. Refreshing now to confirm worker IS alive 鈥?T0028 still in progress, no failure.",
-    "heartbeat_tick_count":  39,
-    "last_heartbeat_source":  "heartbeat_loop.ps1 (auto)"
+{
+  "worker": "remote_claude_win",
+  "platform": "windows",
+  "ts": "2026-05-20T02:28:00Z",
+  "pid": 0,
+  "uptime_sec": 0,
+  "vitis": "OK",
+  "vivado": "OK",
+  "claude_cli": "OK",
+  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+  "current_task": "",
+  "tasks_completed_session": 16,
+  "last_completed_task": "T0029",
+  "last_completed_summary": "T0029 vit_encoder_12layer CLEAN PASS: 12 layers time-multiplexed on ONE instance, DSP 36 (= single layer), LUT 9398, BRAM 1, URAM 79, Fmax 344MHz, csim bit-exact. T0031 now unblocked.",
+  "outstanding_ack_needed": ["T0029:latency_above_900000 (PL-only ablation, expected)"],
+  "protocol_version": "1.0",
+  "session_kind": "claude_code_interactive",
+  "heartbeat_note": "ASCII-only content to avoid the heartbeat_loop.ps1 ConvertTo-Json roundtrip mangling non-ASCII chars. Auto heartbeat loop PID 27892 keeps ts fresh every 15 min."
 }

@@ -1,0 +1,105 @@
+=== hls_csynth vit_encoder_12layer — CLEAN PASS (time-multiplexed) ===
+host:        YIZHIDIANLU
+started:     2026-05-20T02:21:44Z
+finished:    2026-05-20T02:27:31Z
+wall_clock:  ~6 min   (deadline 120 min → 5% used, one-shot pass)
+
+--- target ---
+part:           xcvc1902-vsva2197-2MP-e-S
+clock_period:   4.0 ns (250 MHz)
+top:            vit_encoder_12layer
+architecture:   12 transformer layers, TIME-MULTIPLEXED onto ONE physical
+                vit_transformer_layer instance (per orch directive).
+
+--- design ---
+- vit_transformer_layer (the v4 module from T0028) compiled with
+  `#pragma HLS INLINE off` → ONE physical hardware instance.
+- LAYER_LOOP iterates 12× (sequential, not unrolled). Each iteration:
+    1. invoke the shared vit_transformer_layer with layer-L weights
+    2. copy its output buffer back to the input buffer for layer L+1
+- Weights for all 12 layers passed as external ap_memory ports (~20 MB total)
+  — NOT stored in on-chip BRAM. The testbench supplies them.
+- Ping-pong via buf_in / buf_out (256×384 INT8 each).
+
+--- csim ---
+1 case, LCG-seeded x + 12 full weight sets.
+mismatches  = 0 / 98,304
+max_abs_diff = 0
+PASS — bit-exact: DUT 12-layer encoder == reference (12 sequential layer_ref calls).
+
+--- csynth ---
+"All loop constraints were satisfied"  ✓
+Estimated Fmax: 344.59 MHz  ✓
+All internal loops II=1 (QKV_K, SCORES_K, ATTN_O, OUT_K, FFN1_K, FFN2_K,
+softmax, LOAD/COPY/STORE).
+Note: QKV_K achieved II=1 here (it was II=4 in T0028's standalone v4 synth —
+as a shared sub-function HLS scheduled it better).
+
+Total latency: 862,636,461 cycles = 3.451 sec @ 250 MHz
+  LAYER_LOOP: 12 iterations × ~71,869,987 cycles
+    └ one vit_transformer_layer call: 71,771,676 cycles
+  LOAD / STORE / per-layer COPY: 98,307 cycles each
+Per-layer latency here (71.8M) is LOWER than T0028 standalone v4 (113.7M)
+because QKV_K reached II=1 instead of II=4.
+
+--- UTILIZATION (Versal xcvc1902) — TIME-MULTIPLEX CONFIRMED ---
+                Used   Available    Util%      Cap          Status
+DSP58            36      1,968      1.83%      <480         PASS
+LUT           9,398    899,840     1.04%      (no cap)      ok
+FF            4,255  1,799,680     0.24%
+BRAM_18K          1      1,934     0.05%      <256          PASS
+URAM             79        463    17.06%      (≤463 phys)   PASS
+
+*** DSP = 36 — IDENTICAL to a single vit_transformer_layer (T0028 v4 = 36). ***
+This confirms the time-multiplex worked: 12 layers reuse ONE physical instance,
+so resource cost ≈ one layer + thin control. Inlining 12 copies would have been
+432 DSP / 864 URAM (URAM over the 463 limit). The #pragma HLS INLINE off on
+vit_transformer_layer is what made this work.
+
+--- ACCEPTANCE CRITERIA ---
+  status == DONE:               PASS
+  result.csim_pass == true:     PASS
+  result.csynth_pass == true:   PASS
+  result.dsp_used < 480:        PASS  (36)
+  result.bram_used < 256:       PASS  (1)
+
+→ acceptance_criteria_passed = TRUE  (all 5 hard criteria pass)
+
+--- human_ack_required_on CHECK ---
+  latency_above_900000:  *** TRIGGERED ***  (862,636,461 >> 900,000)
+  bram_above_192:        NOT triggered (1)
+
+→ human_ack_needed = TRUE  (latency trigger fired)
+
+NOTE on latency: 862M cycles = 3.45 s for the full 12-layer encoder. The
+orch's spec estimate ("12 × ~100K = 1.2M cycles") was ~700× optimistic —
+real per-layer compute is ~72M cycles, not 100K. HOWEVER, the orch's T0028
+ACK (T0028_ACK_retry_v3) already established the governing policy:
+  "PL-only ViT is the transitional/ablation path ... A slow PL-only latency
+   is an ACCEPTABLE and EXPECTED ablation data point — it is exactly the
+   evidence motivating the AIE encoder."
+So this latency is the intended ablation evidence. Flagging human_ack_needed
+=true for honesty (the trigger did fire), but recommend orch simply ACK-proceed
+or scope_change latency_above_900000 → latency_above_1000000000.
+
+--- numbers for paper §V (PL-only DinoSigLIP-S encoder ablation row) ---
+Module                DSP  BRAM  URAM  LUT    FF     Fmax(MHz)  Latency
+vit_encoder_12layer    36    1    79   9398   4255   344        862.6M cyc
+  (12 layers, time-multiplexed)                                 (3.451 s)
+
+This is the PL-only ablation baseline. The headline AIE-mapped encoder (future
+task) is expected to be ~100-1000× faster — this slow PL number quantifies
+exactly why AIE mapping matters (paper §V.G ablation).
+
+--- T0031 readiness ---
+T0031 (mr_vla_full_top) dependencies: T0024 ✓, T0025 ✓, T0026 ✓, T0027 ✓,
+T0029 ✓ (this), T0030 ✓. ALL SIX DEPENDENCIES NOW SATISFIED. T0031 unblocked.
+
+--- artefacts ---
+  vit_encoder_12layer.{cpp,hpp}    (12-layer time-multiplexed wrapper)
+  vit_transformer_layer.{cpp,hpp}  (the shared layer, INLINE off — v4 from T0028)
+  vit_encoder_12layer_tb.cpp       (testbench, bit-exact 12-layer reference)
+  run_hls.tcl
+  hls.log
+  vit_encoder_12layer_csynth.rpt
+  csynth.rpt
