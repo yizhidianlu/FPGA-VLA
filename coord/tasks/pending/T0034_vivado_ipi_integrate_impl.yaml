@@ -1,0 +1,75 @@
+task_id: T0034
+created_by: orchestrator
+created_at: 2026-05-20T09:05:00Z
+type: vivado_ipi
+priority: P1
+supersedes: T0032
+depends_on: [T0024, T0025, T0026, T0029, T0030]
+deadline_minutes: 480
+params:
+  module_name: mr_vla_full_top
+  description: |
+    **The integrated bitstream — IP-Integrator block design + post-route impl.**
+    T0032 already SUCCEEDED at the hard part: export_design x4 produced ready
+    IP-XACT packages for xmod_attn_v1 / gvsa_matmul / action_diff_head /
+    vit_encoder_12layer, each bundling its divider LogiCORE. What failed was
+    read_checkpoint -cell DCP linking. T0034 instead builds a real Vivado
+    IP-Integrator block design from those ready packages and carries it
+    through place-and-route to a post-route netlist.
+
+  flow:
+    step_0_sanity: |
+      Vivado install sanity-check first (the T0031/T0032 runs hit a
+      lib_core.tcl helper flake and a read_checkpoint -cell failure on this
+      host). Run `vivado -version` and a 1-minute trivial synth smoke; abort
+      with a clear error if the install is unhealthy.
+    step_1_ip_repo: |
+      set_property ip_repo_paths { <4 T0032 IP-XACT package dirs> +
+      a packaged multi_rate_scheduler (ipx::package_project on the T0030 SV) }
+      [current_project]; update_ip_catalog.
+    step_2_block_design: |
+      create_bd_design mr_vla_bd; add clk_wiz (250 MHz), proc_sys_reset, the
+      5 IPs, AXIS interconnect / data-width converters for the cross-rate
+      FIFO crossings. Connect per the T0031 hierarchy
+      (vit_encoder -> xmod_attn -> action_diff_head; gvsa_matmul feeds the
+      language KV path; multi_rate_scheduler drives the 3 rate enables).
+      Expose an AXI-Lite control port (PS bridge may be a stub slave).
+      Generate the HDL wrapper.
+    step_3_synth: |
+      launch_runs synth_1 -jobs 1; wait_on_run synth_1;
+      open_run synth_1; report_utilization; report_timing_summary.
+    step_4_impl: |
+      launch_runs impl_1 -to_step route_design -jobs 1; wait_on_run impl_1;
+      open_run impl_1; report_utilization; report_timing_summary; report_power.
+      THIS is the deliverable that upgrades Table V from [HW-SYNTH] to a
+      post-route number and gives a real integrated WNS.
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+acceptance_criteria:
+  - status: "== DONE"
+  - result.synth_ok: true
+  - result.impl_ok: true
+  - result.timing_met: true
+  - result.wns_ns: ">= 0"
+  - result.lut_pct: "< 80"
+  - result.dsp_pct: "< 85"
+  - result.bram_pct: "< 80"
+  - result.uram_pct: "< 85"
+human_ack_required_on:
+  - impl_skipped_synth_only
+  - wns_below_0_2
+  - vivado_crash_again
+  - bram_pct_above_70
+notes: |
+  Camera-ready headline. Post-route report = the authoritative integrated
+  MR-VLA resource + timing + power number. Sanity baseline from the T0032
+  real-synth sum: ~169 DSP / 76k LUT / 236.5 BRAM tiles / 35 URAM, all
+  < 25% VCK190 — a synth/impl failure would indicate a flow bug, not capacity.
+
+  If Vivado crashes again despite the IP-Integrator flow: fall back to
+  bottom-up DCP linking (each IP synth_design OOC -> .dcp, then a
+  black-boxed top with read_checkpoint), and report which path produced the
+  numbers. Set human_ack(vivado_crash_again) either way.
+
+  If impl (place-and-route) cannot complete on the 16 GB host, synth-only
+  numbers are acceptable for the current draft; flag impl_skipped_synth_only.

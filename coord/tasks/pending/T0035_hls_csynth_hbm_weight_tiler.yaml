@@ -1,0 +1,48 @@
+task_id: T0035
+created_by: orchestrator
+created_at: 2026-05-20T09:10:00Z
+type: hls_csynth
+priority: P2
+depends_on: [T0025]
+deadline_minutes: 150
+params:
+  module_name: hbm_weight_tiler
+  description: |
+    **HBM weight-tiling controller for the language path.** The paper §III.E
+    (Memory hierarchy) describes the distilled language backbone streaming its
+    weights from HBM in bursts coordinated to the 1 Hz language clock, so HBM
+    traffic is bursty and the AXI bus is free for vision/action streams the
+    rest of the time. T0025 (gvsa_matmul) is the compute kernel; this task
+    adds the missing burst-tiling controller as a verified IP so the memory
+    hierarchy claim is backed, not just described.
+
+    Function: a DMA-style controller that, on a language-clock tick, issues
+    burst reads of the next weight tile from an HBM AXI4 port into an on-chip
+    double-buffer feeding the gvsa_matmul kernel, then idles until the next
+    tick. Models: AXI4 master burst read, ping-pong tile buffer, language-rate
+    gated FSM.
+
+    Workload reference: distilled TinyLlama-1.1B language backbone, INT8
+    weights, tiled so one tile = one gvsa_matmul invocation's operand set.
+
+    Pragmas:
+      - #pragma HLS INTERFACE m_axi for the HBM port (max_read_burst_length)
+      - #pragma HLS DATAFLOW for read / double-buffer / feed
+      - ping-pong via #pragma HLS ARRAY_PARTITION on the 2-deep tile buffer
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+acceptance_criteria:
+  - status: "== DONE"
+  - result.csim_pass: true
+  - result.csynth_pass: true
+  - result.fmax_estimated_mhz: ">= 250"
+  - result.dsp_used: "< 64"
+  - result.lut_used: "< 30000"
+human_ack_required_on:
+  - latency_above_200000
+  - bram_above_cap
+notes: |
+  P2 — completes the memory-hierarchy story; not blocking for the headline
+  result. csim should verify burst correctness against a C++ reference
+  (tile-by-tile data match). The HBM-channel-count claim in Table V (4 of 32
+  channels) is informed by this controller's m_axi port count.
