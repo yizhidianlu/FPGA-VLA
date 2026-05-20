@@ -1,0 +1,79 @@
+=== T0035 hls_csynth hbm_weight_tiler — HBM weight-tiling DMA controller ===
+host:        YIZHIDIANLU
+claimed_at:  2026-05-20T09:36:00Z
+finished:    2026-05-20T09:39:42Z
+wall_clock:  ~1 min   (one-shot pass)
+
+--- target ---
+part:           xcvc1902-vsva2197-2MP-e-S
+clock_period:   4.0 ns (250 MHz)
+top:            hbm_weight_tiler
+function:       burst-read INT8 weight tiles from an HBM AXI4 port into an
+                on-chip ping-pong double-buffer, feed them to the gvsa_matmul
+                language path. TILE_ELEMS=65536 (one gvsa operand set),
+                N_TILES=16 (one language-step working set = 1 MB).
+
+--- design ---
+m_axi HBM read port (max_read_burst_length=256, num_read_outstanding=8).
+Per tile: read_tile (burst RD into a stream) || feed_tile (drain to output),
+inside a #pragma HLS DATAFLOW region so tile t+1's read overlaps tile t's
+feed — the hls::stream IS the ping-pong double-buffer.
+In the full system the TILE_LOOP would be gated by the 1 Hz language clock
+enable (one working-set burst per language step); that gating is the caller's
+concern — this IP executes the burst+feed when invoked.
+
+--- csim ---
+mismatches = 0 / 1,048,576   (16 tiles x 65536 bytes, every byte checked)
+PASS — controller delivers every HBM tile byte-exactly.
+
+--- csynth ---
+"All loop constraints were satisfied"
+RD loop: II=1   FD loop: II=1
+Estimated Fmax: 342.47 MHz  ✓ (>= 250 MHz target)
+Total latency: 1,048,813 cycles = 4.195 ms @ 250 MHz
+  (TILE_LOOP 16 iters x ~65560 cycles; DATAFLOW overlaps read/feed)
+
+--- utilization (Versal xcvc1902) ---
+                Used    Available   Util%
+DSP58             0       1,968     0%
+LUT           6,242     899,840    <1%
+FF            5,325   1,799,680    <1%
+BRAM_18K          7       1,934    <1%
+URAM              0         463     0%
+
+--- ACCEPTANCE CRITERIA ---
+  status == DONE:                       PASS
+  result.csim_pass == true:             PASS  (0 / 1,048,576 mismatches)
+  result.csynth_pass == true:           PASS
+  result.fmax_estimated_mhz >= 250:     PASS  (342.47 MHz)
+  result.dsp_used < 64:                 PASS  (0 — pure data movement)
+  result.lut_used < 30000:              PASS  (6,242)
+
+→ acceptance_criteria_passed = TRUE (all 6 criteria pass)
+
+--- human_ack_required_on CHECK ---
+  latency_above_200000:  *** TRIGGERED ***  (1,048,813 >> 200,000)
+  bram_above_cap:        NOT triggered (7 BRAM — trivial; no cap exceeded)
+
+NOTE on latency: 1.05M cycles = 4.195 ms to move the full 1 MB language-step
+weight working set. The HBM port is byte-wide (int8 element type) → ~1 byte/
+cycle → ~1M cycles for 1 MB. This is BENIGN: the language path runs at 1 Hz
+(1000 ms budget per language step), so a 4.195 ms weight load uses only 0.42%
+of the budget — exactly the "bursty HBM traffic, bus free the rest of the
+time" behaviour the memory-hierarchy claim wants. A v1 could widen the m_axi
+port to 512-bit for a ~64x faster load if ever needed; not necessary for the
+1 Hz language rate. Flagging human_ack(latency_above_200000) for honesty; the
+number is well within the architectural budget.
+
+--- paper §III.E memory-hierarchy note ---
+HBM channel count for Table V: this controller uses 1 m_axi read port. The
+paper's "4 of 32 HBM channels" figure would be reached by instantiating 4
+such controllers (or one 4-port variant) across the weight working set — the
+single-port controller here validates the burst-tiling mechanism.
+
+--- artefacts ---
+  hbm_weight_tiler.cpp / .hpp     — controller source
+  hbm_weight_tiler_tb.cpp         — byte-exact burst-correctness testbench
+  run_hls.tcl
+  hls.log
+  hbm_weight_tiler_csynth.rpt

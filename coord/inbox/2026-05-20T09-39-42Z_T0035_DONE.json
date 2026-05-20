@@ -1,0 +1,43 @@
+{
+  "task_id": "T0035",
+  "status": "DONE",
+  "headline": "hbm_weight_tiler one-shot PASS: csim 0/1M byte-exact, Fmax 342 MHz, DSP 0 / LUT 6242 / BRAM 7. All 6 acceptance criteria pass. Latency 4.195 ms soft-trigger (benign — 0.42% of 1 Hz language budget).",
+  "claimed_at": "2026-05-20T09:36:00Z",
+  "finished_at": "2026-05-20T09:39:42Z",
+  "duration_sec": 222,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_exact_mismatches": 0,
+    "csynth_pass": true,
+    "fmax_estimated_mhz": 342.47,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "latency_cycles": 1048813,
+    "latency_ms_at_250mhz": 4.195,
+    "lut_used": 6242,
+    "ff_used": 5325,
+    "dsp_used": 0,
+    "bram_used": 7,
+    "uram_used": 0,
+    "m_axi_ports": 1
+  },
+  "acceptance_criteria_passed": true,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "latency_above_200000 triggered (1.05M cycles = 4.195 ms). Benign: language path is 1 Hz, 4.195 ms = 0.42% of the 1000 ms budget — the intended bursty-HBM behaviour."
+  ],
+  "artefacts": [
+    "coord/reports/T0035/stdout.log",
+    "coord/reports/T0035/result.json",
+    "coord/reports/T0035/hbm_weight_tiler.cpp",
+    "coord/reports/T0035/hbm_weight_tiler.hpp",
+    "coord/reports/T0035/hbm_weight_tiler_tb.cpp",
+    "coord/reports/T0035/run_hls.tcl",
+    "coord/reports/T0035/hls.log",
+    "coord/reports/T0035/hbm_weight_tiler_csynth.rpt"
+  ],
+  "next_task_suggestion": "T0034 vivado_ipi_integrate_impl",
+  "error": null,
+  "notes_for_orch": "T0035 memory-hierarchy controller — clean one-shot pass. csim byte-exact (0/1,048,576), Fmax 342 MHz, DSP 0 (pure data movement), LUT 6242, BRAM 7. All 6 hard acceptance criteria pass.\n\nThe only trigger is latency_above_200000 (1.05M cycles). This is BENIGN and actually the intended behaviour: moving the full 1 MB language-step weight working set over a byte-wide HBM port takes ~1M cycles = 4.195 ms; the language path runs at 1 Hz so this is 0.42% of the 1000 ms per-step budget — bursty HBM traffic, bus free the other 99.6% of the time, exactly the Sec.III.E memory-hierarchy claim. A v1 512-bit m_axi widening would cut load time ~64x if ever wanted; unnecessary at 1 Hz.\n\nFor Table V: this controller uses 1 m_axi HBM read port. The paper's '4 of 32 HBM channels' figure = 4 such controllers across the weight set; the single-port IP here validates the burst-tiling mechanism.\n\nWORKER NEXT: T0034 (vivado_ipi_integrate_impl) is the last remaining task — the IP-Integrator block design + post-route impl, the genuinely hard integration that T0032 partially did (export done, link blocked). Claiming it next."
+}
