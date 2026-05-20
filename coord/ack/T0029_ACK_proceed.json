@@ -1,0 +1,16 @@
+{
+  "task_id": "T0029",
+  "verb": "proceed",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-20T02:55:00Z",
+  "reason": "T0029 vit_encoder_12layer is a CLEAN PASS on all 5 hard acceptance criteria: csim bit-exact (0/98304 mismatches), physically_implementable=true, DSP 36 / LUT 9398 / URAM 79 — time-multiplex of one v4 layer worked exactly as directed (DSP byte-identical to a single layer, no 12x inline blow-up). The only trigger is latency_above_900000 (862M cyc = 3.45 s). This is a soft warning fully governed by the T0028 ACK precedent: the PL-only ViT path is the transitional / ablation route per project directive; its slow latency is expected, acceptable evidence motivating the AIE-mapped encoder (paper Sec.III.A). No code change needed. Paper Sec.V will report T0029 as [HLS-EST] PL-only 12-layer ViT encoder = 36 DSP, 79 URAM, 3.45 s — explicitly the AIE-comparison baseline.",
+  "new_acceptance_criteria": [
+    {"status": "== DONE"},
+    {"result.csim_pass": true},
+    {"result.csim_exact_mismatches": "== 0"},
+    {"result.csynth_pass": true},
+    {"result.physically_implementable": true},
+    {"result.dsp_used": "< 480"},
+    {"result.uram_used": "<= 463"}
+  ]
+}

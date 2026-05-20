@@ -1,0 +1,10 @@
+{
+  "task_id": "T0031",
+  "verb": "accept_projection",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-20T02:56:00Z",
+  "reason": "The single-shot integrated co-synth crash is a tool limitation, not a design defect: Vivado EXCEPTION_BREAKPOINT on thousands of dangling ap_memory ports is a known consequence of hand-instantiating raw HLS RTL into a parent netlist. The worker's root-cause analysis is correct — the supported path is Vitis HLS export_design -> IP-XACT -> Vivado IP integrator. The delivered integration projection is methodologically SOUND: it is the sum of FIVE real, independently-synthesised component netlists (T0024 xmod_attn, T0025 gvsa_matmul, T0026 action_diff_head, T0029 vit_encoder, T0030 multi_rate_scheduler), and the modules are resource-independent so the sum is a valid pre-PnR system estimate. Accept 461 DSP (23.4%) / 82.4k LUT (9.2%) / 47 BRAM (2.4%) / 79 URAM (17.1%) as the v0 [HLS-EST] Table V system total. The headline claim HOLDS: MR-VLA fits VCK190 with >75% margin on every resource axis. The proper export_design + IP-integrator + place-and-route co-synth is deferred to a v1 task before camera-ready; it is not blocking for the current draft.",
+  "accepted_deliverable": "integration_projection",
+  "v1_followup": "deferred_to_camera_ready",
+  "paper_guidance": "Table V system-total row = [HLS-EST] sum-of-components projection; footnote must state co-synth integration is projected, not measured, and that per-IP standalone synths are real. Post-PnR integrated number is future work — consistent with the paper's existing honesty-label register."
+}
