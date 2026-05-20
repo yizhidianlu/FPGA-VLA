@@ -1,0 +1,161 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version     : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
+| Date             : Wed May 20 17:34:45 2026
+| Host             : YizhiDianLu running 64-bit major release  (build 9200)
+| Command          : report_power -file C:/Users/jielu/Desktop/Workspace/FPGA-VLA/runs/T0033/vivado/variant_dual_power.rpt
+| Design           : mr_vla_top_dual
+| Device           : xcvc1902-vsva2197-2MP-e-S
+| Design State     : synthesized
+| Grade            : extended
+| Process          : typical
+| Characterization : Production
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Power Report
+
+Table of Contents
+-----------------
+1. Summary
+1.1 On-Chip Components
+1.2 Power Supply Summary
+1.3 Confidence Level
+2. Settings
+2.1 Environment
+2.2 Clock Constraints
+3. Detailed Reports
+3.1 By Hierarchy
+
+1. Summary
+----------
+
++--------------------------+--------------+
+| Total On-Chip Power (W)  | 13.442       |
+| Design Power Budget (W)  | Unspecified* |
+| Power Budget Margin (W)  | NA           |
+| Dynamic (W)              | 0.040        |
+| Device Static (W)        | 13.402       |
+| Effective TJA (C/W)      | 5.6          |
+| Max Ambient (C)          | 25.0         |
+| Junction Temperature (C) | 100.0        |
+| Confidence Level         | Medium       |
+| Setting File             | ---          |
+| Simulation Activity File | ---          |
+| Design Nets Matched      | NA           |
++--------------------------+--------------+
+* Specify Design Power Budget using, set_operating_conditions -design_power_budget <value in Watts>
+
+
+1.1 On-Chip Components
+----------------------
+
++-------------------+-----------+----------+-----------+-----------------+
+| On-Chip           | Power (W) | Used     | Available | Utilization (%) |
++-------------------+-----------+----------+-----------+-----------------+
+| Clocks            |     0.000 |        3 |       --- |             --- |
+| Logic             |     0.002 |     1112 |       --- |             --- |
+|   LUT as Logic    |     0.002 |      401 |    899840 |            0.04 |
+|   CLE FF Register |    <0.001 |      324 |   1799680 |            0.02 |
+|   LOOKAHEAD8      |    <0.001 |       40 |    112480 |            0.04 |
+|   Others          |     0.000 |       19 |       --- |             --- |
+| Signals           |     0.003 |      790 |       --- |             --- |
+| Block RAM         |     0.024 |       26 |       967 |            2.69 |
+| DSPs              |     0.011 |        6 |       --- |             --- |
+| Static Power      |    13.402 |          |           |                 |
+| Total             |    13.442 |          |           |                 |
++-------------------+-----------+----------+-----------+-----------------+
+
+
+1.2 Power Supply Summary
+------------------------
+
++-------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+| Source      | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
++-------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+| Vccint      |       0.800 |    12.416 |       0.050 |     12.367 |       NA    | Unspecified | NA         |
+| VCC_SOC     |       0.800 |     1.326 |       0.000 |      1.326 |       NA    | Unspecified | NA         |
+| VCC_IO      |       0.800 |     0.187 |       0.000 |      0.187 |       NA    | Unspecified | NA         |
+| VCCRAM      |       0.800 |     0.078 |       0.000 |      0.077 |       NA    | Unspecified | NA         |
+| Vccaux      |       1.500 |     1.927 |       0.000 |      1.927 |       NA    | Unspecified | NA         |
+| VCCO_503    |       3.300 |     0.003 |       0.000 |      0.003 |       NA    | Unspecified | NA         |
+| VCCO_500    |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCCO_501    |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCCO_502    |       3.300 |     0.003 |       0.000 |      0.003 |       NA    | Unspecified | NA         |
+| VCC_FUSE    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_BATT    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| GTY_AVCCAUX |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| GTY_AVCC    |       0.880 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| GTY_AVTT    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco33      |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco25      |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco18      |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco15      |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco135     |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco12      |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco11      |       1.100 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco10      |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_PMC     |       0.800 |     0.045 |       0.000 |      0.045 |       NA    | Unspecified | NA         |
+| VCCAUX_PMC  |       1.500 |     0.002 |       0.000 |      0.002 |       NA    | Unspecified | NA         |
+| VCCAUX_SMON |       1.500 |     0.003 |       0.000 |      0.003 |       NA    | Unspecified | NA         |
+| VCC_PSLP    |       0.800 |     0.081 |       0.000 |      0.081 |       NA    | Unspecified | NA         |
+| VCC_PSFP    |       0.800 |     0.096 |       0.000 |      0.096 |       NA    | Unspecified | NA         |
++-------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+
+
+1.3 Confidence Level
+--------------------
+
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| User Input Data             | Confidence | Details                                        | Action                                                                                                     |
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Design implementation state | Low        | Design is synthesized                          | Accuracy of the tool is not optimal until design is fully placed and routed                                |
+| Clock nodes activity        | High       | User specified more than 95% of clocks         |                                                                                                            |
+| I/O nodes activity          | High       | User specified more than 95% of inputs         |                                                                                                            |
+| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views |
+| Device models               | High       | Device models are Production                   |                                                                                                            |
+|                             |            |                                                |                                                                                                            |
+| Overall confidence level    | Medium     |                                                |                                                                                                            |
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+
+
+2. Settings
+-----------
+
+2.1 Environment
+---------------
+
++------------------+------+
+| Ambient Temp (C) | 25.0 |
+| ThetaJA (C/W)    | 5.6  |
++------------------+------+
+
+
+2.2 Clock Constraints
+---------------------
+
++-------+--------+-----------------+
+| Clock | Domain | Constraint (ns) |
++-------+--------+-----------------+
+| clk   | clk    |             4.0 |
++-------+--------+-----------------+
+
+
+3. Detailed Reports
+-------------------
+
+3.1 By Hierarchy
+----------------
+
++----------------------+-----------+
+| Name                 | Power (W) |
++----------------------+-----------+
+| mr_vla_top_dual      |     0.040 |
+|   u_enable_gen       |     0.002 |
+|   u_gvsa_matmul_stub |     0.006 |
+|   u_language_fifo    |     0.010 |
+|   u_vision_fifo      |     0.014 |
+|   u_xmod_action_fifo |     0.002 |
+|   u_xmod_attn_stub   |     0.006 |
++----------------------+-----------+
+
+
