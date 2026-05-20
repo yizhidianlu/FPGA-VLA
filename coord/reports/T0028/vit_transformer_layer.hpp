@@ -20,7 +20,10 @@
 #define D       384
 #define D_QKV   (3 * D)       // 1152 — concatenated Q|K|V output
 #define D_FFN   1536
-#define K_UR    64            // k-unroll factor (matches T0025/T0026 pattern)
+#define K_UR    8             // v3: reduced from 64 → 8 per T0028_ACK_retry_v3.
+                              // v2's K_UR=64 across 6 sequential stages caused
+                              // DSP=1600 (cap 480) and, combined with URAM
+                              // BIND_STORAGE, 776 URAM (avail 463 → unimplementable).
 
 void vit_transformer_layer(
     const int8_t x      [N_PATCH][D],

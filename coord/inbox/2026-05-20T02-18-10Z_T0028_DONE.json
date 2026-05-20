@@ -1,0 +1,42 @@
+{
+  "task_id": "T0028",
+  "status": "DONE",
+  "headline": "vit_transformer_layer v4 CLEAN PASS — ALL 8 acceptance criteria met. csim bit-exact, DSP 36 / LUT 8255 / URAM 72 / BRAM 1, Fmax 344 MHz, physically_implementable=TRUE. The v2/v3 URAM-overflow + DSP-explosion is FIXED.",
+  "claimed_at": "2026-05-20T01:35:00Z",
+  "finished_at": "2026-05-20T02:18:10Z",
+  "duration_sec": 2590,
+  "machine": "YIZHIDIANLU",
+  "worker_version": "claude-code-interactive-v1",
+  "result": {
+    "csim_pass": true,
+    "csim_exact_mismatches": 0,
+    "csynth_pass": true,
+    "physically_implementable": true,
+    "fmax_estimated_mhz": 344.59,
+    "target_part_used": "xcvc1902-vsva2197-2MP-e-S",
+    "latency_cycles": 113747484,
+    "latency_sec_at_250mhz": 0.455,
+    "dsp_used": 36,
+    "lut_used": 8255,
+    "ff_used": 4042,
+    "bram_used": 1,
+    "uram_used": 72,
+    "iterations_to_pass": 4
+  },
+  "acceptance_criteria_passed": true,
+  "human_ack_needed": false,
+  "human_ack_reasons": [],
+  "artefacts": [
+    "coord/reports/T0028/stdout.log",
+    "coord/reports/T0028/result.json",
+    "coord/reports/T0028/vit_transformer_layer.cpp",
+    "coord/reports/T0028/vit_transformer_layer.hpp",
+    "coord/reports/T0028/vit_transformer_layer_tb.cpp",
+    "coord/reports/T0028/run_hls.tcl",
+    "coord/reports/T0028/hls.log",
+    "coord/reports/T0028/vit_transformer_layer_csynth.rpt"
+  ],
+  "next_task_suggestion": "T0029 vit_encoder_12layer",
+  "error": null,
+  "notes_for_orch": "*** T0028 FIXED — v4 passes everything ***\n\nFinal numbers (Versal xcvc1902):\n  DSP   36  (cap 480 — 13× headroom)\n  LUT   8255 (cap 80k — 10× headroom)\n  URAM  72  (avail 463 — physically fits, no overflow)\n  BRAM  1\n  Fmax  344 MHz\n  Latency 113.7M cycles = 0.455 s  (slow, but orch pre-cleared: PL-only ViT is the ablation path)\n\nROOT CAUSE of the v2/v3 failures (worth recording for future HLS tasks):\n  `#pragma HLS PIPELINE II=1` on an OUTER loop forces HLS to FULLY UNROLL every\n  inner loop to fit the pipeline. My matmul stages had PIPELINE on the j-loop\n  with a k-reduction inside → HLS unrolled the entire 384/1536-wide k-dimension\n  → 1500+ DSPs and 500-776 URAMs.\n  FIX (v4): move PIPELINE down onto the k0-chunk loop. Now HLS pipelines the\n  reduction at K_UR=8 MACs/cycle → 36 DSP total. This is the exact structure\n  that made T0025 GVSA pass one-shot — I should have matched it from the start.\n\nv4 ATTEMPT COUNT: 4 (v1 compile err, v2 over-cap, v3 wrong-fix, v4 correct-fix).\n\nT0029 IS NOW UNBLOCKED & FEASIBLE:\n  Per your directive, T0029 will time-multiplex ONE v4 instance 12× (not inline\n  12 copies). Time-multiplexed: stays ~36 DSP + ~72-120 URAM + 12 weight sets\n  in BRAM. Inlining would be 432 DSP / 864 URAM (URAM overflow again) — will NOT\n  do that.\n\nWORKER PROCEEDING: claiming T0029 next. Heartbeat loop (PID 27892) still ticking 15-min."
+}
