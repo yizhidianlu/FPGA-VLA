@@ -1,0 +1,29 @@
+{
+  "task_id": "T0037",
+  "status": "FAILED",
+  "finished_at": "2026-05-26T06:34:45Z",
+  "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "worker_version": "v1.0",
+  "result": {
+    "aiecompile_ok": false,
+    "aiesim_pass": false,
+    "scaffold_ok": true,
+    "scaffold_detail": "6 AIE source files for 128-bit PLIO xmod_attn pipeline: graph.cpp (3-kernel adf::graph), kernel_qk.cpp (QKT matmul v16int8), kernel_softmax.cpp (stable softmax), kernel_av.cpp (AV weighted sum), graph.h, main.cpp (testbench with golden)",
+    "frontend_ok": true,
+    "frontend_detail": "aiecompiler graph preprocessing and frontend compilation PASSED — graph.out generated, all PLIO→kernel→PLIO connections validated, no type errors",
+    "backend_fail": true,
+    "backend_error": "FlexNet Licensing: Invalid host. System hostid=00163e5a5f9a, license requires 6c24085b7478. Feature: AIEbuild.",
+    "license_available": true,
+    "license_valid_until": "2026-06-08",
+    "license_hostid_mismatch": true
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": ["license_hostid_mismatch_needs_new_license"],
+  "artefacts": [
+    "coord/reports/T0037/aie_graph/*.cpp",
+    "coord/reports/T0037/aie_graph/*.h",
+    "coord/reports/T0037/result.json"
+  ],
+  "error": "AIEbuild license hostid mismatch — need new license for 00163e5a5f9a"
+}

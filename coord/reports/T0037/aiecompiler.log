@@ -1,0 +1,28 @@
+                                           AI Engine Compiler
+                                     Version 2024.1 (linux64-bit)
+                                     SW Build 5072252 on 2024-05-21-05:03:35
+                          Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+                          Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+INFO: ML part stats configuration file found in /tools/Xilinx/Vitis/2024.1/aietools/data
+INFO: [aiecompiler 77-3355] ###[Start]: Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 55-2053] elapsed time for repository (/tools/Xilinx/Vivado/2024.1/data/embeddedsw) loading 0 seconds
+INFO: [aiecompiler 77-3354] ###[Finish]:  Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-3379] Extracted physical device part from platform is : xcvc1902-vsva2197-2MP-e-S 
+INFO: [aiecompiler 77-297] Cmd Line : /tools/Xilinx/Vitis/2024.1/aietools/bin/unwrapped/lnx64.o/aiecompiler --target=hw -platform=/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm --pl-freq=250 graph.cpp 
+Running Dispatch Server on port: 33477
+INFO: [aiecompiler 77-404] Executing Cmd: ${XILINX_VITIS_AIETOOLS}/tps/lnx64/gcc/bin/g++ -E -std=c++17 -D__ADF_FRONTEND__ -D__AIE_ARCH__=10 -I/tools/Xilinx/Vitis/2024.1/aietools/include  -I .  graph.cpp > Work/temp/graph.ii
+INFO: [aiecompiler 77-404] Executing Cmd: graph_preprocessor Work/temp/graph.ii -o Work/temp/graph.processed.ii -report-core-dump  -- -std=c++17  -ftemplate-depth=2048  -Wno-return-stack-address  -Wno-missing-declarations  -Wno-parentheses-equality  -Wno-shift-negative-value  
+INFO: [aiecompiler 77-404] Executing Cmd: ${XILINX_VITIS_AIETOOLS}/tps/lnx64/gcc/bin/g++  -std=c++17  -I .  Work/temp/graph.processed.ii -o Work/temp/graph.out -L /tools/Xilinx/Vitis/2024.1/aietools/lib/lnx64.o -g -O0 -Wl,--unresolved-symbols=ignore-all  -Wno-return-stack-address  -Wno-missing-declarations  -lmeir_frontend  -ladf_api_frontend 
+INFO: [aiecompiler 77-404] Executing Cmd: Work/temp/graph.out --workdir=Work --aiearch=aie --log-level=1 --pl-axi-lite=0 --enable-multi-layer=0 --disable-dma-autostart=0 --enable-light-cdo=0 --large-program-memory=0 --swfifo-threshold=40 --target=hw
+INFO: [aiecompiler 77-749] Reading logical device VC1902.json
+WARNING: [aiecompiler 77-5890] 'k_qk.in[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k_qk.in[1]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k_qk.out[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k_softmax.in[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k_softmax.out[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k_av.in[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k_av.in[1]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k_av.out[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+INFO: [aiecompiler 77-6447] Executing Cmd: aieir_be --time-passes=0  --disable-om-fifo-insertion=false  --fast-nonlinearfloats=false  --high-performance=false  --single-mm2s-channel=false  --stacksize=1024  --output-archive=libadf.a  --disable-multirate=false  --fastmath=false  --event-trace-advanced-mapping=0  --gen-graph-cleanup=false  --use-canonical-net-names=false  --use-phy-shim=true  --trace-aiesim-option=0  --num-trace-streams=16  --adf-api-log-level=2  --enable-partition=false  --quiet=false  --exec-timed=0  --keep-intermediate-results=false  --enable-profiling=false  --runtime-opt=true  --disable-transform-merge-broadcast=false  --verbose=false  --nodot-graph=false  --disable-transform-broadcast-split=true  --pl-freq=250  --trace-plio-width=64  --broadcast-enable-core=true  --kernel-address-location=false  --target=hw --swfifo-threshold=40  --workdir=Work  --exit-after=complete  --test-iterations=-1  --known-tripcount=false  --platform=/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm  --write-partitioned-file=true  --schemafile=AIEGraphSchema.json  --lock-fence-mode=1  --enable-reconfig=false  --evaluate-fifo-depth=false  --event-trace-port=gmio --xlopt=1  --extend-trace-partition=false  --graph-iterator-event=false  --optimize-pktids=false  --no-init=false  --fast-floats=true  --large-kernel-program=false  --no-timer-sync=false  --heapsize=1024  --enable-reconfig-dma-autostart=false  --disable-dma-autostart=false  --json=Work/temp/graph.json
+AIEbuild feature license not found !
