@@ -1,17 +1,16 @@
-// graph.cpp — AIE adf::graph for xmod_attn 3-kernel pipeline (128-bit PLIO)
+// graph.cpp — AIE xmod_attn 3-kernel stream pipeline (128-bit PLIO, v0 scaled)
 
 #include <adf.h>
 #include "graph.h"
 
 using namespace adf;
 
-// Block sizes: total elements transferred per kernel invocation
-#define Q_BLKSZ   QDIM            // Q vector: 4096 int8
-#define K_BLKSZ   (NTOK * QDIM)   // K rows: 256*4096 int8
-#define V_BLKSZ   (NTOK * QDIM)   // V rows: 256*4096 int8
-#define S_BLKSZ   NTOK            // scores: 256 int16
-#define W_BLKSZ   NTOK            // weights: 256 int16
-#define O_BLKSZ   QDIM            // output: 4096 int8
+#define Q_BLKSZ  QDIM
+#define K_BLKSZ  (NTOK * QDIM)
+#define V_BLKSZ  (NTOK * QDIM)
+#define S_BLKSZ  NTOK
+#define W_BLKSZ  NTOK
+#define O_BLKSZ  QDIM
 
 void kernel_qk(input_window<int8>*, input_window<int8>*, output_window<int16>*);
 void kernel_softmax(input_window<int16>*, output_window<int16>*);
@@ -37,17 +36,11 @@ public:
         source(k_softmax) = "kernel_softmax.cpp";
         source(k_av)      = "kernel_av.cpp";
 
-        // PLIO(stream) → kernel(window): connect<window<BLOCKSIZE>>
         connect< window<Q_BLKSZ> >(plio_Q.out[0], k_qk.in[0]);
         connect< window<K_BLKSZ> >(plio_K.out[0], k_qk.in[1]);
-
-        // kernel(window) → kernel(window)
-        connect< window<S_BLKSZ> >(k_qk.out[0], k_softmax.in[0]);
+        connect< window<S_BLKSZ> >(k_qk.out[0],   k_softmax.in[0]);
         connect< window<W_BLKSZ> >(k_softmax.out[0], k_av.in[0]);
-
         connect< window<V_BLKSZ> >(plio_V.out[0], k_av.in[1]);
-
-        // kernel(window) → PLIO(stream)
         connect< window<O_BLKSZ>, stream >(k_av.out[0], plio_out.in[0]);
 
         runtime<ratio>(k_qk)      = 0.25;

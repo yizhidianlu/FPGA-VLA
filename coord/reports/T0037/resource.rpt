@@ -1,0 +1,17 @@
+=== T0037 AIE xmod_attn v0 Resource Report ===
+
+Target:     xcvc1902-vsva2197-2MP-e-S (VCK190)
+Platform:   xilinx_vck190_base_202410_1
+PL freq:    250 MHz
+
+Tiles used:       1 core (tile 25_0)
+Memory banks:     3 (MM2S/S2MM for PLIO)
+PLIO width:       128-bit (plio_128_bits)
+PLIO ports:       4 (Q_in, K_in, V_in, out)
+DDR bandwidth:    N/A (PLIO only, no GMIO)
+
+v0 dimensions:    NTOK=32, QDIM=256, TOPK=8
+                  (scaled to fit AIE 32KB DMA MG limit)
+
+Kernels:          3 (kernel_qk, kernel_softmax, kernel_av)
+                  All merged to single AIE core

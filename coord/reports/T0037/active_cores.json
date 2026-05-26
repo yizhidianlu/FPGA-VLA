@@ -1,0 +1,6 @@
+{
+  "ActiveCores" : [
+    {"25_0": "Work/aie/25_0"}
+  ],
+  "ActiveMemory" : ["24_0", "25_0", "25_1"]
+}

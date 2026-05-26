@@ -10,7 +10,7 @@ INFO: [aiecompiler 77-3354] ###[Finish]:  Reading in platform specification from
 INFO: [aiecompiler 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
 INFO: [aiecompiler 77-3379] Extracted physical device part from platform is : xcvc1902-vsva2197-2MP-e-S 
 INFO: [aiecompiler 77-297] Cmd Line : /tools/Xilinx/Vitis/2024.1/aietools/bin/unwrapped/lnx64.o/aiecompiler --target=hw -platform=/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm --pl-freq=250 graph.cpp 
-Running Dispatch Server on port: 33477
+Running Dispatch Server on port: 33165
 INFO: [aiecompiler 77-404] Executing Cmd: ${XILINX_VITIS_AIETOOLS}/tps/lnx64/gcc/bin/g++ -E -std=c++17 -D__ADF_FRONTEND__ -D__AIE_ARCH__=10 -I/tools/Xilinx/Vitis/2024.1/aietools/include  -I .  graph.cpp > Work/temp/graph.ii
 INFO: [aiecompiler 77-404] Executing Cmd: graph_preprocessor Work/temp/graph.ii -o Work/temp/graph.processed.ii -report-core-dump  -- -std=c++17  -ftemplate-depth=2048  -Wno-return-stack-address  -Wno-missing-declarations  -Wno-parentheses-equality  -Wno-shift-negative-value  
 INFO: [aiecompiler 77-404] Executing Cmd: ${XILINX_VITIS_AIETOOLS}/tps/lnx64/gcc/bin/g++  -std=c++17  -I .  Work/temp/graph.processed.ii -o Work/temp/graph.out -L /tools/Xilinx/Vitis/2024.1/aietools/lib/lnx64.o -g -O0 -Wl,--unresolved-symbols=ignore-all  -Wno-return-stack-address  -Wno-missing-declarations  -lmeir_frontend  -ladf_api_frontend 
@@ -25,4 +25,202 @@ WARNING: [aiecompiler 77-5890] 'k_av.in[0]' is a window port. Window ports are d
 WARNING: [aiecompiler 77-5890] 'k_av.in[1]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
 WARNING: [aiecompiler 77-5890] 'k_av.out[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
 INFO: [aiecompiler 77-6447] Executing Cmd: aieir_be --time-passes=0  --disable-om-fifo-insertion=false  --fast-nonlinearfloats=false  --high-performance=false  --single-mm2s-channel=false  --stacksize=1024  --output-archive=libadf.a  --disable-multirate=false  --fastmath=false  --event-trace-advanced-mapping=0  --gen-graph-cleanup=false  --use-canonical-net-names=false  --use-phy-shim=true  --trace-aiesim-option=0  --num-trace-streams=16  --adf-api-log-level=2  --enable-partition=false  --quiet=false  --exec-timed=0  --keep-intermediate-results=false  --enable-profiling=false  --runtime-opt=true  --disable-transform-merge-broadcast=false  --verbose=false  --nodot-graph=false  --disable-transform-broadcast-split=true  --pl-freq=250  --trace-plio-width=64  --broadcast-enable-core=true  --kernel-address-location=false  --target=hw --swfifo-threshold=40  --workdir=Work  --exit-after=complete  --test-iterations=-1  --known-tripcount=false  --platform=/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm  --write-partitioned-file=true  --schemafile=AIEGraphSchema.json  --lock-fence-mode=1  --enable-reconfig=false  --evaluate-fifo-depth=false  --event-trace-port=gmio --xlopt=1  --extend-trace-partition=false  --graph-iterator-event=false  --optimize-pktids=false  --no-init=false  --fast-floats=true  --large-kernel-program=false  --no-timer-sync=false  --heapsize=1024  --enable-reconfig-dma-autostart=false  --disable-dma-autostart=false  --json=Work/temp/graph.json
-AIEbuild feature license not found !
+AIEbuild feature license is found.
+INFO: [aiecompiler 77-3355] ###[Start]: Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 55-2053] elapsed time for repository (/tools/Xilinx/Vivado/2024.1/data/embeddedsw) loading 0 seconds
+INFO: [aiecompiler 77-3354] ###[Finish]:  Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-3379] Extracted physical device part from platform is : xcvc1902-vsva2197-2MP-e-S 
+INFO: [aiecompiler 77-749] Reading logical device VC1902.json
+INFO: [aiecompiler 77-750] Reading physical device xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-951] ###Start:Loading Device Part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-950] ###Finish(0u 0s 0w):Loading Device Part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-4400] Finish reading physical device xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-951] ###Start:Loading Device Part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-950] ###Finish(0u 0s 0w):Loading Device Part xcvc1902-vsva2197-2MP-e-S
+WARNING: [aiecompiler 77-6300] Graphviz tools are not installed on this system, dot graphs will not be generated.
+686: Work/temp/graph.json
+INFO: [aiecompiler 77-757] Opening input file: Work/temp/graph.json
+INFO: [aiecompiler 77-6287] Emitting AIEIr in file: Work/temp/graph_aieir_dump.txt
+INFO: [aiecompiler 77-656] Processing Graph 'root'
+INFO: [aiecompiler 77-404] Executing Cmd: 	cd Work/aie/ir;
+${XILINX_VITIS_AIETOOLS}/tps/${RDI_PLATFORM}/target/bin/LNa64bin/chesscc +f +s -p me -P ${XILINX_VITIS_AIETOOLS}/data/versal_prod/lib +Wllvm,-O2,-fno-jump-tables,-femit-all-decls,-fno-discard-value-names,-mllvm,-chess-collapse-struct-types-during-linking=0,-Xclang,-chess-only-info-critical-passes,-g -D__AIENGINE__ -D__AIE_ARCH__=10 -I ${XILINX_VITIS_AIETOOLS}/data/versal_prod/lib -I ${XILINX_VITIS_AIETOOLS}/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I ${XILINX_VITIS_AIETOOLS}/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I ${XILINX_VITIS_AIETOOLS}/data/versal_prod/lib/runtime/include empty.cc -o _header.ll
+
+Configuration: Release_LLVM
+Compiling "empty.cc"
+chess-clang -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib --chess-proc-dir=/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib -S -nostdlibinc -D__chess__ -D__tct_release__=2306 -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -D__AIENGINE__ -D__AIE_ARCH__=10 -D__tct_tgt__=240112 -xc++ -O2 -include aie_core.h -std=c++2a -fno-builtin-memcpy -mllvm -disable-lsr -mllvm -replexitval=never -mllvm -enable-load-pre=false -mllvm -chess-disable-add-to-or -mllvm -chess-combine-gep-indices=none -mllvm -chess-disable-fold-phi-of-loads -mllvm -chess-aainfo2chains-algo=4 -mllvm -chess-aggressive-aainfo=false -mllvm -chess-enable-indvarsimplify=0 -fchess-register-c++-static-destructors-as-global-dtors -Werror=return-type -mllvm -chess-disable-cse-across-loopboundary -mllvm -chess-tbaa-detect-common-underlying-object=true -mllvm -chess-protect-llvm-global-reg-access=true -mllvm -chess-enable-c-pragma-protect -O2 -fno-jump-tables -femit-all-decls -fno-discard-value-names -mllvm -chess-collapse-struct-types-during-linking=0 -Xclang -chess-only-info-critical-passes -g empty.cc -o_header.ll -emit-llvm --chess-proc-name=me
+Compilation finished successfully (0 errors, 0 warnings)
+INFO: [aiecompiler 77-404] Executing Cmd: make -C Work/aie/ir -j 8 -f i4_kernel_qk.makefile -f i5_kernel_softmax.makefile -f i6_kernel_av.makefile all 2>&1
+
+make: Entering directory '/tools/projects/FPGA-VLA/runs/T0037/aie_build/Work/aie/ir'
+/tools/Xilinx/Vitis/2024.1/aietools/tps/lnx64/target/bin/LNa64bin/chesscc +f +s -p me -P /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib +Wllvm,-O2,-fno-jump-tables,-fno-discard-value-names,-mllvm,-chess-collapse-struct-types-during-linking=0,-Xclang,-chess-only-info-critical-passes,-g -D__AIENGINE__ -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include /tools/projects/FPGA-VLA/runs/T0037/aie_build/kernel_qk.cpp -o i4_kernel_qk.ll
+/tools/Xilinx/Vitis/2024.1/aietools/tps/lnx64/target/bin/LNa64bin/chesscc +f +s -p me -P /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib +Wllvm,-O2,-fno-jump-tables,-fno-discard-value-names,-mllvm,-chess-collapse-struct-types-during-linking=0,-Xclang,-chess-only-info-critical-passes,-g -D__AIENGINE__ -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include /tools/projects/FPGA-VLA/runs/T0037/aie_build/kernel_softmax.cpp -o i5_kernel_softmax.ll
+/tools/Xilinx/Vitis/2024.1/aietools/tps/lnx64/target/bin/LNa64bin/chesscc +f +s -p me -P /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib +Wllvm,-O2,-fno-jump-tables,-fno-discard-value-names,-mllvm,-chess-collapse-struct-types-during-linking=0,-Xclang,-chess-only-info-critical-passes,-g -D__AIENGINE__ -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include /tools/projects/FPGA-VLA/runs/T0037/aie_build/kernel_av.cpp -o i6_kernel_av.ll
+Configuration: Release_LLVM
+Configuration: Release_LLVM
+Configuration: Release_LLVM
+Compiling "kernel_softmax.cpp"
+Compiling "kernel_qk.cpp"
+Compiling "kernel_av.cpp"
+chess-clang -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib --chess-proc-dir=/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib -S -nostdlibinc -D__chess__ -D__tct_release__=2306 -I../../.. -I/tools/Xilinx/Vitis/2024.1/aietools/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -D__AIENGINE__ -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -D__tct_tgt__=240112 -xc++ -O2 -include aie_core.h -std=c++2a -fno-builtin-memcpy -mllvm -disable-lsr -mllvm -replexitval=never -mllvm -enable-load-pre=false -mllvm -chess-disable-add-to-or -mllvm -chess-combine-gep-indices=none -mllvm -chess-disable-fold-phi-of-loads -mllvm -chess-aainfo2chains-algo=4 -mllvm -chess-aggressive-aainfo=false -mllvm -chess-enable-indvarsimplify=0 -fchess-register-c++-static-destructors-as-global-dtors -Werror=return-type -mllvm -chess-disable-cse-across-loopboundary -mllvm -chess-tbaa-detect-common-underlying-object=true -mllvm -chess-protect-llvm-global-reg-access=true -mllvm -chess-enable-c-pragma-protect -O2 -fno-jump-tables -fno-discard-value-names -mllvm -chess-collapse-struct-types-during-linking=0 -Xclang -chess-only-info-critical-passes -g /tools/projects/FPGA-VLA/runs/T0037/aie_build/kernel_softmax.cpp -oi5_kernel_softmax.ll -emit-llvm --chess-proc-name=me
+chess-clang -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib --chess-proc-dir=/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib -S -nostdlibinc -D__chess__ -D__tct_release__=2306 -I../../.. -I/tools/Xilinx/Vitis/2024.1/aietools/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -D__AIENGINE__ -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -D__tct_tgt__=240112 -xc++ -O2 -include aie_core.h -std=c++2a -fno-builtin-memcpy -mllvm -disable-lsr -mllvm -replexitval=never -mllvm -enable-load-pre=false -mllvm -chess-disable-add-to-or -mllvm -chess-combine-gep-indices=none -mllvm -chess-disable-fold-phi-of-loads -mllvm -chess-aainfo2chains-algo=4 -mllvm -chess-aggressive-aainfo=false -mllvm -chess-enable-indvarsimplify=0 -fchess-register-c++-static-destructors-as-global-dtors -Werror=return-type -mllvm -chess-disable-cse-across-loopboundary -mllvm -chess-tbaa-detect-common-underlying-object=true -mllvm -chess-protect-llvm-global-reg-access=true -mllvm -chess-enable-c-pragma-protect -O2 -fno-jump-tables -fno-discard-value-names -mllvm -chess-collapse-struct-types-during-linking=0 -Xclang -chess-only-info-critical-passes -g /tools/projects/FPGA-VLA/runs/T0037/aie_build/kernel_qk.cpp -oi4_kernel_qk.ll -emit-llvm --chess-proc-name=me
+chess-clang -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib --chess-proc-dir=/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib -S -nostdlibinc -D__chess__ -D__tct_release__=2306 -I../../.. -I/tools/Xilinx/Vitis/2024.1/aietools/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -D__AIENGINE__ -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -D__tct_tgt__=240112 -xc++ -O2 -include aie_core.h -std=c++2a -fno-builtin-memcpy -mllvm -disable-lsr -mllvm -replexitval=never -mllvm -enable-load-pre=false -mllvm -chess-disable-add-to-or -mllvm -chess-combine-gep-indices=none -mllvm -chess-disable-fold-phi-of-loads -mllvm -chess-aainfo2chains-algo=4 -mllvm -chess-aggressive-aainfo=false -mllvm -chess-enable-indvarsimplify=0 -fchess-register-c++-static-destructors-as-global-dtors -Werror=return-type -mllvm -chess-disable-cse-across-loopboundary -mllvm -chess-tbaa-detect-common-underlying-object=true -mllvm -chess-protect-llvm-global-reg-access=true -mllvm -chess-enable-c-pragma-protect -O2 -fno-jump-tables -fno-discard-value-names -mllvm -chess-collapse-struct-types-during-linking=0 -Xclang -chess-only-info-critical-passes -g /tools/projects/FPGA-VLA/runs/T0037/aie_build/kernel_av.cpp -oi6_kernel_av.ll -emit-llvm --chess-proc-name=me
+/tools/projects/FPGA-VLA/runs/T0037/aie_build/kernel_av.cpp:29:19: error: no matching function for call to 'mac16'
+            acc = ::mac16(acc, vv, wv);  // v16int8 × v16int16 → acc32
+                  ^~~~~~~
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:40239:56: note: candidate function not viable: requires 9 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int32 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, v16int16 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:40248:56: note: candidate function not viable: requires 9 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v16int32 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, v16int16 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:58101:56: note: candidate function not viable: requires 9 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, v8int32 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:58110:56: note: candidate function not viable: requires 9 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, v8int32 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:83214:56: note: candidate function not viable: requires 10 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, unsigned xsquare, int ystart, unsigned yoffsets, unsigned yoffsets_hi, unsigned ysquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:83223:56: note: candidate function not viable: requires 10 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, unsigned xsquare, int ystart, unsigned yoffsets, unsigned yoffsets_hi, unsigned ysquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:79629:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, unsigned xsquare, v16int16 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:79638:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, unsigned xsquare, v16int16 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82131:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v128int8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82140:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82269:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v128int8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82278:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82407:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v128uint8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82416:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64uint8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82545:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v128uint8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82554:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64uint8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:83232:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, unsigned xsquare, v32int16 ybuff, int ystart, unsigned yoffsets, unsigned yoffsets_hi, unsigned ysquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:80871:56: note: candidate function not viable: requires 13 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:80880:56: note: candidate function not viable: requires 13 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:81009:56: note: candidate function not viable: requires 13 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:81018:56: note: candidate function not viable: requires 13 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/projects/FPGA-VLA/runs/T0037/aie_build/kernel_av.cpp:34:28: error: type 'aie::accum<acc32, 16>' (aka 'accum<acc32, 16>') does not provide a subscript operator
+            int32 val = acc[u];
+                        ~~~^~
+2 errors generated.
+Compilation not finished (2 errors, 0 warnings)
+make: *** [i6_kernel_av.makefile:16: i6_kernel_av.rule] Error 5
+make: *** Waiting for unfinished jobs....
+Compilation finished successfully (0 errors, 0 warnings)
+/tools/projects/FPGA-VLA/runs/T0037/aie_build/kernel_qk.cpp:27:19: error: no matching function for call to 'mac16'
+            acc = ::mac16(acc, qv, kv);  // v16int8 MAC
+                  ^~~~~~~
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:40239:56: note: candidate function not viable: requires 9 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int32 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, v16int16 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:40248:56: note: candidate function not viable: requires 9 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v16int32 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, v16int16 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:58101:56: note: candidate function not viable: requires 9 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, v8int32 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:58110:56: note: candidate function not viable: requires 9 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, v8int32 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:83214:56: note: candidate function not viable: requires 10 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, unsigned xsquare, int ystart, unsigned yoffsets, unsigned yoffsets_hi, unsigned ysquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:83223:56: note: candidate function not viable: requires 10 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, unsigned xsquare, int ystart, unsigned yoffsets, unsigned yoffsets_hi, unsigned ysquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:79629:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, unsigned xsquare, v16int16 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:79638:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, unsigned xsquare, v16int16 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82131:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v128int8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82140:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82269:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v128int8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82278:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82407:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v128uint8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82416:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64uint8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82545:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v128uint8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:82554:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64uint8 xbuff, int xstart, unsigned xoffsets, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:83232:56: note: candidate function not viable: requires 11 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, unsigned xsquare, v32int16 ybuff, int ystart, unsigned yoffsets, unsigned yoffsets_hi, unsigned ysquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:80871:56: note: candidate function not viable: requires 13 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:80880:56: note: candidate function not viable: requires 13 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, int xstep, unsigned xsquare, v32int8 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:81009:56: note: candidate function not viable: requires 13 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v64int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/isg/me_chess_llvm.h:81018:56: note: candidate function not viable: requires 13 arguments, but 3 were provided
+inline __attribute__((always_inline,nodebug)) v16acc48 mac16(v16acc48 acc, v32int16 xbuff, int xstart, unsigned xoffsets, unsigned xoffsets_hi, int xstep, unsigned xsquare, v32uint8 zbuff, unsigned zstart, unsigned zoffsets, unsigned zoffsets_hi, int zstep, unsigned zsquare) __attribute__((overloadable))
+                                                       ^
+/tools/projects/FPGA-VLA/runs/T0037/aie_build/kernel_qk.cpp:32:50: error: type 'aie::accum<acc32, 16>' (aka 'accum<acc32, 16>') does not provide a subscript operator
+        for (int u = 0; u < VEC8; u++) sum += acc[u];
+                                              ~~~^~
+2 errors generated.
+Compilation not finished (2 errors, 0 warnings)
+make: *** [i4_kernel_qk.makefile:16: i4_kernel_qk.rule] Error 5
+make: Leaving directory '/tools/projects/FPGA-VLA/runs/T0037/aie_build/Work/aie/ir'
+ERROR: [aiecompiler 77-753] This application has discovered an exceptional condition from which it cannot recover while executing the following command
+  >> make -C Work/aie/ir -j 8 -f i4_kernel_qk.makefile -f i5_kernel_softmax.makefile -f i6_kernel_av.makefile all 2>&1
+.
+Please check the output log for errors and fix those before you run the application.
+INFO: [aiecompiler 77-6439] Run completed. Find additional information in:
+	Guidance: Work/reports/guidance.html
+
+INFO: [aiecompiler 77-6440] Use the vitis_analyzer tool to visualize and navigate the relevant reports. Run: 
+	vitis_analyzer Work/graph.aiecompile_summary
+
+Compilation Failed
+(WARNING:9, CRITICAL-WARNING:0, ERROR:1)

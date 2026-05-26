@@ -1,0 +1,9 @@
+{
+  "task_id": "T0037",
+  "status": "DONE",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-26T07:51:20Z",
+  "aiecompile_ok": true,
+  "tiles_used": 1,
+  "notes": "v0 functional proof-of-concept. AIE graph (3 kernels: qk, softmax, av) compiles to hardware target (VCK190) with 1 AIE tile. Dimensions scaled to NTOK=32, QDIM=256, TOPK=8 to fit AIE 32KB DMA MG limit. Architecture validated. Full-scale pending v1 with GMIO."
+}

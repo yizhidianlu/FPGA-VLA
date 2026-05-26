@@ -1,0 +1,875 @@
+{
+    "schema": "MEGraphSchema-0.4",
+    "id": "root",
+    "blockTypes": {
+        "b0": {
+            "type": "plio",
+            "ports": {
+                "po0": {
+                    "type": "stream",
+                    "elementType": "int8",
+                    "direction": "out",
+                    "portName": "plio_Q.out[0]"
+                }
+            }
+        },
+        "b1": {
+            "type": "plio",
+            "ports": {
+                "po0": {
+                    "type": "stream",
+                    "elementType": "int8",
+                    "direction": "out",
+                    "portName": "plio_K.out[0]"
+                }
+            }
+        },
+        "b2": {
+            "type": "plio",
+            "ports": {
+                "po0": {
+                    "type": "stream",
+                    "elementType": "int8",
+                    "direction": "out",
+                    "portName": "plio_V.out[0]"
+                }
+            }
+        },
+        "b3": {
+            "type": "plio",
+            "ports": {
+                "pi0": {
+                    "type": "stream",
+                    "elementType": "int8",
+                    "direction": "in",
+                    "portName": "plio_out.in[0]"
+                }
+            }
+        },
+        "b4": {
+            "type": "function",
+            "function": "kernel_qk",
+            "srcFile": "kernel_qk.cpp",
+            "ports": {
+                "pi0": {
+                    "type": "mem",
+                    "elementType": "int8",
+                    "direction": "in",
+                    "parameterIndex": 0,
+                    "circularBuffer": 1,
+                    "portName": "in[0]",
+                    "cppDataType": "input_window<signed char> *",
+                    "hasCyclicAddressing": true,
+                    "margin": 4294967295
+                },
+                "pi1": {
+                    "type": "mem",
+                    "elementType": "int8",
+                    "direction": "in",
+                    "parameterIndex": 1,
+                    "circularBuffer": 1,
+                    "portName": "in[1]",
+                    "cppDataType": "input_window<signed char> *",
+                    "hasCyclicAddressing": true,
+                    "margin": 4294967295
+                },
+                "po0": {
+                    "type": "mem",
+                    "elementType": "int16",
+                    "direction": "out",
+                    "parameterIndex": 2,
+                    "circularBuffer": 1,
+                    "portName": "out[0]",
+                    "cppDataType": "output_window<short> *",
+                    "hasCyclicAddressing": true,
+                    "margin": 4294967295
+                }
+            }
+        },
+        "b5": {
+            "type": "function",
+            "function": "kernel_softmax",
+            "srcFile": "kernel_softmax.cpp",
+            "ports": {
+                "pi0": {
+                    "type": "mem",
+                    "elementType": "int16",
+                    "direction": "in",
+                    "parameterIndex": 0,
+                    "circularBuffer": 1,
+                    "portName": "in[0]",
+                    "cppDataType": "input_window<short> *",
+                    "hasCyclicAddressing": true,
+                    "margin": 4294967295
+                },
+                "po0": {
+                    "type": "mem",
+                    "elementType": "int16",
+                    "direction": "out",
+                    "parameterIndex": 1,
+                    "circularBuffer": 1,
+                    "portName": "out[0]",
+                    "cppDataType": "output_window<short> *",
+                    "hasCyclicAddressing": true,
+                    "margin": 4294967295
+                }
+            }
+        },
+        "b6": {
+            "type": "function",
+            "function": "kernel_av",
+            "srcFile": "kernel_av.cpp",
+            "ports": {
+                "pi0": {
+                    "type": "mem",
+                    "elementType": "int16",
+                    "direction": "in",
+                    "parameterIndex": 0,
+                    "circularBuffer": 1,
+                    "portName": "in[0]",
+                    "cppDataType": "input_window<short> *",
+                    "hasCyclicAddressing": true,
+                    "margin": 4294967295
+                },
+                "pi1": {
+                    "type": "mem",
+                    "elementType": "int8",
+                    "direction": "in",
+                    "parameterIndex": 1,
+                    "circularBuffer": 1,
+                    "portName": "in[1]",
+                    "cppDataType": "input_window<signed char> *",
+                    "hasCyclicAddressing": true,
+                    "margin": 4294967295
+                },
+                "po0": {
+                    "type": "mem",
+                    "elementType": "int8",
+                    "direction": "out",
+                    "parameterIndex": 2,
+                    "circularBuffer": 1,
+                    "portName": "out[0]",
+                    "cppDataType": "output_window<signed char> *",
+                    "hasCyclicAddressing": true,
+                    "margin": 4294967295
+                }
+            }
+        },
+        "ps_b7": {
+            "type": "function",
+            "function": "ps_main",
+            "srcFile": "graph.cpp",
+            "implType": "unknown"
+        }
+    },
+    "blockInstances": {
+        "i0": {
+            "blockType": "b0",
+            "graphIds": [
+                0
+            ],
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "qualifiedGraphName": "gr",
+            "qualifiedName": "gr.plio_Q",
+            "dataWidth": 128,
+            "dataFile": "data/Q.txt",
+            "logicalName": "Q_in",
+            "plFreq": 250.0,
+            "instanceId": 0,
+            "loc": "graph.cpp:21:5"
+        },
+        "i1": {
+            "blockType": "b1",
+            "graphIds": [
+                0
+            ],
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "qualifiedGraphName": "gr",
+            "qualifiedName": "gr.plio_K",
+            "dataWidth": 128,
+            "dataFile": "data/K.txt",
+            "logicalName": "K_in",
+            "plFreq": 250.0,
+            "instanceId": 1,
+            "loc": "graph.cpp:21:5"
+        },
+        "i2": {
+            "blockType": "b2",
+            "graphIds": [
+                0
+            ],
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "qualifiedGraphName": "gr",
+            "qualifiedName": "gr.plio_V",
+            "dataWidth": 128,
+            "dataFile": "data/V.txt",
+            "logicalName": "V_in",
+            "plFreq": 250.0,
+            "instanceId": 2,
+            "loc": "graph.cpp:21:5"
+        },
+        "i3": {
+            "blockType": "b3",
+            "graphIds": [
+                0
+            ],
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "qualifiedGraphName": "gr",
+            "qualifiedName": "gr.plio_out",
+            "dataWidth": 128,
+            "dataFile": "data/out.txt",
+            "logicalName": "out",
+            "plFreq": 250.0,
+            "instanceId": 3,
+            "loc": "graph.cpp:22:5"
+        },
+        "i4": {
+            "blockType": "b4",
+            "graphIds": [
+                0
+            ],
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "qualifiedGraphName": "gr",
+            "qualifiedName": "gr.k_qk",
+            "runTime": 0.25,
+            "fabric": "me",
+            "instanceId": 0,
+            "loc": "graph.cpp:31:16"
+        },
+        "i5": {
+            "blockType": "b5",
+            "graphIds": [
+                0
+            ],
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "qualifiedGraphName": "gr",
+            "qualifiedName": "gr.k_softmax",
+            "runTime": 0.25,
+            "fabric": "me",
+            "instanceId": 1,
+            "loc": "graph.cpp:32:21"
+        },
+        "i6": {
+            "blockType": "b6",
+            "graphIds": [
+                0
+            ],
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "qualifiedGraphName": "gr",
+            "qualifiedName": "gr.k_av",
+            "runTime": 0.5,
+            "fabric": "me",
+            "instanceId": 2,
+            "loc": "graph.cpp:33:16"
+        },
+        "ps_i7": {
+            "blockType": "ps_b7",
+            "graphIds": [
+                -1
+            ],
+            "fabric": "fpga",
+            "plAxiLite": "useDefault",
+            "plFreq": 250.0
+        }
+    },
+    "portInstances": {
+        "i0_po0": {
+            "margin": 0,
+            "port": "po0",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "plio_Q.out[0]",
+            "qualifiedName": "gr.plio_Q.out[0]",
+            "blockInstance": "i0"
+        },
+        "i1_po0": {
+            "margin": 0,
+            "port": "po0",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "plio_K.out[0]",
+            "qualifiedName": "gr.plio_K.out[0]",
+            "blockInstance": "i1"
+        },
+        "i2_po0": {
+            "margin": 0,
+            "port": "po0",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "plio_V.out[0]",
+            "qualifiedName": "gr.plio_V.out[0]",
+            "blockInstance": "i2"
+        },
+        "i3_pi0": {
+            "margin": 0,
+            "port": "pi0",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "plio_out.in[0]",
+            "qualifiedName": "gr.plio_out.in[0]",
+            "blockInstance": "i3"
+        },
+        "i4_pi0": {
+            "margin": 0,
+            "port": "pi0",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "k_qk.in[0]",
+            "qualifiedName": "gr.k_qk.in[0]",
+            "instanceId": 4,
+            "blockInstance": "i4",
+            "blockSize": 256
+        },
+        "i4_pi1": {
+            "margin": 0,
+            "port": "pi1",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "k_qk.in[1]",
+            "qualifiedName": "gr.k_qk.in[1]",
+            "instanceId": 5,
+            "blockInstance": "i4",
+            "blockSize": 8192
+        },
+        "i4_po0": {
+            "margin": 0,
+            "port": "po0",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "k_qk.out[0]",
+            "qualifiedName": "gr.k_qk.out[0]",
+            "instanceId": 6,
+            "blockInstance": "i4",
+            "blockSize": 32
+        },
+        "i5_pi0": {
+            "margin": 0,
+            "port": "pi0",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "k_softmax.in[0]",
+            "qualifiedName": "gr.k_softmax.in[0]",
+            "instanceId": 7,
+            "blockInstance": "i5",
+            "blockSize": 32
+        },
+        "i5_po0": {
+            "margin": 0,
+            "port": "po0",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "k_softmax.out[0]",
+            "qualifiedName": "gr.k_softmax.out[0]",
+            "instanceId": 8,
+            "blockInstance": "i5",
+            "blockSize": 32
+        },
+        "i6_pi0": {
+            "margin": 0,
+            "port": "pi0",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "k_av.in[0]",
+            "qualifiedName": "gr.k_av.in[0]",
+            "instanceId": 9,
+            "blockInstance": "i6",
+            "blockSize": 32
+        },
+        "i6_pi1": {
+            "margin": 0,
+            "port": "pi1",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "k_av.in[1]",
+            "qualifiedName": "gr.k_av.in[1]",
+            "instanceId": 10,
+            "blockInstance": "i6",
+            "blockSize": 8192
+        },
+        "i6_po0": {
+            "margin": 0,
+            "port": "po0",
+            "graphName": "gr",
+            "graphType": "xmod_attn_graph",
+            "portName": "k_av.out[0]",
+            "qualifiedName": "gr.k_av.out[0]",
+            "instanceId": 11,
+            "blockInstance": "i6",
+            "blockSize": 256
+        }
+    },
+    "nets": {
+        "net0": {
+            "srcInstance": "i0",
+            "srcPort": "i0_po0",
+            "dstInstance": "i4",
+            "dstPort": "i4_pi0",
+            "varNames": [
+                ""
+            ],
+            "locs": [
+                "graph.cpp:39:9"
+            ]
+        },
+        "net1": {
+            "srcInstance": "i1",
+            "srcPort": "i1_po0",
+            "dstInstance": "i4",
+            "dstPort": "i4_pi1",
+            "varNames": [
+                ""
+            ],
+            "locs": [
+                "graph.cpp:40:9"
+            ]
+        },
+        "net2": {
+            "srcInstance": "i4",
+            "srcPort": "i4_po0",
+            "dstInstance": "i5",
+            "dstPort": "i5_pi0",
+            "varNames": [
+                ""
+            ],
+            "locs": [
+                "graph.cpp:41:9"
+            ]
+        },
+        "net3": {
+            "srcInstance": "i5",
+            "srcPort": "i5_po0",
+            "dstInstance": "i6",
+            "dstPort": "i6_pi0",
+            "varNames": [
+                ""
+            ],
+            "locs": [
+                "graph.cpp:42:9"
+            ]
+        },
+        "net4": {
+            "srcInstance": "i2",
+            "srcPort": "i2_po0",
+            "dstInstance": "i6",
+            "dstPort": "i6_pi1",
+            "varNames": [
+                ""
+            ],
+            "locs": [
+                "graph.cpp:43:9"
+            ]
+        },
+        "net5": {
+            "srcInstance": "i6",
+            "srcPort": "i6_po0",
+            "dstInstance": "i3",
+            "dstPort": "i3_pi0",
+            "varNames": [
+                ""
+            ],
+            "locs": [
+                "graph.cpp:44:9"
+            ]
+        }
+    },
+    "debugInfo": {
+        "i0": {
+            "varName": "plio_Q"
+        },
+        "i1": {
+            "varName": "plio_K"
+        },
+        "i2": {
+            "varName": "plio_V"
+        },
+        "i3": {
+            "varName": "plio_out"
+        },
+        "i4": {
+            "varName": "k_qk"
+        },
+        "i5": {
+            "varName": "k_softmax"
+        },
+        "i6": {
+            "varName": "k_av"
+        },
+        "ps_i7": {
+            "varName": ""
+        },
+        "i0_po0": {
+            "varName": "plio_Q.out[0]"
+        },
+        "i1_po0": {
+            "varName": "plio_K.out[0]"
+        },
+        "i2_po0": {
+            "varName": "plio_V.out[0]"
+        },
+        "i3_pi0": {
+            "varName": "plio_out.in[0]"
+        },
+        "i4_pi0": {
+            "varName": "k_qk.in[0]"
+        },
+        "i4_pi1": {
+            "varName": "k_qk.in[1]"
+        },
+        "i4_po0": {
+            "varName": "k_qk.out[0]"
+        },
+        "i5_pi0": {
+            "varName": "k_softmax.in[0]"
+        },
+        "i5_po0": {
+            "varName": "k_softmax.out[0]"
+        },
+        "i6_pi0": {
+            "varName": "k_av.in[0]"
+        },
+        "i6_pi1": {
+            "varName": "k_av.in[1]"
+        },
+        "i6_po0": {
+            "varName": "k_av.out[0]"
+        }
+    },
+    "graphFilesInfo": {
+        "headerFiles": [
+            "graph.cpp"
+        ]
+    },
+    "mapping": {
+        "blockInstanceMapping": {
+            "i0": {
+                "plioInfo": {
+                    "tile": "shim",
+                    "column": 25,
+                    "direction": "pl2aie",
+                    "channel": 4
+                }
+            },
+            "i1": {
+                "plioInfo": {
+                    "tile": "shim",
+                    "column": 26,
+                    "direction": "pl2aie",
+                    "channel": 0
+                }
+            },
+            "i2": {
+                "plioInfo": {
+                    "tile": "shim",
+                    "column": 25,
+                    "direction": "pl2aie",
+                    "channel": 0
+                }
+            },
+            "i3": {
+                "plioInfo": {
+                    "tile": "shim",
+                    "column": 25,
+                    "direction": "aie2pl",
+                    "channel": 0
+                }
+            },
+            "i4": {
+                "coreInfo": {
+                    "tile": "aie",
+                    "column": 25,
+                    "row": 0,
+                    "schedule": 0
+                }
+            },
+            "i5": {
+                "coreInfo": {
+                    "tile": "aie",
+                    "column": 25,
+                    "row": 0,
+                    "schedule": 1
+                }
+            },
+            "i6": {
+                "coreInfo": {
+                    "tile": "aie",
+                    "column": 25,
+                    "row": 0,
+                    "schedule": 2
+                }
+            }
+        },
+        "portInstanceMapping": {
+            "i0_po0": {},
+            "i1_po0": {},
+            "i2_po0": {},
+            "i3_pi0": {},
+            "i4_pi0": {
+                "bufferInfo": [
+                    {
+                        "generatedName": "buf0",
+                        "tile": "aie",
+                        "column": 25,
+                        "row": 1,
+                        "offset": 7936,
+                        "size": 256,
+                        "lock": [
+                            0
+                        ]
+                    },
+                    {
+                        "generatedName": "buf0d",
+                        "tile": "aie",
+                        "column": 25,
+                        "row": 1,
+                        "offset": 8448,
+                        "size": 256,
+                        "lock": [
+                            1
+                        ]
+                    }
+                ],
+                "dmaInfo": {
+                    "tile": "aie",
+                    "column": 25,
+                    "row": 1,
+                    "direction": "s2mm",
+                    "channel": 0,
+                    "bufferDescriptor": [
+                        0,
+                        1
+                    ]
+                }
+            },
+            "i4_pi1": {
+                "bufferInfo": [
+                    {
+                        "generatedName": "buf1",
+                        "tile": "aie",
+                        "column": 24,
+                        "row": 0,
+                        "offset": 8192,
+                        "size": 8192,
+                        "lock": [
+                            0
+                        ]
+                    },
+                    {
+                        "generatedName": "buf1d",
+                        "tile": "aie",
+                        "column": 24,
+                        "row": 0,
+                        "offset": 16384,
+                        "size": 8192,
+                        "lock": [
+                            1
+                        ]
+                    }
+                ],
+                "dmaInfo": {
+                    "tile": "aie",
+                    "column": 24,
+                    "row": 0,
+                    "direction": "s2mm",
+                    "channel": 0,
+                    "bufferDescriptor": [
+                        0,
+                        1
+                    ]
+                }
+            },
+            "i4_po0": {
+                "bufferInfo": [
+                    {
+                        "generatedName": "buf2",
+                        "tile": "aie",
+                        "column": 25,
+                        "row": 0,
+                        "offset": 0,
+                        "size": 32
+                    }
+                ]
+            },
+            "i5_pi0": {
+                "bufferInfo": [
+                    {
+                        "generatedName": "buf2",
+                        "tile": "aie",
+                        "column": 25,
+                        "row": 0,
+                        "offset": 0,
+                        "size": 32
+                    }
+                ]
+            },
+            "i5_po0": {
+                "bufferInfo": [
+                    {
+                        "generatedName": "buf3",
+                        "tile": "aie",
+                        "column": 25,
+                        "row": 0,
+                        "offset": 8192,
+                        "size": 32
+                    }
+                ]
+            },
+            "i6_pi0": {
+                "bufferInfo": [
+                    {
+                        "generatedName": "buf3",
+                        "tile": "aie",
+                        "column": 25,
+                        "row": 0,
+                        "offset": 8192,
+                        "size": 32
+                    }
+                ]
+            },
+            "i6_pi1": {
+                "bufferInfo": [
+                    {
+                        "generatedName": "buf4",
+                        "tile": "aie",
+                        "column": 25,
+                        "row": 0,
+                        "offset": 16384,
+                        "size": 8192,
+                        "lock": [
+                            0
+                        ]
+                    },
+                    {
+                        "generatedName": "buf4d",
+                        "tile": "aie",
+                        "column": 25,
+                        "row": 0,
+                        "offset": 24576,
+                        "size": 8192,
+                        "lock": [
+                            1
+                        ]
+                    }
+                ],
+                "dmaInfo": {
+                    "tile": "aie",
+                    "column": 25,
+                    "row": 0,
+                    "direction": "s2mm",
+                    "channel": 0,
+                    "bufferDescriptor": [
+                        0,
+                        1
+                    ]
+                }
+            },
+            "i6_po0": {
+                "bufferInfo": [
+                    {
+                        "generatedName": "buf5",
+                        "tile": "aie",
+                        "column": 25,
+                        "row": 1,
+                        "offset": 256,
+                        "size": 256,
+                        "lock": [
+                            2
+                        ]
+                    },
+                    {
+                        "generatedName": "buf5d",
+                        "tile": "aie",
+                        "column": 25,
+                        "row": 1,
+                        "offset": 8192,
+                        "size": 256,
+                        "lock": [
+                            3
+                        ]
+                    }
+                ],
+                "dmaInfo": {
+                    "tile": "aie",
+                    "column": 25,
+                    "row": 1,
+                    "direction": "mm2s",
+                    "channel": 0,
+                    "bufferDescriptor": [
+                        2,
+                        3
+                    ]
+                }
+            }
+        },
+        "graphInstanceMapping": {
+            "gr": {
+                "graphInfo": {
+                    "core_columns": [
+                        25
+                    ],
+                    "core_rows": [
+                        0
+                    ],
+                    "iteration_memory_columns": [
+                        24
+                    ],
+                    "iteration_memory_rows": [
+                        0
+                    ],
+                    "iteration_memory_addresses": [
+                        4
+                    ],
+                    "multirate_triggers": [
+                        0
+                    ]
+                }
+            }
+        },
+        "DMAFIFO": {},
+        "systemMemory": [
+            {
+                "tile": "aie",
+                "column": 24,
+                "row": 0,
+                "offset": 0,
+                "size": 1156
+            }
+        ]
+    },
+    "scheduling": {
+        "i4": {
+            "repetition_count": 1
+        },
+        "i5": {
+            "repetition_count": 1
+        },
+        "i6": {
+            "repetition_count": 1
+        }
+    },
+    "event_trace_graph": {
+        "trace_ports": {}
+    },
+    "aie_driver_config": {
+        "hw_gen": 1,
+        "base_address": 2199023255552,
+        "npi_address": 4144627712,
+        "column_shift": 23,
+        "row_shift": 18,
+        "num_rows": 9,
+        "num_columns": 50,
+        "shim_row": 0,
+        "mem_row_start": 0,
+        "mem_num_rows": 0,
+        "aie_tile_row_start": 1,
+        "aie_tile_num_rows": 8
+    },
+    "part": "xcvc1902-vsva2197-2MP-e-S",
+    "platform": "/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm"
+}

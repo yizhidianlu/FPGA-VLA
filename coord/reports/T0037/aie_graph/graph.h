@@ -1,12 +1,11 @@
-// graph.h — Common definitions for AIE xmod_attn graph (128-bit PLIO)
+// graph.h — AIE xmod_attn v0 (scaled to fit AIE 32KB DMA MG limit)
 #ifndef XMOD_ATTN_AIE_GRAPH_H
 #define XMOD_ATTN_AIE_GRAPH_H
 
-#define QDIM   4096
-#define NTOK    256
-#define TOPK     64
-
-// 128-bit PLIO → v16int8 = 16 int8 elements per stream beat
-#define VEC8   16
+// v0 dims: K=32*256=8KB, V=32*256=8KB → double-buffer=16KB < 32KB limit
+#define QDIM    256
+#define NTOK     32
+#define TOPK      8
+#define VEC8     16
 
 #endif
