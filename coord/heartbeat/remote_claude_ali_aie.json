@@ -1,0 +1,13 @@
+{
+  "worker": "remote_claude_ali_aie",
+  "platform": "linux-ubuntu22-ali-ecs",
+  "ts": "2026-05-26T05:06:57Z",
+  "pid": 75683,
+  "vitis": "OK", "vivado": "OK", "aie": "OK",
+  "cpu_cores": 16, "ram_gb": 61,
+  "host": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "current_task": "",
+  "worker_state": "ONLINE - awaiting orchestrator handshake",
+  "protocol_version": "1.0",
+  "session_kind": "claude_code_interactive"
+}
