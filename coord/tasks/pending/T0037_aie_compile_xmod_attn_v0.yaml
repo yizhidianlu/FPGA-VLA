@@ -1,0 +1,86 @@
+task_id: T0037
+created_by: orchestrator
+created_at: 2026-05-26T00:05:00Z
+type: aie_compile
+priority: P0
+target_worker: remote_claude_ali_aie   # AIE only available here
+depends_on: [T0022]                     # PL baseline of xmod_attn already validated
+deadline_minutes: 360
+params:
+  module_name: xmod_attn_v0_aie
+  description: |
+    **First MR-VLA kernel ported to AI Engine — paper §V.G PL-only vs AIE+PL
+    ablation enabler.**
+
+    User explicitly held this back until AIE was installed
+    ("硬件端先用PL完成实验，后续等我通知再安装AIE做性能对比"). The new
+    Alibaba ECS host has aiecompiler 2024.1 verified; this task is the user
+    signal to begin the AIE arm.
+
+    Target IP: cross-modal sparse attention (xmod_attn) — the centerpiece IP
+    from T0022. Its PL baseline is fully measured:
+      Fmax 351 MHz, DSP=12, BRAM=9, LUT=13272, FF=8590,
+      latency 168 507 cycles @ 250 MHz = 674 µs.
+    AIE arm hypothesis: an AIE tile array exploiting the MAC-256 vector unit
+    should improve latency at comparable energy, validating the C1 + C2 claim
+    that the topology is AIE-friendly.
+
+  flow:
+    step_0_scaffold: |
+      Create coord/reports/T0037/aie_graph/ with:
+        graph.cpp          (adf::graph hierarchy, 1 PLIO in, 1 PLIO out for
+                            stream-attached PL skirt; pure-AIE inner)
+        kernel_qk.cpp      (Q·K^T tile kernel using v8int16/v8float intrinsics)
+        kernel_softmax.cpp (numerically-stable softmax)
+        kernel_av.cpp      (Attention·V tile kernel)
+        graph.h, main.cpp  (testbench)
+      Tile choice: start with a 4-tile pipeline (qk → softmax → av → write)
+      and iterate up to the latency target. Sequence length matches T0022.
+    step_1_aie_simulate: |
+      aiecompiler --target=hw -platform=<vck190 platform> graph.cpp ;
+      aiesimulator --pkg-dir Work --i I/O ;
+      check: numerical correctness against T0022 csim golden tensor (load
+      from coord/reports/T0022/golden_*.bin if present, otherwise regenerate
+      from the same numpy script T0022 used).
+    step_2_resource: |
+      report from Work/reports/: tiles_used, mem_modules_used, DMA channels,
+      DDR bandwidth, AIE clock cycles per inference.
+    step_3_compare_to_pl: |
+      Compute and report:
+        aie_latency_us  (from aiesimulator cycles ÷ AIE clock)
+        aie_tiles
+        pl_latency_us = 674   (T0022 measured)
+        speedup = pl_latency_us / aie_latency_us
+        notes on numerical accuracy (max |abs| diff vs golden)
+  target_platform: xilinx_vck190_base_202410_1   # adjust to installed platform
+acceptance_criteria:
+  - status: "== DONE"
+  - result.aiecompile_ok: true
+  - result.aiesim_pass: true
+  - result.max_abs_diff_vs_golden: "< 1e-2"
+  - result.tiles_used: "< 32"
+  - result.aie_latency_us: "< 5000"   # generous soft cap; want to beat 674 µs but won't block
+human_ack_required_on:
+  - aie_latency_worse_than_pl
+  - tiles_above_24
+  - max_abs_diff_above_5e-3
+notes: |
+  This is a v0 — function-correctness first, then speed. Acceptable for v0:
+  even AIE latency > PL latency, as long as the graph compiles, simulates
+  correctly, and produces credible tile/DDR-BW numbers. Optimization passes
+  (v1, v2 with explicit cascade-streams, intrinsic tiling) come in follow-ups.
+
+  Numerical accuracy budget: max |abs| diff < 1e-2 because the PL path uses
+  INT8/INT16; the AIE path may use bfloat16 / int8. Document the dtype actually
+  used in result.json.
+
+  If the installed VCK190 platform name differs (e.g.
+  xilinx_vck190_base_202410_1 vs xilinx_vck190_base_dfx_202410_1), substitute
+  and report the actual platform string in result.json.
+
+  Output to coord/reports/T0037/:
+    aie_graph/    (all source)
+    aiesim.log
+    resource.rpt
+    result.json
+    compare_pl.md (3-line summary table for paper §V.G)

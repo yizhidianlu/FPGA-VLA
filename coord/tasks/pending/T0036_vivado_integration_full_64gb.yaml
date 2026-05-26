@@ -1,0 +1,89 @@
+task_id: T0036
+created_by: orchestrator
+created_at: 2026-05-26T00:00:00Z
+type: vivado_ipi
+priority: P0
+supersedes: T0034
+target_worker: remote_claude_ali_aie    # new 64 GB ECS host
+depends_on: [T0024, T0025, T0026, T0029, T0030]
+deadline_minutes: 600
+params:
+  module_name: mr_vla_full_top
+  description: |
+    **Camera-ready integrated post-route netlist — RERUN of T0034 on 64 GB host.**
+
+    T0034 conclusively crashed Vivado IP-Integrator three times on the 16 GB
+    YIZHIDIANLU host (EXCEPTION_BREAKPOINT / [Project 1-9] / ACCESS_VIOLATION).
+    Worker correctly stopped per protocol §11 and the T0032 component-sum
+    [HW-SYNTH] number (169 DSP / 76 k LUT / 236.5 BRAM / 35 URAM, all <25 %
+    VCK190) is the current paper number.
+
+    The Alibaba ECS host (64 GiB RAM, 16 vCPU, Vivado 2024.1, Vitis 2024.1,
+    AIE installed) clears the conclusive 16 GB ceiling. All preparation
+    artefacts from T0034 are committed and ready to run as-is:
+      - coord/reports/T0034/build_bd.tcl          (block-design build script)
+      - coord/reports/T0034/mr_vla_sched_wrap.v   (Verilog wrapper around SV)
+      - coord/reports/T0034/*.xml + IP-XACT pkgs  (4 packaged HLS IPs)
+    Pick them up from the repo and execute the IP-Integrator flow end-to-end.
+
+  flow:
+    step_0_sanity: |
+      vivado -version && a 1-minute trivial synth smoke; ensure ulimit -v is
+      unlimited and at least 32 GiB free swap exists. Abort cleanly on any
+      install/file path issue and report stdout — do NOT silently retry.
+    step_1_ip_repo: |
+      Reuse the 4 IP-XACT package dirs already in coord/reports/T0034/.
+      set_property ip_repo_paths { <those 4 dirs> } [current_project] ;
+      update_ip_catalog.
+    step_2_block_design: |
+      Source the T0034 build_bd.tcl as-is first. If it succeeds, jump to step_3.
+      If it fails on a host-specific path, patch the path and rerun — do NOT
+      change the topology. Verify all 5 cells instantiate: vit_encoder_12layer,
+      xmod_attn_v1, gvsa_matmul, action_diff_head, mr_vla_sched_wrap.
+      Generate HDL wrapper.
+    step_3_synth: |
+      launch_runs synth_1 -jobs 4 ; wait_on_run synth_1 ;
+      open_run synth_1 ; report_utilization > synth_util.rpt ;
+      report_timing_summary > synth_timing.rpt.
+    step_4_impl: |
+      launch_runs impl_1 -to_step route_design -jobs 4 ; wait_on_run impl_1 ;
+      open_run impl_1 ;
+      report_utilization > impl_util.rpt ;
+      report_timing_summary > impl_timing.rpt ;
+      report_power > impl_power.rpt.
+      **This is the camera-ready upgrade**: T0036 replaces the component-sum
+      [HW-SYNTH] number with a real post-route [HW-SYNTH] integrated number
+      (single authoritative WNS / LUT / DSP / BRAM / URAM / power).
+    step_5_archive: |
+      Save mr_vla_bd.tcl (write_bd_tcl), the .dcp for impl_1, all three .rpt
+      files, and a clean stdout log to coord/reports/T0036/.
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+acceptance_criteria:
+  - status: "== DONE"
+  - result.synth_ok: true
+  - result.impl_ok: true
+  - result.timing_met: true
+  - result.wns_ns: ">= 0"
+  - result.lut_pct: "< 25"
+  - result.dsp_pct: "< 25"
+  - result.bram_pct: "< 30"
+  - result.uram_pct: "< 25"
+human_ack_required_on:
+  - vivado_crash_again
+  - wns_below_0_2
+  - lut_pct_above_15
+  - impl_skipped_synth_only
+notes: |
+  This is the single most important hardware deliverable for camera-ready.
+  Worker: please prepend stdout with `free -g` and `vivado -version` so the
+  orch can immediately verify the host capacity at write-time.
+
+  If Vivado crashes AGAIN despite 64 GB: do NOT fall back to DCP linking
+  (already shown non-functional in T0032). Instead, capture the crash log,
+  write inbox FAIL with verb=host_unexpectedly_limited, and stop.
+
+  Cross-paper alignment: the result.json must surface a single integrated
+  resource line (dsp / lut / bram_tiles / uram + dsp_pct ... + wns_ns +
+  total_power_w) — that line goes verbatim into main.tex Table V as the
+  HW-SYNTH integrated row.

@@ -1,0 +1,62 @@
+task_id: T0038
+created_by: orchestrator
+created_at: 2026-05-26T00:10:00Z
+type: llm_codegen
+priority: P1
+target_worker: remote_claude_ali_aie
+depends_on: [T0036, T0037]
+deadline_minutes: 90
+params:
+  module_name: aie_vs_pl_ablation
+  description: |
+    **Paper §V.G PL-only vs AIE+PL ablation writeup, fed by T0037 measurement.**
+
+    After T0037 (AIE arm) and T0036 (integrated PL post-route) both complete,
+    aggregate the numbers into a single LaTeX-ready ablation block + a small
+    PNG bar chart for §V.G.
+
+  flow:
+    step_1_collect: |
+      Read coord/reports/T0036/result.json   (integrated PL post-route)
+      Read coord/reports/T0037/result.json   (AIE arm)
+      Read coord/reports/T0022/result.json   (PL standalone xmod_attn baseline)
+    step_2_emit_latex: |
+      Write coord/reports/T0038/aie_vs_pl.tex with a 3-row table:
+        +-----------+----------+--------+--------+---------+--------+
+        | Variant   | Latency  | DSP    | LUT    | BRAM    | Power  |
+        +-----------+----------+--------+--------+---------+--------+
+        | PL only   | …µs      | …      | …      | …       | …W     |
+        | AIE only  | …µs      | 0      | 0      | 0       | … (AIE)|
+        | AIE + PL  | …µs      | …(skirt)| …      | …       | …W     |
+        +-----------+----------+--------+--------+---------+--------+
+      Caption: "PL vs AIE for xmod_attn (cross-modal sparse attention)."
+      Honesty label: [HW-SYNTH]+[AIE-SIM] (AIE numbers from aiesimulator,
+      not on-board).
+    step_3_emit_figure: |
+      Render coord/reports/T0038/fig_aie_vs_pl.png — single bar group:
+        latency bars (3 variants), with a secondary axis showing
+        DSP fraction (cap: 1936 of VCK190 PL DSP).
+      Use matplotlib defaults; no seaborn. 400 dpi, square aspect, tight_layout.
+    step_4_emit_notes_for_orch: |
+      Write a 1-page coord/reports/T0038/notes_for_orch.md summarising:
+        - Was the AIE arm faster? By how much?
+        - Did energy improve (if power numbers available)?
+        - Recommended single-sentence verdict for §V.G.
+        - Open issues / suggested v1 follow-ups.
+acceptance_criteria:
+  - status: "== DONE"
+  - result.tex_written: true
+  - result.fig_written: true
+  - result.notes_written: true
+human_ack_required_on:
+  - aie_latency_worse_than_pl_in_writeup
+  - power_field_missing
+notes: |
+  This task is the bridge from "experiment done" to "in the paper". Output the
+  three artefacts and stop — do NOT touch main.tex. The orchestrator will pull
+  them in.
+
+  Coding env: any Python + matplotlib + numpy is fine. If the AIE arm power
+  number is unavailable from aiesimulator (typical), document "AIE power
+  estimate via vcd_to_power post-pass" as future work and emit "—" in the
+  table cell; do NOT fabricate.
