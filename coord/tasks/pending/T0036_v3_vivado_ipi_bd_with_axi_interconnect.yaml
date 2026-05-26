@@ -1,0 +1,83 @@
+task_id: T0036_v3
+created_by: orchestrator
+created_at: 2026-05-26T08:35:00Z
+type: vivado_ipi
+priority: P2                            # camera-ready item, does NOT block FCCM/DAC submission
+supersedes: T0036_RETRY                  # the impl half only — synth half already accepted
+target_worker: remote_claude_ali_aie
+depends_on: [T0036_RETRY, T0040]         # don't run during T0040; reuse T0036_RETRY synth artefacts
+deadline_minutes: 480
+params:
+  module_name: mr_vla_full_top_v3
+  description: |
+    **BD-wiring fix to enable post-route impl.** T0036_RETRY successfully ran
+    integrated synth (465 DSP / 53k LUT / 235 BRAM / 35 URAM, all <25% VCK190)
+    but impl failed on IO overutilization (20,841 IO pins vs 1,004 available)
+    because the IP-Integrator block design exposed every HLS IP's m_axi and
+    s_axilite ports as top-level Bonded IOBs. Fix: insert a proper AXI Network
+    layer (NoC + SmartConnect + AXI-Lite interconnect) so the IPs' AXI ports
+    are internally routed instead of externalized.
+
+  flow:
+    step_1_open_existing: |
+      Open the T0036_RETRY project; the BD wrapper mr_vla_bd_wrapper compiled
+      cleanly through synth — don't touch what works, just add the missing AXI
+      routing layer to the BD.
+    step_2_axi_noc_topology: |
+      In the BD, add:
+        - axi_noc_0  : VCK190 has an integrated NoC; route each IP's m_axi
+                       through one NoC master port to one or more DDR/HBM
+                       ports (NMU/NSU bridge)
+        - axi_smartconnect_0 : optional, for any non-NoC AXI bridging
+        - axi_interconnect_0 or AXI Lite SmartConnect for s_axilite control
+                                ports (collapse 5 s_axilite to one PS or stub
+                                AXI-Lite master)
+      Hide the per-IP AXI ports inside the BD. The only top-level pins that
+      remain should be:
+        clk_in, rst_in, ddr (NoC), maybe a small s_axilite for control.
+    step_3_validate: |
+      validate_bd_design  ; should PASS without IO over-utilization warnings
+    step_4_synth_impl: |
+      launch_runs synth_1 -jobs 4 ; wait ;
+      launch_runs impl_1 -to_step route_design -jobs 4 ; wait ;
+      report_utilization > impl_util.rpt ;
+      report_timing_summary > impl_timing.rpt ;
+      report_power > impl_power.rpt
+    step_5_archive: |
+      Write coord/reports/T0036_v3/result.json with the integrated post-route
+      row (dsp, lut, bram, uram, wns_ns, whs_ns, total_power_w, dynamic_power_w).
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+acceptance_criteria:
+  - status: "== DONE"
+  - result.synth_ok: true
+  - result.impl_ok: true
+  - result.timing_met: true
+  - result.wns_ns: ">= 0"
+  - result.io_pct: "< 100"               # the key fix — IO under 100% means BD wiring is sound
+  - result.lut_pct: "< 25"
+  - result.dsp_pct: "< 30"               # synth showed 23.6%; impl might push higher
+  - result.bram_pct: "< 30"
+  - result.uram_pct: "< 25"
+human_ack_required_on:
+  - vivado_crash_again
+  - wns_below_0_2
+  - io_overutilization_again
+  - impl_runtime_above_4h
+notes: |
+  P2 — this is for camera-ready, not initial submission. The paper Table V is
+  already upgraded with T0036_RETRY synth-level numbers; T0036_v3 turns
+  [HW-SYNTH] into [HW-IMPL] post-route. WHS / power become real instead of
+  vectorless-estimated.
+
+  AXI routing reference: AMD UG1701 + UG1273; VCK190 board has 4 DDR
+  controllers + the NoC.  The control plane can be a stub AXI-Lite if PS9
+  isn't being elaborated yet.
+
+  If the NoC IP isn't available in the installed Vivado, fall back to
+  axi_smartconnect everywhere with a stub DDR controller pinned to MIO. The
+  goal is "every AXI port has a sink, not an IOB" — the specific sink choice
+  is implementation detail.
+
+  Do NOT modify the per-IP HLS source. Wrapping/wiring lives entirely in the
+  BD.

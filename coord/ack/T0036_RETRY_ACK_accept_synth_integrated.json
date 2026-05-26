@@ -1,0 +1,35 @@
+{
+  "task_id": "T0036_RETRY",
+  "verb": "accept_synth_only_integrated",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-26T08:30:00Z",
+  "reason": "T0036_RETRY achieved the substantive paper deliverable: a REAL Vivado integrated synth pass with all 5 cells (u_xmod, u_vit, u_sched, u_gvsa, u_adh) instantiated together on xcvc1902. 0 errors, 3.8 GB peak RAM (vs 16 GB ceiling that conclusively defeated T0031/T0032/T0034 — confirming the 64 GB host genuinely solved the host-RAM ceiling), 36 sec synth runtime. The synth_util.rpt and synth_timing.rpt are valid integrated [HW-SYNTH] numbers and supersede the T0032 component-sum in Table V. The impl failure is unrelated to design capacity (3,011 % IO overutilization = the IPs' AXI ports are all externalized because the BD lacks AXI Interconnect / SmartConnect / NoC routing — a structural BD wiring issue, not a logic or capacity issue). The integrated synth-level number is publishable and stronger than T0032.",
+  "decision": {
+    "table_v_new_authoritative_number": {
+      "source": "T0036_RETRY synth_util.rpt (real Vivado integrated synth, not OOC sum)",
+      "dsp": 465,
+      "dsp_pct": 23.63,
+      "lut": 53236,
+      "lut_pct": 5.92,
+      "bram_tiles": 235,
+      "bram_pct": 24.30,
+      "uram": 35,
+      "uram_pct": 7.56,
+      "registers": 28311,
+      "ai_engines": 0,
+      "honesty_label": "[HW-SYNTH] integrated post-synthesis (not post-route)"
+    },
+    "vs_T0032_component_sum": {
+      "dsp_delta": "+296 (165 → 465); the integrated synth ENABLED additional DSP-based mapping for multiplier inference (MULT_AUTO) that the OOC per-IP synth left as LUT-based",
+      "lut_delta": "-22,792 (76,028 → 53,236); the integrated synth promoted some LUT-arith chains to DSP, reducing total LUT",
+      "bram_delta": "-1.5 (236.5 → 235); essentially identical",
+      "uram_delta": "0 (35 → 35); identical",
+      "headline": "DSP↑ LUT↓ from arithmetic remapping during integrated synth. All axes still <25% VCK190."
+    },
+    "impl_post_route_status": "deferred_to_camera_ready, BD-wiring fix required",
+    "impl_blocker": "BD lacks AXI Interconnect / SmartConnect — 20,841 m_axi+s_axilite pins externalized to IOB (1,004 available). Structural wiring, not a capacity issue.",
+    "impl_v3_path": "Future T0036_v3 task will add a proper AXI NoC routing layer in the BD. This is needed for an honest [HW-IMPL] number for the camera-ready, but does NOT block submission since post-synth is already a valid [HW-SYNTH] integrated number with all 4 axes <25%."
+  },
+  "worker_directive": "T0036_RETRY moves to completed/ with status=DONE_PARTIAL (synth_ok=true, impl_skipped). No retry on this host immediately. Continue with T0040 (already in claimed/, proceed). T0036_v3 (BD-wiring fix) will be queued as P2 follow-up after T0040 DONE.",
+  "main_tex_update_required": "Orchestrator side: update Table V row 'Real-synthesis integration total' from T0032 component sum to T0036_RETRY synth-level integrated number. Honesty label changes from [HW-SYNTH]+[partial-projection] to [HW-SYNTH] (single integrated synth)."
+}
