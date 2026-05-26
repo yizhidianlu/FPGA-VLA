@@ -1,0 +1,35 @@
+{
+  "task_id": "T0036",
+  "status": "FAILED",
+  "claimed_at": "2026-05-26T00:00:00Z",
+  "finished_at": "2026-05-26T06:04:50Z",
+  "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "worker_version": "v1.0",
+  "result": {
+    "synth_ok": false,
+    "impl_ok": false,
+    "timing_met": false,
+    "wns_ns": null,
+    "ipi_ok": true,
+    "ipi_detail": "All 5 cells instantiated (u_xmod, u_gvsa, u_adh, u_vit, u_sched). validate_bd_design passed. HDL wrapper generated.",
+    "license_fail": true,
+    "license_error": "ERROR [Common 17-345]: No license for feature 'Synthesis' and/or device 'xcvc1902'",
+    "hls_ip_regen": {
+      "T0024_xmod_attn_v1": "CSim PASS (cos_sim=1.0), csynth PASS, IP-XACT OK",
+      "T0025_gvsa_matmul": "CSim PASS, csynth PASS, IP-XACT OK",
+      "T0026_action_diff_head": "CSim PASS (mismatches=0/7), csynth PASS, IP-XACT OK",
+      "T0029_vit_encoder_12layer": "CSim PASS, csynth PASS, IP-XACT OK"
+    }
+  },
+  "acceptance_criteria_passed": false,
+  "human_ack_needed": true,
+  "human_ack_reasons": ["vivado_license_missing"],
+  "artefacts": [
+    "coord/reports/T0036/vivado_ipi.log",
+    "coord/reports/T0036/build_bd.tcl",
+    "coord/reports/T0036/result.json",
+    "runs/T0036/mr_vla_ipi/ (Vivado project — block design ready)"
+  ],
+  "next_task_suggestion": "Install xcvc1902 license, then retry T0036 synth+impl",
+  "error": "Vivado Synthesis license missing for xcvc1902 Versal device"
+}

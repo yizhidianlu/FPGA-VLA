@@ -1,0 +1,36 @@
+{
+  "task_id": "T0036",
+  "status": "FAILED",
+  "worker": "remote_claude_ali_aie",
+  "ts": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'",
+  "failure_stage": "step_3_synth",
+  "failure_reason": "Vivado license missing for xcvc1902 (VCK190 Versal device)",
+  "what_succeeded": {
+    "step_0_sanity": "Vivado 2024.1 OK, 61 GiB RAM",
+    "step_1_ip_repo": "4 IP-XACT packages regenerated from HLS source (T0024/T0025/T0026/T0029) — all CSim PASS, csynth PASS, export_design OK",
+    "step_2_block_design": "All 5 cells instantiated: u_xmod, u_gvsa, u_adh, u_vit, u_sched — NO crash (64 GB cleared the ACCESS_VIOLATION wall)",
+    "wrapper": "HDL wrapper generated successfully, validate_bd_design passed"
+  },
+  "what_failed": {
+    "step_3_synth": "launch_runs synth_1 failed — ERROR [Common 17-345]: No license for feature 'Synthesis' and/or device 'xcvc1902'. All 4 OOC IP synths also failed with the same license error."
+  },
+  "license_diagnosis": {
+    "available_licenses": "XilinxFree.lic (IP cores only), Xilinx.lic (Design_Linking IP cores only) — no Synthesis license for any Versal device",
+    "XILINXD_LICENSE_FILE": "not set",
+    "LM_LICENSE_FILE": "not set",
+    "note": "vitis_hls synthesis works (no device license needed for C→RTL), but Vivado synthesis + PnR requires a paid Versal license"
+  },
+  "next_steps_for_orch": [
+    "Option A: Transfer Vivado license from YIZHIDIANLU Windows machine (which has it — T0030 synth succeeded there) to this Alibaba ECS",
+    "Option B: Generate a 30-day Vivado evaluation license for xcvc1902 at https://www.xilinx.com/getlicense",
+    "Option C: Set XILINXD_LICENSE_FILE=port@host pointing to a license server with Versal seats"
+  ],
+  "artefacts_committed": [
+    "coord/reports/T0036/vivado_ipi.log (full Vivado session log)",
+    "runs/T0036/build_bd.tcl (patched for Linux)",
+    "coord/reports/T0036/build_bd.log (copy of Vivado log)"
+  ],
+  "human_ack_needed": true,
+  "human_ack_reason": "vivado_license_missing — cannot synthesize without xcvc1902 license. Block design is ready to go the moment a license is available.",
+  "next_task_suggestion": "T0036_RETRY after license installed; T0037 can start immediately (aiecompiler does not need Vivado Synthesis license)"
+}
