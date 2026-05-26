@@ -1,1 +1,1 @@
-EOF
+{"worker":"remote_claude_ali_aie","platform":"linux-ubuntu22-ali-ecs","ts":"2026-05-26T06:15:00Z","pid":1,"vitis":"OK","vivado":"LICENSE_MISSING","aie":"OK","cpu_cores":16,"ram_gb":61,"host":"ali-ecs ecs.g8ise.4xlarge 47.116.52.72","current_task":"idle","worker_state":"IDLE — T0036 license-blocked, T0037 ready-to-start pending ACK","protocol_version":"1.0"}
