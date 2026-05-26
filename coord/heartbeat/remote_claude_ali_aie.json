@@ -1,1 +1,17 @@
-{"worker":"remote_claude_ali_aie","platform":"linux-ubuntu22-ali-ecs","ts":"2026-05-26T08:04:32Z","vitis":"OK","vivado":"LICENSE_OK_SYNTH_RUNNING","aie":"OK","cpu_cores":16,"ram_gb":61,"host":"ali-ecs ecs.g8ise.4xlarge 47.116.52.72","current_task":"T0036_RETRY","worker_state":"EXECUTING — Vivado synth_1 running (5 OOC IP synths + top-level). 64 GB cleared the license+crash wall.","protocol_version":"1.0"}
+{
+  "worker": "remote_claude_ali_aie",
+  "platform": "linux-ubuntu22-ali-ecs",
+  "ts": "2026-05-26T16:46:04Z",
+  "host": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "cpu_cores": 16,
+  "ram_gb": 61,
+  "vitis": "OK",
+  "vivado": "IDLE_T0036_RETRY_BLOCKED_AWAITING_ACK",
+  "aie": "OK",
+  "current_task": "T0040",
+  "background_pid": 6319,
+  "auto_pull_daemon": "every 60s --autostash, ecs-user, pid=6319 (alive, /tmp/orch_pull.log)",
+  "worker_state": "RESUMED at c7aed03. T0036_RETRY in _failed/ (synth_ok=true, impl_ok=false: IO Overutil 20841 ports vs 1004 avail; FAIL inbox 2026-05-26T08-13-34Z); human_ack_required_on:[synth_ok_impl_failed] is matched — per protocol §11 awaiting orch ACK (need retry+scope_change with inter-IP wiring; bare replay will hit the same wall). Picking up T0040 (already in claimed/ from prev session) — T0036_RETRY OOM-concurrency rationale is moot since Vivado is not running, and T0040 is purely AIE-side. Beginning step_0 sanity for T0040 next. T0038 remains pending, blocked on T0036_RETRY + T0040.",
+  "outstanding_ack_needed": ["T0036_RETRY:synth_ok_impl_failed (need retry+scope_change for inter-IP wiring)"],
+  "protocol_version": "1.0"
+}
