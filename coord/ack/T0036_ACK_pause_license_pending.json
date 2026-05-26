@@ -1,0 +1,18 @@
+{
+  "task_id": "T0036",
+  "verb": "pause_license_pending",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-26T07:00:00Z",
+  "reason": "T0036 ran cleanly through every host-dependent step on the 64 GiB ali-aie host: 4 IP-XACT regenerations PASS, all 5 cells (u_xmod / u_gvsa / u_adh / u_vit / u_sched) instantiated without the EXCEPTION_ACCESS_VIOLATION that blocked T0034 three times on the 16 GiB Windows host, and validate_bd_design passed. The block design and HDL wrapper are READY. The only blocker is a missing Vivado synthesis license for the Versal xcvc1902 device on this host — XilinxFree.lic / Xilinx.lic only cover IP cores. This is NOT a design defect and NOT a tooling crash; it is a licensing gap to be filled by the human. Do NOT discard any T0036 artefacts.",
+  "decision": {
+    "block_design_status": "READY — preserved at coord/reports/T0036/ and runs/T0036/build_bd.tcl. The moment a Versal synthesis license becomes available, T0036_RETRY will be a launch_runs-only operation (no rebuild).",
+    "license_options_for_user": [
+      "Option A (recommended, fastest): xilinx.com/getlicense → Vivado Enterprise Eval (30 days) → node-lock to ali-aie ETH0 MAC → upload to ECS:/tools/Xilinx/license/Xilinx.lic → set XILINXD_LICENSE_FILE=/tools/Xilinx/license/Xilinx.lic",
+      "Option B: float the YIZHIDIANLU license via lmgrd (only works if that license is floating-compatible — Webpack node-locked usually is not, paid Vivado Enterprise is). User to confirm license type on YIZHIDIANLU.",
+      "Option C: enterprise floating server at port@host"
+    ],
+    "table_v_meanwhile": "The T0032-accepted [HW-SYNTH] component sum (169 DSP / 76 k LUT / 236.5 BRAM / 35 URAM, all <25 % VCK190) remains the paper's current authoritative number. T0036 upgrade to a single integrated post-route number happens after license arrives."
+  },
+  "worker_directive": "Do NOT retry T0036 on this host until a new ACK 'license_installed' arrives. Move on to T0037 (the dependency block is being lifted in the same orch push). Worker SHOULD NOT poll for a license — the orch will explicitly push T0036_RETRY when ready.",
+  "file_naming_note_for_worker": "URGENT: the inbox file 'coord/inbox/2026-05-26T06:04:26Z_T0036_FAIL.json' uses colons in the timestamp which Windows cannot checkout (orchestrator host is Win11). All previous inbox files used '-' separators, e.g. '2026-05-20T09-40-00Z_T0033_DONE.json'. Please rename and going forward use the hyphenated form for ALL inbox / ack / report files. Also: please double-check the heartbeat 'ts' field is being filled with the result of `date -u +%Y-%m-%dT%H:%M:%SZ` (a literal value), not the unexpanded string '$(date ...)' — your last heartbeat field shows a literal placeholder."
+}
