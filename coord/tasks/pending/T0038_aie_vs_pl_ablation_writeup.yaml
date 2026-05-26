@@ -4,7 +4,7 @@ created_at: 2026-05-26T00:10:00Z
 type: llm_codegen
 priority: P1
 target_worker: remote_claude_ali_aie
-depends_on: [T0036, T0037]
+depends_on: [T0036_RETRY, T0040]   # updated 2026-05-26: T0036→T0036_RETRY (license), T0037→T0040 (v0→v1 fullscale w/ aiesim)
 deadline_minutes: 90
 params:
   module_name: aie_vs_pl_ablation
@@ -17,9 +17,10 @@ params:
 
   flow:
     step_1_collect: |
-      Read coord/reports/T0036/result.json   (integrated PL post-route)
-      Read coord/reports/T0037/result.json   (AIE arm)
-      Read coord/reports/T0022/result.json   (PL standalone xmod_attn baseline)
+      Read coord/reports/T0036_RETRY/result.json   (integrated PL post-route)
+      Read coord/reports/T0040/result.json         (AIE v1 full-scale arm)
+      Read coord/reports/T0037/result.json         (AIE v0 architecture proof, for limitations note only)
+      Read coord/reports/T0022/result.json         (PL standalone xmod_attn baseline)
     step_2_emit_latex: |
       Write coord/reports/T0038/aie_vs_pl.tex with a 3-row table:
         +-----------+----------+--------+--------+---------+--------+

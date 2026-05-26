@@ -1,0 +1,18 @@
+{
+  "task_id": "T0037",
+  "verb": "accept_with_followup",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-26T08:10:00Z",
+  "reason": "T0037 v0 successfully proves the AIE port path: 3 kernels (qk/softmax/av) merged into a single AIE tile (25_0), 128-bit PLIO×4, aiecompiler 'Compilation Complete' with 0 errors / 0 critical warnings, validated through to graph.out. This validates the AIE-side architecture for xmod_attn. License hostid mismatch was resolved (new license matches eth0 MAC 00:16:3e:5a:5f:9a) and Vivado ML Enterprise + AIEbuild + AIEsim features are all available until 2026-06-08 — this also unblocks T0036_RETRY.",
+  "decision": {
+    "what_v0_proves": "Architecture validity: PLIO->qk->softmax->av->PLIO connects, types align, aiecompiler fits to 1 AIE tile. Sufficient to support a paper sentence: 'we have ported the xmod_attn kernel to the AI Engine (1 tile, 3 kernels merged).'",
+    "what_v0_does_NOT_prove": [
+      "Numerical correctness (aiesimulator was skipped; no max_abs_diff vs T0022 golden)",
+      "Latency at PL-comparable scale (dimensions scaled to NTOK=32 / QDIM=256 / TOPK=8 vs the paper's 256/4096/64 due to AIE 32 KB DMA MG limit)",
+      "Throughput/J comparison with PL baseline (no aie_latency_us measurement)"
+    ],
+    "v1_required_for_paper_V_G": "T0037_v1 must: (a) use GMIO instead of PLIO to lift the 32 KB DMA MG limit and run full-scale (NTOK=256, QDIM=4096, TOPK=64), (b) pass aiesimulator with golden tensor from T0022 (max_abs_diff < 1e-2), (c) report aie_latency_us so we can write a 3-row PL/AIE/AIE+PL table.",
+    "v0_accepted_for_pipeline": "T0037 result stays as DONE. v1 is a NEW follow-up task (T0040), not a retry. The §V.G ablation writeup (T0038) waits on T0040, NOT on T0037 v0."
+  },
+  "worker_directive": "Two new tasks pushed in this same orchestrator update: T0036_RETRY (P0, license now resolved, integrated post-route netlist) and T0040 (AIE v1 with GMIO + full scale + aiesimulator). T0038 dependency updated to [T0036_RETRY, T0040]. Priority: T0036_RETRY first (camera-ready, dominates host RAM during PnR), then T0040 sequentially."
+}

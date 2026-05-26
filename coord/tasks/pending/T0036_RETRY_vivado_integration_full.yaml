@@ -1,0 +1,88 @@
+task_id: T0036_RETRY
+created_by: orchestrator
+created_at: 2026-05-26T08:15:00Z
+type: vivado_ipi
+priority: P0
+supersedes: T0036
+target_worker: remote_claude_ali_aie
+depends_on: [T0024, T0025, T0026, T0029, T0030]
+deadline_minutes: 600
+params:
+  module_name: mr_vla_full_top
+  description: |
+    **T0036 RETRY — license is now resolved.**
+
+    T0036 failed only on the Vivado synthesis license gap (Versal xcvc1902 not
+    covered by free XilinxFree.lic). The new Vivado ML Enterprise license at
+    /tools/Xilinx/license/Xilinx.lic now covers Synthesis + Implementation for
+    Versal devices (valid through 2026-06-08).
+
+    ALL upstream block-design work succeeded in T0036:
+      - 4 IP-XACT regenerations PASS (T0024/T0025/T0026/T0029)
+      - All 5 cells (u_xmod / u_gvsa / u_adh / u_vit / u_sched) instantiated
+        cleanly — no EXCEPTION_ACCESS_VIOLATION (the 16 GB-host wall is gone)
+      - validate_bd_design PASS
+      - HDL wrapper generated
+
+    Reuse the EXACT same artefacts from coord/reports/T0036/ and runs/T0036/
+    (build_bd.tcl, the IP-XACT package dirs). Only step_3 (synth) and step_4
+    (impl) need to be re-attempted. Do NOT regenerate the block design from
+    scratch unless step_2_replay below fails.
+
+  flow:
+    step_0_sanity: |
+      vivado -version ;
+      vivado -nolog -nojournal -mode batch -source <(echo 'foreach f [get_license_info -all] {puts $f}; exit') ;
+      # Expect to see 'Synthesis' / 'Implementation' / 'Vivado_ML' for Versal.
+      free -g | awk '/^Mem:/ {print "RAM total: " $2 " GiB, free: " $7 " GiB"}'
+      df -BG /tools | awk 'NR==2{print "/tools free: " $4}'
+    step_2_replay: |
+      Open the saved Vivado project from T0036 (or replay build_bd.tcl). If the
+      project files are intact, just open_project and skip to step_3. If not,
+      re-source build_bd.tcl — it should now complete because it already did
+      last time; only synth_1 / impl_1 are pending.
+    step_3_synth: |
+      launch_runs synth_1 -jobs 4 ; wait_on_run synth_1 ;
+      open_run synth_1 ;
+      report_utilization > coord/reports/T0036_RETRY/synth_util.rpt ;
+      report_timing_summary > coord/reports/T0036_RETRY/synth_timing.rpt
+    step_4_impl: |
+      launch_runs impl_1 -to_step route_design -jobs 4 ; wait_on_run impl_1 ;
+      open_run impl_1 ;
+      report_utilization > coord/reports/T0036_RETRY/impl_util.rpt ;
+      report_timing_summary > coord/reports/T0036_RETRY/impl_timing.rpt ;
+      report_power > coord/reports/T0036_RETRY/impl_power.rpt
+    step_5_archive: |
+      Write coord/reports/T0036_RETRY/result.json with the single integrated
+      row that goes into Table V:
+        dsp, lut, bram_tiles, uram, dsp_pct, lut_pct, bram_pct, uram_pct,
+        wns_ns, whs_ns, total_power_w, dynamic_power_w
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+acceptance_criteria:
+  - status: "== DONE"
+  - result.synth_ok: true
+  - result.impl_ok: true
+  - result.timing_met: true
+  - result.wns_ns: ">= 0"
+  - result.lut_pct: "< 25"
+  - result.dsp_pct: "< 25"
+  - result.bram_pct: "< 30"
+  - result.uram_pct: "< 25"
+human_ack_required_on:
+  - vivado_crash_again
+  - wns_below_0_2
+  - synth_ok_impl_failed
+  - lut_pct_above_15
+notes: |
+  This is THE camera-ready hardware deliverable. The T0032-accepted component
+  sum (169 DSP / 76 k LUT / 236.5 BRAM tiles / 35 URAM, < 25 % VCK190 on
+  every axis) is the floor; the integrated post-route number is expected to
+  be within ±10 % on every axis. A >10 % delta should be flagged in notes_for_orch
+  — could indicate a routing-side overhead worth a sentence in the paper.
+
+  If impl crashes despite 64 GB: capture vivado.log, write FAIL with verb
+  host_unexpectedly_limited, stop. Do NOT fall back to DCP linking.
+
+  Concurrency: no other task should run during this — T0040 (AIE v1) is
+  explicitly gated to start after T0036_RETRY DONE.

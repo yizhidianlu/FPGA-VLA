@@ -1,0 +1,85 @@
+task_id: T0040
+created_by: orchestrator
+created_at: 2026-05-26T08:20:00Z
+type: aie_compile
+priority: P1
+target_worker: remote_claude_ali_aie
+depends_on: [T0037, T0036_RETRY]   # v0 architecture + integration must be in
+deadline_minutes: 480
+params:
+  module_name: xmod_attn_v1_fullscale
+  description: |
+    **AIE port v1 — full paper-scale + numerical golden check + latency.**
+
+    T0037 v0 successfully proved the AIE architecture path (1 tile, 3 kernels
+    merged, aiecompiler PASS) but at reduced dimensions (NTOK=32 / QDIM=256 /
+    TOPK=8) due to the 32 KB DMA MG limit on PLIO. v0's `aiesim_pass` was
+    skipped — no numerical correctness, no latency measurement. v1 must close
+    those three gaps so the §V.G PL vs AIE table is publishable.
+
+  flow:
+    step_1_switch_to_gmio: |
+      Replace PLIO ports with GMIO (DDR-backed) ports for Q_in, K_in, V_in,
+      out. GMIO removes the 32 KB MG window — buffers go through DDR and the
+      kernel reads tiles via cascade or shared-buffer windows. Restructure
+      kernel_qk / kernel_softmax / kernel_av to consume Q_TILE x K_TILE x
+      V_TILE chunks per call (TOPK-aware sparse pattern, matching T0022's
+      sparse mask). Document the tile shape choice in graph.h.
+    step_2_full_scale: |
+      Restore dimensions to the paper-published numbers:
+        NTOK = 256    (sequence length)
+        QDIM = 4096   (DinoSigLIP-S hidden)
+        TOPK = 64     (cross-modal sparse top-k)
+      If a single AIE tile is insufficient for the per-call work, split across
+      2-4 tiles via cascade stream. Document tile_count in result.json.
+    step_3_aiesimulator: |
+      aiesimulator --pkg-dir Work --i I/O ;
+      Compare aie output buffer vs T0022 golden tensor
+      (coord/reports/T0022/golden_*.bin, or regenerate from numpy if missing).
+      Compute and report max_abs_diff (target < 1e-2).
+    step_4_latency: |
+      From aiesimulator profile or Work/aiesim_output/timing.csv, extract
+      cycle count for one full inference; divide by AIE clock (typ 1.0 GHz on
+      VCK190) to get aie_latency_us.
+    step_5_compare_pl: |
+      Write coord/reports/T0040/compare_pl.md with a 4-row table:
+        Variant       | Latency (us) | Tiles or DSP | BRAM | Notes
+        ----          | ----         | ----         | ----   | ----
+        PL T0022      | 674          | DSP=12       | 9      | INT8/INT16
+        AIE v0        | n/a          | 1 tile       | -      | scaled-down
+        AIE v1        | <measured>   | <count>      | -      | full-scale
+        Speedup       | PL/AIE       | -            | -      | bigger=better
+  target_platform: xilinx_vck190_base_202410_1
+acceptance_criteria:
+  - status: "== DONE"
+  - result.aiecompile_ok: true
+  - result.aiesim_pass: true
+  - result.max_abs_diff_vs_golden: "< 1e-2"
+  - result.tiles_used: "< 16"
+  - result.aie_latency_us: "< 5000"
+  - result.dimensions_full_scale: true
+human_ack_required_on:
+  - aie_latency_worse_than_pl_by_2x   # informational; doesn't invalidate paper
+  - max_abs_diff_above_5e-3
+  - tiles_above_8
+  - gmio_couldnt_reach_full_scale     # would force a redesign discussion
+notes: |
+  This is the version whose numbers enter the paper §V.G table. v0 was
+  proof-of-compile; v1 is proof-of-function-at-scale + proof-of-speed.
+
+  Sequencing: do NOT claim until T0036_RETRY shows DONE. The host has 64 GB
+  but Vivado impl can use ~30+ GB; concurrent aiecompiler risks OOM during
+  long-running aiesimulator runs.
+
+  Output to coord/reports/T0040/:
+    aie_graph/    (v1 source — GMIO version)
+    aiecompiler.log
+    aiesim.log
+    timing.csv    (raw aiesim cycle data)
+    resource.rpt
+    result.json
+    compare_pl.md (table for §V.G)
+
+  If you discover at step_2 that even with GMIO + 4 tiles the full-scale
+  doesn't compile, REPORT the obstacle and what shape DOES compile — that
+  becomes a paper limitation paragraph rather than blocking the paper.
