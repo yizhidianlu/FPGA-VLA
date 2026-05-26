@@ -2,9 +2,9 @@ task_id: T0037
 created_by: orchestrator
 created_at: 2026-05-26T00:05:00Z
 type: aie_compile
-priority: P0
-target_worker: remote_claude_ali_aie   # AIE only available here
-depends_on: [T0022]                     # PL baseline of xmod_attn already validated
+priority: P1                            # demoted from P0 — wait for T0036 to free up host RAM
+target_worker: remote_claude_ali_aie    # AIE only available here
+depends_on: [T0022, T0036]              # PL baseline + integration must finish first (user-prioritised)
 deadline_minutes: 360
 params:
   module_name: xmod_attn_v0_aie
@@ -65,6 +65,10 @@ human_ack_required_on:
   - tiles_above_24
   - max_abs_diff_above_5e-3
 notes: |
+  *** SEQUENCING: user has prioritised T0036 first. Do NOT claim T0037 until
+  T0036 result.json shows status=DONE. Vivado PnR for T0036 can use ~30+ GB
+  RAM; running aiecompiler concurrently risks an OOM on the 64 GB host. ***
+
   This is a v0 — function-correctness first, then speed. Acceptable for v0:
   even AIE latency > PL latency, as long as the graph compiles, simulates
   correctly, and produces credible tile/DDR-BW numbers. Optimization passes
