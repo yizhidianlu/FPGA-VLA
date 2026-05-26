@@ -1,0 +1,764 @@
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 26 16:03:04 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source synth_impl.tcl
+# set_param general.maxThreads 16
+# set PROJ /tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.xpr
+# open_project $PROJ
+Scanning sources...
+Finished scanning sources
+WARNING: [Project 1-509] GeneratedRun file for 'mr_vla_bd_u_gvsa_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'mr_vla_bd_u_xmod_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'mr_vla_bd_u_vit_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'mr_vla_bd_u_adh_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'mr_vla_bd_u_sched_0_synth_1' not found
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0025/gvsa_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0026/action_diff_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2024.1/data/ip'.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_xmod_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_xmod_0/mr_vla_bd_u_xmod_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_xmod_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_xmod_0/mr_vla_bd_u_xmod_0_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_xmod_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_xmod_0/mr_vla_bd_u_xmod_0_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_xmod_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_xmod_0/mr_vla_bd_u_xmod_0_sim_netlist.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_xmod_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_xmod_0/mr_vla_bd_u_xmod_0_sim_netlist.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_gvsa_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_gvsa_0/mr_vla_bd_u_gvsa_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_gvsa_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_gvsa_0/mr_vla_bd_u_gvsa_0_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_gvsa_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_gvsa_0/mr_vla_bd_u_gvsa_0_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_gvsa_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_gvsa_0/mr_vla_bd_u_gvsa_0_sim_netlist.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_gvsa_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_gvsa_0/mr_vla_bd_u_gvsa_0_sim_netlist.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_adh_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_adh_0/mr_vla_bd_u_adh_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_adh_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_adh_0/mr_vla_bd_u_adh_0_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_adh_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_adh_0/mr_vla_bd_u_adh_0_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_adh_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_adh_0/mr_vla_bd_u_adh_0_sim_netlist.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_adh_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_adh_0/mr_vla_bd_u_adh_0_sim_netlist.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_vit_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_vit_0/mr_vla_bd_u_vit_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_vit_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_vit_0/mr_vla_bd_u_vit_0_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_vit_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_vit_0/mr_vla_bd_u_vit_0_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_vit_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_vit_0/mr_vla_bd_u_vit_0_sim_netlist.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_vit_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_vit_0/mr_vla_bd_u_vit_0_sim_netlist.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_sched_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_sched_0/mr_vla_bd_u_sched_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_sched_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_sched_0/mr_vla_bd_u_sched_0_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_sched_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_sched_0/mr_vla_bd_u_sched_0_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_sched_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_sched_0/mr_vla_bd_u_sched_0_sim_netlist.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'mr_vla_bd_u_sched_0' generated file not found '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_sched_0/mr_vla_bd_u_sched_0_sim_netlist.vhdl'. Please regenerate to continue.
+open_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1535.293 ; gain = 99.906 ; free physical = 31287 ; free virtual = 58874
+# puts ">>> STEP0 SANITY"
+>>> STEP0 SANITY
+# puts "  Part: [get_property PART [current_project]]"
+  Part: xcvc1902-vsva2197-2MP-e-S
+# puts "  Top:  [get_property TOP [current_fileset]]"
+  Top:  mr_vla_bd_wrapper
+# puts ">>> STEP3 SYNTH: launch_runs synth_1 -jobs 4"
+>>> STEP3 SYNTH: launch_runs synth_1 -jobs 4
+# if {[catch {
+#     reset_run synth_1
+#     launch_runs synth_1 -jobs 4
+#     wait_on_run synth_1
+#     open_run synth_1 -name synth_1
+#     set wp [get_timing_paths -quiet -setup -max_paths 1 -nworst 1]
+#     if {[llength $wp] > 0} { set wns [get_property SLACK [lindex $wp 0]] } else { set wns "n/a" }
+#     report_utilization -file /tools/projects/FPGA-VLA/runs/T0036/synth_util.rpt
+#     report_timing_summary -file /tools/projects/FPGA-VLA/runs/T0036/synth_timing.rpt -no_header
+#     puts ">>> STEP3 SYNTH OK : WNS=$wns"
+# } err]} {
+#     puts ">>> STEP3 SYNTH FAIL :: $err"
+#     close_project
+#     exit 1
+# }
+INFO: [IP_Flow 19-6930] IPCACHE: runCacheChecks() number of threads = 8
+INFO: [IP_Flow 19-6921] IPCACHE: Adding cache check func to thread queue for IP mr_vla_bd_u_adh_0
+INFO: [IP_Flow 19-6921] IPCACHE: Adding cache check func to thread queue for IP mr_vla_bd_u_gvsa_0
+INFO: [IP_Flow 19-6921] IPCACHE: Adding cache check func to thread queue for IP mr_vla_bd_u_vit_0
+INFO: [IP_Flow 19-6921] IPCACHE: Adding cache check func to thread queue for IP mr_vla_bd_u_xmod_0
+INFO: [IP_Flow 19-8020] IPCACHE: runCacheChecks() calling threadPool finishWork()
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: mr_vla_bd_u_adh_0
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: mr_vla_bd_u_gvsa_0
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: mr_vla_bd_u_vit_0
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: mr_vla_bd_u_xmod_0
+WARNING: [Vivado 12-7122] Auto Incremental Compile:: No reference checkpoint was found in run synth_1. Auto-incremental flow will not be run, the standard flow will be run instead.
+[Tue May 26 16:03:15 2026] Launched mr_vla_bd_u_gvsa_0_synth_1, mr_vla_bd_u_xmod_0_synth_1, mr_vla_bd_u_vit_0_synth_1, mr_vla_bd_u_adh_0_synth_1, mr_vla_bd_u_sched_0_synth_1...
+Run output will be captured here:
+mr_vla_bd_u_gvsa_0_synth_1: /tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/mr_vla_bd_u_gvsa_0_synth_1/runme.log
+mr_vla_bd_u_xmod_0_synth_1: /tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/mr_vla_bd_u_xmod_0_synth_1/runme.log
+mr_vla_bd_u_vit_0_synth_1: /tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/mr_vla_bd_u_vit_0_synth_1/runme.log
+mr_vla_bd_u_adh_0_synth_1: /tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/mr_vla_bd_u_adh_0_synth_1/runme.log
+mr_vla_bd_u_sched_0_synth_1: /tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/mr_vla_bd_u_sched_0_synth_1/runme.log
+[Tue May 26 16:03:15 2026] Launched synth_1...
+Run output will be captured here: /tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/runme.log
+[Tue May 26 16:03:15 2026] Waiting for synth_1 to finish...
+
+*** Running vivado
+    with args -log mr_vla_bd_wrapper.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source mr_vla_bd_wrapper.tcl
+
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 26 16:08:21 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source mr_vla_bd_wrapper.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0025/gvsa_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0026/action_diff_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2024.1/data/ip'.
+Command: synth_design -top mr_vla_bd_wrapper -part xcvc1902-vsva2197-2MP-e-S
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcvc1902'
+INFO: [Device 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 112674
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2743.215 ; gain = 417.953 ; free physical = 28837 ; free virtual = 56793
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_bd_wrapper' [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/hdl/mr_vla_bd_wrapper.v:13]
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_bd' [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/synth/mr_vla_bd.v:13]
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_bd_u_adh_0' [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/.Xil/Vivado-112665-iZuf63nslpsmuz7caylpqsZ/realtime/mr_vla_bd_u_adh_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mr_vla_bd_u_adh_0' (0#1) [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/.Xil/Vivado-112665-iZuf63nslpsmuz7caylpqsZ/realtime/mr_vla_bd_u_adh_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_bd_u_gvsa_0' [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/.Xil/Vivado-112665-iZuf63nslpsmuz7caylpqsZ/realtime/mr_vla_bd_u_gvsa_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mr_vla_bd_u_gvsa_0' (0#1) [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/.Xil/Vivado-112665-iZuf63nslpsmuz7caylpqsZ/realtime/mr_vla_bd_u_gvsa_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_bd_u_sched_0' [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/.Xil/Vivado-112665-iZuf63nslpsmuz7caylpqsZ/realtime/mr_vla_bd_u_sched_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mr_vla_bd_u_sched_0' (0#1) [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/.Xil/Vivado-112665-iZuf63nslpsmuz7caylpqsZ/realtime/mr_vla_bd_u_sched_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_bd_u_start1_0' [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_start1_0/synth/mr_vla_bd_u_start1_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlconstant_v1_1_9_xlconstant' [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ipshared/e2d2/hdl/xlconstant_v1_1_vl_rfs.v:68]
+INFO: [Synth 8-6155] done synthesizing module 'xlconstant_v1_1_9_xlconstant' (0#1) [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ipshared/e2d2/hdl/xlconstant_v1_1_vl_rfs.v:68]
+INFO: [Synth 8-6155] done synthesizing module 'mr_vla_bd_u_start1_0' (0#1) [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_start1_0/synth/mr_vla_bd_u_start1_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_bd_u_vit_0' [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/.Xil/Vivado-112665-iZuf63nslpsmuz7caylpqsZ/realtime/mr_vla_bd_u_vit_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mr_vla_bd_u_vit_0' (0#1) [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/.Xil/Vivado-112665-iZuf63nslpsmuz7caylpqsZ/realtime/mr_vla_bd_u_vit_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mr_vla_bd_u_xmod_0' [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/.Xil/Vivado-112665-iZuf63nslpsmuz7caylpqsZ/realtime/mr_vla_bd_u_xmod_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mr_vla_bd_u_xmod_0' (0#1) [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/.Xil/Vivado-112665-iZuf63nslpsmuz7caylpqsZ/realtime/mr_vla_bd_u_xmod_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mr_vla_bd' (0#1) [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/synth/mr_vla_bd.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'mr_vla_bd_wrapper' (0#1) [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/hdl/mr_vla_bd_wrapper.v:13]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2871.184 ; gain = 545.922 ; free physical = 28685 ; free virtual = 56642
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2871.184 ; gain = 545.922 ; free physical = 28685 ; free virtual = 56642
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2871.184 ; gain = 545.922 ; free physical = 28685 ; free virtual = 56642
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.05 . Memory (MB): peak = 2871.184 ; gain = 0.000 ; free physical = 28685 ; free virtual = 56643
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_xmod_0/mr_vla_bd_u_xmod_0/mr_vla_bd_u_xmod_0_in_context.xdc] for cell 'mr_vla_bd_i/u_xmod'
+Finished Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_xmod_0/mr_vla_bd_u_xmod_0/mr_vla_bd_u_xmod_0_in_context.xdc] for cell 'mr_vla_bd_i/u_xmod'
+Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_gvsa_0/mr_vla_bd_u_gvsa_0/mr_vla_bd_u_gvsa_0_in_context.xdc] for cell 'mr_vla_bd_i/u_gvsa'
+Finished Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_gvsa_0/mr_vla_bd_u_gvsa_0/mr_vla_bd_u_gvsa_0_in_context.xdc] for cell 'mr_vla_bd_i/u_gvsa'
+Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_adh_0/mr_vla_bd_u_adh_0/mr_vla_bd_u_adh_0_in_context.xdc] for cell 'mr_vla_bd_i/u_adh'
+Finished Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_adh_0/mr_vla_bd_u_adh_0/mr_vla_bd_u_adh_0_in_context.xdc] for cell 'mr_vla_bd_i/u_adh'
+Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_vit_0/mr_vla_bd_u_vit_0/mr_vla_bd_u_vit_0_in_context.xdc] for cell 'mr_vla_bd_i/u_vit'
+Finished Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_vit_0/mr_vla_bd_u_vit_0/mr_vla_bd_u_vit_0_in_context.xdc] for cell 'mr_vla_bd_i/u_vit'
+Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_sched_0/mr_vla_bd_u_sched_0/mr_vla_bd_u_sched_0_in_context.xdc] for cell 'mr_vla_bd_i/u_sched'
+Finished Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_sched_0/mr_vla_bd_u_sched_0/mr_vla_bd_u_sched_0_in_context.xdc] for cell 'mr_vla_bd_i/u_sched'
+Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3209.145 ; gain = 0.000 ; free physical = 28665 ; free virtual = 56623
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3209.145 ; gain = 0.000 ; free physical = 28665 ; free virtual = 56623
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 3209.145 ; gain = 883.883 ; free physical = 28661 ; free virtual = 56618
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcvc1902-vsva2197-2MP-e-S
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 3209.145 ; gain = 883.883 ; free physical = 28661 ; free virtual = 56618
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for mr_vla_bd_i. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for mr_vla_bd_i/u_xmod. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for mr_vla_bd_i/u_gvsa. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for mr_vla_bd_i/u_adh. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for mr_vla_bd_i/u_vit. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for mr_vla_bd_i/u_sched. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for mr_vla_bd_i/u_start1. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 3209.145 ; gain = 883.883 ; free physical = 28661 ; free virtual = 56618
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 3209.145 ; gain = 883.883 ; free physical = 28657 ; free virtual = 56617
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1968 (col length:164)
+BRAMs: 1934 (col length: RAMB18 168 RAMB36 84)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 3209.145 ; gain = 883.883 ; free physical = 28656 ; free virtual = 56624
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 3813.562 ; gain = 1488.301 ; free physical = 28008 ; free virtual = 55976
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 3822.562 ; gain = 1497.301 ; free physical = 27999 ; free virtual = 55967
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-11322] No global retiming is needed without any clock constraint
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 3840.383 ; gain = 1515.121 ; free physical = 27984 ; free virtual = 55952
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 3848.320 ; gain = 1523.059 ; free physical = 27985 ; free virtual = 55953
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 3848.320 ; gain = 1523.059 ; free physical = 27985 ; free virtual = 55953
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 3848.320 ; gain = 1523.059 ; free physical = 27985 ; free virtual = 55953
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 3848.320 ; gain = 1523.059 ; free physical = 27984 ; free virtual = 55952
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 3848.320 ; gain = 1523.059 ; free physical = 27984 ; free virtual = 55952
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 3848.320 ; gain = 1523.059 ; free physical = 27984 ; free virtual = 55952
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------------+----------+
+|      |BlackBox name       |Instances |
++------+--------------------+----------+
+|1     |mr_vla_bd_u_adh_0   |         1|
+|2     |mr_vla_bd_u_gvsa_0  |         1|
+|3     |mr_vla_bd_u_sched_0 |         1|
+|4     |mr_vla_bd_u_vit_0   |         1|
+|5     |mr_vla_bd_u_xmod_0  |         1|
++------+--------------------+----------+
+
+Report Cell Usage: 
++------+------------------+------+
+|      |Cell              |Count |
++------+------------------+------+
+|1     |mr_vla_bd_u_adh   |     1|
+|2     |mr_vla_bd_u_gvsa  |     1|
+|3     |mr_vla_bd_u_sched |     1|
+|4     |mr_vla_bd_u_vit   |     1|
+|5     |mr_vla_bd_u_xmod  |     1|
+|6     |IBUF              |  8894|
+|7     |OBUF              | 11948|
++------+------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 3848.320 ; gain = 1523.059 ; free physical = 27984 ; free virtual = 55952
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 3848.320 ; gain = 1185.098 ; free physical = 27984 ; free virtual = 55952
+Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 3848.320 ; gain = 1523.059 ; free physical = 27984 ; free virtual = 55952
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.11 ; elapsed = 00:00:00.11 . Memory (MB): peak = 3848.320 ; gain = 0.000 ; free physical = 28276 ; free virtual = 56244
+WARNING: [Netlist 29-101] Netlist 'mr_vla_bd_wrapper' is not ideal for floorplanning, since the cellview 'mr_vla_bd_wrapper' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3848.320 ; gain = 0.000 ; free physical = 28275 ; free virtual = 56243
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 527477ab
+INFO: [Common 17-83] Releasing license: Synthesis
+42 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:38 ; elapsed = 00:00:36 . Memory (MB): peak = 3848.320 ; gain = 2316.629 ; free physical = 28275 ; free virtual = 56243
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2986.445; main = 2873.624; forked = 399.312
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 4629.395; main = 3837.945; forked = 1033.047
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.42 ; elapsed = 00:00:00.15 . Memory (MB): peak = 3850.152 ; gain = 0.000 ; free physical = 28252 ; free virtual = 56242
+INFO: [Common 17-1381] The checkpoint '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/synth_1/mr_vla_bd_wrapper.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file mr_vla_bd_wrapper_utilization_synth.rpt -pb mr_vla_bd_wrapper_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue May 26 16:09:06 2026...
+[Tue May 26 16:09:16 2026] synth_1 finished
+wait_on_runs: Time (s): cpu = 00:12:49 ; elapsed = 00:06:01 . Memory (MB): peak = 1767.301 ; gain = 0.000 ; free physical = 30910 ; free virtual = 58869
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xcvc1902-vsva2197-2MP-e-S
+INFO: [Device 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+INFO: [Project 1-454] Reading design checkpoint '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_adh_0/mr_vla_bd_u_adh_0.dcp' for cell 'mr_vla_bd_i/u_adh'
+INFO: [Project 1-454] Reading design checkpoint '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_gvsa_0/mr_vla_bd_u_gvsa_0.dcp' for cell 'mr_vla_bd_i/u_gvsa'
+INFO: [Project 1-454] Reading design checkpoint '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_sched_0/mr_vla_bd_u_sched_0.dcp' for cell 'mr_vla_bd_i/u_sched'
+INFO: [Project 1-454] Reading design checkpoint '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_vit_0/mr_vla_bd_u_vit_0.dcp' for cell 'mr_vla_bd_i/u_vit'
+INFO: [Project 1-454] Reading design checkpoint '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.gen/sources_1/bd/mr_vla_bd/ip/mr_vla_bd_u_xmod_0/mr_vla_bd_u_xmod_0.dcp' for cell 'mr_vla_bd_i/u_xmod'
+Netlist sorting complete. Time (s): cpu = 00:00:00.74 ; elapsed = 00:00:00.74 . Memory (MB): peak = 2559.418 ; gain = 0.000 ; free physical = 29938 ; free virtual = 57897
+INFO: [Netlist 29-17] Analyzing 19104 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 5 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2024.1
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3838.387 ; gain = 0.000 ; free physical = 28816 ; free virtual = 56776
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 19104 instances were transformed.
+  (CARRY8) => LUT6CY (LUTCY1, LUTCY2): 2336 instances
+  DSP58 => DSP58 (DSP_ALUADD, DSP_ALUMUX, DSP_ALUREG, DSP_A_B_DATA58, DSP_C_DATA58, DSP_MULTIPLIER58, DSP_M_DATA58, DSP_OUTPUT58, DSP_PATDET, DSP_PREADD58, DSP_PREADD_DATA58, DSP_SRCMX_OPTINV, VCC): 465 instances
+  LUT6CY => LUT6CY (LUTCY1, LUTCY2): 13998 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 33 instances
+  RAM16X1S => RAM32X1S (RAMS32): 2048 instances
+  RAM64X1S => RAM64X1S (RAMS64E5, VCC): 224 instances
+
+open_run: Time (s): cpu = 00:00:46 ; elapsed = 00:00:41 . Memory (MB): peak = 3838.387 ; gain = 2071.086 ; free physical = 28816 ; free virtual = 56776
+>>> STEP3 SYNTH OK : WNS=
+# puts ">>> STEP4 IMPL: launch_runs impl_1 -to_step route_design -jobs 4"
+>>> STEP4 IMPL: launch_runs impl_1 -to_step route_design -jobs 4
+# if {[catch {
+#     reset_run impl_1
+#     launch_runs impl_1 -to_step route_design -jobs 4
+#     wait_on_run impl_1
+#     open_run impl_1 -name impl_1
+#     set wp [get_timing_paths -quiet -setup -max_paths 1 -nworst 1]
+#     if {[llength $wp] > 0} { set wns [get_property SLACK [lindex $wp 0]] } else { set wns "n/a" }
+#     set whs_p [get_timing_paths -quiet -hold -max_paths 1 -nworst 1]
+#     if {[llength $whs_p] > 0} { set whs [get_property SLACK [lindex $whs_p 0]] } else { set whs "n/a" }
+#     report_utilization -file /tools/projects/FPGA-VLA/runs/T0036/impl_util.rpt
+#     report_timing_summary -file /tools/projects/FPGA-VLA/runs/T0036/impl_timing.rpt -no_header
+#     report_power -file /tools/projects/FPGA-VLA/runs/T0036/impl_power.rpt
+#     puts ">>> STEP4 IMPL OK : WNS=$wns WHS=$whs"
+# } err]} {
+#     puts ">>> STEP4 IMPL FAIL :: $err"
+#     close_project
+#     exit 1
+# }
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.87 ; elapsed = 00:00:00.31 . Memory (MB): peak = 6044.336 ; gain = 0.000 ; free physical = 26915 ; free virtual = 54932
+WARNING: [Common 17-210] 'write_hwdef' is deprecated.
+[Tue May 26 16:10:36 2026] Launched impl_1...
+Run output will be captured here: /tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/impl_1/runme.log
+launch_runs: Time (s): cpu = 00:00:10 ; elapsed = 00:00:06 . Memory (MB): peak = 6044.336 ; gain = 183.164 ; free physical = 26887 ; free virtual = 54898
+[Tue May 26 16:10:36 2026] Waiting for impl_1 to finish...
+
+*** Running vivado
+    with args -log mr_vla_bd_wrapper.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source mr_vla_bd_wrapper.tcl -notrace
+
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue May 26 16:10:38 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source mr_vla_bd_wrapper.tcl -notrace
+Command: open_checkpoint /tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/impl_1/mr_vla_bd_wrapper.dcp
+INFO: [Device 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+Netlist sorting complete. Time (s): cpu = 00:00:00.72 ; elapsed = 00:00:00.72 . Memory (MB): peak = 2532.066 ; gain = 0.000 ; free physical = 25304 ; free virtual = 53315
+INFO: [Netlist 29-17] Analyzing 19104 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 5 CPU seconds
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [Project 1-479] Netlist was created with Vivado 2024.1
+INFO: [Constraints 18-6358] GCLK_DESKEW_DEFAULT not specified in Clock Expansion Window constraints config file for device xcvc1902.  GCLK Deskew mode will be Off and cannot be enabled via GCLK_DESKEW override.
+INFO: [Constraints 18-5720] The default GCLK Deskew mode is Off.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00.32 ; elapsed = 00:00:00.35 . Memory (MB): peak = 3133.340 ; gain = 57.781 ; free physical = 24710 ; free virtual = 52721
+Reading NOC Solution File '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/impl_1/mr_vla_bd_wrapper/mr_vla_bd_wrapper.ncr'
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3611.441 ; gain = 0.000 ; free physical = 24242 ; free virtual = 52254
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 19104 instances were transformed.
+  (CARRY8) => LUT6CY (LUTCY1, LUTCY2): 2336 instances
+  DSP58 => DSP58 (DSP_ALUADD, DSP_ALUMUX, DSP_ALUREG, DSP_A_B_DATA58, DSP_C_DATA58, DSP_MULTIPLIER58, DSP_M_DATA58, DSP_OUTPUT58, DSP_PATDET, DSP_PREADD58, DSP_PREADD_DATA58, DSP_SRCMX_OPTINV, VCC): 465 instances
+  LUT6CY => LUT6CY (LUTCY1, LUTCY2): 13998 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 33 instances
+  RAM16X1S => RAM32X1S (RAMS32): 2048 instances
+  RAM64X1S => RAM64X1S (RAMS64E5, VCC): 224 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2024.1 (64-bit) build 5076996
+open_checkpoint: Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 3611.441 ; gain = 2177.055 ; free physical = 24243 ; free virtual = 52254
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0024/xmod_attn_v1_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0025/gvsa_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0026/action_diff_hls/sol1/impl/ip'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/projects/FPGA-VLA/runs/T0029/vit_enc_hls/sol1/impl/ip'.
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xcvc1902'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcvc1902'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 16 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:00.89 . Memory (MB): peak = 3836.840 ; gain = 213.188 ; free physical = 24237 ; free virtual = 52248
+
+Starting Logic Optimization Task
+
+Phase 1 Initialization
+
+Phase 1.1 Core Generation And Design Setup
+Phase 1.1 Core Generation And Design Setup | Checksum: 1fa9872d0
+
+Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.05 . Memory (MB): peak = 4159.426 ; gain = 256.430 ; free physical = 24021 ; free virtual = 52033
+
+Phase 1.2 Setup Constraints And Sort Netlist
+Phase 1.2 Setup Constraints And Sort Netlist | Checksum: 1fa9872d0
+
+Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.09 . Memory (MB): peak = 4159.426 ; gain = 256.430 ; free physical = 24021 ; free virtual = 52033
+Phase 1 Initialization | Checksum: 1fa9872d0
+
+Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.1 . Memory (MB): peak = 4159.426 ; gain = 256.430 ; free physical = 24021 ; free virtual = 52033
+
+Phase 2 Timer Update And Timing Data Collection
+
+Phase 2.1 Timer Update
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Phase 2.1 Timer Update | Checksum: 1fa9872d0
+
+Time (s): cpu = 00:00:52 ; elapsed = 00:00:15 . Memory (MB): peak = 5507.992 ; gain = 1604.996 ; free physical = 22682 ; free virtual = 50694
+
+Phase 2.2 Timing Data Collection
+Phase 2.2 Timing Data Collection | Checksum: 1fa9872d0
+
+Time (s): cpu = 00:00:53 ; elapsed = 00:00:15 . Memory (MB): peak = 5507.992 ; gain = 1604.996 ; free physical = 22674 ; free virtual = 50686
+Phase 2 Timer Update And Timing Data Collection | Checksum: 1fa9872d0
+
+Time (s): cpu = 00:00:53 ; elapsed = 00:00:15 . Memory (MB): peak = 5507.992 ; gain = 1604.996 ; free physical = 22674 ; free virtual = 50686
+
+Phase 3 Retarget
+INFO: [Opt 31-1834] Total Chains To Be Transformed Were: 0 AND Number of Transformed insts Created are: 0
+INFO: [Opt 31-1566] Pulled 19 inverters resulting in an inversion of 651 pins
+INFO: [Opt 31-138] Pushed 70 inverter(s) to 474 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 3 Retarget | Checksum: 1ec8bebd2
+
+Time (s): cpu = 00:00:56 ; elapsed = 00:00:19 . Memory (MB): peak = 5654.523 ; gain = 1751.527 ; free physical = 22672 ; free virtual = 50684
+Retarget | Checksum: 1ec8bebd2
+INFO: [Opt 31-389] Phase Retarget created 12 cells and removed 2445 cells
+
+Phase 4 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 4 Constant propagation | Checksum: 115d5488a
+
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:19 . Memory (MB): peak = 5654.523 ; gain = 1751.527 ; free physical = 22672 ; free virtual = 50684
+Constant propagation | Checksum: 115d5488a
+INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 11 cells
+
+Phase 5 Sweep
+Phase 5 Sweep | Checksum: 1a3fa1a57
+
+Time (s): cpu = 00:01:00 ; elapsed = 00:00:23 . Memory (MB): peak = 5654.523 ; gain = 1751.527 ; free physical = 22673 ; free virtual = 50685
+Sweep | Checksum: 1a3fa1a57
+INFO: [Opt 31-389] Phase Sweep created 3961 cells and removed 2531 cells
+
+Phase 6 BUFG optimization
+INFO: [Opt 31-194] Inserted BUFG clk_IBUF_BUFG_inst to drive 34033 load(s) on clock net clk_IBUF_BUFGCE
+INFO: [Opt 31-193] Inserted 1 BUFG(s) on clock nets
+INFO: [Opt 31-1077] Phase BUFG optimization inserted 0 global clock buffer(s) for CLOCK_LOW_FANOUT.
+Phase 6 BUFG optimization | Checksum: 1f1c1c47e
+
+Time (s): cpu = 00:01:12 ; elapsed = 00:00:27 . Memory (MB): peak = 5703.367 ; gain = 1800.371 ; free physical = 22670 ; free virtual = 50682
+BUFG optimization | Checksum: 1f1c1c47e
+INFO: [Opt 31-662] Phase BUFG optimization created 1 cells of which 1 are BUFGs and removed 0 cells.
+
+Phase 7 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 7 Shift Register Optimization | Checksum: 1f1c1c47e
+
+Time (s): cpu = 00:01:12 ; elapsed = 00:00:27 . Memory (MB): peak = 5703.367 ; gain = 1800.371 ; free physical = 22670 ; free virtual = 50682
+Shift Register Optimization | Checksum: 1f1c1c47e
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 8 Post Processing Netlist
+Phase 8 Post Processing Netlist | Checksum: 13f41e9dc
+
+Time (s): cpu = 00:01:13 ; elapsed = 00:00:28 . Memory (MB): peak = 5703.367 ; gain = 1800.371 ; free physical = 22670 ; free virtual = 50682
+Post Processing Netlist | Checksum: 13f41e9dc
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+
+Phase 9 Finalization
+
+Phase 9.1 Finalizing Design Cores and Updating Shapes
+Phase 9.1 Finalizing Design Cores and Updating Shapes | Checksum: 286026038
+
+Time (s): cpu = 00:01:22 ; elapsed = 00:00:32 . Memory (MB): peak = 5703.367 ; gain = 1800.371 ; free physical = 22667 ; free virtual = 50679
+
+Phase 9.2 Verifying Netlist Connectivity
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:00.09 . Memory (MB): peak = 5703.367 ; gain = 0.000 ; free physical = 22667 ; free virtual = 50679
+Phase 9.2 Verifying Netlist Connectivity | Checksum: 286026038
+
+Time (s): cpu = 00:01:22 ; elapsed = 00:00:32 . Memory (MB): peak = 5703.367 ; gain = 1800.371 ; free physical = 22666 ; free virtual = 50678
+Phase 9 Finalization | Checksum: 286026038
+
+Time (s): cpu = 00:01:22 ; elapsed = 00:00:32 . Memory (MB): peak = 5703.367 ; gain = 1800.371 ; free physical = 22666 ; free virtual = 50678
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |              12  |            2445  |                                              0  |
+|  Constant propagation         |               0  |              11  |                                              0  |
+|  Sweep                        |            3961  |            2531  |                                              0  |
+|  BUFG optimization            |               1  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+Ending Logic Optimization Task | Checksum: 286026038
+
+Time (s): cpu = 00:01:22 ; elapsed = 00:00:32 . Memory (MB): peak = 5703.367 ; gain = 1800.371 ; free physical = 22666 ; free virtual = 50678
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.03 . Memory (MB): peak = 5703.367 ; gain = 0.000 ; free physical = 22666 ; free virtual = 50678
+Ending Netlist Obfuscation Task | Checksum: 286026038
+
+Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.04 . Memory (MB): peak = 5703.367 ; gain = 0.000 ; free physical = 22666 ; free virtual = 50678
+INFO: [Common 17-83] Releasing license: Implementation
+38 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:01:27 ; elapsed = 00:00:35 . Memory (MB): peak = 5703.367 ; gain = 2091.926 ; free physical = 22666 ; free virtual = 50678
+INFO: [Vivado 12-24828] Executing command : report_drc -file mr_vla_bd_wrapper_drc_opted.rpt -pb mr_vla_bd_wrapper_drc_opted.pb -rpx mr_vla_bd_wrapper_drc_opted.rpx
+Command: report_drc -file mr_vla_bd_wrapper_drc_opted.rpt -pb mr_vla_bd_wrapper_drc_opted.pb -rpx mr_vla_bd_wrapper_drc_opted.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 16 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file /tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/impl_1/mr_vla_bd_wrapper_drc_opted.rpt.
+report_drc completed successfully
+report_drc: Time (s): cpu = 00:00:27 ; elapsed = 00:00:06 . Memory (MB): peak = 6033.062 ; gain = 329.695 ; free physical = 22637 ; free virtual = 50652
+generate_parallel_reports: Time (s): cpu = 00:00:27 ; elapsed = 00:00:06 . Memory (MB): peak = 6033.062 ; gain = 329.695 ; free physical = 22637 ; free virtual = 50652
+Write ShapeDB Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.35 . Memory (MB): peak = 6033.062 ; gain = 0.000 ; free physical = 22611 ; free virtual = 50652
+INFO: [Common 17-1381] The checkpoint '/tools/projects/FPGA-VLA/runs/T0036/mr_vla_ipi/mr_vla_ipi.runs/impl_1/mr_vla_bd_wrapper_opt.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:08 ; elapsed = 00:00:05 . Memory (MB): peak = 6033.062 ; gain = 0.000 ; free physical = 22616 ; free virtual = 50651
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xcvc1902'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcvc1902'
+INFO: [Common 17-83] Releasing license: Implementation
+INFO: [DRC 23-27] Running DRC with 16 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors, 1 Warnings
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 16 threads
+CRITICAL WARNING: [DRC CIPS-1] Versal CIPS exists check - place design: Versal designs must contain a CIPS IP in the netlist hierarchy to function properly. Please create an instance of the CIPS IP and configure it. Without a CIPS IP in the design, Vivado will not generate a CDO for the PMC, an elf for the PLM.
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors, 1 Critical Warnings, 1034 Warnings, 39 Advisories
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 16 CPUs
+
+Starting Placer Task
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.03 . Memory (MB): peak = 6033.062 ; gain = 0.000 ; free physical = 22612 ; free virtual = 50647
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 1b23bd49f
+
+Time (s): cpu = 00:00:00.18 ; elapsed = 00:00:00.13 . Memory (MB): peak = 6033.062 ; gain = 0.000 ; free physical = 22612 ; free virtual = 50648
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 6033.062 ; gain = 0.000 ; free physical = 22612 ; free virtual = 50648
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+ERROR: [Place 30-415] IO Placement failed due to overutilization. This design contains 20841 I/O ports
+ while the target  device: xcvc1902 package: vsva2197, contains only 1004 available user I/O. The target device has 1004 usable I/O pins of which 0 are already occupied by user-locked I/Os.
+ To rectify this issue:
+ 1. Ensure you are targeting the correct device and package.  Select a larger device or different package if necessary.
+ 2. Check the top-level ports of the design to ensure the correct number of ports are specified.
+ 3. Consider design changes to reduce the number of I/Os necessary.
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[0]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[10]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[11]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[12]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[1]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[2]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[3]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[4]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[5]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[6]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[7]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[8]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address0_0_OBUF[9]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[0]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[10]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[11]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[12]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[1]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[2]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[3]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[4]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[5]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[6]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[7]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[8]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_address1_0_OBUF[9]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_ce0_0_OBUF_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_ce1_0_OBUF_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q0_0_IBUF[0]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q0_0_IBUF[1]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q0_0_IBUF[2]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q0_0_IBUF[3]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q0_0_IBUF[4]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q0_0_IBUF[5]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q0_0_IBUF[6]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q0_0_IBUF[7]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q1_0_IBUF[0]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q1_0_IBUF[1]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q1_0_IBUF[2]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q1_0_IBUF[3]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q1_0_IBUF[4]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q1_0_IBUF[5]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q1_0_IBUF[6]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_0_q1_0_IBUF[7]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[0]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[10]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[11]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[12]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[1]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[2]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[3]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[4]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[5]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[6]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[7]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[8]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address0_0_OBUF[9]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[0]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[10]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[11]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[12]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[1]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[2]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[3]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[4]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[5]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[6]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[7]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[8]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_address1_0_OBUF[9]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_ce0_0_OBUF_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_ce1_0_OBUF_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q0_0_IBUF[0]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q0_0_IBUF[1]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q0_0_IBUF[2]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q0_0_IBUF[3]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q0_0_IBUF[4]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q0_0_IBUF[5]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q0_0_IBUF[6]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q0_0_IBUF[7]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q1_0_IBUF[0]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q1_0_IBUF[1]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q1_0_IBUF[2]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q1_0_IBUF[3]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q1_0_IBUF[4]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q1_0_IBUF[5]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q1_0_IBUF[6]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_10_q1_0_IBUF[7]_inst (IBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[0]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[10]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[11]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[12]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[1]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[2]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[3]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[4]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[5]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[6]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[7]_inst (OBUF) is not placed
+ERROR: [Place 30-68] Instance K_0_11_address0_0_OBUF[8]_inst (OBUF) is not placed
+INFO: [Common 17-14] Message 'Place 30-68' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 102ad3860
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:12 . Memory (MB): peak = 6033.062 ; gain = 0.000 ; free physical = 22607 ; free virtual = 50642
+Phase 1 Placer Initialization | Checksum: 102ad3860
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:12 . Memory (MB): peak = 6033.062 ; gain = 0.000 ; free physical = 22607 ; free virtual = 50643
+ERROR: [Place 30-99] Placer failed with error: 'IO Clock Placer failed'
+Please review all ERROR, CRITICAL WARNING, and WARNING messages during placement to understand the cause for failure.
+Ending Placer Task | Checksum: 102ad3860
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:12 . Memory (MB): peak = 6033.062 ; gain = 0.000 ; free physical = 22607 ; free virtual = 50643
+53 Infos, 0 Warnings, 1 Critical Warnings and 103 Errors encountered.
+place_design failed
+ERROR: [Common 17-69] Command failed: Placer could not place all instances
+INFO: [Common 17-206] Exiting Vivado at Tue May 26 16:12:21 2026...
+[Tue May 26 16:12:37 2026] impl_1 finished
+ERROR: [Vivado 12-13638] Failed runs(s) : 'impl_1'
+wait_on_runs: Time (s): cpu = 00:00:00.85 ; elapsed = 00:02:01 . Memory (MB): peak = 6044.336 ; gain = 0.000 ; free physical = 26876 ; free virtual = 54912
+>>> STEP4 IMPL FAIL :: ERROR: [Common 17-39] 'wait_on_runs' failed due to earlier errors.
+
+INFO: [Common 17-206] Exiting Vivado at Tue May 26 16:12:39 2026...

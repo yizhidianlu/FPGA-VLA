@@ -1,35 +1,31 @@
 {
-  "task_id": "T0036",
+  "task_id": "T0036_RETRY",
   "status": "FAILED",
-  "claimed_at": "2026-05-26T00:00:00Z",
-  "finished_at": "2026-05-26T06:04:50Z",
+  "claimed_at": "2026-05-26T08:10:00Z",
+  "finished_at": "2026-05-26T08:13:34Z",
   "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
   "worker_version": "v1.0",
+  "license": "Vivado ML Enterprise Edition — LICENSE_OK for xcvc1902",
   "result": {
-    "synth_ok": false,
+    "synth_ok": true,
+    "synth_detail": "synth_design completed successfully: 42 Infos, 2 Warnings, 0 Errors. Peak RAM 3.8 GB. Time 36 seconds.",
     "impl_ok": false,
-    "timing_met": false,
+    "impl_failure_reason": "IO Overutilization: design has 20,841 I/O ports vs 1,004 available on xcvc1902-vsva2197. The build_bd.tcl externalized all unconnected pins of the 4 HLS IPs (xmod_attn, gvsa_matmul, action_diff_head, vit_encoder_12layer). Each IP's partitioned memory interfaces (K/Q/V arrays with cyclic+block partitioning) created thousands of individual I/O ports.",
+    "timing_met": null,
     "wns_ns": null,
-    "ipi_ok": true,
-    "ipi_detail": "All 5 cells instantiated (u_xmod, u_gvsa, u_adh, u_vit, u_sched). validate_bd_design passed. HDL wrapper generated.",
-    "license_fail": true,
-    "license_error": "ERROR [Common 17-345]: No license for feature 'Synthesis' and/or device 'xcvc1902'",
-    "hls_ip_regen": {
-      "T0024_xmod_attn_v1": "CSim PASS (cos_sim=1.0), csynth PASS, IP-XACT OK",
-      "T0025_gvsa_matmul": "CSim PASS, csynth PASS, IP-XACT OK",
-      "T0026_action_diff_head": "CSim PASS (mismatches=0/7), csynth PASS, IP-XACT OK",
-      "T0029_vit_encoder_12layer": "CSim PASS, csynth PASS, IP-XACT OK"
-    }
+    "host_64gb_result": "64 GB host successfully cleared both previous blockers: (1) Vivado license for xcvc1902 — OK, (2) ACCESS_VIOLATION crash at create_bd_cell — did not occur. Synthesis completed with 3.8 GB peak. The impl failure is a design connectivity issue, not a host/tool limitation.",
+    "license_verified": true,
+    "license_feature": "Vivado_ML_Enterprise_Edition + Implementation for xcvc1902"
   },
   "acceptance_criteria_passed": false,
   "human_ack_needed": true,
-  "human_ack_reasons": ["vivado_license_missing"],
+  "human_ack_reasons": ["impl_skipped_synth_only — IO overutilization (20,841 ports). Design needs inter-IP connectivity before PnR is possible."],
   "artefacts": [
-    "coord/reports/T0036/vivado_ipi.log",
-    "coord/reports/T0036/build_bd.tcl",
-    "coord/reports/T0036/result.json",
-    "runs/T0036/mr_vla_ipi/ (Vivado project — block design ready)"
+    "coord/reports/T0036/vivado_synth_impl.log",
+    "coord/reports/T0036/synth_util.rpt",
+    "coord/reports/T0036/synth_timing.rpt",
+    "coord/reports/T0036/result.json"
   ],
-  "next_task_suggestion": "Install xcvc1902 license, then retry T0036 synth+impl",
-  "error": "Vivado Synthesis license missing for xcvc1902 Versal device"
+  "next_task_suggestion": "Either (A) define full pipeline connectivity in build_bd.tcl to wire IPs together (reducing I/O count), or (B) accept synth-level validation + T0032 component-sum as definitive paper numbers. The 64 GB + license issues are fully resolved.",
+  "error": "IO Overutilization at place_design: 20,841 ports vs 1,004 available. Design needs inter-IP wiring."
 }

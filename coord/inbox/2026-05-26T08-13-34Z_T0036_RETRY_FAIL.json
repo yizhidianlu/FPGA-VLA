@@ -1,0 +1,13 @@
+{
+  "task_id": "T0036_RETRY",
+  "status": "FAILED",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-26T08:13:34Z",
+  "synth_ok": true,
+  "synth_detail": "0 errors, 3.8 GB peak RAM, 36 sec",
+  "impl_ok": false,
+  "impl_error": "IO Overutilization: 20,841 I/O ports vs 1,004 available. Externalized HLS IP pins need inter-IP wiring.",
+  "license_ok": true,
+  "host_64gb_ok": true,
+  "next_step": "Need design connectivity fix or accept synth-level + T0032 sum for paper"
+}
