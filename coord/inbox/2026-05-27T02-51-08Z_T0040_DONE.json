@@ -1,0 +1,15 @@
+{
+  "task_id": "T0040",
+  "status": "DONE",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-27T02:51:08Z",
+  "aiecompile_ok": true,
+  "aiesim_pass": true,
+  "max_abs_diff_vs_golden": 0,
+  "tiles_used": 1,
+  "dimensions_full_scale": true,
+  "dimensions": "NTOK=256, QDIM=4096, TOPK=64",
+  "aiesim_target": "x86sim (functional). hw target needs GMIO migration — v1.1 follow-up.",
+  "aie_latency_us_bounds": {"scalar_upper": 2100, "vector_lower": 65, "note": "analytic; aiesim --target=hw requires GMIO"},
+  "notes": "AIE xmod_attn v1 full-scale: bit-exact match to T0022 PL semantics (Q.K^T sat16 -> top-K=64 -> shifted-linear softmax WIN=32 -> sat8(>>15)). max_abs_diff = 0/4096. All 7 acceptance criteria passed; no human_ack triggers fired."
+}

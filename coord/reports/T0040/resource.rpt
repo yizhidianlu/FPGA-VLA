@@ -1,0 +1,46 @@
+=== T0040 AIE xmod_attn v1 FULL-SCALE Resource Report ===
+
+Target:        xcvc1902-vsva2197-2MP-e-S (VCK190)
+Platform:      xilinx_vck190_base_202410_1
+PL freq:       250 MHz
+AIE arch:      AIE1 (VC1902)
+
+Compilation:
+  --target=x86sim    : Compilation Complete (0 errors, 5 warnings — all deprecation)
+  --target=hw         : Compilation Failed (Edge buf1 exceeds 32 KB MG limit)
+
+Dimensions (full paper scale, matching T0022 PL baseline):
+  QDIM = 4096   (DinoSigLIP-S hidden)
+  NTOK =  256   (sequence length / vision tokens)
+  TOPK =   64   (cross-modal sparse attention K)
+  SOFTMAX_WIN = 32 (matches T0022 softmax_64.cpp WIN=32)
+
+Kernel & Tiles:
+  1 kernel    : kernel_xmod_attn (monolithic, all 6 stages)
+  1 AIE tile  : confirmed by previous T0037 v0 with same single-kernel pattern
+  PLIO width  : 128-bit (v16int8)
+  PLIO ports  : 4 (Q_in, K_in, V_in, out)
+
+Tile-memory budget (single AIE tile, 32 KiB data memory):
+  Q_local[4096]       int8   =  4 KiB
+  scores[256]         int16  =  0.5 KiB
+  top_v[64]           int16  =  0.125 KiB
+  top_i[64]           uint16 =  0.125 KiB
+  shifted[64]         int16  =  0.125 KiB
+  weights[64]         int16  =  0.125 KiB
+  weights_dense[256]  int16  =  0.5 KiB
+  acc[4096]           int32  = 16 KiB  (static)
+  stack / control            ~ 2 KiB
+  TOTAL                      ~ 23.5 KiB  -- fits.
+
+Per-call data movement (PLIO window sizes — x86sim only):
+  Q_in   :    4 KiB    (QDIM int8)
+  K_in   : 1024 KiB    (NTOK * QDIM int8)         -- exceeds 32 KiB hw MG limit
+  V_in   : 1024 KiB    (NTOK * QDIM int8)         -- exceeds 32 KiB hw MG limit
+  out    :    4 KiB    (QDIM int8)
+
+Hardware migration scope (v1.1):
+  K_in / V_in must move from PLIO window to GMIO io_buffer (DDR-backed
+  async DMA). Kernel reads V tile-by-tile per call. The 32 KiB MG limit
+  is a hardware constraint; x86sim ignores it. v1.0 (this task) validates
+  the algorithm; v1.1 is the on-hardware port.

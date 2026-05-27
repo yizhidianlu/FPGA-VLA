@@ -1,0 +1,77 @@
+                                           AI Engine Compiler
+                                     Version 2024.1 (linux64-bit)
+                                     SW Build 5072252 on 2024-05-21-05:03:35
+                          Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+                          Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+INFO: ML part stats configuration file found in /tools/Xilinx/Vitis/2024.1/aietools/data
+INFO: [aiecompiler 77-3355] ###[Start]: Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 55-2053] elapsed time for repository (/tools/Xilinx/Vivado/2024.1/data/embeddedsw) loading 0 seconds
+INFO: [aiecompiler 77-3354] ###[Finish]:  Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-3379] Extracted physical device part from platform is : xcvc1902-vsva2197-2MP-e-S 
+INFO: [aiecompiler 77-297] Cmd Line : /tools/Xilinx/Vitis/2024.1/aietools/bin/unwrapped/lnx64.o/aiecompiler --target=hw -platform=/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm --pl-freq=250 --workdir=Work_hw graph.cpp 
+Running Dispatch Server on port: 46513
+INFO: [aiecompiler 77-404] Executing Cmd: ${XILINX_VITIS_AIETOOLS}/tps/lnx64/gcc/bin/g++ -E -std=c++17 -D__ADF_FRONTEND__ -D__AIE_ARCH__=10 -I/tools/Xilinx/Vitis/2024.1/aietools/include  -I .  graph.cpp > Work_hw/temp/graph.ii
+INFO: [aiecompiler 77-404] Executing Cmd: graph_preprocessor Work_hw/temp/graph.ii -o Work_hw/temp/graph.processed.ii -report-core-dump  -- -std=c++17  -ftemplate-depth=2048  -Wno-return-stack-address  -Wno-missing-declarations  -Wno-parentheses-equality  -Wno-shift-negative-value  
+INFO: [aiecompiler 77-404] Executing Cmd: ${XILINX_VITIS_AIETOOLS}/tps/lnx64/gcc/bin/g++  -std=c++17  -I .  Work_hw/temp/graph.processed.ii -o Work_hw/temp/graph.out -L /tools/Xilinx/Vitis/2024.1/aietools/lib/lnx64.o -g -O0 -Wl,--unresolved-symbols=ignore-all  -Wno-return-stack-address  -Wno-missing-declarations  -lmeir_frontend  -ladf_api_frontend 
+INFO: [aiecompiler 77-404] Executing Cmd: Work_hw/temp/graph.out --workdir=Work_hw --aiearch=aie --log-level=1 --pl-axi-lite=0 --enable-multi-layer=0 --disable-dma-autostart=0 --enable-light-cdo=0 --large-program-memory=0 --swfifo-threshold=40 --target=hw
+INFO: [aiecompiler 77-749] Reading logical device VC1902.json
+WARNING: [aiecompiler 77-5890] 'k.in[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k.in[1]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k.in[2]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k.out[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+INFO: [aiecompiler 77-6447] Executing Cmd: aieir_be --time-passes=0  --disable-om-fifo-insertion=false  --fast-nonlinearfloats=false  --high-performance=false  --single-mm2s-channel=false  --stacksize=1024  --output-archive=libadf.a  --disable-multirate=false  --fastmath=false  --event-trace-advanced-mapping=0  --gen-graph-cleanup=false  --use-canonical-net-names=false  --use-phy-shim=true  --trace-aiesim-option=0  --num-trace-streams=16  --adf-api-log-level=2  --enable-partition=false  --quiet=false  --exec-timed=0  --keep-intermediate-results=false  --enable-profiling=false  --runtime-opt=true  --disable-transform-merge-broadcast=false  --verbose=false  --nodot-graph=false  --disable-transform-broadcast-split=true  --pl-freq=250  --trace-plio-width=64  --broadcast-enable-core=true  --kernel-address-location=false  --target=hw --swfifo-threshold=40  --workdir=Work_hw  --exit-after=complete  --test-iterations=-1  --known-tripcount=false  --platform=/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm  --write-partitioned-file=true  --schemafile=AIEGraphSchema.json  --lock-fence-mode=1  --enable-reconfig=false  --evaluate-fifo-depth=false  --event-trace-port=gmio --xlopt=1  --extend-trace-partition=false  --graph-iterator-event=false  --optimize-pktids=false  --no-init=false  --fast-floats=true  --large-kernel-program=false  --no-timer-sync=false  --heapsize=1024  --enable-reconfig-dma-autostart=false  --disable-dma-autostart=false  --json=Work_hw/temp/graph.json
+AIEbuild feature license is found.
+INFO: [aiecompiler 77-3355] ###[Start]: Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 55-2053] elapsed time for repository (/tools/Xilinx/Vivado/2024.1/data/embeddedsw) loading 0 seconds
+INFO: [aiecompiler 77-3354] ###[Finish]:  Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-3379] Extracted physical device part from platform is : xcvc1902-vsva2197-2MP-e-S 
+INFO: [aiecompiler 77-749] Reading logical device VC1902.json
+INFO: [aiecompiler 77-750] Reading physical device xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-951] ###Start:Loading Device Part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-950] ###Finish(0u 0s 0w):Loading Device Part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-4400] Finish reading physical device xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-951] ###Start:Loading Device Part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-950] ###Finish(0u 0s 0w):Loading Device Part xcvc1902-vsva2197-2MP-e-S
+WARNING: [aiecompiler 77-6300] Graphviz tools are not installed on this system, dot graphs will not be generated.
+686: Work_hw/temp/graph.json
+INFO: [aiecompiler 77-757] Opening input file: Work_hw/temp/graph.json
+INFO: [aiecompiler 77-6287] Emitting AIEIr in file: Work_hw/temp/graph_aieir_dump.txt
+INFO: [aiecompiler 77-656] Processing Graph 'root'
+INFO: [aiecompiler 77-404] Executing Cmd: 	cd Work_hw/aie/ir;
+${XILINX_VITIS_AIETOOLS}/tps/${RDI_PLATFORM}/target/bin/LNa64bin/chesscc +f +s -p me -P ${XILINX_VITIS_AIETOOLS}/data/versal_prod/lib +Wllvm,-O2,-fno-jump-tables,-femit-all-decls,-fno-discard-value-names,-mllvm,-chess-collapse-struct-types-during-linking=0,-Xclang,-chess-only-info-critical-passes,-g -D__AIENGINE__ -D__AIE_ARCH__=10 -I ${XILINX_VITIS_AIETOOLS}/data/versal_prod/lib -I ${XILINX_VITIS_AIETOOLS}/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I ${XILINX_VITIS_AIETOOLS}/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I ${XILINX_VITIS_AIETOOLS}/data/versal_prod/lib/runtime/include empty.cc -o _header.ll
+
+Configuration: Release_LLVM
+Compiling "empty.cc"
+chess-clang -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib --chess-proc-dir=/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib -S -nostdlibinc -D__chess__ -D__tct_release__=2306 -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -D__AIENGINE__ -D__AIE_ARCH__=10 -D__tct_tgt__=240112 -xc++ -O2 -include aie_core.h -std=c++2a -fno-builtin-memcpy -mllvm -disable-lsr -mllvm -replexitval=never -mllvm -enable-load-pre=false -mllvm -chess-disable-add-to-or -mllvm -chess-combine-gep-indices=none -mllvm -chess-disable-fold-phi-of-loads -mllvm -chess-aainfo2chains-algo=4 -mllvm -chess-aggressive-aainfo=false -mllvm -chess-enable-indvarsimplify=0 -fchess-register-c++-static-destructors-as-global-dtors -Werror=return-type -mllvm -chess-disable-cse-across-loopboundary -mllvm -chess-tbaa-detect-common-underlying-object=true -mllvm -chess-protect-llvm-global-reg-access=true -mllvm -chess-enable-c-pragma-protect -O2 -fno-jump-tables -femit-all-decls -fno-discard-value-names -mllvm -chess-collapse-struct-types-during-linking=0 -Xclang -chess-only-info-critical-passes -g empty.cc -o_header.ll -emit-llvm --chess-proc-name=me
+Compilation finished successfully (0 errors, 0 warnings)
+INFO: [aiecompiler 77-404] Executing Cmd: make -C Work_hw/aie/ir -j 8 -f i4_kernel_xmod_attn.makefile all 2>&1
+
+make: Entering directory '/tools/projects/FPGA-VLA/runs/T0040/aie_build/Work_hw/aie/ir'
+/tools/Xilinx/Vitis/2024.1/aietools/tps/lnx64/target/bin/LNa64bin/chesscc +f +s -p me -P /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib +Wllvm,-O2,-fno-jump-tables,-fno-discard-value-names,-mllvm,-chess-collapse-struct-types-during-linking=0,-Xclang,-chess-only-info-critical-passes,-g -D__AIENGINE__ -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I /tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include /tools/projects/FPGA-VLA/runs/T0040/aie_build/kernel_xmod_attn.cpp -o i4_kernel_xmod_attn.ll
+Configuration: Release_LLVM
+Compiling "kernel_xmod_attn.cpp"
+chess-clang -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib --chess-proc-dir=/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib -S -nostdlibinc -D__chess__ -D__tct_release__=2306 -I../../.. -I/tools/Xilinx/Vitis/2024.1/aietools/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libcxx-lite/include -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime_cxx/libs/libcxx-9.0.0/include-lite -I/tools/Xilinx/Vitis/2024.1/aietools/data/versal_prod/lib/runtime/include -D__AIENGINE__ -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -D__tct_tgt__=240112 -xc++ -O2 -include aie_core.h -std=c++2a -fno-builtin-memcpy -mllvm -disable-lsr -mllvm -replexitval=never -mllvm -enable-load-pre=false -mllvm -chess-disable-add-to-or -mllvm -chess-combine-gep-indices=none -mllvm -chess-disable-fold-phi-of-loads -mllvm -chess-aainfo2chains-algo=4 -mllvm -chess-aggressive-aainfo=false -mllvm -chess-enable-indvarsimplify=0 -fchess-register-c++-static-destructors-as-global-dtors -Werror=return-type -mllvm -chess-disable-cse-across-loopboundary -mllvm -chess-tbaa-detect-common-underlying-object=true -mllvm -chess-protect-llvm-global-reg-access=true -mllvm -chess-enable-c-pragma-protect -O2 -fno-jump-tables -fno-discard-value-names -mllvm -chess-collapse-struct-types-during-linking=0 -Xclang -chess-only-info-critical-passes -g /tools/projects/FPGA-VLA/runs/T0040/aie_build/kernel_xmod_attn.cpp -oi4_kernel_xmod_attn.ll -emit-llvm --chess-proc-name=me
+Compilation finished successfully (0 errors, 0 warnings)
+make: Leaving directory '/tools/projects/FPGA-VLA/runs/T0040/aie_build/Work_hw/aie/ir'
+INFO: [aiecompiler 77-404] Executing Cmd: rm -f Work_hw/aie/ir/i4_kernel_xmod_attn.makefile;
+
+INFO: [aiecompiler 77-404] Executing Cmd: 	cd Work_hw/aie/ir;
+	export XILINX_CARDANO_KERNEL_ANALYSIS_OPTIONS="-spec=i4_kernel_xmod_attn_spec.json" ;
+	${XILINX_VITIS_AIETOOLS}/lnx64.o/tools/clang/bin/opt -S -load-pass-plugin ${XILINX_VITIS_AIETOOLS}/lib/lnx64.o/libLLVMKernelAnalysis.so -spec=i4_kernel_xmod_attn_spec.json  -passes=kernel_analysis i4_kernel_xmod_attn.ll > /dev/null;
+
+INFO: [aiecompiler 77-404] Executing Cmd: 	cd Work_hw/aie/ir;
+	${XILINX_VITIS_AIETOOLS}/lnx64.o/tools/clang/bin/opt -S -load-pass-plugin=${XILINX_VITIS_AIETOOLS}/lib/lnx64.o/libLLVMXLOptPreProc.so -passes=XLOptPreProc -spec=i4_kernel_xmod_attn_spec.json i4_kernel_xmod_attn.ll -o i4_kernel_xmod_attn.ll 2>/dev/null;
+
+INFO: [aiecompiler 77-5917] Repetition count for gr.k is 1.
+INFO: [aiecompiler 77-6276] DRC Results: 0 Errors
+ERROR: [aiecompiler 77-6450] Edge buf1 exceeds 32KB, the MG limit.
+INFO: [aiecompiler 77-6439] Run completed. Find additional information in:
+	Guidance: Work_hw/reports/guidance.html
+
+INFO: [aiecompiler 77-6440] Use the vitis_analyzer tool to visualize and navigate the relevant reports. Run: 
+	vitis_analyzer Work_hw/graph.aiecompile_summary
+
+Compilation Failed
+(WARNING:5, CRITICAL-WARNING:0, ERROR:1)

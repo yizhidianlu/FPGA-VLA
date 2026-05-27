@@ -1,0 +1,5 @@
+max_abs_diff=157
+mismatches=4096/4096
+mean_abs_diff=127.455322
+cosine_similarity=0.003782
+exact_match=False
