@@ -17,6 +17,42 @@ params:
     skipped — no numerical correctness, no latency measurement. v1 must close
     those three gaps so the §V.G PL vs AIE table is publishable.
 
+  quickstart_for_resumed_session: |
+    # ============================================================
+    # COPY-PASTE QUICKSTART for any Claude session resuming T0040.
+    # Tested assumption: env already source'd Vitis 2024.1 in ~/.bashrc,
+    # license file at /tools/Xilinx/license/Xilinx.lic, XILINXD_LICENSE_FILE
+    # exported. Reuse coord/reports/T0037/aie_graph/ as the scaffolding base.
+    # ============================================================
+
+    # 0. sanity (~30s) — confirm env + license + workspace
+    source /tools/Xilinx/Vitis/2024.1/settings64.sh
+    aiecompiler --version
+    free -g | awk '/^Mem:/ {print "RAM total: " $2 " GiB, free: " $7 " GiB"}'
+    df -BG /tools | awk 'NR==2{print "/tools free: " $4}'
+    test -f /tools/Xilinx/license/Xilinx.lic && echo "license file: OK"
+    # 1. scaffold v1 (~5 min) — copy v0 → v1 dir, swap PLIO → GMIO, bump dims
+    mkdir -p /tools/projects/FPGA-VLA/runs/T0040
+    cp -r coord/reports/T0037/aie_graph runs/T0040/aie_graph_v1
+    cd runs/T0040/aie_graph_v1
+    # edit graph.h:  #define NTOK 256, QDIM 4096, TOPK 64
+    # edit graph.cpp: input_plio<128> → input_gmio  (4 ports: Q,K,V → 1 out)
+    # edit kernel_*.cpp:  loops walk Q_TILE * K_TILE tiles, sparse-mask top-k
+    # if compiler complains "too many live tiles", split into 2-4 AIE cores
+    # via cascade streams (see UG1076 §5.4 cascade).
+    # 2. compile (~5-30 min)
+    aiecompiler --target=hw --platform=xilinx_vck190_base_202410_1 \
+        --workdir=Work graph.cpp 2>&1 | tee aiecompiler.log
+    # 3. aiesimulator (~30-180 min depending on sequence length)
+    aiesimulator --pkg-dir=Work --i I/O 2>&1 | tee aiesim.log
+    # 4. compare to golden — if T0022 golden bin is missing, regenerate via
+    #    a 20-line numpy script that reproduces the T0022 csim golden
+    python3 -c "import numpy as np; ref=np.fromfile('I/O/aie_out.dat',dtype=np.float32); gld=np.fromfile('coord/reports/T0022/golden_out.bin',dtype=np.float32); print('max_abs_diff', float(np.abs(ref-gld).max()))"
+    # 5. extract latency
+    awk -F, '/^cycle/{c=$2} END{print \"aie_latency_us:\", c/1000}' Work/aiesim_output/timing.csv
+    # 6. write result.json + commit + push
+    # (the result.json template below mirrors acceptance_criteria; fill values)
+
   flow:
     step_1_switch_to_gmio: |
       Replace PLIO ports with GMIO (DDR-backed) ports for Q_in, K_in, V_in,
