@@ -1,0 +1,24 @@
+
+
+BUFFER,FROM_INSTANCE.PORT,TO_INSTANCE.PORT,SIZE,MEMORY_GROUP,BANK,OFFSET,DMA_NEEDED
+sysmem3,-,-,24608,"(24, 1)",0,0,-
+sysmem2,-,-,24608,"(26, 0)",0,0,-
+buf4,Q_in.po0,gr.k_qks.pi0,4096,"(23, 0)",1,0,-
+buf0,Q_in.po0,gr.k_qks.pi0,4096,"(23, 0)",0,0,-
+buf5,gr.k_av.po0,out.pi0,4096,"(25, 0)",3,0,-
+buf1,gr.k_av.po0,out.pi0,4096,"(25, 0)",2,0,-
+
+
+PLIO,IN/OUT,TILE_COLUMN,CHANNEL
+out,out,26,0
+Q_in,in,24,0
+
+
+GMIO,IN/OUT,TILE_COLUMN,CHANNEL
+K_gmio,out,26,0
+V_gmio,out,26,0
+
+
+CLUSTER,KERNELS,TILE
+PT1,"gr.k_qks,","(24, 0)"
+PT0,"gr.k_av,","(26, 0)"

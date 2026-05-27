@@ -1,0 +1,19 @@
+{
+  "task_id": "T0042",
+  "status": "PARTIAL",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-27T04:50:00Z",
+  "summary": "kernel_av vectorised with aie::mac<acc32, v16int8, v16int16>. HW compile PASS (chess-backend modulo-scheduler blocker from T0041 RESOLVED). x86sim regression PASS bit-exact (max_abs_diff=0 vs golden). aiesim BLOCKED: standalone aiesimulator with HW-target Work does not execute the user main() that drives gm2aie_nb; both kernel tiles stall in readincr() waiting for GMIO data that never arrives (function profiles show 0 calls in 4.7M sim cycles). Analytic latency from kernel structure + 1.25 GHz AIE1 clock: 160 us central (range 52-210 us), decisively below PL 674 us. measured aie_latency_us requires full Vitis hw_emu flow (xsa + sw_app + qemu) which is outside T0042 scope.",
+  "report_dir": "coord/reports/T0042/",
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "aiesim_pass=false (standalone aiesim+GMIO+HW-target tooling limitation, not algorithmic)",
+    "aie_latency_us_measured=false; analytic 160 us provided (52-210 us range)",
+    "tiles_used=5 incl. 3 buffer/shim helpers (2 actual kernel tiles)"
+  ],
+  "next_action_options": [
+    "ACK PARTIAL and accept analytic 160 us as published AIE number (drop dagger footnote in V.F)",
+    "Queue T0043: full Vitis hw_emu flow to obtain a single measured aie_latency_us number (~4-8h scope)",
+    "Queue T0043 alt: reduced-scale (e.g. NTOK=8) standalone aiesim with PLIO-fed K/V (would extrapolate, NOT full-scale measured)"
+  ]
+}

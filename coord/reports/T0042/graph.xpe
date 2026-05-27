@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<POWERDATA data="AI-Engine Compiler" dataVersion="" design="graph" date="Wed May 27 11:35:45 2026
+">
+ <DEVICE part="xcvc1902" grade="extended" package="vsva2197" speed="-2MP" process="typical" vid="No"></DEVICE>
+  <AIE status="COMPILER_OUTPUT">
+    <AIE_MODULE name="graph" num_tiles="5" clk_freq="1250">
+      <TILE name="CR(23,0)" type="none" int_core_load="0" fp_core_load="0" mem_banks="4" mem_rw_rate="0.2" stream_util="0.019" coordinates="23,1">
+      </TILE>
+      <TILE name="CR(24,0)" type="int16" int_core_load="0.3" fp_core_load="0" mem_banks="0" mem_rw_rate="0.2" stream_util="0.077" coordinates="24,1">
+        <KERNEL name="i4"  int_core_load="0.5" fp_core_load="0"></KERNEL>
+      </TILE>
+      <TILE name="CR(24,1)" type="none" int_core_load="0" fp_core_load="0" mem_banks="8" mem_rw_rate="0.2" stream_util="0" coordinates="24,2">
+      </TILE>
+      <TILE name="CR(25,0)" type="none" int_core_load="0" fp_core_load="0" mem_banks="4" mem_rw_rate="0.2" stream_util="0.096" coordinates="25,1">
+      </TILE>
+      <TILE name="CR(26,0)" type="int16" int_core_load="0.3" fp_core_load="0" mem_banks="8" mem_rw_rate="0.2" stream_util="0.12" coordinates="26,1">
+        <KERNEL name="i5"  int_core_load="0.5" fp_core_load="0"></KERNEL>
+      </TILE>
+      <SHIM name="SHIM(24, 0)" type="AIE_PL_SHIM" stream_util="0.021" num_pl_streams="2" num_aximm_connections="0" coordinates="24,0"></SHIM>
+      <SHIM name="SHIM(26, 0)" type="AIE_PL_NOC_SHIM" stream_util="0.085" num_pl_streams="2" num_aximm_connections="1" coordinates="26,0"></SHIM>
+    </AIE_MODULE>
+  </AIE>
+</POWERDATA>
