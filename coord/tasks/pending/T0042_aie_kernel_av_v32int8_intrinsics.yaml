@@ -1,0 +1,180 @@
+task_id: T0042
+created_by: orchestrator
+created_at: 2026-05-27T04:00:00Z
+type: aie_compile
+priority: P0
+target_worker: remote_claude_ali_aie
+depends_on: [T0041]                # T0041 PARTIAL accepted; this is Path A of its 3 follow-up options
+deadline_minutes: 720              # 12h — kernel intrinsic tuning is genuinely tricky
+params:
+  module_name: xmod_attn_v1_1a_vectorized
+  description: |
+    **T0041 Path A — vectorise kernel_av Stage 5 with aie::mac v32int8 intrinsics
+    so the chess-backend modulo-scheduler accepts it, HW target compile passes,
+    and aiesimulator produces a single measured aie_latency_us value to replace
+    T0040's 65-2100 µs analytic bound.**
+
+    T0041 v1.1 cleanly removed T0040's 32 KiB MG-window ceiling via GMIO +
+    2-kernel split (kernel_qk_softmax + kernel_av), x86sim still bit-exact
+    (max_abs_diff=0 vs golden). kernel_qk_softmax HW compile PASS; kernel_av HW
+    compile FAIL with:
+
+      chess-backend modulo-scheduler:
+        "Internal error: no valid schedule found"
+
+    on the Stage 5 weighted-sum loop:
+
+      static int32 acc[QDIM];                    // QDIM=4096, 16 KiB
+      for (n = 0; n < NTOK; n++) {               // NTOK=256
+          int16 w = weights_dense[n];
+          for (d = 0; d < QDIM; d++)             // 4096 scalar MACs
+              acc[d] += w * V[n][d];             // V is int8
+      }
+
+    Root cause: chess-backend cannot pipeline a 1M-MAC scalar loop with a
+    16-KiB long-lived accumulator and no vector hints. This is a known AIE1
+    compiler limitation; the fix is explicit aie::mac<v32int8> intrinsics.
+
+  quickstart_for_resumed_session: |
+    # ============================================================
+    # COPY-PASTE QUICKSTART. Assumes Vitis 2024.1 env in ~/.bashrc.
+    # Reuse coord/reports/T0041/aie_graph/ as the base — only
+    # kernel_av.cpp changes; graph.cpp / graph.h / kernel_qk_softmax.cpp
+    # are unchanged.
+    # ============================================================
+    cd /tools/projects/FPGA-VLA
+    source /tools/Xilinx/Vitis/2024.1/settings64.sh
+    mkdir -p runs/T0042
+    cp -r coord/reports/T0041/aie_graph runs/T0042/aie_graph_v1_1a
+    cd runs/T0042/aie_graph_v1_1a
+
+    # ---- edit kernel_av.cpp (the only file that changes) ----
+    # Replace the scalar inner loop with v32int8 intrinsic batches.
+    # Per-iteration shape: 32 int8 V lanes * 1 int16 w broadcast -> 32 acc lanes.
+    # AMD AIE API ref: UG1078 "AIE API User Guide" §aie::mac, aie::vector,
+    # aie::accum, aie::sliding_mul. Recommended primitive:
+    #
+    #   #include <aie_api/aie.hpp>
+    #   using namespace aie;
+    #   constexpr unsigned LANES = 32;            // v32int8 fits AIE1 vector reg
+    #
+    #   void kernel_av(input_stream<int16> *w_strm,
+    #                  input_gmio<int8>    *V_gmio,
+    #                  output_stream<int8> *out_strm)
+    #   {
+    #       accum<acc48, LANES> acc_v[QDIM / LANES] = {};  // 128 acc accumulators
+    #
+    #       for (unsigned n = 0; n < NTOK; n++) {
+    #           int16 w = readincr(w_strm);                 // weights_dense[n]
+    #           // broadcast scalar w to 32-lane vector ONCE
+    #           vector<int16, LANES> w_v = broadcast<int16, LANES>(w);
+    #
+    #           for (unsigned d = 0; d < QDIM; d += LANES) {
+    #               // load V[n][d:d+32] from GMIO via per-call window
+    #               vector<int8, LANES> v_v = ::load_v<LANES>(V_ptr + n*QDIM + d);
+    #               // multiply-accumulate: acc += v_v * w_v
+    #               // signature: aie::mac<int16, int8>(accum, vec_a, vec_b)
+    #               acc_v[d / LANES] = mac(acc_v[d / LANES], v_v, w_v);
+    #           }
+    #       }
+    #
+    #       // sat8(>>15) emit, vectorised
+    #       for (unsigned d = 0; d < QDIM; d += LANES) {
+    #           vector<int8, LANES> out_v = acc_v[d / LANES].to_vector<int8>(15);
+    #           // stream out 32 lanes (or write to PLIO out window)
+    #           writeincr_v<LANES>(out_strm, out_v);
+    #       }
+    #   }
+    #
+    # Notes on intrinsic selection (verify against UG1078 §B.6 for exact names):
+    #   - aie::mac with (vec<int16>, vec<int8>) returns accum<acc48, LANES>
+    #   - aie::load_v / aie::store_v access GMIO/PLIO windows in vector lanes
+    #   - aie::broadcast turns scalar into vec for SIMD lane fan-out
+    #   - .to_vector<int8>(shift) does saturating downcast with arithmetic shift
+    #
+    # If the (int16, int8) mac variant doesn't exist on AIE1, fall back to:
+    #   (a) widen w to int8 if value range permits (usually does for softmax output)
+    #   (b) use sliding_mul template which is more permissive
+    #   (c) split into two mac<int16,int16> calls (worst case)
+
+    # ---- compile (HW target this time) ----
+    aiecompiler --target=hw --platform=xilinx_vck190_base_202410_1 \
+        --workdir=Work graph.cpp 2>&1 | tee aiecompiler_hw.log
+
+    # ---- if compile passes, run cycle-accurate aiesim ----
+    aiesimulator --pkg-dir=Work --i I/O 2>&1 | tee aiesim_hw.log
+
+    # ---- extract measured latency ----
+    awk -F, '/^cycle/{c=$2} END{printf "aie_latency_us: %.2f\n", c/1000}' \
+        Work/aiesim_output/timing.csv
+
+    # ---- verify still bit-exact vs golden ----
+    python3 -c "
+    import numpy as np
+    aie = np.fromfile('I/O/aie_out.dat', dtype=np.int8)
+    gld = np.fromfile('../../coord/reports/T0040/golden_out.txt', sep='\n', dtype=np.int8)
+    print('max_abs_diff', int(np.abs(aie.astype(int) - gld.astype(int)).max()))
+    "
+
+  flow:
+    step_1_rewrite_kernel_av: |
+      Only kernel_av.cpp changes. Replace inner scalar loop with aie::mac
+      v32int8 intrinsics. Per-iter: 32 V lanes x scalar w broadcast -> 32 acc lanes.
+      Number of accumulator banks: QDIM / 32 = 128 accum<acc48, 32> registers.
+      Keep API: input streams unchanged, output unchanged, dims unchanged.
+    step_2_hw_compile: |
+      aiecompiler --target=hw should PASS this time. Vector intrinsics have
+      a known optimal modulo schedule; chess-backend will not fall over.
+      Confirm: 0 errors, 0 critical warnings.
+    step_3_x86sim_regression: |
+      Re-run x86simulator FIRST to confirm bit-exact output is preserved
+      (numerical correctness sanity before trusting timing). Expect
+      max_abs_diff = 0 same as T0041 v1.1 / T0040 v1.0.
+    step_4_aiesimulator: |
+      Cycle-accurate aiesimulator with hw-compiled Work/. Extract
+      total_cycles from Work/aiesim_output/timing.csv. Latency =
+      cycles / 1000 (AIE1 at 1 GHz).
+    step_5_archive: |
+      coord/reports/T0042/:
+        aie_graph/kernel_av.cpp     (vectorised version, the diff)
+        aiecompiler_hw.log
+        aiesim_hw.log
+        timing.csv
+        resource.rpt
+        result.json with measured aie_latency_us, vs T0040 analytic bounds
+        compare_pl.md updated with measured AIE row
+
+  target_platform: xilinx_vck190_base_202410_1
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.aiecompile_hw_ok: true
+  - result.aiesim_pass: true
+  - result.max_abs_diff_vs_golden: "<= 1"      # vector saturating math may differ by ±1 LSB
+  - result.aie_latency_us_measured: true
+  - result.aie_latency_us: "< 5000"
+  - result.tiles_used: "<= 4"
+
+human_ack_required_on:
+  - aie_latency_worse_than_pl                  # informational only — straddle is fine
+  - max_abs_diff_above_1                       # vector math should round-trip near-exactly
+  - hw_compile_still_fails                     # would force Path B or Path C from T0041 ACK
+  - tiles_above_4                              # the v32int8 rewrite should NOT explode tile count
+
+notes: |
+  This is the final piece for §V.F: replaces the 65-2100 µs analytic bound
+  with a single measured number. Paper update after DONE:
+    aie_vs_pl_table.tex  : AIE row latency cell, drop dagger footnote
+    main.tex Future Work : remove "must be hand-vectorised" sentence — done
+    main.tex §V.F prose  : update bounded-latency claim to measured
+    NORTH_STAR.md §11    : mark T0042 done
+
+  Reasoning on int16×int8 mac availability: AIE1 has acc48 accumulator;
+  aie::mac<int16, int8> *should* be available via the general mac template.
+  If specific signature is missing, the fallback strategies in the
+  quickstart (a/b/c) all preserve algorithmic correctness.
+
+  Tile count: T0041 v1.1 used 2 tiles (one per kernel). Vectorising kernel_av
+  should NOT change that — vector ops use the same tile's vector ALU, not
+  additional tiles. If aiecompiler reports tiles_used > 2 in T0042, that
+  suggests the vector rewrite spilled — investigate before accepting.

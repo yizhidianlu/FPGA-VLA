@@ -1,0 +1,137 @@
+task_id: T0036_v4
+created_by: orchestrator
+created_at: 2026-05-27T04:05:00Z
+type: vivado_ipi
+priority: P0
+supersedes: T0036_v3
+target_worker: remote_claude_ali_aie
+depends_on: [T0036_v3]                # v3 BLOCKED finding documented; v4 is the architectural fix
+deadline_minutes: 720                 # 12h — re-export 4 IPs + new BD + synth + impl
+params:
+  module_name: mr_vla_full_top_v4
+  description: |
+    **T0036_v3 BLOCKED root cause + fix.**
+
+    T0036_v3 inspected the BD and found 3094 ap_memory ports across the 4 HLS
+    IPs (xmod_attn: 1258, gvsa: 394, adh: 1318, vit: 109, sched: 15) vs the
+    VCK190's 1004 IO budget. The HLS IPs export ap_memory (BRAM-style, signal-
+    level address/data/ce groups) because the default vitis_hls top-level
+    array interface is ap_memory with ARRAY_PARTITION pragmas. T0036_v3's
+    spec assumed m_axi master interfaces that could be NoC-routed; that
+    assumption was wrong, and TCL-only NoC routing of ap_memory ports would
+    require 3094 axi_bram_ctrl instances (architecturally infeasible).
+
+    **T0036_v4 explicitly authorises HLS source pragma changes.** Add
+    `#pragma HLS INTERFACE m_axi` on top-level array args in the 4 HLS IPs
+    (T0024 xmod_attn, T0025 gvsa, T0026 adh, T0029 vit), re-run vitis_hls
+    csynth + export_design to regenerate IP-XACT with m_axi master
+    interfaces, then build a new BD with axi_noc + DDR controllers routing
+    the m_axi masters through to DDR/HBM, and carry through synth + impl
+    to post-route.
+
+  flow:
+    step_1_hls_pragma_audit: |
+      For each of T0024, T0025, T0026, T0029: list top-level function args,
+      decide which arrays should be m_axi (typically the large ones: Q[4096],
+      K[256][4096], V[256][4096], W weights, etc.). Add to the top of the
+      function:
+
+        #pragma HLS INTERFACE m_axi port=K  bundle=ddr0 offset=slave \
+                  depth=1048576 max_read_burst_length=256
+        #pragma HLS INTERFACE m_axi port=V  bundle=ddr1 offset=slave \
+                  depth=1048576 max_read_burst_length=256
+        #pragma HLS INTERFACE m_axi port=out bundle=ddr2 offset=slave \
+                  depth=4096
+        #pragma HLS INTERFACE s_axilite port=return bundle=control
+
+      Keep small arrays (scores[256], top_v[64], etc.) as ap_memory or
+      LUT — they fit in internal BRAM and don't need DDR backing.
+    step_2_hls_csynth_reexport: |
+      For each modified IP: run csim (must still PASS, bit-exact),
+      csynth (estimate impact on cycle count; AXI bursting changes latency
+      profile but algorithm is unchanged), export_design as IP-XACT.
+      Save new IP-XACT to coord/reports/T0036_v4/ip_xact/<ip>/.
+    step_3_new_bd: |
+      Build new BD mr_vla_bd_v4 using the v4 IP-XACT packages:
+        - clk_wiz, proc_sys_reset (unchanged from T0036_RETRY)
+        - 5 IP cells: u_xmod, u_gvsa, u_adh, u_vit, u_sched
+        - axi_noc_0: VCK190 integrated NoC with 4 NMU + 4 NSU configured
+                     for DDR4 controllers. Route each IP's m_axi master
+                     ports through one NoC master to a DDR bank.
+        - axi_smartconnect_0: for the s_axilite control bus, consolidate
+                              all 4 IPs' control ports into one (optional
+                              PS9 stub or external AXI-Lite master).
+        - DDR controller IPs (4 banks: ddr0, ddr1, ddr2, ddr3)
+        - Multi-rate scheduler (u_sched) drives the 3 rate enables unchanged
+      validate_bd_design must PASS — total external IO should drop from
+      3094 to <100 (clk, rst, ddr pads, s_axilite stub).
+    step_4_synth: |
+      launch_runs synth_1 -jobs 4 ; wait_on_run synth_1 ;
+      open_run synth_1 ;
+      report_utilization > coord/reports/T0036_v4/synth_util.rpt ;
+      report_timing_summary > coord/reports/T0036_v4/synth_timing.rpt
+      Expect resource numbers similar to T0036_RETRY but slightly higher
+      due to AXI infrastructure overhead.
+    step_5_impl: |
+      launch_runs impl_1 -to_step route_design -jobs 4 ;
+      wait_on_run impl_1 ;
+      open_run impl_1 ;
+      report_utilization > coord/reports/T0036_v4/impl_util.rpt ;
+      report_timing_summary > coord/reports/T0036_v4/impl_timing.rpt ;
+      report_power > coord/reports/T0036_v4/impl_power.rpt
+      **THIS produces the [HW-IMPL] post-route numbers for Table V.**
+    step_6_archive: |
+      coord/reports/T0036_v4/:
+        ip_xact/      (regenerated IP-XACT packages)
+        build_bd_v4.tcl, mr_vla_bd_v4.tcl
+        synth_util.rpt, synth_timing.rpt
+        impl_util.rpt, impl_timing.rpt, impl_power.rpt
+        vivado.log
+        result.json with the integrated [HW-IMPL] row for Table V
+
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.hls_csim_all_pass: true               # algorithm preserved across pragma change
+  - result.synth_ok: true
+  - result.impl_ok: true
+  - result.timing_met: true
+  - result.wns_ns: ">= 0"
+  - result.io_pct: "< 50"                        # the key fix — IO must drop from 300% to <50%
+  - result.lut_pct: "< 25"
+  - result.dsp_pct: "< 35"                       # AXI infra may push past 25%
+  - result.bram_pct: "< 40"                      # AXI ctrl uses BRAM
+  - result.uram_pct: "< 25"
+  - result.total_power_w: "< 20"                 # MR-VLA budget is 30W cap
+
+human_ack_required_on:
+  - hls_csim_fail_after_pragma                   # would mean pragma broke algorithm — investigate
+  - vivado_crash
+  - wns_below_0_2
+  - io_overutilization_again                     # would indicate BD still has stray pins
+  - total_power_above_15                         # informational, paper §III claims 5.84 W projection
+
+notes: |
+  This is THE camera-ready integrated post-route deliverable. Successful
+  T0036_v4 upgrades Table V from [HW-SYNTH] (T0036_RETRY synth-only) to
+  [HW-IMPL] post-route, with a real WNS, WHS, total power, and dynamic power.
+
+  Resource expectations vs T0036_RETRY synth:
+    - DSP: 465 +/- 10%       (AXI infra adds little DSP)
+    - LUT: 53k -> 65-80k     (AXI smartconnect + NoC config adds ~15-25k)
+    - BRAM: 235 -> 280-320   (AXI buffers add ~50)
+    - URAM: 35 unchanged
+    - HBM ch: 0 -> 4         (4 NoC ports to DDR)
+
+  Resource expectations vs paper §V.A Table IV budget (LUT 67%, DSP 71%):
+    - Should remain well under (paper budget includes HBM-tiled language path)
+
+  Power expectations: full pipeline projected 5.84 W (T0023 HIPPO estimate);
+  post-route should be in the 5-12 W range. Anything > 15 W suggests
+  unexpected toggle activity — investigate.
+
+  AXI NoC topology reference: AMD UG1701 ("Versal ACAP Programmable Network
+  on Chip and Integrated Memory Controller LogiCORE IP"). For VCK190
+  specifically: pg313 platform configuration.
