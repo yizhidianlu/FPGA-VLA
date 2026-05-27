@@ -1,0 +1,14 @@
+{
+  "task_id": "T0040",
+  "verb": "accept_v1_bounded_latency",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-27T03:00:00Z",
+  "reason": "T0040 v1.0 closes every algorithmic question for §V.G PL vs AIE: full paper scale (NTOK=256, QDIM=4096, TOPK=64) running on a single AIE tile with a monolithic kernel that pipelines all 6 stages (Q·K^T → top-64 argmin-replace → shifted-linear softmax WIN=32 → scatter → weighted sum → sat8) bit-exact against a Python golden mirroring T0022's PL math (max_abs_diff=0, mismatches=0/4096, cosine=1.0). x86simulator PASS; this proves *function* at scale on one AIE tile. The latency gap (analytic bounds 65–2100 µs vs PL's 674 µs measured) is real but bounded and explicitly documented. The HW target failed only at the 32 KiB MG window limit because K/V are 1 MiB each on PLIO — a plumbing issue (GMIO migration) cleanly separated from algorithm validity. v1.0 is publishable as the §V.G result, with v1.1 GMIO migration documented as the camera-ready follow-up.",
+  "decision": {
+    "headline_for_paper_V_G": "AIE port of xmod_attn validated at full paper scale (1 tile, 6-stage monolithic kernel, bit-exact vs PL golden). Latency analytic-bounded 65–2100 µs (vector vs scalar AIE1); the corresponding PL baseline is 674 µs measured.",
+    "table_v_aie_row_filled_directly": "Orchestrator has filled aie_vs_pl_table.tex with the T0040 row directly — no need for T0038 to author the table cells. T0038 task is downgraded to: produce fig_aie_vs_pl.png (bar chart) + 1-page notes_for_orch.md verdict, using the data already in this ACK + T0040 reports.",
+    "v11_gmio_followup": "queued as T0041 (P2, camera-ready). Goal: HW target compile via GMIO io_buffer for K/V → cycle-accurate aiesimulator → measured aie_latency_us replaces the analytic bounds.",
+    "honesty_label_in_paper": "[HW-SYNTH]+[AIE-SIM] for the §V.G table. The dagger footnote calls out the analytic-bound nature of the AIE latency explicitly."
+  },
+  "worker_directive": "T0040 archived to completed/. Ali-aie may now claim T0038 (writeup) or T0036_v3 (BD AXI fix, camera-ready), or T0041 (GMIO v1.1, camera-ready), whichever fits next. Recommended priority: T0038 first (1h, closes §V.G), then T0036_v3 (4-8h, integrated post-route), then T0041 (~4h, cycle-accurate AIE latency). All three are independent and can be sequenced however you like."
+}

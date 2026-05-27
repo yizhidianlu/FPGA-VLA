@@ -4,8 +4,8 @@ created_at: 2026-05-26T00:10:00Z
 type: llm_codegen
 priority: P1
 target_worker: remote_claude_ali_aie
-depends_on: [T0036_RETRY, T0040]   # updated 2026-05-26: T0036→T0036_RETRY (license), T0037→T0040 (v0→v1 fullscale w/ aiesim)
-deadline_minutes: 90
+depends_on: [T0040]                # T0036_RETRY synth already accepted; aie_vs_pl_table.tex prefilled by orch
+deadline_minutes: 60                # downgraded: only fig + verdict text remain
 params:
   module_name: aie_vs_pl_ablation
   description: |
@@ -22,17 +22,9 @@ params:
       Read coord/reports/T0037/result.json         (AIE v0 architecture proof, for limitations note only)
       Read coord/reports/T0022/result.json         (PL standalone xmod_attn baseline)
     step_2_emit_latex: |
-      Write coord/reports/T0038/aie_vs_pl.tex with a 3-row table:
-        +-----------+----------+--------+--------+---------+--------+
-        | Variant   | Latency  | DSP    | LUT    | BRAM    | Power  |
-        +-----------+----------+--------+--------+---------+--------+
-        | PL only   | …µs      | …      | …      | …       | …W     |
-        | AIE only  | …µs      | 0      | 0      | 0       | … (AIE)|
-        | AIE + PL  | …µs      | …(skirt)| …      | …       | …W     |
-        +-----------+----------+--------+--------+---------+--------+
-      Caption: "PL vs AIE for xmod_attn (cross-modal sparse attention)."
-      Honesty label: [HW-SYNTH]+[AIE-SIM] (AIE numbers from aiesimulator,
-      not on-board).
+      *** SKIPPED — orch has already filled
+      Dropbox/Overleaf/MR-VLA/aie_vs_pl_table.tex with PL T0022 + AIE T0040
+      rows on 2026-05-27 (commit pending). Do NOT regenerate. ***
     step_3_emit_figure: |
       Render coord/reports/T0038/fig_aie_vs_pl.png — single bar group:
         latency bars (3 variants), with a secondary axis showing
@@ -46,7 +38,6 @@ params:
         - Open issues / suggested v1 follow-ups.
 acceptance_criteria:
   - status: "== DONE"
-  - result.tex_written: true
   - result.fig_written: true
   - result.notes_written: true
 human_ack_required_on:

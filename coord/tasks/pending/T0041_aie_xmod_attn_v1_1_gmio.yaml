@@ -1,0 +1,88 @@
+task_id: T0041
+created_by: orchestrator
+created_at: 2026-05-27T03:05:00Z
+type: aie_compile
+priority: P2                            # camera-ready item, not blocking submission
+supersedes: T0040
+target_worker: remote_claude_ali_aie
+depends_on: [T0040]
+deadline_minutes: 360
+params:
+  module_name: xmod_attn_v1_1_gmio
+  description: |
+    **GMIO migration of T0040 — convert K/V from PLIO window to GMIO
+    io_buffer so the HW target compiles and cycle-accurate aiesimulator
+    produces a measured aie_latency_us.**
+
+    T0040 v1.0 already validated the algorithm at full paper scale
+    (NTOK=256, QDIM=4096, TOPK=64, 1 AIE tile, bit-exact vs golden). The
+    only remaining gap is on-AIE timing: HW target compile rejected K_in
+    and V_in (1 MiB each per call) at the 32 KiB MG limit. v1.1 closes
+    this by moving K/V to GMIO with tile-by-tile DDR streaming. Algorithm
+    is unchanged — only the K/V plumbing.
+
+  quickstart_for_resumed_session: |
+    # Reuse the T0040 graph as the base; only K_in/V_in port type changes,
+    # and the kernel adds an outer GMIO tile loop.
+    cd /tools/projects/FPGA-VLA
+    mkdir -p runs/T0041
+    cp -r coord/reports/T0040/aie_graph runs/T0041/aie_graph_v1_1
+    cd runs/T0041/aie_graph_v1_1
+    # Edit graph.cpp: input_plio<128> K_in, V_in → input_gmio K_gmio, V_gmio
+    # Edit kernel_xmod_attn.cpp: wrap stages 1+5 in tile loops that pull
+    #   K/V rows from GMIO via window_acquire / window_release per row.
+    # Q_in (4 KiB) and out (4 KiB) stay as PLIO — both fit MG.
+    source /tools/Xilinx/Vitis/2024.1/settings64.sh
+    aiecompiler --target=hw --platform=xilinx_vck190_base_202410_1 \
+        --workdir=Work graph.cpp 2>&1 | tee aiecompiler_hw.log
+    aiesimulator --pkg-dir=Work --i I/O 2>&1 | tee aiesim_hw.log
+    # extract cycles → us
+    awk -F, '/^cycle/{c=$2} END{printf "aie_latency_us: %.2f\n", c/1000}' \
+        Work/aiesim_output/timing.csv
+
+  flow:
+    step_1_gmio_swap: |
+      In graph.cpp: replace input_plio<128>::create(K_in, ...) with
+      input_gmio::create(K_gmio, plio_128_bits, "K_gmio.dat"). Same for
+      V_in → V_gmio. Q_in and out_plio remain PLIO (small windows).
+    step_2_tiled_kernel: |
+      In kernel_xmod_attn.cpp: change the K matrix access pattern from
+      "K[n*QDIM:n*QDIM+QDIM] via single PLIO window" to "for each
+      n in 0..NTOK { K_gmio.acquire(); K_row = ...; K_gmio.release(); }".
+      Same restructure for V. Tile size = 1 row = 4 KiB << 32 KiB MG limit.
+    step_3_hw_compile: |
+      aiecompiler --target=hw must now succeed (was the only failure mode
+      in T0040). Confirm 0 errors, 0 critical warnings.
+    step_4_cycle_accurate_sim: |
+      aiesimulator with hw-compiled work dir. Cycle count from
+      Work/aiesim_output/timing.csv. aie_latency_us = cycles ÷ 1000.
+    step_5_archive: |
+      coord/reports/T0041/result.json with measured aie_latency_us,
+      aie_cycles, hw_compile_ok, tiles_used, plus updated compare_pl.md
+      replacing the analytic bound with the measured number.
+
+  target_platform: xilinx_vck190_base_202410_1
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.aiecompile_hw_ok: true
+  - result.aiesim_pass: true
+  - result.max_abs_diff_vs_golden: "< 1e-2"
+  - result.aie_latency_us_measured: true
+  - result.aie_latency_us: "< 5000"
+human_ack_required_on:
+  - aie_latency_worse_than_pl_by_2x        # informational only — does not block paper
+  - hw_compile_still_fails                  # would force a redesign discussion
+  - max_abs_diff_above_5e-3
+notes: |
+  This task replaces T0040's bounded latency range (65–2100 µs) with a
+  single measured number. The paper §V.G table cell gets updated from
+  '65–2100$^\dagger$' to a single number, and the dagger footnote is
+  removed.
+
+  Algorithm correctness is already established by T0040 (bit-exact); v1.1
+  cannot regress it. If max_abs_diff > 0 on v1.1, something went wrong
+  with the GMIO refactor.
+
+  Output to coord/reports/T0041/: aie_graph/, aiecompiler_hw.log,
+  aiesim_hw.log, timing.csv, resource.rpt, result.json, compare_pl.md.
