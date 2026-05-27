@@ -1,0 +1,44 @@
+{
+  "task_id": "T0038",
+  "status": "DONE",
+  "claimed_at": "2026-05-27T03:05:00Z",
+  "finished_at": "2026-05-27T03:10:00Z",
+  "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "worker_version": "v1.0",
+  "result": {
+    "tex_written": false,
+    "tex_written_reason": "Per T0040_ACK_accept_v1_bounded_latency, orchestrator has already filled Dropbox/Overleaf/MR-VLA/aie_vs_pl_table.tex with PL T0022 + AIE T0040 rows. T0038 step_2_emit_latex explicitly skipped.",
+    "fig_written": true,
+    "fig_path": "coord/reports/T0038/fig_aie_vs_pl.png",
+    "fig_format": "PNG 400 dpi square; log-y latency (us) bars + secondary axis DSP %",
+    "notes_written": true,
+    "notes_path": "coord/reports/T0038/notes_for_orch.md",
+    "verdict_sentence": "We ported xmod_attn to a single AI Engine tile in one monolithic 6-stage kernel, validated against the PL pipeline bit-exactly (max_abs_diff=0/4096) at the published shape (NTOK=256, QDIM=4096, TOPK=64); the analytic-bounded AIE latency 65-2100 us straddles the PL baseline of 674 us, with a cycle-accurate measurement to follow once K/V are migrated from PLIO to GMIO (T0041).",
+    "aie_arm_faster_status": "indeterminate_bounded — best 10.4x faster, worst 3.1x slower vs PL 674 us",
+    "energy_status": "not_measured — em-dash cell in table; future work via vcd_to_power on aiesim VCD after T0041",
+    "data_sources": {
+      "T0022": "coord/reports/T0022/result.json — PL baseline 674 us, DSP 12, BRAM 9",
+      "T0036_RETRY": "coord/reports/T0036/result.json — integrated synth: DSP 465 / BRAM 235 / LUT 53236; impl IO-blocked",
+      "T0040": "coord/reports/T0040/result.json — AIE v1 full-scale, 1 tile, max_abs_diff 0, latency bounds 65-2100 us"
+    }
+  },
+  "acceptance_criteria_passed": true,
+  "acceptance_criteria_detail": {
+    "status_DONE": true,
+    "result_fig_written": true,
+    "result_notes_written": true
+  },
+  "human_ack_needed": false,
+  "human_ack_reasons": [],
+  "human_ack_required_check": {
+    "aie_latency_worse_than_pl_in_writeup": "bounded — best case 10.4x faster, worst case 3.1x slower. Not a clear regression; flagged in notes.",
+    "power_field_missing": "documented as em-dash with future-work note in both notes_for_orch.md and the table (per task spec)"
+  },
+  "artefacts": [
+    "coord/reports/T0038/fig_aie_vs_pl.png",
+    "coord/reports/T0038/notes_for_orch.md",
+    "coord/reports/T0038/result.json"
+  ],
+  "next_task_suggestion": "T0041 (GMIO v1.1 for measured AIE latency) → T0036_v3 (integrated post-route with AXI interconnect)",
+  "error": null
+}

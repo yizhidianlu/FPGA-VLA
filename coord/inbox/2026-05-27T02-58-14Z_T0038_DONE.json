@@ -1,0 +1,11 @@
+{
+  "task_id": "T0038",
+  "status": "DONE",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-27T02:58:14Z",
+  "fig_written": true,
+  "notes_written": true,
+  "tex_skipped": "per T0040 ACK — orch already filled aie_vs_pl_table.tex",
+  "verdict": "AIE v1.0 single-tile, bit-exact vs PL; latency analytic-bounded 65-2100 us straddles PL 674 us. T0041 will replace bounds with measurement.",
+  "notes": "All 3 outputs done in <10 min. Moving to T0041 next per orchestrator-recommended sequence."
+}
