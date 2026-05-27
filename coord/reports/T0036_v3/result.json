@@ -1,0 +1,63 @@
+{
+  "task_id": "T0036_v3",
+  "status": "BLOCKED_NEEDS_HLS_SOURCE_CHANGE",
+  "claimed_at": "2026-05-27T03:15:00Z",
+  "finished_at": "2026-05-27T03:30:00Z",
+  "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "worker_version": "v1.0",
+  "result": {
+    "synth_ok": "n/a (already done in T0036_RETRY)",
+    "impl_ok": false,
+    "bd_inspection": {
+      "u_xmod_pins": 1258,
+      "u_gvsa_pins": 394,
+      "u_adh_pins": 1318,
+      "u_vit_pins": 109,
+      "u_sched_pins": 15,
+      "total_pins_across_5_IPs": 3094,
+      "vck190_io_budget": 1004,
+      "ratio": "3094 / 1004 = 3.08x oversubscribed"
+    },
+    "root_cause_analysis": "The 4 HLS IPs (T0024 xmod_attn, T0025 gvsa, T0026 adh, T0029 vit) were exported from vitis_hls with the default ap_memory interface on all top-level array function-args (Q[4096], K[256][4096], V[256][4096], W_time[128*256], etc.). HLS's ARRAY_PARTITION cyclic+block pragmas split each array into 32-128 sub-banks, each becoming a separate IP-XACT busInterface group (Q_0_address0 / Q_0_q0 / Q_0_ce0 ...). component.xml of xmod_attn_v1 alone contains 1674 spirit:name entries — almost all signal-level ap_memory ports.",
+    "why_the_AXI_NoC_fix_doesnt_apply_in_TCL": [
+      "The orchestrator task spec assumes the IPs expose AXI master ports (m_axi) that could be routed through a NoC. They DO NOT. They expose ap_memory BRAM-style ports.",
+      "To absorb 3094 ap_memory ports we would need 3094 axi_bram_ctrl instances (one per address/data/ce group), wired through SmartConnect/NoC to memory controllers. That is not feasible in a TCL script; even Vivado GUI would take days of manual wiring.",
+      "The actual fix is at the HLS source: change top-level array args from default ap_memory to `#pragma HLS INTERFACE m_axi port=K bundle=ddrK offset=slave`. Each array then exposes a SINGLE m_axi master that the BD can route through NoC->DDR. But the task explicitly forbids HLS source changes."
+    ],
+    "io_pct": "300 (3.08x over)",
+    "lut_pct": 5.92,
+    "dsp_pct": 23.63,
+    "bram_pct": 24.30,
+    "uram_pct": 7.56,
+    "timing_met": "n/a (impl not reached)",
+    "wns_ns": null
+  },
+  "acceptance_criteria_passed": false,
+  "acceptance_criteria_detail": {
+    "status_DONE": false,
+    "result_synth_ok": "true (from T0036_RETRY)",
+    "result_impl_ok": false,
+    "result_io_pct_under_100": false,
+    "result_lut_pct_under_25": true,
+    "result_dsp_pct_under_30": true,
+    "result_bram_pct_under_30": true,
+    "result_uram_pct_under_25": true,
+    "result_wns_ns_geq_0": "n/a"
+  },
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "io_overutilization_again — same root cause as T0036_RETRY impl failure. The TCL-level AXI NoC fix proposed by the task spec doesn't apply because the HLS IPs export ap_memory, not m_axi. Resolving this requires either re-running HLS with #pragma HLS INTERFACE m_axi on K/V/W arrays (forbidden by task) or weeks of manual axi_bram_ctrl wiring in GUI.",
+    "Paper-level recommendation: keep T0036_RETRY synth numbers as the [HW-SYNTH] row of Table V (already accepted by ACK 5acc135). Treat the integrated [HW-IMPL] post-route as future work explicitly outside the FCCM/DAC scope."
+  ],
+  "v3a_followup_paths": [
+    "Path A (recommended): re-package HLS IPs (T0024, T0025, T0026, T0029) with m_axi top-level interface on all array args. This is a 1-line pragma addition per array, but is forbidden by T0036_v3 task spec. Would need a new task explicitly authorizing it.",
+    "Path B: build a TCL generator that inspects each IP's interface list and emits one axi_bram_ctrl + SmartConnect mapping per ap_memory bank. Multi-day automation effort; not a pure 1-shot script.",
+    "Path C: accept T0036_RETRY synth-only as paper's authoritative integrated number (matches T0036_RETRY ACK reasoning); skip impl entirely for camera-ready."
+  ],
+  "v0_paper_publishable": "YES — T0036_RETRY synth-only [HW-SYNTH] row is already ACCEPTED for Table V per ACK 5acc135. T0036_v3 attempts post-route upgrade but architecturally cannot complete without HLS source changes that the task forbids.",
+  "artefacts": [
+    "coord/reports/T0036_v3/result.json"
+  ],
+  "next_task_suggestion": "Either authorize HLS source m_axi-pragma additions (new task) or accept synth-only as final. T0042 (T0041 v1.1a follow-up) is independent and can proceed.",
+  "error": "Architectural barrier: 3094 ap_memory ports cannot be routed in TCL-only without HLS source change"
+}

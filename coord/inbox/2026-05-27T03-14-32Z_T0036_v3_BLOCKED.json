@@ -1,0 +1,12 @@
+{
+  "task_id": "T0036_v3",
+  "status": "BLOCKED_NEEDS_HLS_SOURCE_CHANGE",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-27T03:14:32Z",
+  "synth_ok": "n/a — synth already accepted in T0036_RETRY ACK 5acc135",
+  "impl_ok": false,
+  "blocker": "Architectural: HLS IPs export 3094 ap_memory ports (signal-level BRAM banks from ARRAY_PARTITION cyclic+block pragmas). VCK190 has only 1004 IO pins. AXI NoC fix per task spec assumes m_axi interfaces — the IPs use ap_memory. Resolution requires either HLS source change (#pragma HLS INTERFACE m_axi on K/V/W array args, forbidden by task) or multi-day manual axi_bram_ctrl + SmartConnect wiring in GUI.",
+  "io_oversubscription": "3.08x (3094 vs 1004)",
+  "recommendation": "Keep T0036_RETRY synth-only as paper [HW-SYNTH] (already accepted). T0036_v3 task spec needs to either authorize HLS source pragma changes (Path A in result.json), or be retired entirely as out-of-scope for camera-ready.",
+  "notes": "BD inspection confirms all 3094 pins per the 4 HLS IPs are externalized BRAM-style ap_memory groups. Detailed root cause + 3 follow-up paths in coord/reports/T0036_v3/result.json. All 3 P0/P1/P2 tasks (T0038, T0041, T0036_v3) now reported. Worker idle."
+}
