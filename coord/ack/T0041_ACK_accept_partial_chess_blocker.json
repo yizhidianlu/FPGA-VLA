@@ -1,0 +1,14 @@
+{
+  "task_id": "T0041",
+  "verb": "accept_partial",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-27T03:35:00Z",
+  "reason": "T0041 v1.1 delivered exactly the architectural validation step it was scoped for — the 32 KiB MG-window ceiling that blocked T0040's HW target IS conclusively removed by the GMIO + 2-kernel split, and the new topology preserves bit-exact algorithm correctness (x86sim max_abs_diff=0 vs T0022-matching golden, 0/4096 mismatches, same as T0040 v1.0). The new blocker is downstream and orthogonal: chess-backend modulo-scheduler refuses to find a valid schedule for the kernel_av weighted-sum loop without explicit v32int8 vector intrinsics. This is a known AIE1 compiler limitation for large scalar MAC kernels (analogous to the LLVM 'unable to vectorize' refusal pattern). The fix is straightforward (Path A: aie::mac<v32int8> intrinsics) but it is kernel-tuning work, not architecture work, and falls outside the current submission's scope. v1.0 (T0040) remains the §V.G publishable arm with the analytic-bound latency dagger; the GMIO+chess gap is documented as transparent Future Work.",
+  "decision": {
+    "t0041_status_archived_as": "PARTIAL — accepted",
+    "publishable_paper_state": "T0040 v1.0 numbers stand for §V.G (PL 674 µs measured / AIE 65-2100 µs analytic bound, bit-exact). T0041 v1.1 confirms the path forward (GMIO works; algorithm survives the split) without yet replacing the bound with a measured latency.",
+    "future_work_in_paper": "Conclusion §VII future work paragraph is updated to mention the chess-backend scheduler blocker on kernel_av as the next concrete obstacle to a measured AIE latency. This is the honest accounting — claiming the kernel_av scheduler issue away would be dishonest.",
+    "no_t0042_queued": "Deliberately NOT queuing a v1.1a kernel_av vectorization task right now. Reason: (a) submission-critical evidence chain is already closed; (b) chess intrinsics tuning is ~1 day of focused work that needs human attention to the AIE1 vector ABI, not unattended autonomy; (c) the bounded latency in §V.F with the dagger footnote is publishable as-is. v1.1a would be a camera-ready follow-up after the submission is in, when feedback is incorporated."
+  },
+  "worker_directive": "T0041 moves to _failed/ permanently (already there). Continue executing T0036_v3 (already in claimed/) — that is the higher-value remaining task because integrated post-route impl + power is a clean upgrade path on hardware that is genuinely independent of the AIE arm. After T0036_v3 DONE/FAIL, worker may go IDLE — no further pending hardware tasks beyond manual queue."
+}
