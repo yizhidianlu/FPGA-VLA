@@ -1,0 +1,74 @@
+{
+  "task_id": "T0041",
+  "status": "PARTIAL",
+  "claimed_at": "2026-05-27T03:00:00Z",
+  "finished_at": "2026-05-27T03:30:00Z",
+  "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "worker_version": "v1.0",
+  "result": {
+    "gmio_architecture_validated": true,
+    "gmio_architecture_detail": "Refactored T0040 monolithic kernel into 2-kernel pipeline: kernel_qk_softmax (Q PLIO + K GMIO stream -> W_dense stream) + kernel_av (W_dense + V GMIO stream -> out PLIO). Successfully removed the 32 KiB MG window limit that blocked T0040's HW target.",
+    "aiecompile_x86sim_ok": true,
+    "aiecompile_x86sim_status": "Compilation Complete (0 errors, 3 warnings)",
+    "x86sim_pass": true,
+    "x86sim_max_abs_diff_vs_golden": 0,
+    "x86sim_mismatches": "0/4096",
+    "x86sim_note": "GMIO + 2-kernel architecture produces bit-exact same output as T0040 v1.0 monolithic and T0022 PL. Algorithm correctness preserved across the topology change.",
+    "aiecompile_hw_ok": false,
+    "aiecompile_hw_failure": {
+      "kernel_qk_softmax": "PASS — compiles cleanly (Stage 1-4: Q.K^T + top-K + softmax + scatter)",
+      "kernel_av": "FAIL — chess-backend modulo-scheduler error 'Internal error: no valid schedule found' on Stage 5 weighted-sum loop. Compilation finished (0 errors, 42 warnings) from chess-clang but elfgen aborted.",
+      "root_cause": "chess-backend struggles to schedule the nested 'for n, for d, acc[d]+=w*V[n][d]' loop with the static int32 acc[4096] accumulator. This is a known AIE1 compiler limitation for large scalar MAC kernels lacking explicit v32int8 vector intrinsics."
+    },
+    "aiesim_pass": false,
+    "aiesim_pass_reason": "Could not run aiesimulator — requires successful HW target compile of both kernels.",
+    "aie_latency_us_measured": false,
+    "aie_latency_us_measured_reason": "Same as aiesim_pass=false. Analytic bounds 65-2100 us from T0040 remain the published latency for §V.G; T0041 did NOT replace them with a measured value.",
+    "aie_latency_us": null,
+    "tiles_used": 2,
+    "tiles_used_note": "Architecturally 2 tiles (one per kernel). Actual tile assignment would be confirmed by a successful HW compile.",
+    "dimensions_full_scale": true,
+    "dimensions": {"QDIM": 4096, "NTOK": 256, "TOPK": 64, "SOFTMAX_WIN": 32},
+    "v1_1_vs_v1_0_delta": {
+      "v1_0_topology": "1 monolithic kernel, PLIO 128b for Q/K/V (1 MiB windows hit MG limit on hw)",
+      "v1_1_topology": "2 kernels split, Q/out PLIO 128b, K/V GMIO 64b stream",
+      "v1_0_x86sim": "PASS, max_abs_diff=0",
+      "v1_1_x86sim": "PASS, max_abs_diff=0",
+      "v1_0_hw_compile": "FAIL (MG limit on PLIO buf1)",
+      "v1_1_hw_compile": "PARTIAL: kernel_qk_softmax PASS, kernel_av FAIL on chess-backend scheduler"
+    }
+  },
+  "acceptance_criteria_passed": false,
+  "acceptance_criteria_detail": {
+    "status_DONE": "PARTIAL (not DONE)",
+    "aiecompile_hw_ok_true": false,
+    "aiesim_pass_true": false,
+    "max_abs_diff_under_1e-2": "PASS via x86sim (0/4096); aiesim not run",
+    "aie_latency_us_measured_true": false,
+    "aie_latency_us_under_5000": "still bounded 65-2100 us from T0040 (analytic)"
+  },
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "hw_compile_still_fails — kernel_av chess-backend modulo-scheduler does not find a valid schedule for the static int32 acc[4096] weighted-sum loop without vector intrinsics. The MG limit blocker from T0040 is REMOVED (GMIO works); the new blocker is downstream in the chess scheduler."
+  ],
+  "v1_1a_followup_paths": [
+    "Path A (recommended): rewrite kernel_av Stage 5 inner loop using aie::mac with v32int8 intrinsics. This both fixes the scheduler issue (vector ops have known optimal schedules) and likely improves the achievable latency by ~30x. Requires ~1 day of intrinsic-tuning work.",
+    "Path B: split kernel_av further — kernel_av_mac runs per V row (NTOK invocations via runtime ratio), kernel_av_sat reads acc + emits output once. Each sub-kernel is small enough for the scheduler. ~half-day refactor.",
+    "Path C: tile acc[QDIM] into 4 sub-tiles of 1024 each, process sequentially within one kernel call. Each tile's inner loop is small. No vector intrinsics needed."
+  ],
+  "v1_0_publishable_for_camera_ready": "YES — T0040 v1.0 is already ACCEPTED for §V.G (max_abs_diff=0 at full scale, 1 tile, analytic latency 65-2100 us with dagger footnote). T0041 v1.1 closes one path (GMIO removes MG limit) but the cycle-accurate latency measurement is deferred to a v1.1a kernel-tuning iteration.",
+  "artefacts": [
+    "coord/reports/T0041/aie_graph/graph.cpp",
+    "coord/reports/T0041/aie_graph/graph.h",
+    "coord/reports/T0041/aie_graph/kernel_qk_softmax.cpp",
+    "coord/reports/T0041/aie_graph/kernel_av.cpp",
+    "coord/reports/T0041/aiecompiler_x86sim.log",
+    "coord/reports/T0041/aiecompiler_hw_chess_scheduler_fail.log",
+    "coord/reports/T0041/x86sim.log",
+    "coord/reports/T0041/aie_out.txt",
+    "coord/reports/T0041/golden_out.txt",
+    "coord/reports/T0041/result.json"
+  ],
+  "next_task_suggestion": "T0042 — v1.1a kernel_av vectorization via aie::mac<v32int8> intrinsics, or kernel_av split into mac+sat sub-kernels. T0036_v3 can also proceed in parallel.",
+  "error": "kernel_av chess-backend scheduler: 'Internal error: no valid schedule found'"
+}

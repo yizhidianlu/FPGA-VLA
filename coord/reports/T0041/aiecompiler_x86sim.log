@@ -1,0 +1,109 @@
+                                           AI Engine Compiler
+                                     Version 2024.1 (linux64-bit)
+                                     SW Build 5072252 on 2024-05-21-05:03:35
+                          Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+                          Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+INFO: ML part stats configuration file found in /tools/Xilinx/Vitis/2024.1/aietools/data
+INFO: [aiecompiler 77-3355] ###[Start]: Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 55-2053] elapsed time for repository (/tools/Xilinx/Vivado/2024.1/data/embeddedsw) loading 0 seconds
+INFO: [aiecompiler 77-3354] ###[Finish]:  Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 21-403] Loading part xcvc1902-vsva2197-2MP-e-S
+INFO: [aiecompiler 77-3379] Extracted physical device part from platform is : xcvc1902-vsva2197-2MP-e-S 
+INFO: [aiecompiler 77-297] Cmd Line : /tools/Xilinx/Vitis/2024.1/aietools/bin/unwrapped/lnx64.o/aiecompiler --target=x86sim -platform=/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm --pl-freq=250 graph.cpp 
+Running Dispatch Server on port: 43423
+INFO: [aiecompiler 77-404] Executing Cmd: ${XILINX_VITIS_AIETOOLS}/tps/lnx64/gcc/bin/g++ -E -std=c++17 -D__ADF_FRONTEND__ -D__AIE_ARCH__=10 -I/tools/Xilinx/Vitis/2024.1/aietools/include  -I .  graph.cpp > Work/temp/graph.ii
+INFO: [aiecompiler 77-404] Executing Cmd: graph_preprocessor Work/temp/graph.ii -o Work/temp/graph.processed.ii -report-core-dump  -- -std=c++17  -ftemplate-depth=2048  -Wno-return-stack-address  -Wno-missing-declarations  -Wno-parentheses-equality  -Wno-shift-negative-value  
+INFO: [aiecompiler 77-404] Executing Cmd: ${XILINX_VITIS_AIETOOLS}/tps/lnx64/gcc/bin/g++  -std=c++17  -I .  Work/temp/graph.processed.ii -o Work/temp/graph.out -L /tools/Xilinx/Vitis/2024.1/aietools/lib/lnx64.o -g -O0 -Wl,--unresolved-symbols=ignore-all  -Wno-return-stack-address  -Wno-missing-declarations  -lmeir_frontend  -ladf_api_frontend 
+INFO: [aiecompiler 77-404] Executing Cmd: Work/temp/graph.out --workdir=Work --aiearch=aie --log-level=1 --pl-axi-lite=0 --enable-multi-layer=0 --disable-dma-autostart=0 --enable-light-cdo=0 --large-program-memory=0 --swfifo-threshold=40 --target=x86sim
+INFO: [aiecompiler 77-749] Reading logical device VC1902.json
+WARNING: [aiecompiler 77-5890] 'k_qks.in[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+WARNING: [aiecompiler 77-5890] 'k_av.out[0]' is a window port. Window ports are deprecated in this release and will be obsoleted in future releases. We recommend using io buffers instead.
+INFO: [aiecompiler 77-6447] Executing Cmd: aieir_be --time-passes=0  --disable-om-fifo-insertion=false  --fast-nonlinearfloats=false  --high-performance=false  --single-mm2s-channel=false  --stacksize=1024  --output-archive=libadf.a  --disable-multirate=false  --fastmath=false  --event-trace-advanced-mapping=0  --gen-graph-cleanup=false  --use-canonical-net-names=false  --use-phy-shim=true  --trace-aiesim-option=0  --num-trace-streams=16  --adf-api-log-level=2  --enable-partition=false  --quiet=false  --exec-timed=0  --keep-intermediate-results=false  --enable-profiling=false  --runtime-opt=true  --disable-transform-merge-broadcast=false  --verbose=false  --nodot-graph=false  --disable-transform-broadcast-split=true  --pl-freq=250  --trace-plio-width=64  --broadcast-enable-core=true  --kernel-address-location=false  --target=x86sim --swfifo-threshold=40  --workdir=Work  --exit-after=complete  --test-iterations=-1  --known-tripcount=false  --platform=/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm  --write-partitioned-file=true  --schemafile=AIEGraphSchema.json  --lock-fence-mode=1  --enable-reconfig=false  --evaluate-fifo-depth=false  --event-trace-port=gmio --xlopt=1  --extend-trace-partition=false  --graph-iterator-event=false  --optimize-pktids=false  --no-init=false  --fast-floats=true  --large-kernel-program=false  --no-timer-sync=false  --heapsize=1024  --enable-reconfig-dma-autostart=false  --disable-dma-autostart=false  --json=Work/temp/graph.json
+INFO: [aiecompiler 77-3355] ###[Start]: Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [aiecompiler 55-2053] elapsed time for repository (/tools/Xilinx/Vivado/2024.1/data/embeddedsw) loading 0 seconds
+INFO: [aiecompiler 77-3354] ###[Finish]:  Reading in platform specification from /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+WARNING: [aiecompiler 77-6300] Graphviz tools are not installed on this system, dot graphs will not be generated.
+686: Work/temp/graph.json
+INFO: [aiecompiler 77-757] Opening input file: Work/temp/graph.json
+INFO: [aiecompiler 77-6287] Emitting AIEIr in file: Work/temp/graph_aieir_dump.txt
+INFO: [aiecompiler 77-656] Processing Graph 'root'
+INFO: [aiecompiler 77-5917] Repetition count for gr.k_qks is 1.
+INFO: [aiecompiler 77-5917] Repetition count for gr.k_av is 1.
+INFO: [aiecompiler 77-5607] ### Entering X86Sim Switch Configuration pass
+INFO: [aiecompiler 77-5606] ### Done with X86Sim Switch Configuration pass
+DEBUG:Buildx86simCFGraph:### Entering Build CFGraph pass
+DEBUG:Buildx86simCFGraph:### CF Graph is built
+INFO: [aiecompiler 77-610] Performing x86Sim Graph Analysis
+Start processing Node Instances.
+Processing Node Instance: plio  nodeinst:i0:b0 {
+   portinst: i0_po0 idx[-1] datatype:strm<int8> stream out bw_utlization = 1 (variable name:  plio_Q.out[0])
+}
+Node Instance processing done.
+Processing Node Instance: plio  nodeinst:i1:b1 {
+   portinst: i1_pi0 idx[-1] datatype:strm<int8> stream in bw_utlization = 1 (variable name:  plio_out.in[0])
+}
+Node Instance processing done.
+Processing Node Instance: gmio  i2:b2 K_gmio { start: blksize:0 brstsize:64 bw:1
+   portinst: i2_po0 idx[-1] datatype:int8 gmem out bw_utlization = 1 (variable name:  gmio_K.out[0])
+}
+Node Instance processing done.
+Processing Node Instance: gmio  i3:b3 V_gmio { start: blksize:0 brstsize:64 bw:1
+   portinst: i3_po0 idx[-1] datatype:int8 gmem out bw_utlization = 1 (variable name:  gmio_V.out[0])
+}
+Node Instance processing done.
+Processing Node Instance: me  i4:b4 runtime:0.5 {
+   portinst: i4_pi0 idx[0] datatype:wndo<int8> mem in blocksize:4096 max_blocksize:4096 bw_utlization = 1 (variable name:  k_qks.in[0])
+   portinst: i4_pi1 idx[1] datatype:strm<int8> stream in bw_utlization = 1 (variable name:  k_qks.in[1])
+   portinst: i4_po0 idx[2] datatype:strm<int16> stream out bw_utlization = 1 (variable name:  k_qks.out[0])
+}
+Node Instance processing done.
+Processing Node Instance: me  i5:b5 runtime:0.5 {
+   portinst: i5_pi0 idx[0] datatype:strm<int16> stream in bw_utlization = 1 (variable name:  k_av.in[0])
+   portinst: i5_pi1 idx[1] datatype:strm<int8> stream in bw_utlization = 1 (variable name:  k_av.in[1])
+   portinst: i5_po0 idx[2] datatype:wndo<int8> mem out blocksize:4096 max_blocksize:4096 bw_utlization = 1 (variable name:  k_av.out[0])
+}
+Node Instance processing done.
+Finished processing Node Instances.
+Processing: Channel net0: Single :src:i0_po0 dst:i4_pi0
+Processing: Channel net1: Single :src:i2_po0 dst:i4_pi1
+Processing: Channel net2: Single :src:i4_po0 dst:i5_pi0
+Processing: Channel net3: Single :src:i3_po0 dst:i5_pi1
+Processing: Channel net4: Single :src:i5_po0 dst:i1_pi0
+### Channel processing Done. ####
+INFO: [aiecompiler 77-600] Emitting x86Sim Code
+INFO: [aiecompiler 77-608] New x86Sim Code Generation Complete
+INFO: [aiecompiler 77-599] Building simulation executable
+INFO: [aiecompiler 77-404] Executing Cmd: make -j4 -C Work/pthread -f makefile -O --no-print-directory all 
+debug=no
+debug_lib_x86sim=no
+address_sanitizer=no
+clang_static_analyzer=no
+g++ -fPIC -c -o PthreadSimBasic.cpp.o -MT PthreadSimBasic.cpp.o -MMD -MP -MF PthreadSimBasic.cpp.Td -g  -D__X86SIM__ -D__PTHREAD_API__ -fvisibility=hidden -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/osci_systemc/include -I /tools/Xilinx/Vitis/2024.1/aietools/tps/boost_1_72_0 -std=c++17 PthreadSimBasic.cpp
+g++ -fPIC -E -MT wrap_graph.cpp.o -M -MM -MP -MF wrap_graph.cpp.d -g  -D__X86SIM__ -D__PTHREAD_API__ -fvisibility=hidden -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/osci_systemc/include -I /tools/Xilinx/Vitis/2024.1/aietools/tps/boost_1_72_0 wrap_graph.cpp
+g++ -fPIC -c -o PthreadSim.cpp.o -MT PthreadSim.cpp.o -MMD -MP -MF PthreadSim.cpp.Td -g  -D__X86SIM__ -D__PTHREAD_API__ -fvisibility=hidden -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/osci_systemc/include -I /tools/Xilinx/Vitis/2024.1/aietools/tps/boost_1_72_0 -std=c++17 PthreadSim.cpp
+g++ -fPIC -c -o PthreadSimXmc.cpp.o -MT PthreadSimXmc.cpp.o -MMD -MP -MF PthreadSimXmc.cpp.Td -g  -D__X86SIM__ -D__PTHREAD_API__ -fvisibility=hidden -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/osci_systemc/include -I /tools/Xilinx/Vitis/2024.1/aietools/tps/boost_1_72_0 -std=c++17 PthreadSimXmc.cpp
+g++ -fPIC -c -o wrap_graph.cpp.o -MT wrap_graph.cpp.o -MMD -MP -MF wrap_graph.cpp.Td -g  -D__X86SIM__ -D__PTHREAD_API__ -fvisibility=hidden -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/osci_systemc/include -I /tools/Xilinx/Vitis/2024.1/aietools/tps/boost_1_72_0 -std=c++17 wrap_graph.cpp
+g++ -fPIC -c -o PthreadSimSwemu.cpp.o -I /tools/Xilinx/Vitis_HLS/2024.1/include -MT PthreadSimSwemu.cpp.o -MMD -MP -MF PthreadSimSwemu.cpp.Td -g  -D__X86SIM__ -D__PTHREAD_API__ -fvisibility=hidden -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/osci_systemc/include -I /tools/Xilinx/Vitis/2024.1/aietools/tps/boost_1_72_0 -std=c++17 PthreadSimSwemu.cpp
+aie_clang++ -fPIC -c -o wrap_kernel_av.cpp.o -g  -D__X86SIM__ -D__PTHREAD_API__ -fvisibility=hidden -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/osci_systemc/include -I /tools/Xilinx/Vitis/2024.1/aietools/tps/boost_1_72_0 -D__AIENGINE__ -D__AIE_ARCH__=10 -std=c++2a -stdlib=libc++ -gdwarf-4 \
+-MT wrap_kernel_av.cpp.o -MMD -MP -MF wrap_kernel_av.cpp.Td   wrap_kernel_av.cpp
+aie_clang++ -fPIC -c -o wrap_kernel_qk_softmax.cpp.o -g  -D__X86SIM__ -D__PTHREAD_API__ -fvisibility=hidden -D__AIE_ARCH__=10 -D__LOCK_FENCE_MODE__=0 -DAIE_OPTION_SCALAR_FLOAT_ON_VECTOR -I ../.. -I /tools/Xilinx/Vitis/2024.1/aietools/include -I /tools/Xilinx/Vitis/2024.1/aietools/data/osci_systemc/include -I /tools/Xilinx/Vitis/2024.1/aietools/tps/boost_1_72_0 -D__AIENGINE__ -D__AIE_ARCH__=10 -std=c++2a -stdlib=libc++ -gdwarf-4 \
+-MT wrap_kernel_qk_softmax.cpp.o -MMD -MP -MF wrap_kernel_qk_softmax.cpp.Td   wrap_kernel_qk_softmax.cpp
+ld -o aie_kernels_obj.o -r wrap_kernel_qk_softmax.cpp.o wrap_kernel_av.cpp.o -L/tools/Xilinx/Vitis/2024.1/aietools/lib/lnx64.o -lc++ -lc++abi  
+aie_g++ -shared -o libxmcsim.so -D__AIE_ARCH__=10 aie_kernels_obj.o  PthreadSimXmc.cpp.o PthreadSim.cpp.o -lc++ -lpthread -ladf_api_x86sim -lx86simDummySocketUtil -lx86simStreamApiAIE10 -lx86sim -Wl,-R/tools/Xilinx/Vitis/2024.1/aietools/lib/lnx64.o -Wl,-R/tools/Xilinx/Vitis/2024.1/aietools/tps/lnx64/gcc/lib64 
+aie_g++ -o sim.out -D__AIE_ARCH__=10 aie_kernels_obj.o  PthreadSimBasic.cpp.o PthreadSim.cpp.o wrap_graph.cpp.o -lpthread -ladf_api_x86sim -lx86simSocketUtil -lx86simStreamApiAIE10 -lx86sim -Wl,-R/tools/Xilinx/Vitis/2024.1/aietools/lib/lnx64.o -Wl,-R/tools/Xilinx/Vitis/2024.1/aietools/tps/lnx64/gcc/lib64 
+aie_g++ -shared -o libsim.so -D__AIE_ARCH__=10 aie_kernels_obj.o  PthreadSimSwemu.cpp.o PthreadSim.cpp.o -lc++ -lpthread -ladf_api_x86sim -lx86simDummySocketUtil -lx86simStreamApiAIE10 -lx86sim -Wl,-R/tools/Xilinx/Vitis/2024.1/aietools/lib/lnx64.o -Wl,-R/tools/Xilinx/Vitis/2024.1/aietools/tps/lnx64/gcc/lib64 
+INFO: [aiecompiler 77-6228] ### Entering Packager pass
+INFO: [aiecompiler 77-4236] Adding hardware components under: Work/temp/hw.o  
+INFO: [aiecompiler 77-4237] Adding software components under: Work/temp/sw.o  
+INFO: [aiecompiler 77-4235] Adding emulation and config components under: Work/temp/cfg.o 
+INFO: [aiecompiler 77-1086] Generating hand-off archive: libadf.a
+/tools/Xilinx/Vitis/2024.1/aietools/tps/lnx64/gcc/bin/ar: creating libadf.a
+INFO: [aiecompiler 77-6227] ### Done with Packager pass (278097520 secs)
+INFO: [aiecompiler 77-6439] Run completed. Find additional information in:
+	Guidance: Work/reports/guidance.html
+
+INFO: [aiecompiler 77-6440] Use the vitis_analyzer tool to visualize and navigate the relevant reports. Run: 
+	vitis_analyzer Work/graph.aiecompile_summary
+
+Compilation Complete
+(WARNING:3, CRITICAL-WARNING:0, ERROR:0)

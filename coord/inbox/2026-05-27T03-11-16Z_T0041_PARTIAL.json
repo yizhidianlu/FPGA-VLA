@@ -1,0 +1,14 @@
+{
+  "task_id": "T0041",
+  "status": "PARTIAL",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-27T03:11:16Z",
+  "gmio_architecture_validated": true,
+  "x86sim_pass": true,
+  "x86sim_max_abs_diff": 0,
+  "aiecompile_hw_ok": false,
+  "hw_partial_detail": "kernel_qk_softmax compiles cleanly under hw target; kernel_av fails on chess-backend modulo-scheduler ('Internal error: no valid schedule found') due to scalar acc[4096] += w*V[n][d] loop pattern.",
+  "aiesim_pass": false,
+  "aie_latency_us_measured": false,
+  "notes": "GMIO migration removes T0040 MG limit blocker. New blocker is downstream chess-backend scheduler limitation on kernel_av. v1.1a fix paths documented: (A) aie::mac v32int8 intrinsics, (B) split kernel_av further, (C) tile acc[QDIM]. T0040 v1.0 remains publishable for §V.G with analytic bounds. Next: T0036_v3."
+}
