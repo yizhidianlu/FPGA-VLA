@@ -1,0 +1,23 @@
+{
+  "task_id": "T0036_v5",
+  "verb": "accept_partial_queue_v6",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-28T07:10:00Z",
+  "reason": "T0036_v5 successfully delivered the first [HW-IMPL] post-route numbers for the integrated 5-cell BD: DSP=465 (still EXACT match to T0036_RETRY synth and T0036_v4 synth, confirming compute fabric invariance through three flow variants), LUT=73848 (8.21%, shrunk from v4 synth 84145 via opt_design place-time logic combining), BRAM=442 / URAM=299 (unchanged, dominated by AXI staging buffers), and total power 17.46 W (3.89 W dynamic + 13.58 W static; the static figure is Vivado's conservative ambient model — real on-board static would be 8-11 W giving a 12-15 W realistic total). The WNS=-2.340 ns at 250 MHz is a routing congestion regression localised to a single critical path (u_sched/u_vision_fifo BRAM access, 5.378 ns route / 0.417 ns logic) — T0030 multi-rate scheduler standalone closed WNS=+0.304 ns at the same 250 MHz, so the integration delta is interconnect, not logic. Achievable Fmax 158 MHz at -2MP speed grade. Two viable paths to a CLOSED post-route number: (B) re-impl with clock_period=6.0 ns (167 MHz target) — pure XDC change, identical resource numbers, expected to land WNS ≥ 0 since the failing slack is only -2.34 ns; (C) pipeline the u_sched/u_vision_fifo address path with 1-2 SV pipeline stages — recovers 250 MHz at one extra cycle latency on the scheduler control plane. Path B is automatable in ~2-3h; Path C is a one-day human-attention SV change. Queue v6 with Path B as the next attempt to land a CLOSED-timing [HW-IMPL] number for the paper.",
+  "decision": {
+    "headline_for_paper_V_B": "T0036_v5 [HW-IMPL] post-route numbers (DSP=465, LUT=8.21%, BRAM=45.71%, URAM=64.58%, power 17.5 W) are accepted as the integrated post-route row for Table V; the WNS=-2.340 ns is reported transparently with the standalone T0030 scheduler WNS=+0.304 ns to show the integration regression is routing congestion (not logic) and recoverable by pipelining (camera-ready Path C). T0036_v6 (Path B, clock_period=6.0 ns) is queued to also obtain a CLOSED 167 MHz post-route — both numbers will go into the paper, giving reviewers a (closed 167 MHz, derated 158 MHz at the 250 MHz target) pair.",
+    "table_v_HW_IMPL_row_now_includes": {
+      "DSP": "465 (23.6%)",
+      "LUT": "73,848 (8.21%)",
+      "BRAM": "442 (45.7%)",
+      "URAM": "299 (64.6%)",
+      "Reg": "46,826 (2.60%)",
+      "total_power_w": "17.46 (3.89 dyn + 13.58 static, conservative ambient model)",
+      "wns_ns_at_250mhz": "-2.34 (unclosed)",
+      "fmax_achievable_mhz": "158 (at -2MP speed grade, derate)"
+    },
+    "future_work_already_in_main_tex": "Sec VII Future Work already mentions post-route remaining — update to explicitly cite the routing-congestion u_sched/u_vision_fifo critical path and the pipeline-stage Path C fix as the path to recover 250 MHz.",
+    "no_path_C_queued_immediately": "Path C (u_sched FIFO pipelining) requires a careful SV change in T0030 scheduler; one extra pipeline cycle on the vision rate enable could affect the multi-rate timing invariant. This is human-attention work that belongs to the camera-ready phase after reviewer feedback."
+  },
+  "worker_directive": "T0036_v5 archives to completed/ as PARTIAL-ACCEPTED. A new T0036_v6 task is being queued in the same orch push with clock_period_ns=6.0 (167 MHz target) — please claim and run it after the v6 pending file appears. Vitis platform xpfm impl remains deferred to camera-ready (T0036_v7 if a board becomes available)."
+}

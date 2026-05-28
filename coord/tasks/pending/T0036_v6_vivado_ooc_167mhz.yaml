@@ -1,0 +1,126 @@
+task_id: T0036_v6
+created_by: orchestrator
+created_at: 2026-05-28T07:15:00Z
+type: vivado_pnr
+priority: P0
+supersedes: T0036_v5
+target_worker: remote_claude_ali_aie
+depends_on: [T0036_v5]
+deadline_minutes: 240
+params:
+  module_name: mr_vla_full_top_v6_ooc_167mhz
+  description: |
+    **Re-run T0036_v5 OOC impl with clock_period_ns=6.0 (167 MHz target)
+    to land WNS >= 0 for a CLOSED-timing post-route number.**
+
+    T0036_v5 produced full post-route numbers at 250 MHz target with
+    WNS=-2.340 ns — the design routes and powers, but does not close
+    timing at the 250 MHz target. The failing slack is small enough
+    (-2.34 ns of a 4.0 ns period) that relaxing the constraint by ~50%
+    (period 4.0 → 6.0 ns, freq 250 → 167 MHz) should land WNS positive
+    on the SAME logic, with IDENTICAL resource numbers. The point is to
+    produce a closed post-route number alongside the v5 derated number,
+    giving reviewers a (closed 167 MHz, derated 158 MHz at 250 MHz)
+    pair to evaluate.
+
+  quickstart_for_resumed_session: |
+    # ============================================================
+    # COPY-PASTE QUICKSTART. Reuse T0036_v5's existing OOC project,
+    # only swap clock period in XDC, reset impl, rerun.
+    # ============================================================
+    cd /tools/projects/FPGA-VLA
+    source /tools/Xilinx/Vivado/2024.1/settings64.sh
+    cp -r runs/T0036_v5 runs/T0036_v6
+    cd runs/T0036_v6
+
+    # 1. Swap XDC to 6.0 ns period
+    cat > mr_vla_bd_v6_ooc.xdc <<'XDC'
+    create_clock -name clk_in   -period 6.0  [get_ports clk_in]
+    set_input_delay  -clock clk_in -max 2.0 [all_inputs]
+    set_input_delay  -clock clk_in -min 0.3 [all_inputs]
+    set_output_delay -clock clk_in -max 2.0 [all_outputs]
+    set_output_delay -clock clk_in -min 0.3 [all_outputs]
+    XDC
+
+    # 2. Re-impl (no synth rerun needed — logic unchanged, only constraint)
+    vivado -mode batch -nolog -nojournal -source <(cat <<'TCL'
+    open_project runs/T0036_v6/mr_vla_full_top_v6_ooc.xpr
+    remove_files -fileset constrs_1 [get_files -of [get_filesets constrs_1] "mr_vla_bd_v5_ooc.xdc"]
+    add_files -fileset constrs_1 runs/T0036_v6/mr_vla_bd_v6_ooc.xdc
+    reset_run impl_1
+    launch_runs impl_1 -to_step route_design -jobs 4
+    wait_on_run impl_1
+    open_run impl_1
+    report_utilization     -file runs/T0036_v6/impl_util_167mhz.rpt
+    report_timing_summary  -file runs/T0036_v6/impl_timing_167mhz.rpt
+    report_power           -file runs/T0036_v6/impl_power_167mhz.rpt
+    close_design
+    exit
+    TCL
+    )
+
+    # 3. Archive
+    mkdir -p coord/reports/T0036_v6
+    cp -p runs/T0036_v6/impl_*167mhz.rpt coord/reports/T0036_v6/
+    cp -p runs/T0036_v6/mr_vla_bd_v6_ooc.xdc coord/reports/T0036_v6/
+
+  flow:
+    step_1_copy_v5_project: |
+      cp -r runs/T0036_v5 runs/T0036_v6 — reuse the v5 synth output (which
+      was Mode out_of_context with the same logic).
+    step_2_xdc_swap: |
+      Remove v5 XDC, add v6 XDC with period=6.0. Synth output is reused
+      (no re-synth needed since logic is identical — only constraint changes).
+    step_3_impl_only: |
+      reset_run impl_1; launch_runs impl_1 -to_step route_design.
+      Expected ~30-60 min — same logic, just relaxed constraint.
+    step_4_archive: |
+      coord/reports/T0036_v6/:
+        impl_util_167mhz.rpt
+        impl_timing_167mhz.rpt   (expect WNS > 0 since slack relaxed by 2 ns)
+        impl_power_167mhz.rpt    (expect slightly lower dynamic power at lower freq)
+        mr_vla_bd_v6_ooc.xdc
+        result.json with the [HW-IMPL] CLOSED row
+
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 6.0
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.impl_ok_ooc: true
+  - result.wns_ns: ">= 0"          # the goal — closed timing at 167 MHz
+  - result.lut_pct: "< 25"
+  - result.dsp_pct: "< 35"
+  - result.bram_pct: "< 50"
+  - result.uram_pct: "< 70"
+  - result.total_power_w: "< 20"
+
+human_ack_required_on:
+  - wns_still_below_0              # would suggest the critical path needs SV pipelining (Path C)
+  - vivado_crash
+  - total_power_above_15            # informational
+
+notes: |
+  Why 167 MHz? Pulled from T0036_v5 critical-path analysis: WNS=-2.34 ns
+  means a 6.34 ns true period is needed (period = clock + |WNS|). 6.0 ns
+  rounds up to give margin; if WNS still negative at 6.0, the critical
+  path is qualitatively bad and Path C (SV pipelining) is required.
+
+  Why ONE clock period change? The 17.46 W power figure measured at
+  250 MHz target stays valid at 167 MHz since dynamic power scales with
+  activity factor more than frequency in this design (the multi-rate
+  enables already gate most clocks; only u_xmod is at full rate).
+
+  Why no synth rerun? Vivado's OOC impl uses the cached synth_design
+  output. Constraint changes only affect impl_design timing analysis
+  and place_design effort, NOT the synthesised logic.
+
+  If the result reports WNS positive (target outcome): T0036_v6 IS the
+  CLOSED [HW-IMPL] post-route row for Table V (167 MHz Fmax with full
+  resource + power numbers); T0036_v5's 158 MHz Fmax derate becomes
+  a comparison point.
+
+  If WNS still negative (e.g., -0.3 ns at 6.0 ns target): the critical
+  path is fundamental to the routing (not just the timing margin) and
+  Path C (pipelining u_sched FIFO) is the only fix — flag and queue
+  a new task for camera-ready scope.

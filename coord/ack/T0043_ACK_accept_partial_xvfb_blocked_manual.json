@@ -1,0 +1,17 @@
+{
+  "task_id": "T0043",
+  "verb": "accept_partial_blocked_on_host_admin",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-28T07:12:00Z",
+  "reason": "T0043 carried the full hw_emu pre-package flow to completion: aiecompiler --target=hw PASS (reused T0042 AIE graph unchanged), v++ -c of pl_stub PASS at 342 MHz after iterating through HLS bundle naming + AXIS stream interface fixes, v++ -l XSA PASS after correcting VCK190 sptag (DDR not DDR[0]) and adding sc= AXIS connections. The only remaining step — v++ -p --target=hw_emu — is blocked on a single host system dependency: Xvfb (X virtual framebuffer) is missing on the ECS, and ali-aie cannot install it autonomously because (a) the Aliyun apt mirror DNS routes to an unreachable internal IP (198.18.0.33), (b) sudo sed of /etc/apt/sources.list to switch to archive.ubuntu.com or mirrors.tuna.tsinghua.edu.cn is rejected by the auto-mode classifier, and (c) no offline xvfb .deb is on the host. This is a genuine human-intervention requirement, not a tool/flow issue — every step UP TO packaging works. The fix is a one-time `sudo apt-get install -y xvfb` (after restoring apt connectivity) executed by the user; the worker resumes from the v++ -p invocation when notified.",
+  "decision": {
+    "headline_for_paper_V_F": "Until Xvfb is installed and hw_emu can run, T0042 schedule-derived 160 µs (52-210 µs range, [AIE-SCHED-EST]) remains the published AIE latency for §V.F. The dagger footnote explaining the hw_emu deferral is already in main.tex. The paper claim 'AIE arm 4.2× faster than PL' stands on the schedule-derived analytic; hw_emu would tighten it but not invalidate it.",
+    "manual_step_instructions_for_user": [
+      "Option 1 (recommended, ~2 min): ssh ecs-user@47.116.52.72 ; sudo sed -i.bak -e 's|mirrors.cloud.aliyuncs.com|archive.ubuntu.com|g' /etc/apt/sources.list ; sudo apt-get update ; sudo apt-get install -y xvfb",
+      "Option 2 (Tsinghua mirror, if archive.ubuntu.com is slow): replace the sed target with mirrors.tuna.tsinghua.edu.cn ; rest same",
+      "Option 3 (offline .deb): scp a downloaded xvfb .deb to the ECS and dpkg -i it"
+    ],
+    "after_xvfb_installed_resume_step": "User pastes a one-line nudge to the ali-aie Claude session: 'continue T0043 from v++ -p; everything else still cached'. Worker runs v++ -p (~10-30 min) + launch_hw_emu.sh -no-reboot (~5-15 min) and writes result.json with measured aie_latency_us."
+  },
+  "worker_directive": "T0043 stays in claimed/ as PARTIAL pending host admin (Xvfb install). Do NOT move to _failed/; do NOT retry automatically — the next attempt requires the user's manual step + an explicit re-nudge. Use this idle window to claim T0036_v6 when it arrives."
+}
