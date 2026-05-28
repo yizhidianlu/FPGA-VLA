@@ -1,0 +1,41 @@
+{
+  "task_id": "T0043",
+  "status": "PARTIAL",
+  "retry_round": "after user-provided PetaLinux 2024.1 install",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-28T18:30:00Z",
+  "summary": "MAJOR progress this retry. Built full pipeline autonomously: PetaLinux+XRT image (4847 task build PASS) + SDK (4908 task build PASS) + cross-compiled host.elf (aarch64 ELF 471 KiB linked with libxrt+libadf_api_xrt+libxaiengine) + v++ -p package_v2 PASS in sd boot mode with proper PetaLinux rootfs. qemu reaches Linux kernel 6.6.10-xilinx-v2024.1, PMC + ATF + u-boot 2024.01 all PASS. BLOCKED at kernel rootfs mount: 'VFS Unable to mount root fs on unknown-block(179,2)'. The sd_card.img has 2 ext4 partitions (verified by file command); kernel cmdline expects /dev/mmcblk0p2 but qemu sd-card model + Vitis-platform boot.scr present a mismatch. Tried both boot mode=5 (sd1) and mode=3 (sd0) — same panic. T0042 analytic 160 us remains published.",
+  "report_dir": "coord/reports/T0043/",
+  "stages_passed": [
+    "aiecompiler hw",
+    "v++ -c pl_stub",
+    "v++ -l XSA",
+    "petalinux-create project from versal template",
+    "petalinux-config get-hw-description from XSA",
+    "rootfs_config enable XRT+zocl+libxrt+packagegroup-petalinux-xrt",
+    "petalinux-build (4847 tasks PASS, 2 retries through SIGKILLs)",
+    "petalinux-build --sdk (4908 tasks PASS, 1 retry)",
+    "sdk.sh install to /tools/Xilinx/PetaLinux/2024.1/vck190_sdk",
+    "host.cpp + graph.cpp cross-compile to host.elf (aarch64)",
+    "v++ -p hw_emu sd boot mode PASS with sd_card.img + host.elf + kernel + rootfs",
+    "qemu launch_hw_emu.sh boot through PMC + ATF + u-boot + Linux kernel"
+  ],
+  "stages_blocked": [
+    "Linux kernel rootfs mount (mmcblk0p2 not found despite ext4 partition existing)",
+    "userspace init / login prompt",
+    "host.elf execution",
+    "AIE GMIO drive",
+    "cycle counter readback"
+  ],
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "hw_emu_qemu_kernel_panic_on_rootfs_mount: Vitis-platform + custom-PetaLinux boot-args interop issue",
+    "Cannot reach userspace autonomously without platform-config fix"
+  ],
+  "next_action_options": [
+    "(A) Modify boot.scr/cmdline to root=/dev/mmcblk1p2 (or whatever qemu SD index actually maps to)",
+    "(B) Use --package.rootfs as initramfs only (skip sd_card mount)",
+    "(C) Use Vitis platform's prebuilt XRT image (may already have XRT runtime)",
+    "(D) DEFER: keep T0042 analytic 160 us — build pipeline is fully validated; only the final boot-arg mismatch remains"
+  ]
+}

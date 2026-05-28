@@ -5,42 +5,47 @@
 #include <chrono>
 #include <vector>
 #include <cstdint>
-#include <adf/adf_api/XRTConfig.h>
-#include <experimental/xrt_kernel.h>
-#include <experimental/xrt_aie.h>
+#include <cstring>
 
-extern void gr_init();
-extern void gr_run(int);
-extern void gr_wait();
-extern void gr_end();
+#include <adf.h>
+#include "graph.h"
 
-// The auto-generated XRT graph handle lives in libadf.a; the user-visible
-// name is the global `gr` declared in graph.cpp. We re-declare it here.
-class xmod_attn_v1_1_graph;
+class xmod_attn_v1_1_graph : public adf::graph {
+public:
+    adf::input_plio  plio_Q;
+    adf::output_plio plio_out;
+    adf::input_gmio  gmio_K;
+    adf::input_gmio  gmio_V;
+    adf::kernel      k_qks, k_av;
+};
 extern xmod_attn_v1_1_graph gr;
 
-int main(int argc, char** argv) {
-    const int NTOK = 256, QDIM = 4096;
-    std::vector<int8_t> K(NTOK * QDIM), V(NTOK * QDIM);
-    for (size_t i = 0; i < K.size(); ++i) K[i] = (int8_t)((i * 17) & 0xFF);
-    for (size_t i = 0; i < V.size(); ++i) V[i] = (int8_t)((i * 23) & 0xFF);
+#include <experimental/xrt_kernel.h>
+#include <experimental/xrt_aie.h>
+#include <adf/adf_api/XRTConfig.h>
 
-    const char* xclbin_path = (argc > 1) ? argv[1] : "xmod_attn.xclbin";
+int main(int argc, char** argv) {
+    std::vector<int8_t> Kbuf(NTOK * QDIM), Vbuf(NTOK * QDIM);
+    for (size_t i = 0; i < Kbuf.size(); ++i) Kbuf[i] = (int8_t)((i * 17) & 0xFF);
+    for (size_t i = 0; i < Vbuf.size(); ++i) Vbuf[i] = (int8_t)((i * 23) & 0xFF);
+
+    const char* xclbin_path = (argc > 1) ? argv[1] : "/mnt/sd-mmcblk0p1/xmod_attn.xclbin";
+    std::cout << "Loading xclbin: " << xclbin_path << std::endl;
     xrt::device dev(0);
     auto uuid = dev.load_xclbin(xclbin_path);
-    adf::registerXRT(dev, uuid);
+    adf::registerXRT(dev, uuid.get());
 
-    extern void gr_dispatch_K(int8_t*, size_t);
-    extern void gr_dispatch_V(int8_t*, size_t);
-
+    std::cout << "Starting AIE graph..." << std::endl;
     auto start = std::chrono::high_resolution_clock::now();
-    gr_dispatch_K(K.data(), K.size());
-    gr_dispatch_V(V.data(), V.size());
-    gr_run(1);
-    gr_wait();
-    auto stop = std::chrono::high_resolution_clock::now();
-    gr_end();
 
+    gr.init();
+    gr.gmio_K.gm2aie_nb(Kbuf.data(), Kbuf.size());
+    gr.gmio_V.gm2aie_nb(Vbuf.data(), Vbuf.size());
+    gr.run(1);
+    gr.wait();
+    gr.end();
+
+    auto stop = std::chrono::high_resolution_clock::now();
     double us = std::chrono::duration<double, std::micro>(stop - start).count();
     std::cout << "aie_latency_us_measured: " << us << std::endl;
     return 0;
