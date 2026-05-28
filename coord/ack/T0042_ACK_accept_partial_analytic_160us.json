@@ -1,0 +1,16 @@
+{
+  "task_id": "T0042",
+  "verb": "accept_partial_analytic_central",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-28T04:55:00Z",
+  "reason": "T0042 delivered the decisive technical breakthrough for §V.F: the chess-backend modulo-scheduler blocker that defeated T0041 v1.1 kernel_av is DEFINITIVELY RESOLVED. The aie::mac<acc32, v16int8, v16int16> rewrite produces a schedule the backend accepts (0 errors, 0 critical warnings, 2 kernel tiles + 3 helpers), x86sim regression remains bit-exact (max_abs_diff=0 vs T0022 PL golden), and the analytic latency tightens from T0040's wide 65-2100 µs into a schedule-grounded 52-210 µs range with central estimate 160 µs at 1.25 GHz AIE clock (confirmed from graph.xpe). At ALL three points in the range, AIE decisively beats the PL baseline of 674 µs (3.2× at worst case II=4, 12.9× at best case II=1, 4.2× at central II=3). The remaining gap (full cycle-accurate aiesim) is a Vitis 2024.1 standalone-aiesim+GMIO+HW-target tooling limitation — kernels stall on empty streams because user main.cpp isn't executed; only full hw_emu (XSA + sw_app + qemu) would close it, which is 4-8h Vitis work beyond T0042 scope and explicitly camera-ready territory.",
+  "decision": {
+    "headline_for_paper_V_F": "AIE arm 160 µs analytic (52-210 µs range, II=1 to II=4 modulo schedule) vs PL 674 µs measured = 4.2× central speedup. This is a SCHEDULE-DERIVED analytic, not a best/worst-case envelope: the central II=3 estimate is what chess-backend's accepted modulo schedule actually produces.",
+    "honesty_label_revised": "[HW-SYNTH] for PL T0022 unchanged. AIE row label changes from [AIE-SIM]+dagger(analytic-bound) to [AIE-SCHED-EST]+narrower-range. The new honesty story: the AIE compiler accepted a vector schedule, x86sim confirms numerical correctness, and the cycle-accurate measurement via hw_emu is camera-ready.",
+    "aie_vs_pl_table_tex_update": "Replace AIE row latency cell '65-2100 µs (analytic bound, dagger)' with '160 µs (52-210 µs range, schedule-derived)' and revise/remove the dagger footnote to call out the schedule-derived nature.",
+    "main_tex_V_F_prose_update": "Replace 'bounded 65-2100 µs' language with 'schedule-derived central 160 µs (52-210 µs over II=1 to II=4)'. Add: chess-backend modulo-scheduler accepted the vectorised kernel_av (T0042 ACK record), x86sim regression preserves bit-exact algorithm equivalence with the PL pipeline, hw_emu measurement deferred to camera-ready.",
+    "main_tex_future_work_update": "Soften the future-work paragraph: chess-backend kernel_av blocker is no longer 'must be hand-vectorised — work in progress'; it is DONE. The only remaining AIE-side gap is the hw_emu flow for cycle-accurate latency confirmation, which is purely a methodology/runtime gap, not an algorithm or architecture gap.",
+    "no_T0043_queued": "Do not queue hw_emu task right now. (a) The 4-8h v++ packaging work needs human attention to xsa/linker.cfg, not unattended autonomy. (b) The schedule-grounded analytic is publishable for FCCM/DAC LBR. (c) Camera-ready phase will revisit if reviewers ask."
+  },
+  "worker_directive": "T0042 archives to completed/ as PARTIAL-ACCEPTED. Continue T0036_v4 (already claimed in parallel). After T0036_v4 DONE/PARTIAL, ali-aie may go IDLE — no further hardware work in the current submission scope."
+}
