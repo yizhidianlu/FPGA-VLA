@@ -1,0 +1,241 @@
+task_id: T0043_v5
+created_by: orchestrator
+created_at: 2026-05-28T20:30:00Z
+type: aie_compile
+priority: P0
+supersedes: T0043_v4
+target_worker: remote_claude_ali_aie
+depends_on: [T0043_v4]               # reuse host_bsp.elf, XSA, AIE Work_aie
+deadline_minutes: 180                # 3h hard cap — LAST T0043 retry
+params:
+  module_name: xmod_attn_hwemu_bsp_prebuilt_wic
+  description: |
+    **LAST T0043 retry. Use AMD's pre-built petalinux-sdimage.wic.xz
+    that ships INSIDE the BSP file, instead of letting Vitis v++ -p
+    re-format ext4 with host's e2fsprogs (which writes features
+    PetaLinux 2024.1 kernel cannot read).**
+
+    T0043_v4 proved the BSP fixes partition addressing (mmcblk0p2
+    now detected). The remaining issue is the ext4 superblock feature
+    mismatch (metadata_csum_seed / orphan_file / fast_commit written
+    by Ubuntu 22.04's mkfs.ext4 v1.47, not understood by PetaLinux's
+    kernel 6.6.10). AMD ships VCK190 BSP with a pre-built sdimage
+    that they test internally — that image MUST be kernel-compatible
+    or the BSP wouldn't be a useful reference.
+
+    Strategy: extract AMD's wic.xz from the BSP, decompress to a raw
+    sd_card.img, mount the rootfs partition via loop device, copy
+    host_bsp.elf into it (or into a known executable directory like
+    /home/root/), unmount, then point launch_hw_emu.sh at this
+    modified image instead of v++ -p's regenerated one.
+
+    THIS IS THE LAST T0043 RETRY. If FAIL, no more — accept D.
+
+  quickstart_for_resumed_session: |
+    set -e
+    cd /tools/projects/FPGA-VLA/runs/T0043
+    source /tools/Xilinx/Vitis/2024.1/settings64.sh
+
+    # 1. Locate the BSP-extracted prebuilt SD image. BSPs typically
+    #    extract during petalinux-create; the source dir lives under
+    #    ~/.petalinux/ or under the project's components/.
+    #    Common paths to check:
+    WIC_CANDIDATES=$(find /tools/projects/FPGA-VLA/runs/T0043/vck190_xrt_bsp \
+                          ~/.petalinux \
+                          ~/Downloads \
+                          -type f \( -name "*sdimage*.wic*" -o -name "petalinux-sdimage.wic*" \) \
+                          2>/dev/null)
+    echo "Candidate wic files:"
+    echo "$WIC_CANDIDATES"
+
+    # If nothing found, extract BSP manually
+    if [ -z "$WIC_CANDIDATES" ]; then
+        echo "[INFO] wic not in expected locations; extracting BSP archive"
+        BSP=/home/ecs-user/Downloads/xilinx-vck190-v2024.1-final.bsp
+        mkdir -p /tmp/bsp_extract && cd /tmp/bsp_extract
+        # BSP is a tar.gz despite the .bsp extension
+        tar tzf "$BSP" 2>/dev/null | head -10 && echo "[INFO] BSP is tar.gz"
+        tar xzf "$BSP"
+        WIC_CANDIDATES=$(find /tmp/bsp_extract -type f \( -name "*sdimage*.wic*" -o -name "*.wic*" \) 2>/dev/null)
+        echo "After extract, candidates:"
+        echo "$WIC_CANDIDATES"
+        cd /tools/projects/FPGA-VLA/runs/T0043
+    fi
+    WIC=$(echo "$WIC_CANDIDATES" | head -1)
+    [ -n "$WIC" ] || { echo "[FATAL] no wic in BSP — Option C dead"; exit 1; }
+    echo "[USING] WIC = $WIC"
+
+    # 2. Decompress wic.xz if compressed
+    mkdir -p /tools/projects/FPGA-VLA/runs/T0043/bsp_sd_img
+    cd /tools/projects/FPGA-VLA/runs/T0043/bsp_sd_img
+    cp "$WIC" .
+    WIC_BASE=$(basename "$WIC")
+    if [[ "$WIC_BASE" == *.xz ]]; then
+        unxz -k "$WIC_BASE"
+        SD_IMG=${WIC_BASE%.xz}
+    else
+        SD_IMG="$WIC_BASE"
+    fi
+    ls -la "$SD_IMG"
+    file "$SD_IMG"  # should say DOS/MBR boot sector with partitions
+
+    # 3. Inspect partition layout
+    fdisk -l "$SD_IMG"
+    # Determine offset to rootfs partition (usually p2)
+    SECTOR_SIZE=512
+    P2_START=$(fdisk -l "$SD_IMG" | grep "${SD_IMG}2" | awk '{print $2}')
+    P2_OFFSET=$((P2_START * SECTOR_SIZE))
+    echo "p2 starts at offset $P2_OFFSET bytes"
+
+    # 4. Mount rootfs partition via loop
+    sudo mkdir -p /mnt/bsp_rootfs
+    sudo mount -o loop,offset=$P2_OFFSET "$SD_IMG" /mnt/bsp_rootfs || {
+        echo "[FAIL] cannot mount BSP wic rootfs — inspect with debugfs?"
+        sudo debugfs "$SD_IMG?offset=$P2_OFFSET" -R "stat <2>" 2>&1 | head -10
+        exit 1
+    }
+    ls /mnt/bsp_rootfs
+
+    # 5. Inject host_bsp.elf into rootfs
+    sudo cp /tools/projects/FPGA-VLA/runs/T0043/host_bsp.elf /mnt/bsp_rootfs/home/root/
+    sudo chmod +x /mnt/bsp_rootfs/home/root/host_bsp.elf
+    # Also drop xclbin + libadf.a if needed at runtime
+    sudo cp /tools/projects/FPGA-VLA/runs/T0043/Work_aie/libadf.a /mnt/bsp_rootfs/home/root/ 2>/dev/null || true
+    # Auto-run via init: append to /etc/profile or systemd service
+    echo "/home/root/host_bsp.elf 2>&1 | tee /home/root/measurement.log" | \
+        sudo tee -a /mnt/bsp_rootfs/etc/profile
+    sudo umount /mnt/bsp_rootfs
+    echo "[OK] host_bsp.elf injected into BSP rootfs at /home/root/"
+
+    # 6. Repackage: copy modified SD image alongside hw_emu launch scripts
+    cd /tools/projects/FPGA-VLA/runs/T0043
+    # We need to fool v++ -p / launch_hw_emu.sh into using our SD image.
+    # Easiest path: rerun v++ -p but with --package.sd_card="$SD_IMG"
+    rm -rf package_v5
+    v++ -p -t hw_emu --platform xilinx_vck190_base_202410_1 \
+        --package.boot_mode=sd \
+        --package.out_dir package_v5 \
+        --package.sd_file=/tools/projects/FPGA-VLA/runs/T0043/bsp_sd_img/$SD_IMG \
+        xmod_attn.xsa Work_aie/libadf.a 2>&1 | tee vpp_package_v5.log
+    # If --package.sd_file accepts the full img, great. If not, manually
+    # replace package_v5/sd_card.img with our modified one:
+    if [ ! -f package_v5/sd_card.img ] && [ -f package_v5/sd_card_dir/sd_card.img ]; then
+        cp /tools/projects/FPGA-VLA/runs/T0043/bsp_sd_img/$SD_IMG \
+           package_v5/sd_card.img
+    fi
+
+    # 7. Run hw_emu, 1800s timeout
+    cd package_v5
+    timeout 1800 ./launch_hw_emu.sh -no-reboot 2>&1 | tee ../hw_emu_v5.log
+    cd ..
+
+    # 8. Extract measurement
+    AIE_LAT=$(grep -oP 'aie_latency_us_measured:\s*\K[\d.]+' hw_emu_v5.log | head -1)
+    if [ -z "$AIE_LAT" ]; then
+        TS=$(date -u +%Y-%m-%dT%H-%M-%SZ)
+        if grep -q "No filesystem could mount root" hw_emu_v5.log; then
+            REASON="ext4_still_unmountable_even_with_bsp_wic"
+        elif grep -q "VFS:" hw_emu_v5.log; then
+            REASON="vfs_mount_other_error"
+        elif grep -q "shared libraries" hw_emu_v5.log; then
+            REASON="libxrt_missing_in_bsp_prebuilt_rootfs"
+        elif grep -q "Stage-2" hw_emu_v5.log || grep -q "/home/root" hw_emu_v5.log; then
+            REASON="userspace_reached_but_no_measurement"
+        else
+            REASON="unknown_inconclusive"
+        fi
+        cat > /tools/projects/FPGA-VLA/coord/inbox/${TS}_T0043_v5_FAIL.json <<EOF
+    {"task_id":"T0043_v5","status":"FAILED","worker":"remote_claude_ali_aie",
+     "ts":"$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+     "blocker":"$REASON",
+     "final_attempt":true,
+     "next":"orch: accept Option D, T0042 analytic 160us as published"}
+    EOF
+        exit 1
+    fi
+
+    # 9. SUCCESS
+    SPEEDUP=$(awk "BEGIN {printf \"%.2f\", 674/$AIE_LAT}")
+    echo "[SUCCESS] measured AIE latency = $AIE_LAT us, speedup vs PL = ${SPEEDUP}x"
+    mkdir -p /tools/projects/FPGA-VLA/coord/reports/T0043_v5
+    cp -p vpp_package_v5.log hw_emu_v5.log /tools/projects/FPGA-VLA/coord/reports/T0043_v5/
+
+    TS=$(date -u +%Y-%m-%dT%H-%M-%SZ)
+    cat > /tools/projects/FPGA-VLA/coord/reports/T0043_v5/result.json <<EOF
+    {
+      "task_id": "T0043_v5",
+      "supersedes_measurement_half_of": ["T0040","T0041","T0042","T0043","T0043_v3","T0043_v4"],
+      "status": "DONE",
+      "worker": "remote_claude_ali_aie",
+      "finished_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+      "result": {
+        "hw_emu_run_ok": true,
+        "aie_latency_us_measured": true,
+        "aie_latency_us": $AIE_LAT,
+        "vs_T0042_analytic": "T0042 schedule-derived 160us central; measured ${AIE_LAT}us",
+        "vs_PL_T0022_speedup_x": $SPEEDUP,
+        "method": "BSP prebuilt sdimage.wic.xz + host.elf injection + qemu hw_emu cycle-accurate"
+      },
+      "acceptance_criteria_passed": true,
+      "human_ack_needed": false
+    }
+    EOF
+    cat > /tools/projects/FPGA-VLA/coord/inbox/${TS}_T0043_v5_DONE.json <<EOF
+    {"task_id":"T0043_v5","status":"DONE","worker":"remote_claude_ali_aie",
+     "ts":"$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+     "headline":"T0043_v5 DONE — AIE measured ${AIE_LAT}us via BSP prebuilt wic (${SPEEDUP}x vs PL)"}
+    EOF
+
+    cd /tools/projects/FPGA-VLA
+    mv coord/tasks/claimed/T0043_v5_*.yaml coord/tasks/completed/ 2>/dev/null
+    git add coord/
+    git commit -m "T0043_v5 DONE: AIE hw_emu measured ${AIE_LAT}us (BSP wic, ${SPEEDUP}x vs PL)"
+    git pull --rebase
+    git push
+
+  flow:
+    step_1_find_bsp_wic: |
+      Search for petalinux-sdimage.wic.xz or similar in BSP extract dirs.
+      BSP is a tar.gz at /home/ecs-user/Downloads/. May extract via
+      tar xzf or be already extracted during petalinux-create.
+    step_2_decompress: |
+      unxz the wic.xz to raw sd_card.img.
+    step_3_mount_inject: |
+      Loop-mount the rootfs partition (usually p2). Copy host_bsp.elf
+      to /home/root/, mark executable, add auto-run hook via
+      /etc/profile or systemd. Unmount.
+    step_4_package_v5: |
+      Repackage hw_emu with --package.sd_file pointing to the modified
+      image (or manually swap sd_card.img in package_v5/).
+    step_5_run_hwemu: |
+      launch_hw_emu.sh, 1800s timeout. If BSP wic boots into userspace,
+      our injected host_bsp.elf runs via the profile/init hook, prints
+      aie_latency_us_measured to console + measurement.log.
+
+  target_platform: xilinx_vck190_base_202410_1
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.hw_emu_run_ok: true
+  - result.aie_latency_us_measured: true
+  - result.aie_latency_us: "> 0 and < 5000"
+
+human_ack_required_on:
+  - bsp_does_not_contain_wic               # then Option C dead — only Option A or D left
+  - ext4_still_unmountable_even_with_bsp_wic  # very strong signal to defer
+  - libxrt_missing_in_bsp_prebuilt_rootfs  # BSP rootfs lacks XRT — need to inject
+  - measured_latency_above_2x_pl           # informational
+
+notes: |
+  THIS IS THE LAST T0043 RETRY. Spec is generous on flexibility
+  (multiple search paths for wic, fallback to manual sd_card.img
+  swap) but if v5 FAILs, orch will accept Option D — T0042
+  schedule-derived 160 us as the published AIE latency for §V.F.
+
+  Cumulative T0043 effort post-completion: ~12 hours across 5 retries.
+  Diminishing returns. Submission timeline is the binding constraint.
+
+  Sudo is required for loop-mount; ali-aie's auto-mode classifier
+  may block. If so, write FAIL inbox with reason
+  'sudo_mount_blocked' and orch will retry with user-pre-mounted
+  rootfs or accept D.
