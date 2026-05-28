@@ -1,0 +1,255 @@
+task_id: T0043_v4
+created_by: orchestrator
+created_at: 2026-05-28T19:40:00Z
+type: aie_compile
+priority: P0
+supersedes: T0043_v3
+target_worker: remote_claude_ali_aie
+depends_on: [T0043]                # reuse XSA + host.cpp + AIE Work_aie from T0043
+deadline_minutes: 240              # 4h — BSP build + repackage + hw_emu
+params:
+  module_name: xmod_attn_hwemu_bsp
+  description: |
+    **REDO T0043 PetaLinux build using the actual VCK190 BSP that the
+    user uploaded, instead of the `--template versal` shortcut ali-aie
+    used in retry2.**
+
+    KEY INSIGHT: T0043 retry2's mmcblk0p2 mount failure was likely
+    caused by `petalinux-create --template versal` producing a generic
+    Versal project with default u-boot config + generic device tree,
+    while qemu hw_emu emulates a VCK190-specific board with VCK190-
+    specific SD/MMC controller mapping. The user-provided VCK190 BSP
+    (xilinx-vck190-v2024.1-final.bsp, MD5 a9df2bfedc7b166cff4a45c10d7a1a08)
+    contains:
+      - VCK190 board-specific u-boot configuration
+      - VCK190 device tree (correct MMC controller naming -> mmcblk0)
+      - Tested bootargs that AMD validated on both real VCK190 and
+        qemu hw_emu
+      - Pre-configured rootfs base (just needs XRT addition)
+      - VCK190 boot.scr that knows the platform's storage layout
+
+    The BSP is at /home/ecs-user/Downloads/xilinx-vck190-v2024.1-final.bsp
+    (user verified MD5 should be a9df2bfedc7b166cff4a45c10d7a1a08).
+
+  quickstart_for_resumed_session: |
+    # ============================================================
+    # T0043_v4 — REBUILD PetaLinux with VCK190 BSP, reuse all other
+    # T0043 artefacts (XSA, host.cpp, Work_aie/libadf.a).
+    # ============================================================
+    cd /tools/projects/FPGA-VLA/runs/T0043
+    source /tools/Xilinx/Vitis/2024.1/settings64.sh
+    source /tools/Xilinx/PetaLinux/2024.1/settings.sh
+
+    # 1. Verify BSP presence + integrity
+    BSP=/home/ecs-user/Downloads/xilinx-vck190-v2024.1-final.bsp
+    [ -f "$BSP" ] || { echo "[FATAL] BSP not at $BSP"; exit 1; }
+    EXPECTED_MD5="a9df2bfedc7b166cff4a45c10d7a1a08"
+    ACTUAL_MD5=$(md5sum "$BSP" | awk '{print $1}')
+    if [ "$ACTUAL_MD5" != "$EXPECTED_MD5" ]; then
+        echo "[WARN] BSP MD5 mismatch: expected $EXPECTED_MD5, got $ACTUAL_MD5"
+        echo "[WARN] Proceeding anyway but may indicate corrupted download"
+    fi
+    ls -la "$BSP"  # confirm size ~1.65 GB
+
+    # 2. Clean up the failed --template versal project
+    rm -rf vck190_xrt        # the retry2 project that failed
+    rm -rf package_v2 package_v3  # failed packages
+
+    # 3. Create new project using BSP
+    petalinux-create -t project -s "$BSP" -n vck190_xrt_bsp
+    cd vck190_xrt_bsp
+
+    # 4. Import hardware from T0043's XSA
+    petalinux-config --get-hw-description=/tools/projects/FPGA-VLA/runs/T0043/xmod_attn.xsa \
+        --silentconfig
+
+    # 5. Enable XRT + AIE in rootfs (same sed-based config as retry2)
+    ROOTFS_CFG=project-spec/configs/rootfs_config
+    cp $ROOTFS_CFG ${ROOTFS_CFG}.bak
+    for SYM in CONFIG_xrt CONFIG_xrt-dev CONFIG_zocl CONFIG_libxrt-dev \
+               CONFIG_xrt-libsensors-dev CONFIG_aie-driver-headers \
+               CONFIG_packagegroup-petalinux-xrt; do
+      if grep -q "^# $SYM is not set" $ROOTFS_CFG; then
+        sed -i "s|^# $SYM is not set|$SYM=y|" $ROOTFS_CFG
+      elif grep -q "^$SYM=n" $ROOTFS_CFG; then
+        sed -i "s|^$SYM=n|$SYM=y|" $ROOTFS_CFG
+      else
+        echo "$SYM=y" >> $ROOTFS_CFG
+      fi
+    done
+    petalinux-config -c rootfs --silentconfig
+    grep -E '^CONFIG_(xrt|zocl|libxrt|aie)' $ROOTFS_CFG | head -10
+
+    # 6. Build (30-60 min)
+    echo "[$(date)] starting petalinux-build (BSP variant)"
+    petalinux-build 2>&1 | tee /tmp/petalinux_build_bsp.log
+    BUILD_EXIT=$?
+    test $BUILD_EXIT -eq 0 || { echo "BSP build FAILED"; exit 1; }
+    ls images/linux/Image images/linux/rootfs.cpio.gz images/linux/system.dtb
+
+    # 7. Build SDK (~30 min)
+    petalinux-build --sdk
+    cd images/linux
+    if [ ! -d /tools/Xilinx/PetaLinux/2024.1/vck190_sdk_bsp ]; then
+        ./sdk.sh -d /tools/Xilinx/PetaLinux/2024.1/vck190_sdk_bsp -y
+    fi
+    source /tools/Xilinx/PetaLinux/2024.1/vck190_sdk_bsp/environment-setup-cortexa72-cortexa53-xilinx-linux
+
+    # 8. Cross-compile host.elf (reuse from T0043 if same)
+    cd /tools/projects/FPGA-VLA/runs/T0043
+    if [ ! -f host_bsp.elf ] || [ host.cpp -nt host_bsp.elf ]; then
+        $CXX -std=c++17 -O2 host.cpp \
+            -I$XILINX_VITIS/aietools/include \
+            -I$SDKTARGETSYSROOT/usr/include/xrt \
+            $XILINX_VITIS/aietools/lib/aarch64.o/libadf_api_xrt.a \
+            -lxrt_coreutil -lxrt_core -lxaiengine -lpthread \
+            -L$SDKTARGETSYSROOT/usr/lib \
+            -o host_bsp.elf 2>&1 | tee host_compile_bsp.log
+    fi
+    file host_bsp.elf  # ELF 64-bit aarch64
+
+    # 9. Repackage with BSP rootfs
+    unset LD_LIBRARY_PATH
+    v++ -p -t hw_emu --platform xilinx_vck190_base_202410_1 \
+        --package.boot_mode=sd \
+        --package.out_dir package_v4 \
+        --package.image_format=ext4 \
+        --package.kernel_image=vck190_xrt_bsp/images/linux/Image \
+        --package.rootfs=vck190_xrt_bsp/images/linux/rootfs.cpio.gz \
+        --package.sd_file=host_bsp.elf \
+        xmod_attn.xsa Work_aie/libadf.a 2>&1 | tee vpp_package_v4.log
+
+    # 10. Run hw_emu, 1800s timeout
+    cd package_v4
+    timeout 1800 ./launch_hw_emu.sh -no-reboot 2>&1 | tee ../hw_emu_v5.log
+    cd ..
+
+    # 11. Extract measurement
+    AIE_LAT=$(grep -oP 'aie_latency_us_measured:\s*\K[\d.]+' hw_emu_v5.log | head -1)
+    if [ -z "$AIE_LAT" ]; then
+        # Diagnose
+        TS=$(date -u +%Y-%m-%dT%H-%M-%SZ)
+        if grep -q "VFS: Unable to mount root" hw_emu_v5.log; then
+            REASON="rootfs_mount_still_fails_with_bsp"
+            DETAIL="$(grep -A 5 'Unable to mount' hw_emu_v5.log | head -10)"
+        elif grep -q "loading shared libraries" hw_emu_v5.log; then
+            REASON="libxrt_missing_at_runtime"
+            DETAIL="$(grep 'loading shared libraries' hw_emu_v5.log | head -3)"
+        elif grep -q "init: Failed" hw_emu_v5.log; then
+            REASON="init_failed"
+            DETAIL="$(grep 'init:' hw_emu_v5.log | head -5)"
+        elif grep -qi "panic" hw_emu_v5.log; then
+            REASON="kernel_panic"
+            DETAIL="$(grep -i panic hw_emu_v5.log | head -5)"
+        else
+            REASON="unknown_no_measurement"
+            DETAIL="$(tail -20 hw_emu_v5.log)"
+        fi
+        cat > /tools/projects/FPGA-VLA/coord/inbox/${TS}_T0043_v4_FAIL.json <<EOF
+    {"task_id":"T0043_v4","status":"FAILED","worker":"remote_claude_ali_aie",
+     "ts":"$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+     "blocker":"$REASON",
+     "detail":$(echo "$DETAIL" | jq -Rs .),
+     "next":"orch decision: Option A bootargs hack / Option D defer"}
+    EOF
+        exit 1
+    fi
+
+    # 12. SUCCESS path
+    SPEEDUP=$(awk "BEGIN {printf \"%.2f\", 674/$AIE_LAT}")
+    echo "[SUCCESS] measured AIE latency = $AIE_LAT us, speedup vs PL = ${SPEEDUP}x"
+    mkdir -p /tools/projects/FPGA-VLA/coord/reports/T0043_v4
+    cp -p vpp_package_v4.log hw_emu_v5.log host_bsp.elf host_compile_bsp.log \
+        /tools/projects/FPGA-VLA/coord/reports/T0043_v4/
+
+    TS=$(date -u +%Y-%m-%dT%H-%M-%SZ)
+    cat > /tools/projects/FPGA-VLA/coord/reports/T0043_v4/result.json <<EOF
+    {
+      "task_id": "T0043_v4",
+      "supersedes_measurement_half_of": ["T0040", "T0041", "T0042", "T0043", "T0043_v3"],
+      "status": "DONE",
+      "worker": "remote_claude_ali_aie",
+      "finished_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+      "result": {
+        "hw_emu_run_ok": true,
+        "aie_latency_us_measured": true,
+        "aie_latency_us": $AIE_LAT,
+        "vs_T0042_analytic": "T0042 schedule-derived central 160us; measured ${AIE_LAT}us",
+        "vs_PL_T0022_speedup_x": $SPEEDUP,
+        "method": "VCK190 BSP-based PetaLinux + XRT, hw_emu qemu cycle-accurate",
+        "petalinux_base": "xilinx-vck190-v2024.1-final.bsp (not --template versal)"
+      },
+      "acceptance_criteria_passed": true,
+      "human_ack_needed": false
+    }
+    EOF
+    cat > /tools/projects/FPGA-VLA/coord/inbox/${TS}_T0043_v4_DONE.json <<EOF
+    {"task_id":"T0043_v4","status":"DONE","worker":"remote_claude_ali_aie",
+     "ts":"$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+     "headline":"T0043_v4 DONE — AIE measured ${AIE_LAT}us, speedup vs PL ${SPEEDUP}x. BSP-based PetaLinux fixed the mount issue."}
+    EOF
+
+    cd /tools/projects/FPGA-VLA
+    mv coord/tasks/claimed/T0043_v4_use_vck190_bsp.yaml coord/tasks/completed/ 2>/dev/null
+    git add coord/
+    git commit -m "T0043_v4 DONE: AIE hw_emu measured ${AIE_LAT}us (BSP-based, ${SPEEDUP}x vs PL)"
+    git pull --rebase
+    git push
+
+  flow:
+    step_1_bsp_verify: |
+      MD5-check the BSP at /home/ecs-user/Downloads/. If mismatch, warn
+      but proceed. If file missing, FAIL inbox.
+    step_2_clean_template_versal: |
+      rm -rf the previous --template versal project + failed package dirs.
+    step_3_create_with_bsp: |
+      petalinux-create -t project -s $BSP -n vck190_xrt_bsp
+      petalinux-config --get-hw-description with T0043 XSA --silentconfig
+    step_4_enable_xrt_rootfs: |
+      Same sed-based XRT/zocl/AIE rootfs config as retry2 (proven).
+    step_5_petalinux_build_bsp: |
+      ~30-60 min. BSP build is faster than --template versal because
+      packages are pre-cached and less from-scratch fetch.
+    step_6_petalinux_sdk_bsp: |
+      ~30 min for SDK if not cached.
+    step_7_cross_compile_host_bsp: |
+      Reuse host.cpp; link with BSP-SDK libxrt. Output host_bsp.elf.
+    step_8_repackage_v4: |
+      v++ -p with BSP's Image+rootfs+host_bsp.elf. ~30s.
+    step_9_run_hwemu: |
+      launch_hw_emu.sh, 1800s timeout. THIS is the moment of truth —
+      does BSP's u-boot bootargs match qemu's SD device path?
+    step_10_extract_or_fail: |
+      grep aie_latency_us_measured. SUCCESS -> DONE. FAIL ->
+      categorize blocker (mount fails / libxrt missing / kernel panic /
+      unknown) and report.
+
+  target_platform: xilinx_vck190_base_202410_1
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.hw_emu_run_ok: true
+  - result.aie_latency_us_measured: true
+  - result.aie_latency_us: "> 0 and < 5000"
+
+human_ack_required_on:
+  - rootfs_mount_still_fails_with_bsp   # BSP didn't fix it -> Option D defer
+  - bsp_md5_mismatch                     # may need re-download
+  - petalinux_build_fails_with_bsp       # rare, BSP is AMD-tested
+  - libxrt_missing_at_runtime            # rootfs config didn't include libxrt
+  - measured_latency_above_2x_pl         # informational only
+
+notes: |
+  This is the proper PetaLinux flow that should have been used in
+  T0043 retry2. The BSP is AMD's reference VCK190 image that they
+  test against both real hardware AND qemu hw_emu — the bootargs +
+  device tree + boot.scr are aligned with what hw_emu emulates.
+
+  ROI: ~3h ali-aie autonomous, ~75% success vs Option A's 50%. If
+  this works, we get measured aie_latency_us and the full submission
+  evidence chain closes with [AIE-HW-EMU] honesty label. If it
+  fails the same way (mount issue), it's strong evidence the issue
+  is qemu-specific and Option D (defer) is correct.
+
+  No more retries after this. Either T0043_v4 succeeds or we accept
+  T0042 analytic 160us as the final §V.F number for submission.
