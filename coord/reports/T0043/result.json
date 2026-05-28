@@ -3,50 +3,55 @@
   "status": "PARTIAL",
   "supersedes_measurement_half_of": "T0042",
   "claimed_at": "2026-05-28T06:08:00Z",
-  "finished_at": "2026-05-28T06:50:00Z",
+  "retry_started_at": "2026-05-28T07:20:00Z (after Xvfb host install)",
+  "finished_at": "2026-05-28T07:48:00Z",
   "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
-  "worker_version": "v0.0",
+  "worker_version": "v0.2",
   "result": {
     "aiecompiler_hw_ok": true,
-    "aiecompiler_hw_status": "Compilation Complete (0 errors, 3 warnings); reused T0042 AIE graph unchanged. libadf.a generated.",
     "vpp_compile_pl_stub_ok": true,
-    "vpp_compile_detail": "First attempt with int *dummy port + s_axilite return only on bundle=ctrl FAILED due to bundle name conflict (HLS 214-200). Fixed by separating m_axi bundle=gmem0 from s_axilite bundle=control. Then second iteration FAILED on missing ap_axi_sdata.h include. Final v++ -c PASS with full AXIS stream interface (s_q_to_aie + s_out_from_aie) wired to AIE PLIO ports.",
-    "pl_stub_fmax_mhz": 342.47,
     "vpp_link_xsa_ok": true,
-    "vpp_link_detail": "First attempt FAILED with sptag=DDR[0] (cfgen 83-2287 invalid sp tag); platforminfo showed VCK190 SP tags are just `DDR` and `LPDDR` (no array index). Second attempt FAILED with `No stream resources found that can accomodate compute unit ai_engine_0.Q_in` because pl_stub had no AXIS streams matching graph PLIO ports. Final v++ -l PASS after rewriting pl_stub with hls::stream<ap_axiu<128,0,0,0>> ports + sc= connections in link.cfg.",
-    "vpp_package_hwemu_ok": false,
-    "vpp_package_block_reason": "v++ -p --target=hw_emu requires Xvfb (X virtual framebuffer) to run qemu_addressing tcl script that generates DDR memspec DTB. Error: `Xvfb is not available on the system, please make sure Xvfb is available on the system.`",
-    "xvfb_install_blocked": "apt-get install -y xvfb fails: `Connection failed [IP: 198.18.0.33 80]` to mirrors.cloud.aliyuncs.com (Aliyun cloud mirror DNS routes to internal IP not reachable from this ECS at the moment). archive.ubuntu.com is reachable per ping but sources.list points to the aliyun mirror. sudo sed -i to switch /etc/apt/sources.list is auto-mode-blocked. No offline xvfb .deb is available on the host.",
-    "hw_emu_run_ok": false,
-    "hw_emu_run_block_reason": "Cannot generate hw_emu package without Xvfb; cannot run launch_hw_emu.sh without package.",
+    "vpp_package_hwemu_ok": true,
+    "vpp_package_detail": "After Xvfb install (sudo apt-get install xvfb), v++ -p -t hw_emu --package.boot_mode=qspi PASS in 2m22s. Produced BOOT.BIN + launch_hw_emu.sh + qemu QSPI flash images. No host.elf was passed (XRT SDK not installed; cannot build host).",
+    "hw_emu_qemu_boot_ok": true,
+    "hw_emu_qemu_boot_detail": "launch_hw_emu.sh boots qemu-system-aarch64 + Xilinx PMC simulator. qemu reaches u-boot prompt (Versal>) on the PMC-driven QSPI image. PLM, ATF, u-boot all load cleanly.",
+    "hw_emu_userspace_ok": false,
+    "hw_emu_userspace_block_reason": "u-boot's default boot.scr tries to load image.ub (PetaLinux FIT) from mmc/usb/jtag or via TFTP. None exist on the QSPI image. TFTP from 10.0.2.2 returns 'Access violation' (no TFTP server in the qemu host network). Result: qemu sits at the u-boot prompt indefinitely with no userspace to run the host app that would drive the AIE graph.",
+    "host_elf_built": false,
+    "host_elf_block_reason": "XRT SDK is not installed on the ECS host. host.cpp uses #include <experimental/xrt_kernel.h>, <experimental/xrt_aie.h>, <adf/adf_api/XRTConfig.h>; XILINX_XRT env var is empty; find / -name xrt_kernel.h finds nothing. Without XRT headers + libxrt_coreutil/libxrt_core, the host.cpp cannot be compiled to host.elf, and even if compiled it would need a PetaLinux rootfs with libxrt at runtime.",
+    "petalinux_image_built": false,
+    "petalinux_image_block_reason": "Building a PetaLinux image.ub for VCK190 requires the PetaLinux tool (not just Vitis), a kernel BSP for the v++ link XSA, and ~30-60 min of build time per iteration. PetaLinux is not installed on the ECS host (no /tools/Xilinx/PetaLinux/). The base_platform xilinx_vck190_base_202410_1/sw/ ships boot.scr + u-boot + bl31 + system.dtb but NO Image/rootfs — the user is expected to build those with PetaLinux.",
     "aie_latency_us_measured": false,
-    "aie_latency_us_measured_block_reason": "T0042 analytic 160 us remains the published AIE latency until either (a) Xvfb is installed (host admin task) and v++ -p succeeds, or (b) a non-qemu measurement path is found."
+    "aie_latency_us_measured_block_reason_chain": "(1) Xvfb missing → FIXED after sudo apt-get install xvfb. (2) v++ -p succeeded. (3) qemu boots to u-boot. (4) No PetaLinux image to boot Linux. (5) No XRT SDK to build host.elf. (6) AIE driver call cannot be issued from u-boot directly — needs userspace with XRT runtime."
   },
   "acceptance_criteria_check": {
-    "status_DONE": "PARTIAL — pre-package flow PASS, hw_emu package + run BLOCKED on Xvfb host dependency",
-    "hw_emu_run_ok": false,
+    "status_DONE": "PARTIAL — pre-userspace pipeline PASS (compile+link+package+qemu_boot), userspace measurement BLOCKED on PetaLinux+XRT host-admin tasks",
+    "hw_emu_run_ok": "partial: qemu launches but no userspace executes",
     "aie_latency_us_measured": false,
     "aie_latency_us_lt_5000": "NA (not measured)",
     "aie_latency_us_in_t0042_range": "NA (not measured)"
   },
   "human_ack_needed": true,
   "human_ack_reasons": [
-    "hw_emu_qemu_boot_fail (broadly: PACKAGE step fails before any boot attempt because Xvfb is missing)",
-    "Host-admin dependency blocks autonomous completion: apt-get cannot fetch xvfb (Aliyun mirror unreachable), sudo sed of sources.list is auto-mode-blocked, no offline xvfb .deb on the host."
+    "petalinux_image_missing: needs PetaLinux build (multi-day host-admin task, not autonomous)",
+    "xrt_sdk_missing: needs sudo install (apt blocked, sources.list edit auto-mode-blocked)",
+    "host_elf_missing: cascading from XRT missing"
   ],
-  "key_finding": "All v++ steps up to and including XSA link PASS cleanly. The hw_emu package step has a hard Xvfb dependency that cannot be satisfied autonomously from this ECS. The AIE graph + PL stub + link.cfg + host.cpp scaffolding is in place; the moment Xvfb is installed (e.g., user runs `sudo apt-get install xvfb` once after restoring apt connectivity), the package + run can be re-attempted with a single v++ -p invocation.",
+  "key_finding": "Xvfb fix unblocked v++ -p and qemu boot. The next hard blocker is the missing PetaLinux+XRT software stack on the ECS host — required to RUN a userspace app that drives the AIE graph and reads the cycle counter. This is a host-admin task (install PetaLinux tool + build Image+rootfs+XRT for the v4 platform) outside autonomous worker scope. T0042 analytic 160 us remains the published AIE latency.",
   "options_for_orch": [
-    "(A) Manual: user installs Xvfb on the ECS host (one-time admin step), then worker retries v++ -p + launch_hw_emu.sh; expect ~10-30 min for package + ~5-15 min for qemu boot + AIE simulation; total ~1h to measured aie_latency_us.",
-    "(B) Defer measurement to camera-ready: keep T0042 analytic 160 us as the published number with [AIE-SCHED-EST] honesty label; the camera-ready phase will run hw_emu (with Xvfb available) or on-board (preferred).",
-    "(C) Alternative measurement path: try aiesimulator with --xtlm-aiesim-config option that bypasses GMIO (kernels driven by file-based PLIO; needs graph rewrite from GMIO to PLIO, which re-triggers T0040's 32 KiB MG limit — likely a dead end)."
+    "(A) HOST-ADMIN: install PetaLinux 2024.1, build VCK190 base BSP with XRT + AIE drivers, rebuild xpfm to include sw/sysroots + Image; then worker rebuilds host.elf, repackages, and runs hw_emu to measurement. Estimated 1-3 days human time + auto runtime.",
+    "(B) BAREMETAL ALTERNATIVE: skip PetaLinux entirely; write a baremetal C++ app using AIE_DRIVER (Xilinx's bare-driver API in /tools/Xilinx/Vitis/2024.1/aietools/...) and build via standaloneBSP. The baremetal app reads aiecompiler-generated cycle counters directly without Linux/XRT. ~1 day worker time.",
+    "(C) DEFER: keep T0042 analytic 160 us as published with [AIE-SCHED-EST] honesty label. The chess-backend HW compile PASS + x86sim bit-exact + tile profile already validate the design architecturally. hw_emu measurement becomes a camera-ready item or post-paper follow-up.",
+    "(D) ON-BOARD: physical VCK190 board with PetaLinux SD card and XRT installed; the only path to a real silicon-thermal-correct measurement. Multi-week procurement + setup; clearly out of scope for the FCCM submission."
   ],
   "deliverables": {
     "aiecompiler_hw.log": "coord/reports/T0043/aiecompiler_hw.log (PASS)",
-    "pl_stub.cpp":     "coord/reports/T0043/pl_stub.cpp (AXIS-stream version, v++ -c PASS at 342 MHz)",
-    "link.cfg":        "coord/reports/T0043/link.cfg (Q_in/out PLIO-to-AXIS stream connections)",
-    "host.cpp":        "coord/reports/T0043/host.cpp (sw_app skeleton for GMIO drive + cycle measurement)",
+    "pl_stub.cpp": "coord/reports/T0043/pl_stub.cpp (AXIS-stream version, v++ -c PASS at 342 MHz)",
+    "link.cfg": "coord/reports/T0043/link.cfg (Q_in/out PLIO-to-AXIS stream connections)",
+    "host.cpp": "coord/reports/T0043/host.cpp (sw_app skeleton — NOT compilable without XRT)",
     "vpp_compile.log": "coord/reports/T0043/vpp_compile.log (PASS, after pragma + include fixes)",
-    "vpp_link.log":    "coord/reports/T0043/vpp_link.log (PASS, after sptag + AXIS-stream fixes)",
-    "vpp_package.log": "coord/reports/T0043/vpp_package.log (FAIL on Xvfb dependency — single error message)"
+    "vpp_link.log": "coord/reports/T0043/vpp_link.log (PASS, after sptag + AXIS-stream fixes)",
+    "vpp_package.log": "coord/reports/T0043/vpp_package.log (PASS, after Xvfb install)",
+    "hw_emu.log": "coord/reports/T0043/hw_emu.log (qemu PASS to u-boot, no userspace beyond)"
   }
 }

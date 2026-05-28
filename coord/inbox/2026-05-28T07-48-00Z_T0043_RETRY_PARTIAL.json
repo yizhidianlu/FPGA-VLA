@@ -1,0 +1,23 @@
+{
+  "task_id": "T0043",
+  "status": "PARTIAL",
+  "retry_round": "after Xvfb install",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-28T07:48:00Z",
+  "summary": "Xvfb fix UNBLOCKED the v++ -p package step. New blocker downstream: hw_emu qemu boots cleanly to u-boot (Versal>) but no PetaLinux Image/rootfs is built into the QSPI flash, and no host.elf is built either (XRT SDK missing). Result: qemu sits at u-boot indefinitely with no userspace to run an AIE-driving host app. T0042 analytic 160 us remains the published AIE latency.",
+  "report_dir": "coord/reports/T0043/",
+  "stages_passed": ["aiecompiler hw", "v++ -c pl_stub", "v++ -l XSA", "v++ -p hw_emu (Xvfb fixed)", "qemu boot to u-boot"],
+  "stages_blocked": ["build host.elf (no XRT SDK)", "build PetaLinux image.ub (no PetaLinux tool)", "qemu boot to userspace", "AIE GMIO drive from host", "aie cycle counter readback"],
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "petalinux_image_missing — multi-day host-admin to build VCK190 BSP with XRT",
+    "xrt_sdk_missing — sudo install blocked by apt + auto-mode policy",
+    "Cannot proceed autonomously to measurement"
+  ],
+  "next_action_options": [
+    "(A) Install PetaLinux 2024.1 + build VCK190 BSP with XRT (1-3 days human work)",
+    "(B) BAREMETAL alternative: AIE_DRIVER baremetal C++ app, no Linux/XRT (~1 day worker time)",
+    "(C) DEFER: keep T0042 analytic 160 us with [AIE-SCHED-EST] label (recommended)",
+    "(D) On-board VCK190 (out of scope for FCCM submission)"
+  ]
+}
