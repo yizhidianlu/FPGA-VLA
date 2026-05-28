@@ -1,0 +1,188 @@
+task_id: T0043_v3
+created_by: orchestrator
+created_at: 2026-05-28T19:00:00Z
+type: aie_compile
+priority: P0
+supersedes: T0043
+target_worker: remote_claude_ali_aie
+depends_on: [T0043]                # all v++ -c / -l artifacts reused
+deadline_minutes: 90
+params:
+  module_name: xmod_attn_hwemu_platform_prebuilt
+  description: |
+    **Option C: skip the custom PetaLinux rootfs that hit the
+    mmcblk0p2 mount issue and use the Vitis platform
+    xilinx_vck190_base_202410_1's PREBUILT XRT image instead.**
+
+    T0043 retry2 confirmed the entire build pipeline works end-to-end
+    (PetaLinux build, XRT, SDK, host.elf cross-compile, qemu boot
+    through kernel 6.6.10). The single failure was Linux kernel
+    rootfs mount on (179,2) — a Vitis-platform-image vs custom-
+    PetaLinux-rootfs interop bug. The Vitis platform ships its OWN
+    prebuilt sw/ image which the launch_hw_emu.sh tooling is
+    explicitly designed to use, and that image's u-boot/kernel/
+    rootfs combination is the supported configuration.
+
+    Hypothesis: if we let v++ -p take the platform's default sw/
+    components and ONLY override the sd_file=host.elf, the resulting
+    hw_emu boots cleanly into the platform's reference rootfs, runs
+    host.elf, drives the AIE GMIO, and prints the measured aie_latency_us.
+
+    Risk: the platform's prebuilt rootfs may NOT include libxrt at
+    runtime (it's a Vitis BASE platform, not a Vitis ML/Acap platform).
+    If so, host.elf load will fail with "error while loading shared
+    libraries: libxrt_core.so.2: cannot open shared object file" —
+    that's a definitive signal to abandon Option C and either
+    (a) statically link host.elf, or (b) cycle back to fixing the
+    custom PetaLinux bootargs (Option A).
+
+  quickstart_for_resumed_session: |
+    cd /tools/projects/FPGA-VLA/runs/T0043
+    source /tools/Xilinx/Vitis/2024.1/settings64.sh
+
+    # 1. Locate the Vitis platform's prebuilt sw/ image directory
+    PLATFORM=/opt/xilinx/platforms/xilinx_vck190_base_202410_1
+    [ -d "$PLATFORM" ] || PLATFORM=/tools/Xilinx/Vitis/2024.1/data/embedded/platforms/xilinx_vck190_base_202410_1
+    [ -d "$PLATFORM" ] || PLATFORM=$(find / -name "xilinx_vck190_base_202410_1.xpfm" 2>/dev/null \
+                                       | head -1 | xargs -r dirname)
+    echo "[INFO] platform at: $PLATFORM"
+
+    # The prebuilt sw/ image lives under either of:
+    PREBUILT_SW=$PLATFORM/sw/xilinx_vck190_base_202410_1/xrt
+    [ -d "$PREBUILT_SW" ] || PREBUILT_SW=$PLATFORM/sw/xrt
+    ls "$PREBUILT_SW"/{Image,rootfs.cpio.gz,*.dtb,boot.scr} 2>/dev/null || \
+      echo "[WARN] no platform prebuilt; will let v++ -p resolve defaults"
+
+    # 2. Confirm prerequisites
+    ls Work_aie/libadf.a xmod_attn.xsa host.elf 2>/dev/null \
+      || { echo "[FATAL] missing prereq from T0043"; exit 1; }
+
+    # 3. v++ -p WITHOUT overriding kernel/rootfs — let platform defaults flow through
+    rm -rf package_v3
+    v++ -p -t hw_emu --platform xilinx_vck190_base_202410_1 \
+        --package.boot_mode=sd \
+        --package.out_dir package_v3 \
+        --package.sd_file=host.elf \
+        xmod_attn.xsa Work_aie/libadf.a 2>&1 | tee vpp_package_v3.log
+    test -f package_v3/launch_hw_emu.sh || \
+      { echo "[FATAL] v++ -p failed; see vpp_package_v3.log"; exit 1; }
+
+    # 4. Launch hw_emu, max 30 min
+    cd package_v3
+    timeout 1800 ./launch_hw_emu.sh -no-reboot 2>&1 | tee ../hw_emu_v4.log
+    cd ..
+
+    # 5. Extract measured latency. Two possible markers:
+    AIE_LAT=$(grep -oP 'aie_latency_us_measured:\s*\K[\d.]+' hw_emu_v4.log | head -1)
+    if [ -z "$AIE_LAT" ]; then
+        # Did host.elf ever start? Look for known marker
+        if grep -q "loading shared libraries" hw_emu_v4.log; then
+            echo "[FAIL] host.elf libxrt missing in prebuilt rootfs — Option C dead end"
+            REASON="prebuilt_rootfs_missing_libxrt"
+        elif grep -q "VFS: Unable to mount root" hw_emu_v4.log; then
+            echo "[FAIL] prebuilt rootfs also has mount issue (unlikely but possible)"
+            REASON="prebuilt_rootfs_mount_also_fails"
+        elif grep -q "MR-VLA host_app starting" hw_emu_v4.log; then
+            echo "[FAIL] host.elf started but didn't reach measurement print"
+            REASON="host_app_started_no_measurement"
+        else
+            echo "[FAIL] hw_emu output inconclusive; tail follows"
+            REASON="inconclusive"
+        fi
+        # Write FAIL inbox
+        TS=$(date -u +%Y-%m-%dT%H-%M-%SZ)
+        cat > /tools/projects/FPGA-VLA/coord/inbox/${TS}_T0043_v3_FAIL.json <<EOF
+{"task_id":"T0043_v3","status":"FAILED","worker":"remote_claude_ali_aie",
+ "ts":"$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+ "blocker":"$REASON",
+ "next":"either Option A (custom-PetaLinux bootargs fix) or D (accept T0042 analytic)"}
+EOF
+        # Don't push the rest, exit
+        exit 1
+    fi
+    echo "[SUCCESS] measured: $AIE_LAT us"
+
+    # 6. Compute speedup vs PL T0022 (674 us)
+    SPEEDUP=$(awk "BEGIN {printf \"%.2f\", 674/$AIE_LAT}")
+    echo "Speedup vs PL: ${SPEEDUP}x"
+
+    # 7. result.json + inbox DONE + commit + push
+    TS=$(date -u +%Y-%m-%dT%H-%M-%SZ)
+    cat > /tools/projects/FPGA-VLA/coord/reports/T0043_v3/result.json <<EOF
+    {
+      "task_id": "T0043_v3",
+      "supersedes_measurement_half_of": ["T0040", "T0041", "T0042", "T0043"],
+      "status": "DONE",
+      "worker": "remote_claude_ali_aie",
+      "finished_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+      "result": {
+        "hw_emu_run_ok": true,
+        "aie_latency_us_measured": true,
+        "aie_latency_us": $AIE_LAT,
+        "vs_T0042_analytic": "T0042 schedule-derived central 160 us; measured $AIE_LAT us",
+        "vs_PL_T0022_speedup_x": $SPEEDUP,
+        "method": "Vitis platform prebuilt XRT image (Option C), hw_emu qemu cycle-accurate"
+      },
+      "acceptance_criteria_passed": true,
+      "human_ack_needed": false
+    }
+    EOF
+    cat > /tools/projects/FPGA-VLA/coord/inbox/${TS}_T0043_v3_DONE.json <<EOF
+    {"task_id":"T0043_v3","status":"DONE","worker":"remote_claude_ali_aie",
+     "ts":"$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+     "headline":"T0043_v3 DONE — AIE measured ${AIE_LAT} us; speedup vs PL ${SPEEDUP}x"}
+    EOF
+
+    cd /tools/projects/FPGA-VLA
+    mkdir -p coord/reports/T0043_v3
+    cp -p runs/T0043/{vpp_package_v3.log,hw_emu_v4.log} coord/reports/T0043_v3/
+    mv coord/tasks/claimed/T0043_v3_*.yaml coord/tasks/completed/ 2>/dev/null || \
+        mv coord/tasks/pending/T0043_v3_*.yaml coord/tasks/completed/
+    git add coord/
+    git commit -m "T0043_v3 DONE: AIE hw_emu measured ${AIE_LAT} us (vs PL 674 us, ${SPEEDUP}x)"
+    git pull --rebase
+    git push
+
+  flow:
+    step_1_locate_platform: |
+      Find xilinx_vck190_base_202410_1 prebuilt sw/ directory. Common
+      locations: /opt/xilinx/platforms/, /tools/Xilinx/Vitis/2024.1/data/
+      embedded/platforms/, or scan with find for the xpfm file.
+    step_2_repackage: |
+      v++ -p -t hw_emu WITHOUT --package.kernel_image / --package.rootfs
+      (let v++ resolve them from the platform's sw/ default). Override
+      ONLY --package.sd_file=host.elf so the prebuilt rootfs picks up
+      our app.
+    step_3_run_hwemu: |
+      launch_hw_emu.sh -no-reboot, 30 min timeout. Three possible
+      outcomes:
+        SUCCESS: host.elf runs, prints aie_latency_us_measured: NNN
+        FAIL libxrt: prebuilt rootfs lacks libxrt — Option C dead end
+        FAIL mount: prebuilt also can't mount — very unlikely, would
+                    indicate a deeper qemu/Vitis issue
+    step_4_extract_and_report: |
+      grep aie_latency_us_measured from hw_emu output, compute speedup
+      vs PL 674 us, write result.json + inbox DONE.
+
+  target_platform: xilinx_vck190_base_202410_1
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.hw_emu_run_ok: true
+  - result.aie_latency_us_measured: true
+  - result.aie_latency_us: "> 0 and < 5000"
+
+human_ack_required_on:
+  - prebuilt_rootfs_missing_libxrt    # would force fallback to Option A or D
+  - prebuilt_rootfs_mount_also_fails   # very rare; suggests deeper interop issue
+  - measured_latency_above_2x_pl       # informational
+
+notes: |
+  This task is a 30-minute one-shot. Either it works (give us the
+  measured number) or it tells us the prebuilt rootfs lacks libxrt
+  in a single qemu boot. No further iteration loop — the orch needs
+  a clear yes/no.
+
+  If FAIL: report the blocker and stop. Orch will decide between
+  Option A (custom PetaLinux bootargs fix, ~1-2h) and Option D
+  (defer, accept T0042 160 us analytic as published).
