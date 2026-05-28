@@ -1,0 +1,45 @@
+{
+  "task_id": "T0043_v5",
+  "status": "FAILED",
+  "supersedes": "T0043_v4",
+  "final_attempt": true,
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-28T22:50:00Z",
+  "blocker": "qemu_hangs_on_bsp_wic_pl_connection",
+  "summary": "LAST T0043 retry. BSP wic injection mechanically succeeded: extracted petalinux-sdimage.wic.xz from BSP (6 GiB), unxz to raw img, loop-mounted partition 2 (ext4 rootfs from p2_offset=4194312*512), confirmed XRT libs present in /usr/lib/libxrt_coreutil.so.2.17.0, injected host_bsp.elf + libadf.a into /home/petalinux/, appended auto-run to /etc/profile, unmounted cleanly. Resized 6GiB->8GiB with truncate to satisfy qemu's power-of-2 SD size requirement. v++ -p package_v5 PASS. launch_hw_emu.sh started, qemu booted, xsim+PMC+AIE-MTMODEL all init OK, but qemu_output.log stays 0 bytes — qemu PS process gets stuck at the rport_pl@0 connection step, never reaches u-boot/kernel boot. After 1800s timeout, SIGTERM. The BSP prebuilt wic image is presumably designed for real VCK190 boot or a different qemu config (e.g., the wic.xz boot script expects MMC at a different bus index than what hw_emu's qemu-system-aarch64 provides). All three avenues (template, bsp-built rootfs, bsp prebuilt wic) now exhausted.",
+  "report_dir": "coord/reports/T0043/",
+  "stages_passed_v5": [
+    "Locate BSP wic in vck190_xrt_bsp/pre-built/linux/images/",
+    "Decompress wic.xz -> raw 6GiB wic",
+    "fdisk: partition 1 (FAT32, 2GiB) + partition 2 (ext4, 4GiB)",
+    "Loop-mount partition 2 at offset 4194312*512",
+    "Confirmed libxrt_coreutil.so.2 present in BSP rootfs /usr/lib",
+    "Injected host_bsp.elf + libadf.a into /home/petalinux/",
+    "Added /home/petalinux/host_bsp.elf auto-run via /etc/profile",
+    "Unmounted",
+    "Resized 6GiB->8GiB power-of-2 (qemu sd_realize() requirement)",
+    "v++ -p package_v5 PASS (28s)",
+    "Swapped package_v5/sd_card.img with the modified 8GiB BSP wic",
+    "launch_hw_emu.sh started qemu + xsim + PMC + AIE-MTMODEL"
+  ],
+  "stages_blocked": [
+    "qemu PS reaches u-boot",
+    "Linux kernel boot",
+    "rootfs mount",
+    "userspace + host_bsp.elf execution",
+    "AIE measurement"
+  ],
+  "qemu_output_log_bytes": 0,
+  "qemu_PS_state_at_timeout": "stuck in rport_pl@0 connection phase; never produced any serial output",
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "Final T0043 retry per orch task instructions — three avenues exhausted (template, bsp rebuild, bsp prebuilt wic)",
+    "Fundamental incompatibility: Vitis hw_emu qemu-system-aarch64 + AMD BSP prebuilt sd image",
+    "T0042 analytic 160 us must remain published"
+  ],
+  "next_action_options": [
+    "DEFER (Option D): T0042 analytic 160 us with [AIE-SCHED-EST] label is the final paper-published AIE latency. The chess-backend HW compile PASS + x86sim bit-exact + tile profiling + 4.2x speedup vs PL 674 us provide architectural validation. Measurement is camera-ready / on-board scope.",
+    "ON-BOARD: physical VCK190 hardware with PetaLinux SD. The entire build pipeline (BSP rootfs, host_bsp.elf, BOOT.BIN, sd_card.img) is validated end-to-end up to qemu boot — on real silicon there's no qemu compat layer to fight.",
+    "v++ ON OFFICIAL EXAMPLE: try Vitis 2024.1 official VCK190 AIE example (e.g., vck190_aie_pi) to confirm whether hw_emu sd boot itself works in this Vitis install; if even that fails, the Vitis 2024.1 + Aliyun ECS combination has a hw_emu bug independent of our design."
+  ]
+}

@@ -1,0 +1,486 @@
+NOC MEM CONFIG: /tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim/noc_memory_config.txt
+
+
+
+
+INFO: Using QEMU from : /tools/Xilinx/Vitis/2024.1/data/emulation/qemu/comp/qemu/sysroots/x86_64-petalinux-linux/usr/bin/qemu-system-aarch64
+Directory '/tools/projects/FPGA-VLA/runs/T0043/package_v5/emu_qemu_scripts' created
+Using QEMU dtb from /tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim/board-versal-ps-cosim-vitis-vck190.dtb
+
+PS COSIM_MACHINE_PATH unix:./qemu-rport-_pl@0
+INFO: Using PMC/PU from : /tools/Xilinx/Vitis/2024.1/data/emulation/qemu/comp/qemu/sysroots/x86_64-petalinux-linux/usr/bin/qemu-system-microblazeel
+
+Starting QEMU
+ - Press <Ctrl-a h> for help 
+Launching QEMU using command "/usr/bin/time -p -o qemu_time.txt /tools/Xilinx/Vitis/2024.1/data/emulation/qemu/comp/qemu/sysroots/x86_64-petalinux-linux/usr/bin/qemu-system-aarch64 -M "arm-generic-fdt"  -display "none"  -chardev "stdio,id=serial2,logfile=qemu_output.log,mux=on,signal=off"  -mon "serial2"  -sync-quantum ""1000000000""  -boot "mode=5"  -hw-dtb /tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim/board-versal-ps-cosim-vitis-vck190.dtb  -drive "file=/tools/projects/FPGA-VLA/runs/T0043/package_v5/sd_card.img,format=raw,if=sd,index=1"  -no-reboot -display "none"  -machine-path "."  -chardev "socket,path=./qemu-rport-_pmc@0,server=on,id=ps-pmc-rp"  -chardev "socket,path=./qemu-rport-_pl@0,server=on,id=pl-rp""
+Waiting for QEMU to start. 
+QEMU started. qemu_pid=2855179
+Waiting for PMU to start. 
+PMC started. pmc_pid=2855182
+Path of the simulation directory :  /tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim
+Simulator started. simulator_pid 2855589
+
+xsim vitis_design_wrapper_sim_wrapper_behav -key {Behavioral:sim_1:Functional:vitis_design_wrapper_sim_wrapper} -tclbatch vitis_design_wrapper_sim_wrapper.tcl -protoinst protoinst_files/bd_57a1.protoinst -protoinst protoinst_files/bd_27ec.protoinst -protoinst protoinst_files/bd_90d1.protoinst -protoinst protoinst_files/bd_28ba.protoinst -protoinst protoinst_files/bd_05a5.protoinst -protoinst protoinst_files/bd_931e.protoinst -protoinst protoinst_files/bd_93ee.protoinst -protoinst protoinst_files/bd_53bf.protoinst -protoinst protoinst_files/bd_920e.protoinst -protoinst protoinst_files/bd_525f.protoinst -protoinst protoinst_files/vitis_design.protoinst -protoinst protoinst_files/xlnoc.protoinst -log simulate.log -R --protoinst /tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim/dr_behav.protoinst
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Thu May 28 22:28:53 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/vitis_design_wrapper_sim_wrapper_behav/xsim_script.tcl
+# xsim {vitis_design_wrapper_sim_wrapper_behav} -autoloadwcfg -tclbatch {vitis_design_wrapper_sim_wrapper.tcl} -runall -key {Behavioral:sim_1:Functional:vitis_design_wrapper_sim_wrapper} -protoinst {protoinst_files/bd_57a1.protoinst} -protoinst {protoinst_files/bd_27ec.protoinst} -protoinst {protoinst_files/bd_90d1.protoinst} -protoinst {protoinst_files/bd_28ba.protoinst} -protoinst {protoinst_files/bd_05a5.protoinst} -protoinst {protoinst_files/bd_931e.protoinst} -protoinst {protoinst_files/bd_93ee.protoinst} -protoinst {protoinst_files/bd_53bf.protoinst} -protoinst {protoinst_files/bd_920e.protoinst} -protoinst {protoinst_files/bd_525f.protoinst} -protoinst {protoinst_files/vitis_design.protoinst} -protoinst {protoinst_files/xlnoc.protoinst} -protoinst {/tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim/dr_behav.protoinst}
+[AIESIM_OPTIONS]: aiesim_options file path ./aiesim_options.txt
+[AIESIM_OPTIONS]: No aiesim_options provided 
+[INFO]: Disable Unused Tiles
+[INFO]: Xpe File: /tools/projects/FPGA-VLA/runs/T0043/package_v5/cfg/./aie.xpe
+INFO  : Running AIE MTMODEL Simulation with 1 threads
+ISS disables unused tiles
+Optimized ISS Wrapper (R+W), r2p25
+
+Info: DEVICE FILE: /tools/Xilinx/Vitis/2024.1/aietools/data/devices/VC1902.json
+
+Info: AIE SOLUTION FILE: /tools/projects/FPGA-VLA/runs/T0043/package_v5/cfg/./aie.shim.solution.aiesol
+qemu-system-aarch64: -chardev socket,path=./qemu-rport-_pmc@0,server=on,id=ps-pmc-rp: info: QEMU waiting for connection on: disconnected:unix:./qemu-rport-_pmc@0,server=on
+qemu-system-aarch64: -chardev socket,path=./qemu-rport-_pl@0,server=on,id=pl-rp: info: QEMU waiting for connection on: disconnected:unix:./qemu-rport-_pl@0,server=on
+INFO  : ROWS: 8 COLS: 50
+Running Dispatch Server on port: 45249
+[SUMMARY_FILE]: Warning AIE_PKG_DIR option missing in -aie-sim-options file
+Summary File: Warning - Can't find aie compiler summary file!
+[INFO]: Disabled Simulator Hang Detect 
+Current Directory=/tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_0
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_0
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_1
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_1
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_2
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_2
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_3
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_3
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_4
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_4
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_5
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_5
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_6
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_6
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_7
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_7
+In file: sc_object_manager.cpp:161
+--------------------------------------------------------------------------------------------------
+SLAVE STREAM INFO:  | Port Name         | Port Width        | Stream Type       | Channel Index     
+                    | S00_AXIS          | 128               | PL STREAM         | 192, 193          
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+MASTER STREAM INFO: | Port Name         | Port Width        | Stream Type       | Channel Index     
+                    | M00_AXIS          | 128               | PL STREAM         | 156, 157          
+--------------------------------------------------------------------------------------------------
+WARNING::[ XTLM::751 ] Deprecated.! Please instantiate Memory Manager with this pointer (sc_module pointer).
+WARNING::[ XTLM::751 ] Deprecated.! Please instantiate Memory Manager with this pointer (sc_module pointer).
+WARNING::[ XTLM::751 ] Deprecated.! Please instantiate Memory Manager with this pointer (sc_module pointer).
+WARNING::[ XTLM::751 ] Deprecated.! Please instantiate Memory Manager with this pointer (sc_module pointer).
+WARNING::[ XTLM::751 ] Deprecated.! Please instantiate Memory Manager with this pointer (sc_module pointer).
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.rd_socket_0
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.wr_socket_0
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.rd_socket_1
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.wr_socket_1
+In file: sc_object_manager.cpp:161
+INFO::[ DDR-STORAGE ] Creating initial 2GB DRAM file image:qemu-memory-_mem_0x80000000@0x800000000ULL
+INFO::[ DDR-STORAGE ] Creating initial 2GB DRAM file image:qemu-memory-_mem_0x50000000000@0x50000000000ULL
+*****************running enhanced NoC-V1 SystemC model*************
+
+Info: (I804) /IEEE_Std_1666/deprecated: sc_object::get_parent() is deprecated, use get_parent_object() instead
+
+Info: (I804) /IEEE_Std_1666/deprecated: sc_sensitive_pos is deprecated use sc_sensitive << with pos() instead
+TraceManager type=nothing
+TraceManager type=nothing
+TraceManager type=nothing
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_57a1.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_57a1.protoinst for the following reason(s):
+There are no instances of module "bd_57a1" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_27ec.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_27ec.protoinst for the following reason(s):
+There are no instances of module "bd_27ec" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_90d1.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_90d1.protoinst for the following reason(s):
+There are no instances of module "bd_90d1" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_28ba.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_28ba.protoinst for the following reason(s):
+There are no instances of module "bd_28ba" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_05a5.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_05a5.protoinst for the following reason(s):
+There are no instances of module "bd_05a5" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_931e.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_931e.protoinst for the following reason(s):
+There are no instances of module "bd_931e" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_93ee.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_93ee.protoinst for the following reason(s):
+There are no instances of module "bd_93ee" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_53bf.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_53bf.protoinst for the following reason(s):
+There are no instances of module "bd_53bf" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_920e.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_920e.protoinst for the following reason(s):
+There are no instances of module "bd_920e" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_525f.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_525f.protoinst for the following reason(s):
+There are no instances of module "bd_525f" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/vitis_design.protoinst
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_AXI_NOC_0
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_AXI_NOC_1
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_CCI_NOC_0
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_CCI_NOC_1
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_CCI_NOC_2
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_CCI_NOC_3
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/LPD_AXI_NOC_0
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/M_AXI_FPD
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/PMC_NOC_AXI_0
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/M00_AXI_bypass_m
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/M00_AXI_bypass_s
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/m_axi_gmem_o
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/m_axi_gmem_q
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/pl_stub_1/m_axi_gmem_o
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/pl_stub_1/m_axi_gmem_q
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/pl_stub_1/s_axi_control
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/pl_stub_1/s_out_from_aie
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/pl_stub_1/s_q_to_aie
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/s_axi_control
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/s_out_from_aie
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/s_q_to_aie
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//ai_engine_0/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//ai_engine_0/M00_AXIS
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//ai_engine_0/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//ai_engine_0/S00_AXIS
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//axi_intc_cascaded_1/s_axi
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//axi_intc_parent/s_axi
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S01_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S02_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S03_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S04_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S05_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S06_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S07_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//dummy_slave_0/S_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//dummy_slave_1/S_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//dummy_slave_2/S_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//dummy_slave_3/S_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M01_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M02_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M03_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M04_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M05_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M06_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_2/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_2/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_3/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_3/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_4/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_4/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_5/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_5/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//noc_ddr4/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//noc_ddr4/S01_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//noc_ddr4/S02_AXI
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/xlnoc.protoinst
+INFO: [Wavedata 42-565] Reading protoinst file /tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim/dr_behav.protoinst
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst/grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst/grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142
+Time resolution is 1 ps
+WARNING: [Simtcl 6-25] Warning: Both '-runall' and '-tclbatch' were specified. The '-runall' was ignored
+source vitis_design_wrapper_sim_wrapper.tcl
+## if { [file exists vitis_params.tcl] } {
+##   source vitis_params.tcl
+## }
+### set VITIS_DYNAMIC_REGION_HW_EMU_PATH vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i
+## if { [info exists ::env(USER_PRE_SIM_SCRIPT)] } {
+##   if { [catch {source $::env(USER_PRE_SIM_SCRIPT)} msg] } {
+##     puts $msg
+##   }
+## }
+## if { [file exists pre_sim_tool_scripts.tcl] } {
+##   source pre_sim_tool_scripts.tcl
+## }
+### if { [file exists preprocess_profile.tcl] } {
+###   if { [catch {source -notrace preprocess_profile.tcl} msg] } {
+###     puts $msg 
+###   }
+### }
+### if { [info exists ::env(XILINX_SC_HW_EMU)] } {
+###   source $::env(XILINX_VITIS)/system_compiler/examples/sc_hw_emu_pre_xsim.tcl
+### }
+## puts "We are running simulator for infinite time. Added some default signals in the waveform. You can pause simulation and add signals and then resume the simulaion again."
+We are running simulator for infinite time. Added some default signals in the waveform. You can pause simulation and add signals and then resume the simulaion again.
+## puts ""
+
+## puts "Stopping at breakpoint in simulator also stops the host code execution"
+Stopping at breakpoint in simulator also stops the host code execution
+## puts ""
+
+## if { [info exists ::env(VITIS_LAUNCH_WAVEFORM_GUI) ] } {
+##   run 1ns
+## } else {
+##   run all
+## }
+[INFO]: Enabled Stream Switch Port Latency 
+0 s: Close summary file.
+connect to ./qemu-rport-_pl@0
+Unexpected error in sd_realize() at /usr/src/debug/nativesdk-qemu-xilinx/v8.1.0-xilinx-v2024.1+gitAUTOINC+2319c870e7-r0/hw/sd/sd.c:2401:
+qemu-system-aarch64: Invalid SD card size: 6 GiB
+SD card size has to be a power of 2, e.g. 8 GiB.
+You can resize disk images with 'qemu-img resize <imagefile> <new-size>'
+(note that this will lose data if you make the image smaller than it currently is).
+qemu-system-microblazeel: /ps_pmc_rp@0: Disconnected clk=0 ns
+
+rp_read: Connection reset by peer
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+Exiting QEMU!!
+1396800 ps .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.ai_engine_0.inst.aie_logical.aie_xtlm.math_engine: end of simulation invoked!
+
+Info: SystemC end_of_simulation Dump: 
+--------------------------------------------------------------------------------------------------
+Port Name           | Type              | Average Throughput
+--------------------------------------------------------------------------------------------------
+S00_AXIS            | IN                | 0.000000 MBps     
+M00_AXIS            | OUT               | 0.000000 MBps     
+--------------------------------------------------------------------------------------------------
+
+JSON file generated successfully!
+INFO::[ DDRC-TXNQ-TRACE ] DDRMC_X0Y0/controller_ch0/transactionQueue qe = 0.000000, overhd = 0.000000
+INFO::[ DDRC-TXNQ-TRACE ] DDRMC_X0Y0/controller_ch1/transactionQueue qe = 0.000000, overhd = 0.000000
+INFO::[ DDRC-TXNQ-TRACE ] DDRMC_X2Y0/controller_ch0/transactionQueue qe = 0.000000, overhd = 0.000000
+INFO::[ DDRC-TXNQ-TRACE ] DDRMC_X2Y0/controller_ch1/transactionQueue qe = 0.000000, overhd = 0.000000
+INFO::[ DDRC-TXNQ-TRACE ] DDRMC_X1Y0/controller_ch0/transactionQueue qe = 0.000000, overhd = 0.000000
+INFO::[ DDRC-TXNQ-TRACE ] DDRMC_X1Y0/controller_ch1/transactionQueue qe = 0.000000, overhd = 0.000000
+
+$stop called at time : 1396800 ps
+## if { [file exists post_sim_tool_scripts.tcl] } {
+##   source post_sim_tool_scripts.tcl
+## }
+### if { [file exists profile.tcl] } {
+###   if { [catch {source -notrace profile.tcl } msg] } {
+###     puts $msg
+###   }
+### }
+Waiting for protocol analyzers to complete...
+Done!
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.dataflowTxWaveData.OutStanding
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_0
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_1
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_2
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_3
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_4
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_5
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_6
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_7
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_8
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_9
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_10
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_11
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_12
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_13
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_14
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_15
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_16
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_17
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_18
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_19
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_20
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_21
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_22
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_23
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_24
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_25
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_26
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_27
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_28
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_29
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_30
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_31
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_32
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_33
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_34
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_35
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_36
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_37
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_38
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_39
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_40
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_41
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_42
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_43
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_44
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_45
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_46
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_47
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_48
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_49
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_50
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_51
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_52
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_53
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_54
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_55
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_56
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_57
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_58
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_59
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_60
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_61
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_62
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127.iterationsWave_63
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.dataflowTxWaveData.OutStanding
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_0
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_1
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_2
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_3
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_4
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_5
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_6
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_7
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_8
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_9
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_10
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_11
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_12
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_13
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_14
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_15
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_16
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_17
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_18
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_19
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_20
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_21
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_22
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_23
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_24
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_25
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_26
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_27
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_28
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_29
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_30
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_31
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_32
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_33
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_34
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_35
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_36
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_37
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_38
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_39
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_40
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_41
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_42
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_43
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_44
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_45
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_46
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_47
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_48
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_49
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_50
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_51
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_52
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_53
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_54
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_55
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_56
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_57
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_58
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_59
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_60
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_61
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_62
+Unable to find signal: /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst//grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142.iterationsWave_63
+### if { [info exists ::env(XILINX_SC_HW_EMU)] } {
+###   source $::env(XILINX_VITIS)/system_compiler/examples/sc_hw_emu_post_xsim.tcl
+### }
+## if { [info exists ::env(VITIS_LAUNCH_WAVEFORM_BATCH) ] } {
+##   if { [info exists ::env(USER_POST_SIM_SCRIPT) ] } {
+##     if { [catch {source $::env(USER_POST_SIM_SCRIPT)} msg] } {
+##       puts $msg
+##     }
+##   }
+##   quit
+## }
+INFO: xsimkernel Simulation Memory Usage: 106606872 KB (Peak: 106641056 KB), Simulation CPU Usage: 28850 ms
+INFO: [Common 17-206] Exiting xsim at Thu May 28 22:29:30 2026...
+\[LAUNCH_EMULATOR\] INFO: 22:29:32 : PS-QEMU exited
+\[LAUNCH_EMULATOR\] INFO: 22:29:34 : PS-QEMU exited
+\[LAUNCH_EMULATOR\] INFO: 22:29:34 : Trying to kill PMU/PMC-QEMU
+\[LAUNCH_EMULATOR\] INFO: 22:29:34 : PMU/PMC-QEMU exited
+\[LAUNCH_EMULATOR\] INFO: 22:29:34 : Simulation exited
+QEMU process run time:
+real 43.79
+user 1.24
+sys 0.34
+
+PMC process run time:
+real 40.80
+user 0.15
+sys 0.09
+
+XSIM process with nohup run time:
+real 38.29
+user 12.23
+sys 21.52
+
+copying qemu output file from /tools/projects/FPGA-VLA/runs/T0043/package_v5 to /tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim/../../../
+copying xsc files from /tools/projects/FPGA-VLA/runs/T0043/package_v5 to /tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim/../../../
+copying simulate files from /tools/projects/FPGA-VLA/runs/T0043/package_v5 to /tools/projects/FPGA-VLA/runs/T0043/package_v5/sim/behav_waveform/xsim/../../../
+INFO: Exiting launch_hw_emu.sh
