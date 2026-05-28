@@ -1,0 +1,35 @@
+{
+  "task_id": "T0043_v3",
+  "status": "FAIL",
+  "supersedes": "T0043",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-28T19:15:00Z",
+  "summary": "Option C dead end. The Vitis base_platform xilinx_vck190_base_202410_1 does NOT ship a prebuilt Linux Image / rootfs.cpio.gz. Its sw/.../xrt/image/ directory contains only boot.scr (a u-boot script that loads image.ub from external storage) but NO kernel/rootfs. v++ -p with only --package.sd_file=host.elf (no kernel_image/rootfs override) ran sysroot+qemu_addressing+ext4 image stages, then FAILED with FileNotFoundError on sd_card.img during sd_card_resize.py step — because there's no kernel/rootfs source to populate the EXT4 partition. The platform expects the user to bring their own PetaLinux Image + rootfs, exactly the path T0043 retry2 already pursued.",
+  "blocker": "find /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1 -name 'Image' -o -name 'rootfs.cpio.gz' -o -name 'image.ub'  returns NOTHING. Only boot.scr exists. The platform is a BARE platform — Linux image is the user's responsibility.",
+  "v3_artifacts_partial": {
+    "vpp_package_v3.log": "coord/reports/T0043/vpp_package_v3.log — shows v++ -p reached EXT4 sd_card image creation step then FileNotFoundError on sd_card.img during resize",
+    "package_v3/sd_card/": "directory has only BOOT.BIN + boot.scr + host.elf + a.xclbin (no Image, no rootfs)",
+    "package_v3/launch_hw_emu.sh": "references sd_card.img which was never created"
+  },
+  "what_remains_blocked_chain": [
+    "(1) Xvfb missing -> FIXED",
+    "(2) v++ -p package -> WORKS but only when kernel_image+rootfs are provided",
+    "(3) Custom PetaLinux build -> PASS",
+    "(4) host.elf cross-compile -> PASS",
+    "(5) v++ -p package_v2 with custom rootfs -> PASS",
+    "(6) qemu boot -> PASS through u-boot + kernel",
+    "(7) **BLOCKED:** Linux kernel rootfs mount (mmcblk0p2)",
+    "(8) Option C (use platform prebuilt) -> **FAIL: platform has no prebuilt Image to use**"
+  ],
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "Option C is not viable: Vitis base_platform does not include a prebuilt Linux image",
+    "Custom PetaLinux + Option A (modify boot.scr to root=/dev/mmcblk1p2) is the only remaining auto-path",
+    "Or Option D: DEFER measurement to camera-ready / on-board"
+  ],
+  "remaining_options_for_orch": [
+    "(A) Option A revisit: edit the custom PetaLinux boot.scr / kernel cmdline to use /dev/mmcblk1p2 (or another correct partition). Requires petalinux-config kernel boot args + petalinux-build re-run (~30min) then re-package + re-emu. Estimated 1-2h.",
+    "(B) Statically link host.elf with libxrt/libadf — eliminate dependency on libxrt at runtime — combined with using rootfs.cpio.gz as initramfs (no sd_card mount needed). Requires extra v++ -p flag --package.kernel_command (or similar) to set initramfs path. Estimated 1-2h experimental.",
+    "(D) DEFER: keep T0042 analytic 160 us with [AIE-SCHED-EST] label as paper-ready number; T0043 measured pursuit awaits on-board VCK190 (camera-ready) or PetaLinux boot-arg expert fix."
+  ]
+}
