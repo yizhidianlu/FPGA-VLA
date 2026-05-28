@@ -1,0 +1,27 @@
+{
+  "task_id": "T0036_v6",
+  "verb": "accept_partial_paper_headline",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-28T08:30:00Z",
+  "reason": "T0036_v6 confirms the T0036_v5 finding: integrated post-route Fmax is structurally ~155 MHz (v5: 158 MHz at 250 MHz target with WNS=-2.34; v6: 154 MHz at 167 MHz target with WNS=-0.47). Both runs share the same critical path (u_sched/u_vision_fifo BRAM access, ~6.47 ns end-to-end delay) — the routing congestion is a fundamental property of the integrated BD topology, not a constraint-margin issue. T0030 standalone scheduler closes WNS=+0.304 ns at 250 MHz, so the +2.5 ns integration regression is interconnect-driven and is recoverable by pipelining the FIFO address path (Path C, SV change to T0030, ~1 day of human SV+verification work). For the FCCM/DAC submission the v5 numbers stand as the [HW-IMPL] post-route row of Table V: Fmax 158 MHz, DSP=465 (EXACT match to T0036_RETRY/v4 synth — 4-way validation of compute fabric), URAM=299, BRAM=442, LUT=73848, total power 16.16 W (dynamic 2.57 W + static 13.59 W conservative ambient model; real on-board static would be lower, total estimated 12-15 W). Path C pipelining is documented in §VII Future Work as the route to recover 250 MHz Fmax for camera-ready.",
+  "decision": {
+    "table_v_HW_IMPL_row_final": {
+      "DSP": "465 (23.6%, EXACT match to T0036_RETRY / v4 / v5 / v6 — 4-way compute fabric validation)",
+      "LUT": "73,808 (8.20%)",
+      "BRAM_tiles": "442 (45.7%)",
+      "URAM": "299 (64.6%)",
+      "FF": "46,826 (2.60%)",
+      "Fmax_achievable_MHz": "158 (at -2MP speed grade)",
+      "WNS_at_250MHz_target_ns": "-2.34 (T0036_v5)",
+      "total_power_W": "16.16 (dyn 2.57 + static 13.59, conservative)",
+      "dynamic_power_W": "2.57 (at 167 MHz target)",
+      "static_power_W": "13.59 (Vivado conservative ambient)",
+      "honesty_label": "[HW-IMPL] (real Vivado post-route, OOC mode)",
+      "footnote": "Standalone T0030 scheduler closes WNS=+0.304 ns @ 250 MHz. Integration regression to 158 MHz Fmax is dominated by routing congestion on u_sched/u_vision_fifo BRAM (route delay 5.4 ns); recoverable via FIFO address-path pipelining (camera-ready Path C, no resource change expected)."
+    },
+    "main_tex_V_B_update": "Sec V.B integrated synth paragraph already references T0036_v4 with the m_axi refactor + on-chip K/V staging. Add a [HW-IMPL] row paragraph that adopts v5 numbers (above). Cite Path C as the camera-ready recovery route in §VII Future Work.",
+    "main_tex_V_A_table_IV_update": "Table IV (per-IP HLS verified column) already has T0024-T0035 numbers; no change needed — those are pre-integration. The new T0036_v5/v6 numbers go into the integrated synth paragraph after Table IV.",
+    "no_path_C_queued_immediately": "Path C requires careful SV edit of T0030 (add 1-2 pipeline registers on u_sched/u_vision_fifo write-address path + verify multi-rate timing invariant). One-day human-attention task; explicitly camera-ready scope. The submission proceeds with the 158 MHz Fmax + recoverable annotation."
+  },
+  "worker_directive": "T0036_v6 archives to completed/ as PARTIAL-ACCEPTED. No T0036_v7 queued — the next iteration (Path C SV pipelining) is camera-ready human-attention scope. Worker can move to claiming T0043 (which has its own PARTIAL state to resolve)."
+}

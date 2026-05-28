@@ -1,0 +1,27 @@
+{
+  "task_id": "T0043",
+  "verb": "accept_partial_pending_user_manual_install",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-28T08:35:00Z",
+  "reason": "T0043 retried after Xvfb install: v++ -p PASS (2m22s producing BOOT.BIN + qemu QSPI images), qemu boots reaching u-boot prompt cleanly. The remaining blockers are platform-software dependencies (PetaLinux Image/rootfs + XRT SDK) that ali-aie cannot install autonomously. User explicitly chose Option A: install PetaLinux + XRT manually on the ECS host, then signal the worker to resume. Until that signal arrives, T0043 sits in a 'waiting on user manual install' state with all pre-userspace artefacts cached (BOOT.BIN, qemu logs, AIE Work_aie/libadf.a, link.cfg, pl_stub.cpp, host.cpp skeleton). T0042 schedule-derived 160 us remains the published AIE latency in the meantime.",
+  "decision": {
+    "user_manual_steps_pending": [
+      "1. Install PetaLinux 2024.1 on the ECS (matches Vitis 2024.1 version)",
+      "2. Build VCK190 base BSP with XRT + AIE drivers enabled",
+      "3. Build Image.ub (PetaLinux FIT) and rootfs with libxrt + AIE userspace driver",
+      "4. Either (a) place Image.ub + rootfs on the QSPI image at known offset for u-boot bootcmd, OR (b) update the xpfm sw/ directory and re-run v++ -p; OR (c) use SD-card boot mode",
+      "5. Notify ali-aie via Claude session prompt: 'PetaLinux + XRT installed at <path>; rebuild host.elf, repackage, run hw_emu'"
+    ],
+    "headline_for_paper_V_F_meanwhile": "T0042 schedule-derived 160 us (52-210 us II=1 to II=4) at 1.25 GHz AIE clock remains the published AIE latency. The dagger footnote citing hw_emu deferral + chess-backend HW compile PASS + x86sim bit-exact regression already present in caption. When T0043_v2 produces a measured aie_latency_us (post-user-install), the orch will replace 160 us in aie_vs_pl_table.tex with the measured value and drop the dagger.",
+    "honesty_label_for_now": "[AIE-SCHED-EST] for the AIE row. Will upgrade to [AIE-HW-EMU] once T0043_v2 measured value is available.",
+    "T0043_artefacts_preserved_in_repo": [
+      "coord/reports/T0043/aiecompiler_hw.log (PASS)",
+      "coord/reports/T0043/pl_stub.cpp (AXIS-stream, v++ -c PASS at 342 MHz)",
+      "coord/reports/T0043/link.cfg (sptag DDR + sc AXIS connections)",
+      "coord/reports/T0043/host.cpp (sw_app skeleton — needs XRT to compile)",
+      "coord/reports/T0043/vpp_compile.log + vpp_link.log + vpp_package.log (all PASS)",
+      "coord/reports/T0043/hw_emu.log (qemu PASS to u-boot, no userspace beyond)"
+    ]
+  },
+  "worker_directive": "T0043 yaml STAYS in claimed/ (do NOT move to _failed/) — it is in a 'pending user manual install' state, not failed. When user signals 'PetaLinux + XRT installed', worker rebuilds host.elf (g++ with XRT include + lib paths now satisfied), repackages with v++ -p (boot.scr will load the Image.ub from the new location), reruns launch_hw_emu.sh, parses measured aie_latency_us from stdout, writes coord/reports/T0043/result.json with the final measured value, pushes inbox DONE. Estimated worker time after user install: 1-2h (rebuild + repackage + qemu boot + AIE sim run + parse)."
+}
