@@ -1,0 +1,769 @@
+NOC MEM CONFIG: /tools/projects/FPGA-VLA/runs/T0043/package_v4/sim/behav_waveform/xsim/noc_memory_config.txt
+
+
+
+
+INFO: Using QEMU from : /tools/Xilinx/Vitis/2024.1/data/emulation/qemu/comp/qemu/sysroots/x86_64-petalinux-linux/usr/bin/qemu-system-aarch64
+Directory '/tools/projects/FPGA-VLA/runs/T0043/package_v4/emu_qemu_scripts' created
+Using QEMU dtb from /tools/projects/FPGA-VLA/runs/T0043/package_v4/sim/behav_waveform/xsim/board-versal-ps-cosim-vitis-vck190.dtb
+
+PS COSIM_MACHINE_PATH unix:./qemu-rport-_pl@0
+INFO: Using PMC/PU from : /tools/Xilinx/Vitis/2024.1/data/emulation/qemu/comp/qemu/sysroots/x86_64-petalinux-linux/usr/bin/qemu-system-microblazeel
+
+Starting QEMU
+ - Press <Ctrl-a h> for help 
+Launching QEMU using command "/usr/bin/time -p -o qemu_time.txt /tools/Xilinx/Vitis/2024.1/data/emulation/qemu/comp/qemu/sysroots/x86_64-petalinux-linux/usr/bin/qemu-system-aarch64 -M "arm-generic-fdt"  -display "none"  -chardev "stdio,id=serial2,logfile=qemu_output.log,mux=on,signal=off"  -mon "serial2"  -sync-quantum ""1000000000""  -boot "mode=5"  -hw-dtb /tools/projects/FPGA-VLA/runs/T0043/package_v4/sim/behav_waveform/xsim/board-versal-ps-cosim-vitis-vck190.dtb  -drive "file=/tools/projects/FPGA-VLA/runs/T0043/package_v4/sd_card.img,format=raw,if=sd,index=1"  -no-reboot -display "none"  -machine-path "."  -chardev "socket,path=./qemu-rport-_pmc@0,server=on,id=ps-pmc-rp"  -chardev "socket,path=./qemu-rport-_pl@0,server=on,id=pl-rp""
+Waiting for QEMU to start. 
+QEMU started. qemu_pid=2809180
+Waiting for PMU to start. 
+PMC started. pmc_pid=2809184
+Path of the simulation directory :  /tools/projects/FPGA-VLA/runs/T0043/package_v4/sim/behav_waveform/xsim
+Simulator started. simulator_pid 2809191
+
+xsim vitis_design_wrapper_sim_wrapper_behav -key {Behavioral:sim_1:Functional:vitis_design_wrapper_sim_wrapper} -tclbatch vitis_design_wrapper_sim_wrapper.tcl -protoinst protoinst_files/bd_57a1.protoinst -protoinst protoinst_files/bd_27ec.protoinst -protoinst protoinst_files/bd_90d1.protoinst -protoinst protoinst_files/bd_28ba.protoinst -protoinst protoinst_files/bd_05a5.protoinst -protoinst protoinst_files/bd_931e.protoinst -protoinst protoinst_files/bd_93ee.protoinst -protoinst protoinst_files/bd_53bf.protoinst -protoinst protoinst_files/bd_920e.protoinst -protoinst protoinst_files/bd_525f.protoinst -protoinst protoinst_files/vitis_design.protoinst -protoinst protoinst_files/xlnoc.protoinst -log simulate.log -R --protoinst /tools/projects/FPGA-VLA/runs/T0043/package_v4/sim/behav_waveform/xsim/dr_behav.protoinst
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Thu May 28 20:09:35 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/vitis_design_wrapper_sim_wrapper_behav/xsim_script.tcl
+# xsim {vitis_design_wrapper_sim_wrapper_behav} -autoloadwcfg -tclbatch {vitis_design_wrapper_sim_wrapper.tcl} -runall -key {Behavioral:sim_1:Functional:vitis_design_wrapper_sim_wrapper} -protoinst {protoinst_files/bd_57a1.protoinst} -protoinst {protoinst_files/bd_27ec.protoinst} -protoinst {protoinst_files/bd_90d1.protoinst} -protoinst {protoinst_files/bd_28ba.protoinst} -protoinst {protoinst_files/bd_05a5.protoinst} -protoinst {protoinst_files/bd_931e.protoinst} -protoinst {protoinst_files/bd_93ee.protoinst} -protoinst {protoinst_files/bd_53bf.protoinst} -protoinst {protoinst_files/bd_920e.protoinst} -protoinst {protoinst_files/bd_525f.protoinst} -protoinst {protoinst_files/vitis_design.protoinst} -protoinst {protoinst_files/xlnoc.protoinst} -protoinst {/tools/projects/FPGA-VLA/runs/T0043/package_v4/sim/behav_waveform/xsim/dr_behav.protoinst}
+[AIESIM_OPTIONS]: aiesim_options file path ./aiesim_options.txt
+[AIESIM_OPTIONS]: No aiesim_options provided 
+[INFO]: Disable Unused Tiles
+[INFO]: Xpe File: /tools/projects/FPGA-VLA/runs/T0043/package_v4/cfg/./aie.xpe
+INFO  : Running AIE MTMODEL Simulation with 1 threads
+ISS disables unused tiles
+Optimized ISS Wrapper (R+W), r2p25
+
+Info: DEVICE FILE: /tools/Xilinx/Vitis/2024.1/aietools/data/devices/VC1902.json
+
+Info: AIE SOLUTION FILE: /tools/projects/FPGA-VLA/runs/T0043/package_v4/cfg/./aie.shim.solution.aiesol
+qemu-system-aarch64: -chardev socket,path=./qemu-rport-_pmc@0,server=on,id=ps-pmc-rp: info: QEMU waiting for connection on: disconnected:unix:./qemu-rport-_pmc@0,server=on
+qemu-system-aarch64: -chardev socket,path=./qemu-rport-_pl@0,server=on,id=pl-rp: info: QEMU waiting for connection on: disconnected:unix:./qemu-rport-_pl@0,server=on
+INFO  : ROWS: 8 COLS: 50
+Running Dispatch Server on port: 35899
+[SUMMARY_FILE]: Warning AIE_PKG_DIR option missing in -aie-sim-options file
+Summary File: Warning - Can't find aie compiler summary file!
+[INFO]: Disabled Simulator Hang Detect 
+Current Directory=/tools/projects/FPGA-VLA/runs/T0043/package_v4/sim/behav_waveform/xsim
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_0
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_0
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_1
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_1
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_2
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_2
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_3
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_3
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_4
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_4
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_5
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_5
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_6
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_6
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.rd_socket_7
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.cips_noc.inst.wr_socket_7
+In file: sc_object_manager.cpp:161
+--------------------------------------------------------------------------------------------------
+SLAVE STREAM INFO:  | Port Name         | Port Width        | Stream Type       | Channel Index     
+                    | S00_AXIS          | 128               | PL STREAM         | 192, 193          
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+MASTER STREAM INFO: | Port Name         | Port Width        | Stream Type       | Channel Index     
+                    | M00_AXIS          | 128               | PL STREAM         | 156, 157          
+--------------------------------------------------------------------------------------------------
+WARNING::[ XTLM::751 ] Deprecated.! Please instantiate Memory Manager with this pointer (sc_module pointer).
+WARNING::[ XTLM::751 ] Deprecated.! Please instantiate Memory Manager with this pointer (sc_module pointer).
+WARNING::[ XTLM::751 ] Deprecated.! Please instantiate Memory Manager with this pointer (sc_module pointer).
+WARNING::[ XTLM::751 ] Deprecated.! Please instantiate Memory Manager with this pointer (sc_module pointer).
+WARNING::[ XTLM::751 ] Deprecated.! Please instantiate Memory Manager with this pointer (sc_module pointer).
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.rd_socket_0
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.wr_socket_0
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.rd_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.rd_socket_1
+In file: sc_object_manager.cpp:161
+
+Warning: (W505) object already exists: .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.wr_socket. Latter declaration will be renamed to .vitis_design_wrapper_sim_wrapper.vitis_design_wrapper_i.vitis_design_i.noc_ddr4.inst.wr_socket_1
+In file: sc_object_manager.cpp:161
+*****************running enhanced NoC-V1 SystemC model*************
+
+Info: (I804) /IEEE_Std_1666/deprecated: sc_object::get_parent() is deprecated, use get_parent_object() instead
+
+Info: (I804) /IEEE_Std_1666/deprecated: sc_sensitive_pos is deprecated use sc_sensitive << with pos() instead
+TraceManager type=nothing
+TraceManager type=nothing
+TraceManager type=nothing
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_57a1.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_57a1.protoinst for the following reason(s):
+There are no instances of module "bd_57a1" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_27ec.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_27ec.protoinst for the following reason(s):
+There are no instances of module "bd_27ec" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_90d1.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_90d1.protoinst for the following reason(s):
+There are no instances of module "bd_90d1" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_28ba.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_28ba.protoinst for the following reason(s):
+There are no instances of module "bd_28ba" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_05a5.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_05a5.protoinst for the following reason(s):
+There are no instances of module "bd_05a5" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_931e.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_931e.protoinst for the following reason(s):
+There are no instances of module "bd_931e" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_93ee.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_93ee.protoinst for the following reason(s):
+There are no instances of module "bd_93ee" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_53bf.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_53bf.protoinst for the following reason(s):
+There are no instances of module "bd_53bf" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_920e.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_920e.protoinst for the following reason(s):
+There are no instances of module "bd_920e" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/bd_525f.protoinst
+WARNING: [Wavedata 42-558] Couldn't load one or more protocol instances from protoinst file protoinst_files/bd_525f.protoinst for the following reason(s):
+There are no instances of module "bd_525f" in the design.
+
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/vitis_design.protoinst
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_AXI_NOC_0
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_AXI_NOC_1
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_CCI_NOC_0
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_CCI_NOC_1
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_CCI_NOC_2
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/FPD_CCI_NOC_3
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/LPD_AXI_NOC_0
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/M_AXI_FPD
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//CIPS_0/PMC_NOC_AXI_0
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/M00_AXI_bypass_m
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/M00_AXI_bypass_s
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/m_axi_gmem_o
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/m_axi_gmem_q
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/pl_stub_1/m_axi_gmem_o
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/pl_stub_1/m_axi_gmem_q
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/pl_stub_1/s_axi_control
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/pl_stub_1/s_out_from_aie
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/pl_stub_1/s_q_to_aie
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/s_axi_control
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/s_out_from_aie
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//VitisRegion/s_q_to_aie
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//ai_engine_0/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//ai_engine_0/M00_AXIS
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//ai_engine_0/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//ai_engine_0/S00_AXIS
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//axi_intc_cascaded_1/s_axi
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//axi_intc_parent/s_axi
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S01_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S02_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S03_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S04_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S05_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S06_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//cips_noc/S07_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//dummy_slave_0/S_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//dummy_slave_1/S_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//dummy_slave_2/S_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//dummy_slave_3/S_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M01_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M02_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M03_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M04_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M05_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/M06_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_1/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_2/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_2/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_3/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_3/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_4/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_4/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_5/M00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//icn_ctrl_5/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//noc_ddr4/S00_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//noc_ddr4/S01_AXI
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i//noc_ddr4/S02_AXI
+INFO: [Wavedata 42-565] Reading protoinst file protoinst_files/xlnoc.protoinst
+INFO: [Wavedata 42-565] Reading protoinst file /tools/projects/FPGA-VLA/runs/T0043/package_v4/sim/behav_waveform/xsim/dr_behav.protoinst
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst/grp_pl_stub_Pipeline_PUSH_Q_fu_127/grp_pl_stub_Pipeline_PUSH_Q_fu_127
+INFO: [Wavedata 42-564]   Found protocol instance at /vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i/VitisRegion/pl_stub_1/inst/grp_pl_stub_Pipeline_PULL_OUT_fu_142/grp_pl_stub_Pipeline_PULL_OUT_fu_142
+Time resolution is 1 ps
+WARNING: [Simtcl 6-25] Warning: Both '-runall' and '-tclbatch' were specified. The '-runall' was ignored
+source vitis_design_wrapper_sim_wrapper.tcl
+## if { [file exists vitis_params.tcl] } {
+##   source vitis_params.tcl
+## }
+### set VITIS_DYNAMIC_REGION_HW_EMU_PATH vitis_design_wrapper_sim_wrapper/vitis_design_wrapper_i/vitis_design_i
+## if { [info exists ::env(USER_PRE_SIM_SCRIPT)] } {
+##   if { [catch {source $::env(USER_PRE_SIM_SCRIPT)} msg] } {
+##     puts $msg
+##   }
+## }
+## if { [file exists pre_sim_tool_scripts.tcl] } {
+##   source pre_sim_tool_scripts.tcl
+## }
+### if { [file exists preprocess_profile.tcl] } {
+###   if { [catch {source -notrace preprocess_profile.tcl} msg] } {
+###     puts $msg 
+###   }
+### }
+### if { [info exists ::env(XILINX_SC_HW_EMU)] } {
+###   source $::env(XILINX_VITIS)/system_compiler/examples/sc_hw_emu_pre_xsim.tcl
+### }
+## puts "We are running simulator for infinite time. Added some default signals in the waveform. You can pause simulation and add signals and then resume the simulaion again."
+We are running simulator for infinite time. Added some default signals in the waveform. You can pause simulation and add signals and then resume the simulaion again.
+## puts ""
+
+## puts "Stopping at breakpoint in simulator also stops the host code execution"
+Stopping at breakpoint in simulator also stops the host code execution
+## puts ""
+
+## if { [info exists ::env(VITIS_LAUNCH_WAVEFORM_GUI) ] } {
+##   run 1ns
+## } else {
+##   run all
+## }
+[INFO]: Enabled Stream Switch Port Latency 
+0 s: Close summary file.
+connect to ./qemu-rport-_pl@0
+[13422.401]****************************************
+[13422.651]Xilinx Versal Platform Loader and Manager 
+[13422.675]Release 2024.1   May 28 2026  -  06:04:07
+[13422.743]Platform Version: v0.0 PMC: v0.0, PS: v0.0
+[13422.777]BOOTMODE: 0x5, MULTIBOOT: 0xF0000000
+[13422.802]****************************************
+[13429.919]Non Secure Boot
+[13445.405]PLM Initialization Time 
+[13445.484]***********Boot PDI Load: Started***********
+[13445.608]Loading PDI from SD1
+[13445.643]Monolithic/Master Device
+[15550.638]2105.082 ms: PDI initialization time
+[15550.722]+++Loading Image#: 0x1, Name: lpd, Id: 0x04210002
+[15550.768]---Loading Partition#: 0x1, Id: 0xC
+[15615.658] 64.835 ms for Partition#: 0x1, Size: 10000 Bytes
+[15617.068]---Loading Partition#: 0x2, Id: 0xB
+[15660.477] 42.259 ms for Partition#: 0x2, Size: 63984 Bytes
+[15692.551]+++Loading Image#: 0x2, Name: fpd, Id: 0x0420C003
+[15693.975]---Loading Partition#: 0x3, Id: 0x8
+[15743.692] 48.593 ms for Partition#: 0x3, Size: 4560 Bytes
+[15836.390]+++Loading Image#: 0x3, Name: aie_image, Id: 0x1C000000
+[15837.972]---Loading Partition#: 0x4, Id: 0x0
+
+Info: (I804) /IEEE_Std_1666/deprecated: the notify() function is deprecated use sc_event::notify()
+[INFO]: Enabled Stream Switch Port Latency 
+[16220.810] 381.772 ms for Partition#: 0x4, Size: 78944 Bytes
+[16222.425]+++Loading Image#: 0x4, Name: default_subsys, Id: 0x1C000000
+[16224.248]---Loading Partition#: 0x5, Id: 0x0
+[16240.971] 15.580 ms for Partition#: 0x5, Size: 24240 Bytes
+[16242.649]---Loading Partition#: 0x6, Id: 0x0
+[16287.744] 43.953 ms for Partition#: 0x6, Size: 67632 Bytes
+[16289.308]---Loading Partition#: 0x7, Id: 0x0
+[17042.606] 752.147 ms for Partition#: 0x7, Size: 1193376 Bytes
+INFO:    BL31: Early console setup
+NOTICE:  TF-A running on Versal Silicon
+INFO:    Indicates counter frequency 0Hz setting to 100000000Hz
+[17053.709]***********Boot PDI Load: Done***********
+[17055.038]3319137304.575 ms: ROM Time
+[17055.991]Total PLM Boot Time 
+INFO:    BL31: GET_HANDOFF_PARAMS call success=0
+INFO:    BL31: PLM to TF-A handover success 0
+NOTICE:  BL31: Secure code at 0x0
+NOTICE:  BL31: Non secure code at 0x8000000
+NOTICE:  BL31: v2.10.0	(debug):v1.1-13187-g4f82b6134
+NOTICE:  BL31: Built : 04:45:53, Mar 12 2024
+INFO:    GICv3 without legacy support detected.
+INFO:    ARM GICv3 driver initialized in EL3
+INFO:    Maximum SPI INTID supported: 223
+INFO:    BL31: Initializing runtime services
+INFO:    Indicates counter frequency 0Hz setting to 100000000Hz
+INFO:    BL31: cortex_a72: CPU workaround for erratum 859971 was applied
+INFO:    BL31: cortex_a72: CPU workaround for erratum 1319367 was applied
+INFO:    BL31: cortex_a72: CPU workaround for CVE 2018_3639 was applied
+INFO:    BL31: cortex_a72: CPU workaround for CVE 2022_23960 was applied
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address = 0x8000000
+INFO:    SPSR = 0x3c9
+
+
+U-Boot 2024.01 (May 14 2024 - 03:31:48 +0000)
+
+CPU:   Versal
+Silicon: v0
+Chip:  v0
+Model: Xilinx Versal vck190 Eval board revA (QSPI)
+DRAM:  2 GiB (effective 16 GiB)
+EL Level:	EL2
+Core:  39 devices, 21 uclasses, devicetree: board
+MMC:   mmc@f1050000: 0
+Loading Environment from FAT... *** Error - No Valid Environment Area found
+*** Warning - bad env area, using default environment
+
+In:    serial@ff000000
+Out:   serial@ff000000
+Err:   serial@ff000000
+Bootmode: SD_MODE1
+Net:   
+ZYNQ GEM: ff0c0000, mdio bus ff0c0000, phyaddr 1, interface rgmii-id
+
+Warning: ethernet@ff0c0000 (eth0) using random MAC address - 16:cd:25:35:cd:74
+eth0: ethernet@ff0c0000Get shared mii bus on ethernet@ff0d0000
+
+ZYNQ GEM: ff0d0000, mdio bus ff0c0000, phyaddr 2, interface rgmii-id
+
+Warning: ethernet@ff0d0000 (eth1) using random MAC address - 76:3c:73:b0:b4:ed
+, eth1: ethernet@ff0d0000
+Hit any key to stop autoboot:  5  4  3  2  1  0 
+switch to partitions #0, OK
+mmc0 is current device
+Scanning mmc 0:1...
+Found U-Boot script /boot.scr
+3472 bytes read in 19 ms (177.7 KiB/s)
+## Executing script at 20000000
+Trying to load boot images from mmc0
+23865856 bytes read in 5721 ms (4 MiB/s)
+## Flattened Device Tree blob at 00001000
+   Booting using the fdt blob at 0x001000
+Working FDT set to 1000
+   Loading Device Tree to 0000000079e97000, end 0000000079e9feae ... OK
+Working FDT set to 79e97000
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd083]
+[    0.000000] Linux version 6.6.10-xilinx-v2024.1-g3af4295e00ef (oe-user@oe-host) (aarch64-xilinx-linux-gcc (GCC) 12.2.0, GNU ld (GNU Binutils) 2.39.0.20220819) #1 SMP Sat Apr 27 05:22:24 UTC 2024
+[    0.000000] KASLR disabled due to lack of seed
+[    0.000000] Machine model: Xilinx Versal vck190 Eval board revA (QSPI)
+[    0.000000] earlycon: pl11 at MMIO32 0x00000000ff000000 (options '115200n8')
+[    0.000000] printk: bootconsole [pl11] enabled
+[    0.000000] efi: UEFI not found.
+[    0.000000] OF: reserved mem: 0x0000000800000000..0x000000097fffffff (6291456 KiB) nomap non-reusable buffer@0
+[    0.000000] OF: reserved mem: 0x0000050000000000..0x00000501ffffffff (8388608 KiB) nomap non-reusable buffer@1
+[    0.000000] Zone ranges:
+[    0.000000]   DMA32    [mem 0x0000000000000000-0x00000000ffffffff]
+[    0.000000]   Normal   [mem 0x0000000100000000-0x00000501ffffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x000000007fffffff]
+[    0.000000]   node   0: [mem 0x0000000800000000-0x000000097fffffff]
+[    0.000000]   node   0: [mem 0x0000050000000000-0x00000501ffffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x00000501ffffffff]
+[    0.000000] cma: Reserved 512 MiB at 0x0000000049e00000 on node -1
+[    0.000000] psci: probing for conduit method from DT.
+[    0.000000] psci: PSCIv1.1 detected in firmware.
+[    0.000000] psci: Using standard PSCI v0.2 function IDs
+[    0.000000] psci: MIGRATE_INFO_TYPE not supported.
+[    0.000000] psci: SMC Calling Convention v1.4
+[    0.000000] percpu: Embedded 19 pages/cpu s37864 r8192 d31768 u77824
+[    0.000000] Detected PIPT I-cache on CPU0
+[    0.000000] CPU features: detected: GIC system register CPU interface
+[    0.000000] CPU features: detected: Spectre-v3a
+[    0.000000] CPU features: detected: Spectre-BHB
+[    0.000000] CPU features: detected: ARM erratum 1742098
+[    0.000000] CPU features: detected: ARM errata 1165522, 1319367, or 1530923
+[    0.000000] alternatives: applying boot alternatives
+[    0.000000] Kernel command line: console=ttyAMA0  earlycon=pl011,mmio32,0xFF000000,115200n8 clk_ignore_unused root=/dev/mmcblk0p2 rw rootwait cma=512M
+[    0.000000] Dentry cache hash table entries: 2097152 (order: 12, 16777216 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 1048576 (order: 11, 8388608 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 4128768
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] software IO TLB: area num 2.
+[    0.000000] software IO TLB: mapped [mem 0x000000007a39b000-0x000000007e39b000] (64MB)
+[    0.000000] Memory: 1191600K/16777216K available (15040K kernel code, 1034K rwdata, 4336K rodata, 2752K init, 443K bss, 15061328K reserved, 524288K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=16 to nr_cpu_ids=2.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=2
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] GICv3: GIC: Using split EOI/Deactivate mode
+[    0.000000] GICv3: 192 SPIs implemented
+[    0.000000] GICv3: 0 Extended SPIs implemented
+[    0.000000] Root IRQ handler: gic_handle_irq
+[    0.000000] GICv3: GICv3 features: 16 PPIs
+[    0.000000] GICv3: CPU0: found redistributor 0 region 0:0x00000000f9080000
+[    0.000000] ITS [mem 0xf9020000-0xf903ffff]
+[    0.000000] ITS@0x00000000f9020000: allocated 8192 Devices @1c30000 (indirect, esz 8, psz 64K, shr 1)
+[    0.000000] ITS@0x00000000f9020000: allocated 8192 Interrupt Collections @1c40000 (flat, esz 8, psz 64K, shr 1)
+[    0.000000] GICv3: using LPI property table @0x0000000001c60000
+[    0.000000] GICv3: CPU0: using allocated LPI pending table @0x0000000001c70000
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] arch_timer: cp15 timer(s) running at 100.00MHz (phys).
+[    0.000000] clocksource: arch_sys_counter: mask: 0x1ffffffffffffff max_cycles: 0x171024e7e0, max_idle_ns: 440795205315 ns
+[    0.000067] sched_clock: 57 bits at 100MHz, resolution 10ns, wraps every 4398046511100ns
+[    0.007541] Console: colour dummy device 80x25
+[    0.009011] Calibrating delay loop (skipped), value calculated using timer frequency.. 200.00 BogoMIPS (lpj=400000)
+[    0.009523] pid_max: default: 32768 minimum: 301
+[    0.012174] Mount-cache hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.012712] Mountpoint-cache hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.036663] cacheinfo: Unable to detect cache hierarchy for CPU 0
+[    0.045276] rcu: Hierarchical SRCU implementation.
+[    0.045460] rcu: 	Max phase no-delay instances is 1000.
+[    0.048298] Platform MSI: msi-controller@f9020000 domain created
+[    0.048756] PCI/MSI: /axi/interrupt-controller@f9000000/msi-controller@f9020000 domain created
+[    0.049437] EFI services will not be available.
+[    0.051891] smp: Bringing up secondary CPUs ...
+INFO:    Indicates counter frequency 0Hz setting to 100000000Hz
+[    0.061333] Detected PIPT I-cache on CPU1
+[    0.062358] GICv3: CPU1: found redistributor 1 region 0:0x00000000f90a0000
+[    0.062557] GICv3: CPU1: using allocated LPI pending table @0x0000000001c80000
+[    0.063067] CPU1: Booted secondary processor 0x0000000001 [0x410fd083]
+[    0.067270] smp: Brought up 1 node, 2 CPUs
+[    0.068296] SMP: Total of 2 processors activated.
+[    0.068498] CPU features: detected: 32-bit EL0 Support
+[    0.068834] CPU features: detected: CRC32 instructions
+[    0.070901] CPU: All CPU(s) started at EL2
+[    0.071076] alternatives: applying system-wide alternatives
+[    0.090877] devtmpfs: initialized
+[    0.108201] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.108683] futex hash table entries: 512 (order: 3, 32768 bytes, linear)
+[    0.117310] pinctrl core: initialized pinctrl subsystem
+[    0.122101] DMI not present or invalid.
+[    0.128051] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.137809] DMA: preallocated 256 KiB GFP_KERNEL pool for atomic allocations
+[    0.138493] DMA: preallocated 256 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.139024] audit: initializing netlink subsys (disabled)
+[    0.140877] audit: type=2000 audit(0.132:1): state=initialized audit_enabled=0 res=1
+[    0.143831] hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+[    0.144599] ASID allocator initialised with 65536 entries
+[    0.145899] Serial: AMBA PL011 UART driver
+[    0.155313] platform axi: Fixed dependency cycle(s) with /axi/interrupt-controller@f9000000
+[    0.168430] Modules: 26816 pages in range for non-PLT usage
+[    0.168457] Modules: 518336 pages in range for PLT usage
+[    0.172078] HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.172527] HugeTLB: 0 KiB vmemmap can be freed for a 1.00 GiB page
+[    0.172785] HugeTLB: registered 32.0 MiB page size, pre-allocated 0 pages
+[    0.173029] HugeTLB: 0 KiB vmemmap can be freed for a 32.0 MiB page
+[    0.173243] HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.173473] HugeTLB: 0 KiB vmemmap can be freed for a 2.00 MiB page
+[    0.173691] HugeTLB: registered 64.0 KiB page size, pre-allocated 0 pages
+[    0.173905] HugeTLB: 0 KiB vmemmap can be freed for a 64.0 KiB page
+[    0.243370] raid6: neonx8   gen()  4455 MB/s
+[    0.312038] raid6: neonx4   gen()  3436 MB/s
+[    0.380670] raid6: neonx2   gen()  2836 MB/s
+[    0.449285] raid6: neonx1   gen()  1642 MB/s
+[    0.517901] raid6: int64x8  gen()  2415 MB/s
+[    0.586476] raid6: int64x4  gen()  3113 MB/s
+[    0.655032] raid6: int64x2  gen()  3024 MB/s
+[    0.723531] raid6: int64x1  gen()   593 MB/s
+[    0.723769] raid6: using algorithm neonx8 gen() 4455 MB/s
+[    0.792089] raid6: .... xor() 1747 MB/s, rmw enabled
+[    0.792419] raid6: using neon recovery algorithm
+[    0.795153] iommu: Default domain type: Translated
+[    0.795374] iommu: DMA domain TLB invalidation policy: strict mode
+[    0.797141] SCSI subsystem initialized
+[    0.798787] usbcore: registered new interface driver usbfs
+[    0.799186] usbcore: registered new interface driver hub
+[    0.799501] usbcore: registered new device driver usb
+[    0.800210] mc: Linux media interface: v0.10
+[    0.800485] videodev: Linux video capture interface: v2.00
+[    0.800894] pps_core: LinuxPPS API ver. 1 registered
+[    0.801071] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.801477] PTP clock support registered
+[    0.801804] EDAC MC: Ver: 3.0.0
+[    0.803534] FPGA manager framework
+[    0.805039] Advanced Linux Sound Architecture Driver Initialized.
+[    0.813514] Bluetooth: Core ver 2.22
+[    0.813911] NET: Registered PF_BLUETOOTH protocol family
+[    0.814129] Bluetooth: HCI device and connection manager initialized
+[    0.814519] Bluetooth: HCI socket layer initialized
+[    0.814754] Bluetooth: L2CAP socket layer initialized
+[    0.815066] Bluetooth: SCO socket layer initialized
+[    0.820248] clocksource: Switched to clocksource arch_sys_counter
+[    0.822245] VFS: Disk quotas dquot_6.6.0
+[    0.822522] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.840674] NET: Registered PF_INET protocol family
+[    0.843852] IP idents hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.853388] tcp_listen_portaddr_hash hash table entries: 8192 (order: 5, 131072 bytes, linear)
+[    0.854009] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.854319] TCP established hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.855840] TCP bind hash table entries: 65536 (order: 9, 2097152 bytes, linear)
+[    0.857817] TCP: Hash tables configured (established 131072 bind 65536)
+[    0.859277] UDP hash table entries: 8192 (order: 6, 262144 bytes, linear)
+[    0.860002] UDP-Lite hash table entries: 8192 (order: 6, 262144 bytes, linear)
+[    0.861544] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.865315] RPC: Registered named UNIX socket transport module.
+[    0.865581] RPC: Registered udp transport module.
+[    0.865746] RPC: Registered tcp transport module.
+[    0.865913] RPC: Registered tcp-with-tls transport module.
+[    0.866109] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.866410] PCI: CLS 0 bytes, default 64
+[    0.873120] Initialise system trusted keyrings
+[    0.874629] workingset: timestamp_bits=46 max_order=19 bucket_order=0
+[    0.878715] NFS: Registering the id_resolver key type
+[    0.879207] Key type id_resolver registered
+[    0.879372] Key type id_legacy registered
+[    0.879747] nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+[    0.880155] nfs4flexfilelayout_init: NFSv4 Flexfile Layout Driver Registering...
+[    0.881680] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    0.920833] NET: Registered PF_ALG protocol family
+[    0.921188] xor: measuring software checksum speed
+[    0.925047]    8regs           :  2889 MB/sec
+[    0.927319]    32regs          :  5304 MB/sec
+[    0.930407]    arm64_neon      :  3707 MB/sec
+[    0.930637] xor: using function: 32regs (5304 MB/sec)
+[    0.930877] Key type asymmetric registered
+[    0.931088] Asymmetric key parser 'x509' registered
+[    0.931514] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 244)
+[    0.931984] io scheduler mq-deadline registered
+[    0.932238] io scheduler kyber registered
+[    0.932673] io scheduler bfq registered
+[    0.937750] irq-xilinx: /axi/interrupt-controller@a5000000: num_irq=32, edge=0x0
+[    1.269131] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+[    1.275617] Serial: AMBA driver
+[    1.300768] brd: module loaded
+[    1.310939] loop: module loaded
+[    1.320337] tun: Universal TUN/TAP device driver, 1.6
+[    1.321143] CAN device driver interface
+[    1.322092] usbcore: registered new interface driver asix
+[    1.322342] usbcore: registered new interface driver ax88179_178a
+[    1.322613] usbcore: registered new interface driver cdc_ether
+[    1.322864] usbcore: registered new interface driver net1080
+[    1.323131] usbcore: registered new interface driver cdc_subset
+[    1.323408] usbcore: registered new interface driver zaurus
+[    1.323714] usbcore: registered new interface driver cdc_ncm
+[    1.324012] usbcore: registered new interface driver r8153_ecm
+[    1.326303] VFIO - User Level meta-driver version: 0.3
+[    1.327970] usbcore: registered new interface driver uas
+[    1.328369] usbcore: registered new interface driver usb-storage
+[    1.330849] i2c_dev: i2c /dev entries driver
+[    1.333246] usbcore: registered new interface driver uvcvideo
+[    1.334554] Bluetooth: HCI UART driver ver 2.3
+[    1.334791] Bluetooth: HCI UART protocol H4 registered
+[    1.334987] Bluetooth: HCI UART protocol BCSP registered
+[    1.335274] Bluetooth: HCI UART protocol LL registered
+[    1.335461] Bluetooth: HCI UART protocol ATH3K registered
+[    1.335765] Bluetooth: HCI UART protocol Three-wire (H5) registered
+[    1.336163] Bluetooth: HCI UART protocol Intel registered
+[    1.336433] Bluetooth: HCI UART protocol QCA registered
+[    1.336698] usbcore: registered new interface driver bcm203x
+[    1.336928] usbcore: registered new interface driver bpa10x
+[    1.337148] usbcore: registered new interface driver bfusb
+[    1.337377] usbcore: registered new interface driver btusb
+[    1.337691] usbcore: registered new interface driver ath3k
+[    1.341647] sdhci: Secure Digital Host Controller Interface driver
+[    1.341876] sdhci: Copyright(c) Pierre Ossman
+[    1.342039] sdhci-pltfm: SDHCI platform and OF driver helper
+[    1.343010] ledtrig-cpu: registered to indicate activity on CPUs
+[    1.343778] SMCCC: SOC_ID: ID = jep106:0049:0000 Revision = 0x00000007
+[    1.346983] zynqmp_firmware_probe Platform Management API v1.0
+[    1.349490] zynqmp_firmware_probe Trustzone version v1.0
+[    1.356494] xlnx_event_manager xlnx_event_manager: SGI 15 Registered over TF-A
+[    1.356800] xlnx_event_manager xlnx_event_manager: Xilinx Event Management driver probed
+[    3.249379] zynqmp-pinctrl firmware:versal-firmware:pinctrl: This is an experimental solution(hardcoded the MIO ID
+[    3.249379] information) and this solution will be deprecated and use PM interface
+[    3.249379] to get the MIO IDs information
+[    4.048771] securefw securefw: securefw probed
+[    4.051938] zynqmp-aes zynqmp-aes.0: will run requests pump with realtime priority
+[    4.058086] zynqmp_rsa zynqmp_rsa.0: RSA is not supported on the platform
+[    4.059260] usbcore: registered new interface driver usbhid
+[    4.059556] usbhid: USB HID core driver
+[    4.070391] ARM CCI_500 PMU driver probed
+[    4.072702] hw perfevents: enabled with armv8_pmuv3 PMU driver, 7 counters available
+[    4.075873] fpga_manager fpga0: Xilinx Versal FPGA Manager registered
+[    4.079074] pktgen: Packet Generator for packet performance testing. Version: 2.75
+[    4.085016] Initializing XFRM netlink socket
+[    4.085633] NET: Registered PF_INET6 protocol family
+[    4.093154] Segment Routing with IPv6
+[    4.093472] In-situ OAM (IOAM) with IPv6
+[    4.094365] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    4.097086] NET: Registered PF_PACKET protocol family
+[    4.097382] NET: Registered PF_KEY protocol family
+[    4.097847] can: controller area network core
+[    4.098309] NET: Registered PF_CAN protocol family
+[    4.098522] can: raw protocol
+[    4.098745] can: broadcast manager protocol
+[    4.098990] can: netlink gateway - max_hops=1
+[    4.099697] Bluetooth: RFCOMM TTY layer initialized
+[    4.099952] Bluetooth: RFCOMM socket layer initialized
+[    4.100271] Bluetooth: RFCOMM ver 1.11
+[    4.100500] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    4.100653] Bluetooth: BNEP filters: protocol multicast
+[    4.101179] Bluetooth: BNEP socket layer initialized
+[    4.101333] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[    4.101528] Bluetooth: HIDP socket layer initialized
+[    4.102267] 8021q: 802.1Q VLAN Support v1.8
+[    4.103233] 9pnet: Installing 9P2000 support
+[    4.103608] Key type dns_resolver registered
+[    4.115238] registered taskstats version 1
+[    4.115416] Loading compiled-in X.509 certificates
+[    4.171022] Btrfs loaded, zoned=no, fsverity=no
+[    5.140831] ff000000.serial: ttyAMA0 at MMIO 0xff000000 (irq = 19, base_baud = 0) is a PL011 rev1
+[    5.142555] printk: console [ttyAMA0] enabled
+[    5.142555] printk: console [ttyAMA0] enabled
+[    5.143094] printk: bootconsole [pl11] disabled
+[    5.143094] printk: bootconsole [pl11] disabled
+[    5.151478] aie aieaperture_0_50: AI engine aperture aieaperture_0_50, id 0x18800000, cols(0, 50) aie_tile_rows(1, 8) memory_tile_rows(0, 0) is probed successfully.
+[    5.152292] xilinx-ai-engine 20000000000.ai_engine: Xilinx AI Engine device 20000000000.ai_engine probed. Device generation: 1. Clock frequency: 1250000000Hz.
+[    5.153600] of-fpga-region fpga: FPGA Region probed
+[    5.154040] irq-xilinx: /axi/interrupt-controller@a4000000: num_irq=32, edge=0x0
+[    5.544259] spi-nor spi0.0: found mt25qu02g, expected m25p80
+[    5.549047] spi-nor spi0.0: mt25qu02g (393216 Kbytes)
+[    5.550370] 1 fixed-partitions partitions found on MTD device spi0.0
+[    5.550692] Creating 1 MTD partitions on "spi0.0":
+[    5.550993] 0x000000000000-0x000010000000 : "spi0-flash0"
+[    5.568530] macb ff0c0000.ethernet: GEM doesn't support hardware ptp.
+[    5.587153] macb ff0c0000.ethernet eth0: Cadence GEM rev 0x00020118 at 0xff0c0000 irq 33 (16:cd:25:35:cd:74)
+[    5.591834] macb ff0d0000.ethernet: GEM doesn't support hardware ptp.
+[    5.605307] macb ff0d0000.ethernet eth1: Cadence GEM rev 0x00020118 at 0xff0d0000 irq 34 (76:3c:73:b0:b4:ed)
+[    5.687459] xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+[    5.688163] xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 1
+[    5.691056] xhci-hcd xhci-hcd.0.auto: hcc params 0x00087001 hci version 0x100 quirks 0x0000000000000810
+[    5.691625] xhci-hcd xhci-hcd.0.auto: irq 36, io mem 0xfe200000
+[    5.692923] xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+[    5.693146] xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 2
+[    5.693514] xhci-hcd xhci-hcd.0.auto: Host supports USB 3.0 SuperSpeed
+[    5.697359] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 6.06
+[    5.697694] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    5.697947] usb usb1: Product: xHCI Host Controller
+[    5.698116] usb usb1: Manufacturer: Linux 6.6.10-xilinx-v2024.1-g3af4295e00ef xhci-hcd
+[    5.698412] usb usb1: SerialNumber: xhci-hcd.0.auto
+[    5.701800] hub 1-0:1.0: USB hub found
+[    5.702584] hub 1-0:1.0: 4 ports detected
+[    5.706109] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[    5.706743] usb usb2: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 6.06
+[    5.707040] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    5.707282] usb usb2: Product: xHCI Host Controller
+[    5.707460] usb usb2: Manufacturer: Linux 6.6.10-xilinx-v2024.1-g3af4295e00ef xhci-hcd
+[    5.707746] usb usb2: SerialNumber: xhci-hcd.0.auto
+[    5.708850] hub 2-0:1.0: USB hub found
+[    5.709200] hub 2-0:1.0: 4 ports detected
+[    5.722306] rtc_zynqmp f12a0000.rtc: registered as rtc0
+[    5.723091] rtc_zynqmp f12a0000.rtc: setting system clock to 2026-05-28T12:10:17 UTC (1779970217)
+[    5.725551] cdns-i2c ff030000.i2c: can't get pinctrl, bus recovery not supported
+[    5.728855] cdns-i2c ff030000.i2c: 100 kHz mmio ff030000 irq 39
+[    5.733704] cdns-i2c f1000000.i2c: can't get pinctrl, bus recovery not supported
+[    5.736539] cdns-i2c f1000000.i2c: 100 kHz mmio f1000000 irq 40
+[    5.742325] cpufreq: cpufreq_online: CPU0: Running at unlisted initial frequency: 1349999 KHz, changing to: 1350000 KHz
+[    5.753624] of_cfs_init
+[    5.754085] of_cfs_init: OK
+[    5.754765] clk: Not disabling unused clocks
+[    5.886316] ALSA device list:
+[    5.887474]   No soundcards found.
+[    5.893194] uart-pl011 ff000000.serial: no DMA platform data
+[    5.929238] mmc0: SDHCI controller on f1050000.mmc [f1050000.mmc] using ADMA 64-bit
+[    5.932786] Waiting for root device /dev/mmcblk0p2...
+[    5.946607] mmc0: new high speed SD card at address 4567
+[    5.949363] mmcblk0: mmc0:4567 QEMU! 2.00 GiB
+[    5.958164]  mmcblk0: p1 p2
+[    6.047005] List of all partitions:
+[    6.047348] 0100           65536 ram0 
+[    6.047402]  (driver?)
+[    6.047627] 0101           65536 ram1 
+[    6.047634]  (driver?)
+[    6.047852] 0102           65536 ram2 
+[    6.047859]  (driver?)
+[    6.048146] 0103           65536 ram3 
+[    6.048154]  (driver?)
+[    6.048359] 0104           65536 ram4 
+[    6.048377]  (driver?)
+[    6.048577] 0105           65536 ram5 
+[    6.048583]  (driver?)
+[    6.048783] 0106           65536 ram6 
+[    6.048789]  (driver?)
+[    6.049001] 0107           65536 ram7 
+[    6.049006]  (driver?)
+[    6.049206] 0108           65536 ram8 
+[    6.049212]  (driver?)
+[    6.049422] 0109           65536 ram9 
+[    6.049429]  (driver?)
+[    6.049629] 010a           65536 ram10 
+[    6.049634]  (driver?)
+[    6.049837] 010b           65536 ram11 
+[    6.049842]  (driver?)
+[    6.050044] 010c           65536 ram12 
+[    6.050049]  (driver?)
+[    6.050267] 010d           65536 ram13 
+[    6.050272]  (driver?)
+[    6.050485] 010e           65536 ram14 
+[    6.050492]  (driver?)
+[    6.050696] 010f           65536 ram15 
+[    6.050702]  (driver?)
+[    6.050926] 1f00          262144 mtdblock0 
+[    6.050937]  (driver?)
+[    6.051151] b300         2097152 mmcblk0 
+[    6.051161]  driver: mmcblk
+[    6.051395]   b301          999424 mmcblk0p1 88064c08-01
+[    6.051416] 
+[    6.051661]   b302          572416 mmcblk0p2 88064c08-02
+[    6.051669] 
+[    6.051937] No filesystem could mount root, tried: 
+[    6.051956]  ext3
+[    6.052177]  ext2
+[    6.052254]  ext4
+[    6.052318]  cramfs
+[    6.052384]  vfat
+[    6.052455]  msdos
+[    6.052517]  iso9660
+[    6.052586]  btrfs
+[    6.052668] 
+[    6.052980] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(179,2)
+[    6.053491] CPU: 0 PID: 1 Comm: swapper/0 Not tainted 6.6.10-xilinx-v2024.1-g3af4295e00ef #1
+[    6.053823] Hardware name: Xilinx Versal vck190 Eval board revA (QSPI) (DT)
+[    6.054210] Call trace:
+[    6.054390]  dump_backtrace+0x94/0xec
+[    6.054640]  show_stack+0x18/0x24
+[    6.054768]  dump_stack_lvl+0x48/0x60
+[    6.054904]  dump_stack+0x18/0x24
+[    6.055018]  panic+0x30c/0x36c
+[    6.055124]  mount_root_generic+0x324/0x33c
+[    6.055286]  mount_root+0x168/0x2dc
+[    6.055419]  prepare_namespace+0x6c/0x2a8
+[    6.055559]  kernel_init_freeable+0x27c/0x2d8
+[    6.055708]  kernel_init+0x28/0x1e0
+[    6.055845]  ret_from_fork+0x10/0x20
+[    6.056228] SMP: stopping secondary CPUs
+[    6.056584] Kernel Offset: disabled
+[    6.056720] CPU features: 0x1,00000200,28020000,1000420b
+[    6.057031] Memory Limit: none
+[    6.057386] ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(179,2) ]---
+./launch_hw_emu.sh: line 15: 2809132 Killed                  launch_emulator -device-family versal -aie-sim-config $PWD/cfg/aie.sim.config.txt -noc-memory-config $PWD/sim/behav_waveform/xsim/noc_memory_config.txt -qemu-dtb $PWD/sim/behav_waveform/xsim/board-versal-ps-cosim-vitis-vck190.dtb -pmc-dtb $PWD/sim/behav_waveform/xsim/board-versal-pmc-virt.dtb -target hw_emu -qemu-args-file $PWD/qemu_args.txt -pmc-args-file $PWD/pmc_args.txt -sd-card-image $PWD/sd_card.img -pl-sim-dir $PWD/sim/behav_waveform/xsim -xtlm-log-state WAVEFORM_AND_LOG -platform-name xilinx_vck190_base_202410_1 "$@"
