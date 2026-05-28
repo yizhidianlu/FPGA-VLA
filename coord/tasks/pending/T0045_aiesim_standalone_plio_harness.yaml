@@ -1,0 +1,179 @@
+task_id: T0045
+created_by: orchestrator
+created_at: 2026-05-29T01:05:00Z
+type: aie_compile
+priority: P0
+target_worker: remote_claude_ali_aie
+depends_on: [T0042]                    # reuse T0042 AIE graph; recompile for hw_emu target
+deadline_minutes: 600
+params:
+  module_name: aiesim_hwemu_target_plio_harness
+  description: |
+    **Track B: aiesimulator independent mode (NO qemu, NO Linux, NO
+    PS-PL cosim). Drive the AIE graph via PLIO file inputs from
+    aiesimulator's built-in stimulus generator. Avoid GMIO (which
+    needs user main() that standalone aiesim doesn't run).**
+
+    Key insight from 3-agent analysis:
+    - aiesimulator --target=hw (T0042 attempt) needs GMIO → standalone
+      aiesim has no PS to drive gm2aie_nb → kernels stall (0 calls
+      observed in T0042 profile)
+    - aiesimulator --target=hw_emu IS DIFFERENT: it's the cycle-accurate
+      AIE simulation target with PLIO file-based stimulus support.
+      The 32 KiB MG limit may or may not be enforced at sim time
+      (T0040 evidence is ambiguous).
+    - If hw_emu target enforces MG limit on full-scale: fallback to
+      scaled-down NTOK with extrapolation via T0044's per-iteration
+      cycle count.
+
+  quickstart_for_resumed_session: |
+    cd /tools/projects/FPGA-VLA/runs/T0042
+    source /tools/Xilinx/Vitis/2024.1/settings64.sh
+
+    # 1. Recompile for hw_emu target (different from hw, different from x86sim)
+    cd aie_graph
+    if [ ! -d Work_hwemu ]; then
+        aiecompiler --target=hw_emu \
+            --platform=xilinx_vck190_base_202410_1 \
+            --workdir=Work_hwemu \
+            --pl-freq=312.5 \
+            --profile \
+            graph.cpp 2>&1 | tee ../aiecompile_hwemu.log
+    fi
+    AIECC_EXIT=$?
+    if [ $AIECC_EXIT -ne 0 ]; then
+        # Check if it's the MG limit issue
+        if grep -q "exceeds 32 KB MG limit" ../aiecompile_hwemu.log; then
+            echo "[INFO] hw_emu target ALSO enforces MG limit; need scaled-down"
+            # Scaled-down version: NTOK=32, QDIM=512 (fits MG window)
+            # ... swap graph.h dimensions and recompile
+            # then extrapolate via T0044 per-iteration count
+        else
+            echo "[FAIL] aiecompile hw_emu failed for non-MG reason"
+            tail -50 ../aiecompile_hwemu.log
+            exit 1
+        fi
+    fi
+    cd ..
+
+    # 2. Generate PLIO input files (Q + K + V byte streams)
+    #    Reuse the same byte patterns from T0042's host.cpp (deterministic)
+    python3 <<'EOF'
+    import numpy as np
+    NTOK, QDIM, TOPK = 256, 4096, 64
+    # Same pattern as T0042 host.cpp
+    K = np.fromiter(((i * 17) & 0xFF for i in range(NTOK*QDIM)), dtype=np.int8, count=NTOK*QDIM)
+    V = np.fromiter(((i * 23) & 0xFF for i in range(NTOK*QDIM)), dtype=np.int8, count=NTOK*QDIM)
+    Q = np.fromiter(((i * 31) & 0xFF for i in range(QDIM)), dtype=np.int8, count=QDIM)
+    # PLIO 128-bit = 16 bytes per beat. Write as txt with one beat per line
+    def write_plio_txt(path, data, lanes=16):
+        with open(path, 'w') as f:
+            for i in range(0, len(data), lanes):
+                beat = data[i:i+lanes]
+                line = ' '.join(f'{(b & 0xFF):d}' for b in beat)
+                f.write(line + '\n')
+    write_plio_txt('I/O/Q.txt', Q)
+    write_plio_txt('I/O/K.txt', K)
+    write_plio_txt('I/O/V.txt', V)
+    print('PLIO input files written:', sum(len(d) for d in [Q,K,V]), 'bytes total')
+    EOF
+
+    # 3. Run aiesimulator standalone
+    aiesimulator --pkg-dir=Work_hwemu --i I/O --profile 2>&1 | tee aiesim_hwemu.log
+
+    # 4. Check for completion or stall
+    if grep -q "Simulation finished" aiesim_hwemu.log || \
+       grep -q "All kernels finished" aiesim_hwemu.log; then
+        echo "[OK] aiesim ran to completion"
+    else
+        echo "[WARN] aiesim may have stalled; tail follows"
+        tail -30 aiesim_hwemu.log
+    fi
+
+    # 5. Extract cycle count from profile output
+    PROFILE_QK=$(find aiesimulator_output -name 'profile_funct_24*' | head -1)
+    PROFILE_AV=$(find aiesimulator_output -name 'profile_funct_26*' | head -1)
+    SUMMARY=$(find aiesimulator_output -name 'default.aierun_summary' | head -1)
+
+    if [ -n "$SUMMARY" ]; then
+        echo "=== aierun_summary ==="
+        cat "$SUMMARY"
+        AIE_CYCLES=$(grep -oP 'Total cycles?:\s*\K\d+' "$SUMMARY" | head -1)
+    elif [ -n "$PROFILE_QK" ] && [ -n "$PROFILE_AV" ]; then
+        QK_CYC=$(grep -oP 'Total cycles?:\s*\K\d+' "$PROFILE_QK" | head -1)
+        AV_CYC=$(grep -oP 'Total cycles?:\s*\K\d+' "$PROFILE_AV" | head -1)
+        AIE_CYCLES=$((QK_CYC > AV_CYC ? QK_CYC : AV_CYC))  # parallel = max
+    else
+        echo "[FAIL] no profile output found"
+        exit 1
+    fi
+
+    AIE_LAT=$(awk "BEGIN {printf \"%.2f\", $AIE_CYCLES / 1.25e9 * 1e6}")
+    SPEEDUP=$(awk "BEGIN {printf \"%.2f\", 674 / $AIE_LAT}")
+    echo "[MEASURED] AIE cycles=$AIE_CYCLES, latency=${AIE_LAT}us, speedup=${SPEEDUP}x"
+
+    # 6. Archive + result.json + inbox
+    mkdir -p /tools/projects/FPGA-VLA/coord/reports/T0045
+    cp -p aiecompile_hwemu.log aiesim_hwemu.log \
+          aiesimulator_output/*.aierun_summary \
+          aiesimulator_output/profile_funct_*.txt \
+          /tools/projects/FPGA-VLA/coord/reports/T0045/ 2>/dev/null
+
+  flow:
+    step_1_compile_hwemu_target: |
+      aiecompiler --target=hw_emu (NOT hw, NOT x86sim). This is the
+      middle ground sim target Xilinx provides specifically for
+      cycle-accurate AIE simulation without needing full hw_emu
+      qemu cosim. Documented in UG1076.
+    step_2_plio_input_files: |
+      Generate Q.txt, K.txt, V.txt under I/O/ matching T0042's
+      host.cpp byte patterns (deterministic, reproducible).
+    step_3_aiesim_standalone: |
+      aiesimulator --pkg-dir=Work_hwemu --i I/O --profile
+      No qemu. No Linux. Pure AIE cycle simulation with PLIO file feed.
+    step_4_parse_cycles: |
+      Look for default.aierun_summary first (the official Xilinx
+      summary file). Fall back to per-tile profile_funct_*.txt sums.
+      Latency = max(QK, AV cycles) / 1.25e9 * 1e6.
+    step_5_fallback_if_mg_limit: |
+      If hw_emu compile fails with "exceeds 32 KB MG limit" (same
+      bug as T0040 hw target): swap graph.h to scaled-down dimensions
+      (NTOK=32, QDIM=512 fits 16KB per buffer), rerun aiesim, then
+      extrapolate to full scale via T0044's per-iteration II count:
+        full_cycles_estimate = scaled_cycles * (256/32) * (4096/512)
+
+  target_platform: xilinx_vck190_base_202410_1
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.aiesim_run_completion: true
+  - result.aie_latency_us_measured: "> 0 and < 5000"
+  - result.method: "in [hwemu_full_scale, hwemu_scaled_extrapolated]"
+
+human_ack_required_on:
+  - hwemu_target_compile_fails_for_non_MG_reason   # tool quirk
+  - aiesim_stalls_indefinitely                      # kernel feed issue
+  - latency_disagrees_T0044_by_2x                   # cross-validation conflict
+
+notes: |
+  This is Track B from the 3-agent diagnosis. Independent of T0044.
+  Run in parallel for cross-validation.
+
+  Codex Rescue agent's recommendation: "The highest-value 4 hours
+  is to run aiesimulator standalone (no PS/PL/qemu) with PLIO file
+  inputs and harvest default.aierun_summary." This task implements
+  that recommendation with the --target=hw_emu nuance.
+
+  Honesty label if successful: [AIE-SIM-CYC] (Xilinx aiesimulator
+  cycle-accurate AIE simulation). Officially Xilinx's recommended
+  AIE sign-off methodology short of on-board.
+
+  Cross-validation with T0044:
+    - If T0045 cycles agree T0044 within 10-20%: BOTH numbers in paper,
+      double honesty label [AIE-SCHED-EXACT]+[AIE-SIM-CYC]
+    - If disagree >20%: report both with discrepancy explanation
+      (stream stall in T0045 not modeled in T0044, etc.)
+
+  If both T0044 AND T0045 fail: fallback to Path 6 (defensive
+  reframing of existing T0042 analytic). Even that improves on
+  current "schedule-derived bound" framing.
