@@ -1,0 +1,23 @@
+{
+  "task_id": "T0043_v5",
+  "status": "FAILED",
+  "final_attempt": true,
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-29T01:20:00Z",
+  "summary": "LAST T0043 retry FAILED. BSP wic located + decompressed (6.4GB) + rootfs loop-mounted PASS, XRT libs present in BSP rootfs, host_bsp.elf + libadf.a injected to /home/root/, /etc/profile auto-run hook appended (per task spec, after AskUserQuestion approval), unmount PASS. v++ -p package_v5 partially failed at sd_card_resize step (same v3-style FileNotFoundError); worked around by manually substituting BSP wic as package_v5/sd_card.img. launch_hw_emu.sh started qemu but PS-QEMU exited within 30s with EMPTY qemu_output.log (0 bytes) — never reached u-boot, never produced any serial output. Matches user's observation: 'qemu PS gets stuck at rport_pl@0 connection, never reaches u-boot'. Root cause: BSP-built BOOT.BIN format differs from Vitis-built BOOT.BIN expectations in qemu's PMC secure-boot bootstrap.",
+  "report_dir": "coord/reports/T0043_v5/",
+  "blocker": "qemu_ps_pmc_secure_boot_fails_on_bsp_bootbin",
+  "all_avenues_exhausted": [
+    "v1 Xvfb fix: ran but no rootfs",
+    "v2 template versal: kernel panic mmcblk0p2 mount (boot.scr generic)",
+    "v3 platform prebuilt: no Linux Image in platform",
+    "v4 BSP rebuild: ext4 superblock feature mismatch (host e2fsprogs vs PetaLinux kernel)",
+    "v5 BSP wic prebuilt: qemu PS+PMC exit 30s, never reach u-boot"
+  ],
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "Per task spec: LAST T0043 retry; accept Option D",
+    "T0042 analytic 160 us with [AIE-SCHED-EST] label remains published"
+  ],
+  "next": "orch: accept Option D, T0042 160 us is the published AIE number. Camera-ready / post-paper: on-board VCK190 or fresh Vitis/PetaLinux pairing."
+}

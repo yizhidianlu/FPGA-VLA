@@ -1,0 +1,53 @@
+{
+  "task_id": "T0043_v5",
+  "status": "FAILED",
+  "final_attempt": true,
+  "supersedes": "T0043_v4",
+  "worker": "remote_claude_ali_aie",
+  "finished_at": "2026-05-29T01:16:00Z",
+  "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "result": {
+    "bsp_wic_located": true,
+    "bsp_wic_path": "/tools/projects/FPGA-VLA/runs/T0043/vck190_xrt_bsp/pre-built/linux/images/petalinux-sdimage.wic.xz",
+    "bsp_wic_decompressed_ok": true,
+    "bsp_wic_size_bytes": 6442455040,
+    "bsp_wic_partitions": "p1 FAT32 LBA 2 GiB (boot), p2 Linux 4 GiB (rootfs)",
+    "rootfs_mount_ok": true,
+    "rootfs_xrt_present": true,
+    "rootfs_xrt_libs": ["/usr/lib/libxrt_coreutil.so.2.17.0","/usr/lib/libxrt++.so.2.17.0","/usr/lib/libxrt_swemu.so"],
+    "host_bsp_elf_injected_ok": true,
+    "host_bsp_elf_path_in_rootfs": "/home/root/host_bsp.elf",
+    "libadf_a_injected_ok": true,
+    "autorun_profile_hook_added": true,
+    "autorun_method": "/etc/profile append: /home/root/host_bsp.elf 2>&1 | tee /home/root/measurement.log",
+    "rootfs_umount_ok": true,
+    "vpp_package_v5_ok": false,
+    "vpp_package_v5_block_reason": "v++ -p --package.sd_file=<full wic image> failed at sd_card_resize step (same as v3): EXT4 sd_card image creation step looks for a separate sd_card.img and FileNotFoundError. BOOT.BIN + launch_hw_emu.sh were still produced, allowing manual sd_card.img substitution.",
+    "manual_substitution_ok": true,
+    "manual_substitution_detail": "Copied /tools/projects/FPGA-VLA/runs/T0043/bsp_sd_img/petalinux-sdimage.wic to package_v5/sd_card.img (6.4 GB), bypassing the missing automated substitution.",
+    "hw_emu_qemu_launch_ok_to_invoke": true,
+    "hw_emu_qemu_actually_booted": false,
+    "hw_emu_qemu_block_reason": "PS-QEMU process started but exited within 30s without producing ANY serial output (qemu_output.log is empty 0 bytes). PMC-QEMU also exited at 01:15:31 (3s after PS exit). XSIM ran 24s. This matches the 'qemu PS stuck at rport_pl@0 connection, never reaches u-boot' diagnostic — the BSP wic image's BOOT.BIN format differs from what Vitis-built BOOT.BIN expects to load from QSPI, so qemu's PMC can't bootstrap the secure boot chain.",
+    "hw_emu_run_ok": false,
+    "aie_latency_us_measured": false
+  },
+  "all_avenues_tried": [
+    {"v": "v1_xvfb",  "outcome": "Xvfb installed; v++ -p PASS, qemu boot to u-boot only (no PetaLinux image)"},
+    {"v": "v2_template", "outcome": "PetaLinux versal-generic + XSA + XRT; qemu kernel panic on mmcblk0p2 mount (generic boot.scr)"},
+    {"v": "v3_platform_prebuilt", "outcome": "Vitis platform has no Linux Image; v++ -p fails before package"},
+    {"v": "v4_bsp_rebuild", "outcome": "BSP-based PetaLinux build; kernel sees both partitions but 'No filesystem could mount root' — ext4 superblock feature mismatch host e2fsprogs vs PetaLinux kernel"},
+    {"v": "v5_bsp_prebuilt_wic", "outcome": "AMD's wic image as sd_card.img; qemu PS-QEMU + PMC-QEMU exit within 30s, never reach u-boot, qemu_output.log empty"}
+  ],
+  "definitive_root_cause": "The Aliyun ECS host's Vitis 2024.1 hw_emu flow + the available PetaLinux/BSP combinations together cannot produce a bootable hw_emu image. Three independent rootfs sources (template build, BSP build, BSP prebuilt) hit three different failure modes. Without a known-good v++ -p + qemu boot pipeline, autonomous measurement is impossible.",
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "Final T0043 retry per task spec",
+    "All three independent paths exhausted",
+    "Defer to Option D: T0042 analytic 160 us with [AIE-SCHED-EST] label as the published AIE number"
+  ],
+  "what_paper_can_say": "T0042 analytic latency 160 us central (52-210 us range) decisively beats PL 674 us. Honesty label [AIE-SCHED-EST]. Measurement via on-board VCK190 or fresh hw_emu pipeline (different Vitis/PetaLinux version pairing) remains camera-ready / post-paper scope.",
+  "deliverables": {
+    "vpp_package_v5.log": "coord/reports/T0043_v5/vpp_package_v5.log",
+    "hw_emu_v5.log": "coord/reports/T0043_v5/hw_emu_v5.log"
+  }
+}
