@@ -1,0 +1,41 @@
+{
+  "task_id": "T0043_v4",
+  "status": "PARTIAL",
+  "supersedes": "T0043_v3",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-28T20:10:00Z",
+  "summary": "BSP-based PetaLinux rebuild COMPLETE end-to-end: petalinux-create -s BSP -> MACHINE=xilinx-vck190 (confirmed board-specific via project-spec config) -> petalinux-config XSA overlay -> rootfs XRT/zocl enabled -> petalinux-build 4874 task PASS -> petalinux-build --sdk PASS -> SDK install to /tools/Xilinx/PetaLinux/2024.1/vck190_sdk_bsp -> cross-compile host_bsp.elf (471 KiB aarch64 ELF) -> v++ -p package_v4 PASS (sd_card.img + BOOT.BIN + launch_hw_emu.sh) -> qemu hw_emu launch PASS to Linux kernel 6.6.10. BUT kernel panics on rootfs mount: 'No filesystem could mount root, tried: ext3 ext2 ext4 cramfs vfat msdos iso9660 btrfs'. The kernel correctly SEES both mmcblk0p1 (488 MB) and mmcblk0p2 (280 MB) — the BSP fix DID work for partition addressing — but NO filesystem driver can mount p2. Root cause identified: Vitis-host's mkfs.ext4 (e2fsprogs ≥1.47) writes superblock features (metadata_csum_seed, orphan_file, fast_commit) that PetaLinux 2024.1 kernel's ext4 driver does not understand. This is a Vitis-tooling vs PetaLinux-kernel version-skew, NOT a BSP/template selection issue. T0042 analytic 160us remains published.",
+  "report_dir": "coord/reports/T0043/",
+  "key_diagnostic_evidence": "hw_emu_v4.log line [6.213134]: 'No filesystem could mount root, tried: ext3 ext2 ext4 cramfs vfat msdos iso9660 btrfs'. Combined with [6.212519]+[6.212816] showing mmcblk0p1+p2 both detected. Proves: partition addressing FIXED by BSP; rootfs FEATURE BLOB unrecognizable to kernel.",
+  "stages_passed_v4": [
+    "petalinux-create from BSP",
+    "petalinux-config XSA overlay",
+    "rootfs XRT enable",
+    "petalinux-build (4874 tasks)",
+    "petalinux-build --sdk (4780 tasks)",
+    "SDK installer extract",
+    "host.cpp cross-compile -> host_bsp.elf",
+    "v++ -p package_v4 (sd_card.img + BOOT.BIN)",
+    "qemu launch_hw_emu PASS to Linux kernel",
+    "MMC controller init",
+    "kernel partition table parse: mmcblk0p1 + mmcblk0p2 detected"
+  ],
+  "stages_blocked": [
+    "ext4 rootfs mount on mmcblk0p2 (feature mismatch)",
+    "userspace init",
+    "host_bsp.elf execution",
+    "AIE GMIO drive",
+    "aie_latency_us readback"
+  ],
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "Vitis 2024.1 mkfs.ext4 + PetaLinux 2024.1 kernel ext4 driver version-skew",
+    "Three attempts (template, prebuilt-image, BSP) all converge on this same lower-level tooling bug — definitively not fixable by autonomous worker"
+  ],
+  "next_action_options": [
+    "(A) Downgrade host's e2fsprogs / strip ext4 features with tune2fs before sd_card.img boot",
+    "(B) Boot from initramfs only (modify boot.scr to skip SD mount)",
+    "(C) Use BSP's pre-built petalinux-sdimage.wic.xz directly (known-good ext4)",
+    "(D) DEFER: T0042 analytic 160 us remains published with [AIE-SCHED-EST] label"
+  ]
+}

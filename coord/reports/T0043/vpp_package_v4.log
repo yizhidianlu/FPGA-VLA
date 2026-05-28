@@ -1,0 +1,83 @@
+Option Map File Used: '/tools/Xilinx/Vitis/2024.1/data/vitis/vpp/optMap.xml'
+
+****** v++ v2024.1 (64-bit)
+  **** SW Build 5074859 on 2024-05-20-23:21:20
+  **** Start of session at: Thu May 28 20:07:02 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+INFO: [v++ 60-1306] Additional information associated with this v++ package can be found at:
+	Reports: /tools/projects/FPGA-VLA/runs/T0043/_x/reports/package
+	Log files: /tools/projects/FPGA-VLA/runs/T0043/_x/logs/package
+Running Dispatch Server on port: 44143
+INFO: [v++ 60-1548] Creating build summary session with primary output ./v++.package_summary, at Thu May 28 20:07:05 2026
+INFO: [v++ 60-1315] Creating rulecheck session with output '/tools/projects/FPGA-VLA/runs/T0043/_x/reports/package/v++_package_a_guidance.html', at Thu May 28 20:07:05 2026
+INFO: [v++ 60-895]   Target platform: /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [v++ 60-1578]   This platform contains Xilinx Shell Archive '/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/hw/hw.xsa'
+INFO: [v++ 60-2256] Packaging for hardware emulation
+INFO: [v++ 82-3881] device architecture set to versal
+INFO: [v++ 82-1022] generating /tools/projects/FPGA-VLA/runs/T0043/package_v4/boot_image.bif
+INFO: [v++ 82-3884] generating pdi for arch versal with bif /tools/projects/FPGA-VLA/runs/T0043/package_v4/boot_image.bif
+
+
+****** Bootgen v2024.1
+  **** Build date : May 19 2024-13:05:05
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+
+[INFO]   : Bootimage generated successfully
+
+INFO: [v++ 82-1023] generating boot files
+
+
+****** Bootgen v2024.1
+  **** Build date : May 19 2024-13:05:05
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+INFO: [v++ 82-3582] QEMU and NOC addressing from XSA database
+INFO: [v++ 82-3574] Executing ddr_memspec.dtsi to generate PS and PMC DTB files
+INFO: [v++ 82-3564] Deleting existing file: /tools/projects/FPGA-VLA/runs/T0043/_x/package/qemu_dts_files/ddr_memspec.dtsi
+INFO: [v++ 82-3571] Creating noc_memory_config file
+INFO: [v++ 82-3579] Launched the XSCT to generate qemu addressing.
+INFO: [Hsi 55-2053] elapsed time for repository (/tools/Xilinx/Vitis/2024.1/data/embeddedsw) loading 0 seconds
+INFO: [v++ 82-3580] QEMU Addressing files generated successfully.
+INFO: [v++ 82-3574] Executing ddr_memspec.dtsi to generate PS and PMC DTB files
+INFO: [v++ 82-3889] validating boot mode
+INFO: [v++ 82-1022] generating /tools/projects/FPGA-VLA/runs/T0043/package_v4/launch_hw_emu.sh
+INFO: [v++ 82-1011] creating sd_card directory
+INFO: [v++ 82-3528] mkfsimage command run: /tools/Xilinx/Vitis/2024.1/scripts/vitis/util/mkfsImage.sh -s /tools/projects/FPGA-VLA/runs/T0043/package_v4/sd_card/ -o /tools/projects/FPGA-VLA/runs/T0043/package_v4/sd_card.img -m 1 -e /tools/projects/FPGA-VLA/runs/T0043/vck190_xrt_bsp/images/linux/rootfs.cpio.gz
+SDCARD_SIZE_KB: 51571
+FAT_SDCARD_SIZE: 1048576
+FATSIZE:1024
+fat_start:63
+fat_end:2096639
+fat_sector:2096577
+ext4_start:0
+ext4_sector:241817
+EXT4SIZE:512
+TOTALSIZE:1536
+dummy_ext4_sector:806759
+sd_card_fat_start:2048
+sd_card_ext4_start:2000896
+dummy_ext4_start:2242713
+2096577+0 records in
+2096577+0 records out
+1073447424 bytes (1.1 GB, 1.0 GiB) copied, 2.27546 s, 472 MB/s
+241817+0 records in
+241817+0 records out
+123810304 bytes (124 MB, 118 MiB) copied, 0.246458 s, 502 MB/s
+806759+0 records in
+806759+0 records out
+413060608 bytes (413 MB, 394 MiB) copied, 0.795889 s, 519 MB/s
+INFO: [v++ 82-10329] EXT4 sd_card image is created.
+INFO: [v++ 82-4237] resize command: $XILINX_VITIS/tps/lnx64/python-3.8.3/bin/python3 $XILINX_VITIS/bin/sd_card_resize.py -sd-card-image /tools/projects/FPGA-VLA/runs/T0043/package_v4/sd_card.img 
+XILINX_XD /tools/Xilinx/Vitis/2024.1
+qemu_resize_img script at /tools/projects/FPGA-VLA/runs/T0043/package_v4/qemu_resize_img.sh
+resized sd card successfully
+INFO: [v++ 60-2460] Successfully copied a temporary xclbin to the output xclbin: /tools/projects/FPGA-VLA/runs/T0043/a.xclbin
+INFO: [v++ 60-2343] Use the Vitis Unified IDE to visualize and navigate the reports. Run the following command. 
+    vitis -a/ --analyze ./v++.package_summary 
+INFO: [v++ 60-791] Total elapsed time: 0h 0m 22s
+INFO: [v++ 60-1653] Closing dispatch client.
