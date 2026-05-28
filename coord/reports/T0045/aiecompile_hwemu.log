@@ -1,0 +1,10 @@
+aiecompiler: for the --target option: Cannot find option named 'hw_emu'!
+                                           AI Engine Compiler
+                                     Version 2024.1 (linux64-bit)
+                                     SW Build 5072252 on 2024-05-21-05:03:35
+                          Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+                          Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+ERROR: [aiecompiler 77-4469] driver  
+
+Compilation Failed
+(WARNING:0, CRITICAL-WARNING:0, ERROR:1)

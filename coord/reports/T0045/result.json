@@ -1,0 +1,30 @@
+{
+  "task_id": "T0045",
+  "status": "FAILED",
+  "method": "aiesimulator-hw_emu-target-PLIO-harness",
+  "worker": "remote_claude_ali_aie",
+  "finished_at": "2026-05-29T01:35:00Z",
+  "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "result": {
+    "aiecompile_hw_emu_target_supported": false,
+    "aiecompile_hw_emu_target_block_reason": "aiecompiler 2024.1 ONLY supports --target=x86sim or --target=hw. There is NO --target=hw_emu option. The task spec premise was wrong: 'hw_emu' is a v++ target, not an aiecompiler target. From `aiecompiler --help`:\n  --target=<value>\n    =x86sim  - Compile application targeting x86 simulation.\n    =hw      - Compile application targeting hardware.",
+    "verification_command": "aiecompiler --target=hw_emu graph.cpp -> ERROR: [aiecompiler 77-4469] driver aiecompiler: Unknown command line argument '--target=hw_emu'",
+    "alternative_aiesim_standalone_hw_target": "aiesimulator on T0042's existing Work_aie (hw target) was attempted in T0042 itself. It runs cycle-accurate AIE simulation but kernels stall on GMIO inputs because standalone aiesimulator does NOT execute the user main() that drives gm2aie_nb. profile_funct files show 0 function calls in 4.7M simulated cycles — kernels never started actual compute.",
+    "alternative_plio_only_graph": "Would require source modification of graph.cpp to convert GMIO ports for K/V back to PLIO. This re-triggers T0040's 32 KiB MG limit (the original reason GMIO was introduced in T0041). Scaled-down dimensions could fit MG but then full-scale latency would still be analytic-extrapolated, not measured."
+  },
+  "acceptance_criteria_check": {
+    "status_DONE": "FAILED — task premise (aiecompile hw_emu target) is not supported by aiecompiler 2024.1",
+    "aiesim_run_completion": false,
+    "aie_latency_us_measured": false
+  },
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "aiecompiler does not have an hw_emu target — task spec was incorrect",
+    "Standalone aiesim with hw target stalls on GMIO (proven in T0042)",
+    "PLIO-only graph rewrite re-triggers T0040 MG limit",
+    "T0042 analytic 160 us + T0044 static analysis 115-2307 us range remain the only available AIE latency estimates"
+  ],
+  "deliverables": {
+    "aiecompile_hwemu.log": "coord/reports/T0045/aiecompile_hwemu.log (ERROR: Unknown command line argument '--target=hw_emu')"
+  }
+}
