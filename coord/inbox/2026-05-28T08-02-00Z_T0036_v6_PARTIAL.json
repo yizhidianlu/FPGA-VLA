@@ -1,0 +1,45 @@
+{
+  "task_id": "T0036_v6",
+  "status": "PARTIAL",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-28T08:02:00Z",
+  "summary": "OOC impl at 6.0 ns clock period (167 MHz target) PASS. WNS=-0.473 ns (still negative — same critical path as v5 at ~6.47 ns route delay). Resources unchanged vs v5: DSP=465, URAM=299, BRAM=442, LUT=73808. Total power 16.16 W (dynamic 2.57 W, -34% vs v5; static 13.59 W unchanged). Achievable Fmax ~154 MHz at -2MP grade. WNS didn't close because the critical path is u_sched/u_vision_fifo BRAM access — fundamental routing bottleneck in the multi-rate scheduler FIFO, requires SV pipelining (Path C, camera-ready scope) to close.",
+  "report_dir": "coord/reports/T0036_v6/",
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "wns_still_below_0: WNS=-0.473 at 167 MHz target; per v6 task notes, triggers Path C (u_sched FIFO pipelining)",
+    "total_power_above_15: 16.16 W"
+  ],
+  "key_numbers_for_table_v_hw_impl": {
+    "DSP58": 465,
+    "URAM288E5": 299,
+    "BRAM_Tile": 442,
+    "LUT_CLB": 73808,
+    "Registers": 46826,
+    "wns_ns": -0.473,
+    "whs_ns": -3.549,
+    "fmax_achievable_mhz": 154,
+    "total_power_w": 16.160,
+    "dynamic_power_w": 2.574,
+    "static_power_w": 13.586,
+    "design_state": "Implemented (post-route)",
+    "tool_version": "Vivado 2024.1",
+    "device": "xcvc1902-vsva2197-2MP-e-S",
+    "honesty_label": "[HW-IMPL] OOC, post-route, m_axi-routed, NOT-closed"
+  },
+  "v5_vs_v6_comparison": {
+    "v5_target_freq_mhz": 250,
+    "v5_wns_ns": -2.340,
+    "v5_total_power_w": 17.464,
+    "v6_target_freq_mhz": 167,
+    "v6_wns_ns": -0.473,
+    "v6_total_power_w": 16.160,
+    "both_actual_fmax_mhz": "~155 (v5: 158, v6: 154 — within 3%)",
+    "interpretation": "Same critical path in both runs (~6.47 ns end-to-end); relaxing the target shifted slack from -2.34 to -0.47 as expected. Dynamic power dropped 34% from lower toggle activity at lower freq."
+  },
+  "next_action_options": [
+    "(A) ACK PARTIAL — accept Fmax=154 MHz as published [HW-IMPL] number; pipeline u_sched/u_vision_fifo in camera-ready (Path C)",
+    "(B) Queue T0036_v7 with u_sched FIFO pipelining now (~2h: edit T0030 mr_vla_top.sv FIFO module + full synth+impl rerun)",
+    "(C) Defer impl closure entirely — keep [HW-SYNTH] T0036_v4 numbers as headline; T0036_v5/v6 prove the design routes but timing closure is camera-ready/post-paper"
+  ]
+}

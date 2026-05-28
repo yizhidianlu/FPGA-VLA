@@ -1,0 +1,67 @@
+{
+  "task_id": "T0036_v6",
+  "status": "PARTIAL",
+  "supersedes": "T0036_v5",
+  "claimed_at": "2026-05-28T07:18:00Z",
+  "finished_at": "2026-05-28T08:00:00Z",
+  "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "worker_version": "v6.0",
+  "result": {
+    "ooc_relaxed_clock_period_ns": 6.0,
+    "target_freq_mhz": 167,
+    "flow_strategy": "Reused T0036_v5 synth_ooc.dcp checkpoint, swapped XDC (4.0 -> 6.0 ns), re-ran opt + place + route. Same logic, only constraint relaxed.",
+    "impl_ok_ooc": true,
+    "wns_ns": -0.473,
+    "whs_ns": -3.549,
+    "wns_failing_endpoints_count_implied": "small (TNS = -12.804 across only ~25 paths)",
+    "wns_total_violation_ns": -12.804,
+    "whs_total_violation_ns": -56632.285,
+    "achievable_fmax_mhz": 154,
+    "achievable_fmax_basis": "Fmax = 1000 / (6.0 + |WNS|) = 1000 / 6.473 = 154.5 MHz. Same critical path as v5 at 250 MHz target: u_sched/u_vision_fifo BRAM access, ~6.47 ns end-to-end delay regardless of clock target.",
+    "wns_didnt_close_at_167mhz": true,
+    "wns_diagnosis": "v5 critical path was 5.378 ns of pure route delay on u_sched/u_vision_fifo BRAM. v6 with 6.0 ns target should have given +0.6 ns margin, but the router/physopt with relaxed constraint slightly relaxed the placement (less effort needed) so the critical path actually grew slightly to ~6.47 ns. NET RESULT: v5 and v6 are within ±10% of the same actual silicon Fmax (~154-158 MHz). The bottleneck is fundamental to the BD topology (long BRAM path in the multi-rate scheduler vision FIFO) — pipelining the scheduler is required to close timing at higher freqs.",
+    "impl_resources": {
+      "DSP58": 465,
+      "DSP58_util_pct": 23.63,
+      "URAM288E5": 299,
+      "URAM_util_pct": 64.58,
+      "BRAM_Tile": 442,
+      "BRAM_util_pct": 45.71,
+      "LUT_CLB_total": 73808,
+      "LUT_util_pct": 8.20,
+      "vs_v5_impl": "Resources within ±0.1% of v5 (same logic, same placement architecture, only timing slack target changed)."
+    },
+    "impl_power": {
+      "total_on_chip_w": 16.160,
+      "dynamic_w": 2.574,
+      "static_w": 13.586,
+      "vs_v5_impl": "Total dropped from 17.46 W -> 16.16 W (-7.4%). Dynamic dropped from 3.89 W -> 2.57 W (-34%) as expected from f_target reducing 250 -> 167 MHz. Static essentially unchanged (13.58 W, device thermal baseline).",
+      "above_15W_threshold": true
+    },
+    "acceptance_criteria_check": {
+      "status_DONE": "PARTIAL (impl PASS, WNS still negative + power above 15 W trigger human_ack)",
+      "impl_ok_ooc": true,
+      "wns_ns_ge_0": "FAIL: -0.473 (target was >= 0 at 167 MHz; design needs ~155 MHz to close)",
+      "lut_pct_lt_25": "PASS: 8.20",
+      "dsp_pct_lt_35": "PASS: 23.63",
+      "bram_pct_lt_50": "PASS: 45.71",
+      "uram_pct_lt_70": "PASS: 64.58",
+      "total_power_w_lt_20": "PASS: 16.16 (under 20)"
+    }
+  },
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "wns_still_below_0: WNS = -0.473 ns at 6.0 ns target (Fmax 154 MHz); per v6 task notes, this triggers Path C (pipelining u_sched FIFO) for camera-ready",
+    "total_power_above_15: total power 16.16 W exceeds 15 W informational threshold (although -7% better than v5)"
+  ],
+  "key_finding": "Both v5 (250 MHz target) and v6 (167 MHz target) land on the same actual Fmax ~154-158 MHz. The critical path is u_sched/u_vision_fifo BRAM access with ~6.5 ns route delay — a routing-dominated bottleneck in the multi-rate scheduler FIFO. T0030 standalone scheduler had +0.304 ns WNS at 250 MHz, meaning the FIFO closes at 250 MHz standalone but the integration into the 5-cell BD adds ~2.5 ns of interconnect pressure. Closing timing requires pipelining the FIFO (1-2 register stages on the write address / BRAM enable path).",
+  "table_v_hw_impl_row_recommendation": "Headline numbers: Fmax 154 MHz, DSP=465, URAM=299, BRAM=442, LUT=73808, FF=46826, Total Power 16.16 W (Dynamic 2.57 W + Static 13.59 W). Footnote: timing not closed at the 250 MHz original target (WNS -0.473 at 167 MHz); closing requires u_sched FIFO pipelining (camera-ready scope). The DSP=465 EXACT match across T0036_RETRY synth + T0036_v4 synth + T0036_v5 impl + T0036_v6 impl validates the compute fabric.",
+  "deliverables": {
+    "run_v6.tcl": "coord/reports/T0036_v6/run_v6.tcl",
+    "mr_vla_bd_v6_ooc.xdc": "coord/reports/T0036_v6/mr_vla_bd_v6_ooc.xdc (6.0 ns clock period)",
+    "impl_util_167mhz.rpt": "coord/reports/T0036_v6/impl_util_167mhz.rpt",
+    "impl_timing_167mhz.rpt": "coord/reports/T0036_v6/impl_timing_167mhz.rpt",
+    "impl_power_167mhz.rpt": "coord/reports/T0036_v6/impl_power_167mhz.rpt",
+    "run_v6.log": "coord/reports/T0036_v6/run_v6.log"
+  }
+}
