@@ -1,0 +1,161 @@
+task_id: T0036_v5
+created_by: orchestrator
+created_at: 2026-05-28T06:00:00Z
+type: vivado_pnr
+priority: P0
+supersedes: T0036_v4
+target_worker: remote_claude_ali_aie
+depends_on: [T0036_v4]
+deadline_minutes: 600
+params:
+  module_name: mr_vla_full_top_v5_ooc
+  description: |
+    **Vivado Out-of-Context (OOC) impl of the T0036_v4 BD to obtain
+    integrated post-route WNS + WHS + power — without xpfm platform
+    integration.**
+
+    T0036_v4 synth PASSED but impl was deferred because:
+      (a) 5841 Bonded IOB synth-only count (synth-only externalisation
+          artifact from the 4 axi_smartconnect M_AXI ports + s_axilite
+          + scheduler streams exposed at top); deployable IOB <200.
+      (b) WNS=NA because top wrapper clock did not propagate from
+          create_bd_port -type clk to create_clock at synth scope.
+
+    The fix without going to xpfm: OOC impl. Vivado's OOC mode (a) does
+    NOT place IOBs (signals stay as internal nets that the parent context
+    would later route), (b) accepts explicit create_clock + input/output
+    delay constraints at the wrapper boundary. This gets a real
+    post-route WNS / WHS / total_power_w for the integrated design, which
+    is what the paper Table V [HW-IMPL] row needs.
+
+  quickstart_for_resumed_session: |
+    # ============================================================
+    # COPY-PASTE QUICKSTART. Reuse T0036_v4's existing Vivado project
+    # at runs/T0036_v4/, switch synth_1+impl_1 to OOC mode, add a
+    # synthesizable XDC, re-run synth + impl.
+    # ============================================================
+    cd /tools/projects/FPGA-VLA
+    source /tools/Xilinx/Vivado/2024.1/settings64.sh
+    cp -r runs/T0036_v4 runs/T0036_v5
+    cd runs/T0036_v5
+
+    # 1. Write OOC XDC at the BD wrapper boundary
+    cat > mr_vla_bd_v5_ooc.xdc <<'XDC'
+    # 250 MHz primary clock (matches T0030 multi-rate scheduler base)
+    create_clock -name clk_in   -period 4.0  [get_ports clk_in]
+    set_input_delay  -clock clk_in -max 1.5 [all_inputs]
+    set_input_delay  -clock clk_in -min 0.2 [all_inputs]
+    set_output_delay -clock clk_in -max 1.5 [all_outputs]
+    set_output_delay -clock clk_in -min 0.2 [all_outputs]
+    XDC
+
+    # 2. Open the v4 project, add XDC, switch synth+impl to OOC mode
+    vivado -mode batch -nolog -nojournal -source <(cat <<'TCL'
+    open_project runs/T0036_v4/mr_vla_full_top_v4.xpr
+    save_project_as runs/T0036_v5/mr_vla_full_top_v5_ooc.xpr -force
+    open_project       runs/T0036_v5/mr_vla_full_top_v5_ooc.xpr
+    add_files -fileset constrs_1 runs/T0036_v5/mr_vla_bd_v5_ooc.xdc
+    # Configure synth_1 + impl_1 for OOC
+    set_property STEPS.SYNTH_DESIGN.ARGS.MODE out_of_context [get_runs synth_1]
+    # Reset prior synth runs so OOC mode is honoured
+    reset_run synth_1
+    launch_runs synth_1 -jobs 4
+    wait_on_run synth_1
+    open_run synth_1
+    report_utilization     -file runs/T0036_v5/synth_util_ooc.rpt
+    report_timing_summary  -file runs/T0036_v5/synth_timing_ooc.rpt
+    close_design
+    reset_run impl_1
+    launch_runs impl_1 -to_step route_design -jobs 4
+    wait_on_run impl_1
+    open_run impl_1
+    report_utilization     -file runs/T0036_v5/impl_util_ooc.rpt
+    report_timing_summary  -file runs/T0036_v5/impl_timing_ooc.rpt
+    report_power           -file runs/T0036_v5/impl_power_ooc.rpt
+    close_design
+    exit
+    TCL
+    )
+
+    # 3. Copy artefacts + write result.json
+    mkdir -p /tools/projects/FPGA-VLA/coord/reports/T0036_v5
+    cp -p runs/T0036_v5/{synth,impl}_*.rpt \
+          /tools/projects/FPGA-VLA/coord/reports/T0036_v5/
+    cp -p runs/T0036_v5/mr_vla_bd_v5_ooc.xdc \
+          /tools/projects/FPGA-VLA/coord/reports/T0036_v5/
+    # parse WNS from impl_timing_ooc.rpt and write result.json (template below)
+
+  flow:
+    step_1_copy_v4_project: |
+      cp -r runs/T0036_v4 runs/T0036_v5 and switch into v5 to avoid
+      touching the v4 reference. The HLS IP-XACT packages, build_bd_v4.tcl,
+      and synth-PASS state of v4 are all reused.
+    step_2_xdc: |
+      Write mr_vla_bd_v5_ooc.xdc with a single create_clock at the wrapper
+      clk_in port (250 MHz, 4.0 ns period) plus generic input/output delay
+      constraints so set_max_delay engines fire correctly. No pinout
+      assignments (OOC does not place IOBs).
+    step_3_ooc_synth: |
+      Set property STEPS.SYNTH_DESIGN.ARGS.MODE out_of_context on synth_1;
+      reset_run; launch_runs synth_1; wait. Open run, report utilization
+      + timing. Expect: numbers match T0036_v4 within ±5% (same logic);
+      WNS now non-NA because the XDC is in scope.
+    step_4_ooc_impl: |
+      launch_runs impl_1 -to_step route_design; wait. Open run, report
+      utilization + timing + power. **This produces the [HW-IMPL]
+      post-route row for Table V**: dsp, lut, bram, uram (same axes as
+      T0036_v4 synth), wns_ns, whs_ns, total_power_w, dynamic_power_w.
+    step_5_archive: |
+      coord/reports/T0036_v5/:
+        synth_util_ooc.rpt
+        synth_timing_ooc.rpt
+        impl_util_ooc.rpt
+        impl_timing_ooc.rpt
+        impl_power_ooc.rpt
+        mr_vla_bd_v5_ooc.xdc
+        vivado.log
+        result.json with the integrated [HW-IMPL] post-route row
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 4.0
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.synth_ok_ooc: true
+  - result.impl_ok_ooc: true
+  - result.wns_ns: ">= 0"
+  - result.lut_pct: "< 25"           # OOC should still match T0036_v4 LUT 9.4%
+  - result.dsp_pct: "< 35"
+  - result.bram_pct: "< 50"          # T0036_v4 was 45.7%, ±5% margin
+  - result.uram_pct: "< 70"          # T0036_v4 was 64.6%, ±5%
+  - result.total_power_w: "< 20"
+
+human_ack_required_on:
+  - wns_below_0_2
+  - vivado_crash
+  - total_power_above_15           # informational; paper §III projects 5.84 W
+  - ooc_mode_not_honoured           # would indicate a Vivado property-set bug
+
+notes: |
+  Why OOC > xpfm for this submission:
+    - xpfm needs VCK190 sys_clk0..3 reference + DDR pinout + PS9 CIPS
+      config + possibly petalinux/boot image — 1-2 days of human-attention
+      Vitis platform work.
+    - OOC gets the SAME logic through synth + impl, gives a real
+      post-route WNS / power, and is fully automatable.
+    - The IOB count concern disappears in OOC mode by design.
+    - For Table V [HW-IMPL] row, OOC numbers are honest and complete; if
+      reviewer asks for "on-board measured WNS", that requires xpfm +
+      board access anyway and is camera-ready scope.
+
+  Expected resource numbers (from T0036_v4 synth):
+    LUT 84,145 (9.35%)  DSP 465 (23.6%)  BRAM 442 (45.7%)  URAM 299 (64.6%)
+  Impl may shrink LUT slightly (place-time logic optimisation) and tighten
+  power by 10-30% (true switching activity vs synth estimate).
+
+  Power expectation: synth-time T0023 HIPPO projected 5.84 W for the full
+  pipeline. Post-route should be in the 5-12 W range. > 15 W triggers
+  human ack as an informational signal (does not block DONE).
+
+  WNS expectation: T0030 multi-rate scheduler standalone WNS was
+  +0.304 ns at 250 MHz; the integrated v5 should be within ±0.2 ns of
+  that (slightly tighter due to more interconnect / fanout).

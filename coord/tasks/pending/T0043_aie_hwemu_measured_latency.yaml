@@ -1,0 +1,204 @@
+task_id: T0043
+created_by: orchestrator
+created_at: 2026-05-28T06:05:00Z
+type: aie_compile          # actually a v++ hw_emu task; classified under aie_compile per handler routing
+priority: P0
+supersedes: T0042          # the measurement half only — algorithm half already DONE
+target_worker: remote_claude_ali_aie
+depends_on: [T0042]
+deadline_minutes: 480
+params:
+  module_name: xmod_attn_hw_emu_measured
+  description: |
+    **Cycle-accurate aie_latency_us measurement via Vitis full hw_emu
+    (XSA + sw_app + qemu) flow — replaces T0042's 160 µs analytic with
+    a single measured number.**
+
+    T0042 PARTIAL noted: standalone aiesimulator with HW-target Work/ +
+    GMIO does NOT execute user main() — kernels stall on empty streams,
+    profiles confirm 0 calls in 4.7M cycles. The only path to a measured
+    aie_latency is the full Vitis hw_emu flow:
+      1. v++ --link the AIE graph + a stub PL kernel into an XSA
+      2. Write a small sw_app (C++ on PS9) that drives the GMIO from PS:
+           gr.gmio_K.gm2aie_nb(K_host_buffer, K_size);
+           gr.gmio_V.gm2aie_nb(V_host_buffer, V_size);
+           wait_for_completion();
+           cycles = aie_profile_read();
+      3. v++ --package with --target=hw_emu generates a qemu boot image
+      4. Run launch_emulator or v++ --run --target=hw_emu
+      5. Parse cycle count from emulator output
+
+  quickstart_for_resumed_session: |
+    # ============================================================
+    # COPY-PASTE QUICKSTART. Reuse T0042 AIE graph as-is.
+    # ============================================================
+    cd /tools/projects/FPGA-VLA
+    source /tools/Xilinx/Vitis/2024.1/settings64.sh
+    mkdir -p runs/T0043
+    cp -r coord/reports/T0042/aie_graph runs/T0043/aie_graph
+    cd runs/T0043
+
+    # 1. Compile AIE graph for HW target (same as T0042)
+    cd aie_graph
+    aiecompiler --target=hw --platform=xilinx_vck190_base_202410_1 \
+        --workdir=../Work_aie graph.cpp 2>&1 | tee ../aiecompiler_hw.log
+    cd ..
+
+    # 2. Write a stub PL kernel that the sw_app needs as the linker
+    #    boundary; pure passthrough (the actual data flow goes through
+    #    AIE GMIO, not this kernel).
+    cat > pl_stub.cpp <<'CPP'
+    // Minimal PL kernel for v++ --link to attach the AIE graph
+    extern "C" void pl_stub(int *dummy) {
+    #pragma HLS INTERFACE m_axi port=dummy bundle=ctrl
+    #pragma HLS INTERFACE s_axilite port=return bundle=ctrl
+        if (dummy) *dummy = 0;
+    }
+    CPP
+    v++ -c -t hw_emu --platform xilinx_vck190_base_202410_1 \
+        -k pl_stub --kernel_frequency 250 \
+        -o pl_stub.xo pl_stub.cpp 2>&1 | tee vpp_compile.log
+
+    # 3. Link AIE work + PL kernel into XSA
+    v++ -l -t hw_emu --platform xilinx_vck190_base_202410_1 \
+        --config link.cfg \
+        Work_aie/libadf.a pl_stub.xo \
+        -o xmod_attn.xsa 2>&1 | tee vpp_link.log
+    # link.cfg template:
+    cat > link.cfg <<'CFG'
+    [connectivity]
+    sp=pl_stub_1.dummy:DDR[0]
+    CFG
+
+    # 4. Package as hw_emu (generates boot image + emulator scripts)
+    v++ -p -t hw_emu --platform xilinx_vck190_base_202410_1 \
+        --package.boot_mode=qspi \
+        --package.out_dir package \
+        xmod_attn.xsa Work_aie/libadf.a host.elf 2>&1 | tee vpp_package.log
+
+    # 5. Write sw_app host.cpp that drives GMIO
+    cat > host.cpp <<'CPP'
+    #include <iostream>
+    #include <vector>
+    #include <cstdint>
+    #include <adf/adf_api/XRTConfig.h>
+    #include <experimental/xrt_kernel.h>
+    #include <experimental/xrt_aie.h>
+    #include "aie_graph/graph.h"
+
+    extern xmod_attn graph;  // from graph.h
+
+    int main(int argc, char** argv) {
+        const int NTOK=256, QDIM=4096, TOPK=64;
+        std::vector<int8_t>  K(NTOK*QDIM), V(NTOK*QDIM), Q(QDIM);
+        std::vector<int8_t>  out_buf(QDIM);
+        // Init with a fixed pattern matching golden
+        for (int i = 0; i < (int)K.size(); ++i) K[i] = (i * 17) & 0xFF;
+        for (int i = 0; i < (int)V.size(); ++i) V[i] = (i * 23) & 0xFF;
+        for (int i = 0; i < (int)Q.size(); ++i) Q[i] = (i * 31) & 0xFF;
+
+        xrt::device dev(0);
+        auto uuid = dev.load_xclbin("xmod_attn.xclbin");
+        adf::registerXRT(dev, uuid);
+
+        graph.init();
+        auto start = std::chrono::high_resolution_clock::now();
+
+        graph.gmio_K.gm2aie_nb(K.data(), K.size());
+        graph.gmio_V.gm2aie_nb(V.data(), V.size());
+        graph.run(1);
+        graph.wait();
+
+        auto stop = std::chrono::high_resolution_clock::now();
+        graph.end();
+
+        double us = std::chrono::duration<double, std::micro>(stop-start).count();
+        std::cout << "aie_latency_us_measured: " << us << std::endl;
+        return 0;
+    }
+    CPP
+
+    # 6. Compile host and link with XRT
+    g++ -std=c++17 -O2 host.cpp \
+        -I$XILINX_VITIS/aietools/include \
+        -I$XILINX_XRT/include \
+        -laiengine_core -lxrt_coreutil -lxrt_core \
+        -L$XILINX_VITIS/aietools/lib/lnx64.o \
+        -L$XILINX_XRT/lib \
+        -o host.elf 2>&1 | tee host_compile.log
+
+    # 7. Launch hw_emu
+    cd package
+    ./launch_hw_emu.sh -no-reboot 2>&1 | tee ../hw_emu.log
+    # Wait for "aie_latency_us_measured: <NUM>" line in hw_emu.log
+    cd ..
+
+    # 8. Extract measurement and write result.json
+    AIE_LAT=$(grep -oP 'aie_latency_us_measured: \K[\d.]+' hw_emu.log | head -1)
+    echo "Measured AIE latency: ${AIE_LAT} us"
+
+  flow:
+    step_1_compile_hw: |
+      Same as T0042 — aiecompiler --target=hw produces Work/libadf.a.
+      Confirm 0 errors.
+    step_2_pl_stub: |
+      Tiny passthrough PL kernel; v++ -c -t hw_emu compiles to .xo.
+    step_3_link_xsa: |
+      v++ -l combines libadf.a + pl_stub.xo into an XSA. link.cfg pins
+      the kernel to DDR[0] (any DDR bank works for a stub).
+    step_4_package_hwemu: |
+      v++ -p -t hw_emu generates qemu boot image + launch script.
+    step_5_host_app: |
+      Minimal C++ host (template above): init GMIO, push K/V, graph.run(1),
+      wait, read cycle counter, print "aie_latency_us_measured: N".
+    step_6_run_hwemu: |
+      cd package && ./launch_hw_emu.sh -no-reboot
+      Parse stdout for the measured number.
+    step_7_archive: |
+      coord/reports/T0043/:
+        aie_graph/        (copied from T0042 unchanged)
+        host.cpp pl_stub.cpp link.cfg
+        aiecompiler_hw.log vpp_compile.log vpp_link.log vpp_package.log
+        host_compile.log
+        hw_emu.log
+        result.json with measured aie_latency_us
+
+  target_platform: xilinx_vck190_base_202410_1
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.hw_emu_run_ok: true
+  - result.aie_latency_us_measured: true
+  - result.aie_latency_us: "< 5000"
+  - result.aie_latency_us_in_t0042_range: true   # measured value should fall within 52-210 us
+
+human_ack_required_on:
+  - hw_emu_qemu_boot_fail              # may indicate xrt/platform mismatch
+  - host_compile_fail                   # XRT lib path issues
+  - measured_latency_above_500us       # would mean schedule estimate was wrong
+  - measured_latency_above_2x_pl       # informational; likely tooling overhead in qemu
+
+notes: |
+  Why hw_emu (not on-board): hw_emu uses qemu to emulate the PS9 + AIE
+  cycle-accurately, which is enough to get a real aie_latency_us. On-board
+  measurement requires a physical VCK190 board (which orchestrator does
+  not have access to). hw_emu IS the cycle-accurate path achievable from
+  the ECS host.
+
+  Expected measured value: T0042 analytic central was 160 µs. hw_emu
+  typically tracks analytic within ±30% (qemu has small fixed overhead
+  but AIE cycle simulation is exact). So expect 110-220 µs measured. If
+  measured ≥ 500 µs, the analytic was wrong; if ≤ 50 µs, qemu may have
+  short-circuited something — investigate.
+
+  Caveat in paper: hw_emu is cycle-accurate for AIE but NOT for actual
+  silicon thermal / voltage effects. The honesty label upgrades from
+  [AIE-SCHED-EST] to [AIE-HW-EMU] (Vitis hw_emu cycle-accurate); for
+  full silicon measurement, on-board with PMBus is the next step
+  (camera-ready or beyond).
+
+  If any of the v++ link / package / qemu steps fail in a way that needs
+  manual debugging (e.g., xrt library mismatch, missing platform file
+  paths), STOP and write FAIL/inbox with verb=vitis_flow_blocker, and
+  attach the relevant logs. Orchestrator will decide whether to retry
+  with a different package config or escalate to manual.
