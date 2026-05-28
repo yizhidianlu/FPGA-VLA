@@ -1,0 +1,35 @@
+{
+  "task_id": "T0036_v5",
+  "status": "PARTIAL",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-28T06:55:00Z",
+  "summary": "OOC synth + impl PASS on the T0036_v4 BD. Post-route numbers: WNS=-2.340 ns (FAIL at 250 MHz target; achievable Fmax = 158 MHz at -2MP), WHS=-3.810 ns, DSP=465 (unchanged from v4 synth, EXACT match), URAM=299 (64.6%), BRAM=442 (45.7%), LUT=73848 (8.2%, -12% vs v4 synth from logic combining), total power=17.46 W (dynamic 3.9 W + static 13.6 W). Critical path: u_sched/u_vision_fifo BRAM access with 5.378 ns route delay — pure interconnect congestion (T0030 standalone scheduler had +0.304 ns WNS). Stopping per orch instructions because wns_below_0_2 + total_power_above_15 are both triggered.",
+  "report_dir": "coord/reports/T0036_v5/",
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "wns_below_0_2: WNS = -2.340 ns",
+    "total_power_above_15: total power 17.46 W exceeds 15 W informational threshold"
+  ],
+  "key_numbers_for_table_v_hw_impl": {
+    "DSP58": 465,
+    "URAM288E5": 299,
+    "BRAM_Tile": 442,
+    "LUT_CLB": 73848,
+    "Registers": 46826,
+    "wns_ns": -2.340,
+    "whs_ns": -3.810,
+    "fmax_achievable_mhz": 158,
+    "total_power_w": 17.464,
+    "dynamic_power_w": 3.887,
+    "static_power_w": 13.577,
+    "design_state": "Implemented (post-route)",
+    "tool_version": "Vivado 2024.1",
+    "device": "xcvc1902-vsva2197-2MP-e-S",
+    "honesty_label": "[HW-IMPL] OOC, post-route, m_axi-routed"
+  },
+  "next_action_options": [
+    "ACK PARTIAL — accept Fmax_achievable=158 MHz as the published number with [HW-IMPL] OOC label; pipeline u_sched FIFO in camera-ready",
+    "Queue T0036_v6 with relaxed 6.0 ns clock period to land WNS positive (Fmax 167 MHz, resources unchanged)",
+    "Queue T0036_v6 with pipelined u_sched/u_vision_fifo (recovers Fmax to ~250 MHz, ~2h)"
+  ]
+}

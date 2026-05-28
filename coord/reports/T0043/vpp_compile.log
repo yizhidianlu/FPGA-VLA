@@ -1,0 +1,36 @@
+Option Map File Used: '/tools/Xilinx/Vitis/2024.1/data/vitis/vpp/optMap.xml'
+
+****** v++ v2024.1 (64-bit)
+  **** SW Build 5074859 on 2024-05-20-23:21:20
+  **** Start of session at: Thu May 28 13:58:26 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+INFO: [v++ 60-1306] Additional information associated with this v++ compile can be found at:
+	Reports: /tools/projects/FPGA-VLA/runs/T0043/_x/reports/pl_stub
+	Log files: /tools/projects/FPGA-VLA/runs/T0043/_x/logs/pl_stub
+Running Dispatch Server on port: 46629
+INFO: [v++ 60-1548] Creating build summary session with primary output /tools/projects/FPGA-VLA/runs/T0043/pl_stub.xo.compile_summary, at Thu May 28 13:58:29 2026
+INFO: [v++ 60-1315] Creating rulecheck session with output '/tools/projects/FPGA-VLA/runs/T0043/_x/reports/pl_stub/v++_compile_pl_stub_guidance.html', at Thu May 28 13:58:29 2026
+INFO: [v++ 60-895]   Target platform: /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [v++ 60-1578]   This platform contains Xilinx Shell Archive '/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/hw/hw.xsa'
+INFO: [v++ 60-585] Compiling for hardware emulation target
+INFO: [v++ 60-423]   Target device: xilinx_vck190_base_202410_1
+INFO: [v++ 60-242] Creating kernel: 'pl_stub'
+INFO: [v++ 60-1616] Creating a HLS clock using kernel_frequency option: 250 MHz
+
+===>The following messages were generated while  performing high-level synthesis for kernel: pl_stub Log file: /tools/projects/FPGA-VLA/runs/T0043/_x/pl_stub/pl_stub/vitis_hls.log :
+INFO: [v++ 204-61] Pipelining loop 'PUSH_Q'.
+INFO: [v++ 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'PUSH_Q'
+INFO: [v++ 204-61] Pipelining loop 'PULL_OUT'.
+INFO: [v++ 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 2, loop 'PULL_OUT'
+INFO: [v++ 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [v++ 200-789] **** Estimated Fmax: 342.47 MHz
+INFO: [v++ 60-594] Finished kernel compilation
+INFO: [v++ 60-244] Generating system estimate report...
+INFO: [v++ 60-1092] Generated system estimate report: /tools/projects/FPGA-VLA/runs/T0043/_x/reports/pl_stub/system_estimate_pl_stub.xtxt
+INFO: [v++ 60-586] Created pl_stub.xo
+INFO: [v++ 60-2343] Use the Vitis Unified IDE to visualize and navigate the reports. Run the following command. 
+    vitis -a/ --analyze /tools/projects/FPGA-VLA/runs/T0043/pl_stub.xo.compile_summary 
+INFO: [v++ 60-791] Total elapsed time: 0h 0m 50s
+INFO: [v++ 60-1653] Closing dispatch client.

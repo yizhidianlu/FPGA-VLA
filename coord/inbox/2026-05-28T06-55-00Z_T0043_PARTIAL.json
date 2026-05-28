@@ -1,0 +1,19 @@
+{
+  "task_id": "T0043",
+  "status": "PARTIAL",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-28T06:55:00Z",
+  "summary": "Full hw_emu pre-package flow PASS: aiecompiler hw (3 warnings, 0 errors), v++ -c pl_stub (Fmax 342 MHz, after bundle conflict + ap_axi_sdata.h include fixes), v++ -l XSA (after fixing sptag from DDR[0] -> DDR and adding AXIS streams to pl_stub to match AIE PLIO Q_in/out ports). v++ -p hw_emu BLOCKED on missing Xvfb host dependency. apt-get install xvfb fails: Aliyun cloud mirror unreachable, archive.ubuntu.com reachable but sources.list edit auto-mode-blocked. Cannot complete autonomously.",
+  "report_dir": "coord/reports/T0043/",
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "hw_emu_qemu_boot_fail (package fails before boot due to missing Xvfb)",
+    "host admin dependency: needs `sudo apt-get install xvfb` from a working apt mirror, or restoration of mirrors.cloud.aliyuncs.com connectivity"
+  ],
+  "blocker": "Xvfb missing on the ECS host. v++ --target=hw_emu --package requires Xvfb to run qemu_addressing.tcl that generates DDR memspec DTB.",
+  "next_action_options": [
+    "(A) USER ACTION: install Xvfb (sudo apt-get install xvfb after restoring apt connectivity); then worker re-runs v++ -p + launch_hw_emu.sh; ~1h to measured aie_latency_us",
+    "(B) DEFER: keep T0042 analytic 160 us as published with [AIE-SCHED-EST] label; revisit at camera-ready with Xvfb available or on-board",
+    "(C) Switch to non-qemu measurement path (NOT viable without going back to PLIO which re-triggers T0040 MG limit)"
+  ]
+}

@@ -1,0 +1,51 @@
+Option Map File Used: '/tools/Xilinx/Vitis/2024.1/data/vitis/vpp/optMap.xml'
+
+****** v++ v2024.1 (64-bit)
+  **** SW Build 5074859 on 2024-05-20-23:21:20
+  **** Start of session at: Thu May 28 14:05:03 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+INFO: [v++ 60-1306] Additional information associated with this v++ package can be found at:
+	Reports: /tools/projects/FPGA-VLA/runs/T0043/_x/reports/package
+	Log files: /tools/projects/FPGA-VLA/runs/T0043/_x/logs/package
+Running Dispatch Server on port: 40237
+INFO: [v++ 60-1548] Creating build summary session with primary output ./v++.package_summary, at Thu May 28 14:05:06 2026
+INFO: [v++ 60-1315] Creating rulecheck session with output '/tools/projects/FPGA-VLA/runs/T0043/_x/reports/package/v++_package_a_guidance.html', at Thu May 28 14:05:06 2026
+INFO: [v++ 60-895]   Target platform: /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [v++ 60-1578]   This platform contains Xilinx Shell Archive '/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/hw/hw.xsa'
+INFO: [v++ 60-2256] Packaging for hardware emulation
+INFO: [v++ 82-3881] device architecture set to versal
+WARNING: [v++ 82-1147] Kernel image is not specified for linux domain
+WARNING: [v++ 82-3523] Root FS is not specified for linux domain
+INFO: [v++ 82-1022] generating /tools/projects/FPGA-VLA/runs/T0043/package/boot_image.bif
+INFO: [v++ 82-3884] generating pdi for arch versal with bif /tools/projects/FPGA-VLA/runs/T0043/package/boot_image.bif
+
+
+****** Bootgen v2024.1
+  **** Build date : May 19 2024-13:05:05
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+
+[INFO]   : Bootimage generated successfully
+
+INFO: [v++ 82-1023] generating boot files
+
+
+****** Bootgen v2024.1
+  **** Build date : May 19 2024-13:05:05
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+INFO: [v++ 82-3582] QEMU and NOC addressing from XSA database
+INFO: [v++ 82-3574] Executing ddr_memspec.dtsi to generate PS and PMC DTB files
+INFO: [v++ 82-3564] Deleting existing file: /tools/projects/FPGA-VLA/runs/T0043/_x/package/qemu_dts_files/ddr_memspec.dtsi
+INFO: [v++ 82-3571] Creating noc_memory_config file
+INFO: [v++ 82-3579] Launched the XSCT to generate qemu addressing.
+ERROR: Xvfb is not available on the system, please make sure Xvfb is available on the system.
+ERROR: [v++ 82-3578] Failed to execute the qemu_addressing tcl script
+INFO: [v++ 82-3574] Executing ddr_memspec.dtsi to generate PS and PMC DTB files
+INFO: [v++ 82-3889] validating boot mode
+ERROR: [v++ 60-702] Failed to finish packaging
+INFO: [v++ 60-1653] Closing dispatch client.

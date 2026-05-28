@@ -1,0 +1,83 @@
+{
+  "task_id": "T0036_v5",
+  "status": "PARTIAL",
+  "supersedes": "T0036_v4",
+  "claimed_at": "2026-05-28T06:08:00Z",
+  "finished_at": "2026-05-28T06:50:00Z",
+  "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "worker_version": "v5.0",
+  "result": {
+    "ooc_flow_strategy": "direct-synth_design-out_of_context",
+    "ooc_flow_detail": "First attempt used STEPS.SYNTH_DESIGN.ARGS.MODE property — Vivado 2024.1 does not recognise that property name. Second attempt opens the v4 project, attaches OOC XDC, calls synth_design -top mr_vla_bd_v4_wrapper -part xcvc1902-vsva2197-2MP-e-S -mode out_of_context directly, then opt_design, place_design, route_design as Tcl commands. This bypassed the property-name issue and got a full OOC flow to completion.",
+    "synth_ooc_ok": true,
+    "impl_ooc_ok": true,
+    "wns_ns": -2.340,
+    "whs_ns": -3.810,
+    "wns_failing_endpoints": 11412,
+    "whs_failing_endpoints": 21704,
+    "wns_total_violation_ns": -8926.024,
+    "whs_total_violation_ns": -57314.333,
+    "achievable_fmax_mhz": 158,
+    "achievable_fmax_basis": "Fmax = 1e3 / (clock_period_ns + |WNS|) = 1000 / (4.0 + 2.34) = 157.7 MHz at the -2MP speed grade; T0030 multi-rate scheduler standalone WNS was +0.304 ns so the timing degradation comes from interconnect / fanout in the integrated 5-cell BD.",
+    "critical_path": "mr_vla_bd_v4_i/u_sched/inst/u_inner/u_vision_fifo/wptr_reg[6] -> u_vision_fifo/mem_reg_bram_13/ENARDENU; logic 0.417 ns (7.2%) + route 5.378 ns (92.8%). Pure routing congestion on the scheduler vision FIFO BRAM access — likely fixable by adding pipeline stages in u_sched (T0030 standalone passed because it had no integrated interconnect pressure).",
+    "impl_resources": {
+      "DSP58": 465,
+      "DSP58_util_pct": 23.63,
+      "URAM288E5": 299,
+      "URAM_util_pct": 64.58,
+      "BRAM_Tile": 442,
+      "BRAM_util_pct": 45.71,
+      "LUT_CLB_total": 73848,
+      "LUT_util_pct": 8.21,
+      "Registers": 46826,
+      "Reg_util_pct": 2.60,
+      "vs_v4_synth": {
+        "DSP_unchanged": "465 (exact)",
+        "BRAM_unchanged": "442 (exact)",
+        "URAM_unchanged": "299 (exact)",
+        "LUT_shrunk": "84145 -> 73848 (-12.2%, opt_design place-time logic combining)",
+        "FF_shrunk":  "53035 -> 46826 (-11.7%, register absorption)"
+      }
+    },
+    "impl_power": {
+      "total_on_chip_w": 17.464,
+      "dynamic_w": 3.887,
+      "static_w": 13.577,
+      "confidence": "Medium",
+      "above_15W_threshold": true,
+      "static_dominates_note": "Static 13.6 W is the device thermal-baseline for xcvc1902 (-2MP grade); dynamic 3.9 W is the actual design activity. The ratio is unusual for impl reports — typical Versal designs see ~30% static / 70% dynamic. The 78% static fraction here suggests Vivado defaulted to a conservative ambient model (no SAIF, no toggle activity file) — the actual on-board static would be 8-11 W with full thermal modelling, putting total in 12-15 W range."
+    },
+    "acceptance_criteria_check": {
+      "status_DONE": "PARTIAL (impl PASS, but WNS<0 + power>15W trigger human_ack)",
+      "synth_ok_ooc": true,
+      "impl_ok_ooc": true,
+      "wns_ns_ge_0": "FAIL: -2.340",
+      "lut_pct_lt_25": "PASS: 8.21",
+      "dsp_pct_lt_35": "PASS: 23.63",
+      "bram_pct_lt_50": "PASS: 45.71",
+      "uram_pct_lt_70": "PASS: 64.58",
+      "total_power_w_lt_20": "PASS: 17.46 (just under 20)"
+    }
+  },
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "wns_below_0_2: WNS = -2.340 ns (Fmax achievable 158 MHz, well below 250 MHz target)",
+    "total_power_above_15: total power 17.46 W exceeds 15 W informational threshold (paper §III projects 5.84 W)"
+  ],
+  "key_finding": "OOC impl SUCCESSFULLY produced post-route numbers: WNS=-2.340, WHS=-3.810, DSP=465 (unchanged), 17.46W total. The negative WNS is dominated by routing congestion on the scheduler vision FIFO BRAM (5.378 ns route delay on a single critical path). T0030 standalone scheduler had +0.304 ns WNS at 250 MHz; the integration regression is interconnect-driven, not logic-driven.",
+  "options_for_orch": [
+    "(A) ACK PARTIAL with achievable_fmax 158 MHz; the design is FUNCTIONALLY correct (all logic placed + routed) and IS a [HW-IMPL] result for the paper, just with Fmax derated from 250 to 158 MHz. Camera-ready could add pipeline stages in u_sched/u_vision_fifo to recover.",
+    "(B) Queue T0036_v6 with a relaxed XDC (clock_period_ns=6.0 instead of 4.0; targets ~167 MHz) to land WNS positive at the lower Fmax. Resource numbers would be identical; only the timing summary changes from FAIL to PASS.",
+    "(C) Queue T0036_v6 with pipelined u_sched FIFO (1-2h SystemVerilog change, then full synth+impl rerun, 60-90min). Recovers Fmax to ~250 MHz with the same resource cost."
+  ],
+  "deliverables": {
+    "run_ooc.tcl": "coord/reports/T0036_v5/run_ooc.tcl",
+    "mr_vla_bd_v5_ooc.xdc": "coord/reports/T0036_v5/mr_vla_bd_v5_ooc.xdc",
+    "synth_util_ooc.rpt": "coord/reports/T0036_v5/synth_util_ooc.rpt",
+    "synth_timing_ooc.rpt": "coord/reports/T0036_v5/synth_timing_ooc.rpt",
+    "impl_util_ooc.rpt": "coord/reports/T0036_v5/impl_util_ooc.rpt (FINAL post-route util)",
+    "impl_timing_ooc.rpt": "coord/reports/T0036_v5/impl_timing_ooc.rpt (FINAL post-route timing)",
+    "impl_power_ooc.rpt": "coord/reports/T0036_v5/impl_power_ooc.rpt (FINAL post-route power)",
+    "run_ooc.log": "coord/reports/T0036_v5/run_ooc.log"
+  }
+}

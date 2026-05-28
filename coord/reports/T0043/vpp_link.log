@@ -1,0 +1,200 @@
+Option Map File Used: '/tools/Xilinx/Vitis/2024.1/data/vitis/vpp/optMap.xml'
+
+****** v++ v2024.1 (64-bit)
+  **** SW Build 5074859 on 2024-05-20-23:21:20
+  **** Start of session at: Thu May 28 13:59:37 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+INFO: [v++ 60-1306] Additional information associated with this v++ link can be found at:
+	Reports: /tools/projects/FPGA-VLA/runs/T0043/_x/reports/link
+	Log files: /tools/projects/FPGA-VLA/runs/T0043/_x/logs/link
+Running Dispatch Server on port: 33285
+INFO: [v++ 60-1548] Creating build summary session with primary output /tools/projects/FPGA-VLA/runs/T0043/xmod_attn.xsa.link_summary, at Thu May 28 13:59:40 2026
+INFO: [v++ 60-1315] Creating rulecheck session with output '/tools/projects/FPGA-VLA/runs/T0043/_x/reports/link/v++_link_xmod_attn_guidance.html', at Thu May 28 13:59:40 2026
+INFO: [v++ 60-895]   Target platform: /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm
+INFO: [v++ 60-1578]   This platform contains Xilinx Shell Archive '/tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/hw_emu/hw_emu.xsa'
+INFO: [v++ 60-629] Linking for hardware emulation target
+INFO: [v++ 60-423]   Target device: xilinx_vck190_base_202410_1
+INFO: [v++ 60-1332] Run 'run_link' status: Not started
+INFO: [v++ 60-1443] [13:59:42] Run run_link: Step system_link: Started
+INFO: [v++ 60-1453] Command Line: system_link --xo /tools/projects/FPGA-VLA/runs/T0043/pl_stub.xo /tools/projects/FPGA-VLA/runs/T0043/.Xil/v++-79136-iZuf63nslpsmuz7caylpqsZ/a0/hw.o --config /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/syslinkConfig.ini --xpfm /tools/Xilinx/Vitis/2024.1/base_platforms/xilinx_vck190_base_202410_1/xilinx_vck190_base_202410_1.xpfm --target emu --output_dir /tools/projects/FPGA-VLA/runs/T0043/_x/link/int --temp_dir /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link
+INFO: [v++ 60-1454] Run Directory: /tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link
+INFO: [SYSTEM_LINK 82-128] Extracting .o file /tools/projects/FPGA-VLA/runs/T0043/.Xil/v++-79136-iZuf63nslpsmuz7caylpqsZ/a0/hw.o
+INFO: [SYSTEM_LINK 82-38] [13:59:43] merge_aieprj started: /tools/Xilinx/Vitis/2024.1/bin/merge_aieprj --in-aieprj /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/iprepo/temp/o0/system.aieprj --out-aieprj /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/system.aieprj --temp_dir /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/aie/merge_temp
+INFO: [SYSTEM_LINK 82-37] [13:59:43] merge_aieprj finished successfully
+Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.06 . Memory (MB): peak = 469.082 ; gain = 0.000 ; free physical = 49882 ; free virtual = 55291
+INFO: [SYSTEM_LINK 82-38] [13:59:43] aieshim_validator started: /tools/Xilinx/Vitis/2024.1/bin/aieshim_validator -x /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/aie/shim_validation -g /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/aie/system.aieprj -t /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/shim_validation.tcl
+INFO: [SYSTEM_LINK 82-37] [13:59:44] aieshim_validator finished successfully
+Time (s): cpu = 00:00:00.88 ; elapsed = 00:00:00.91 . Memory (MB): peak = 469.082 ; gain = 0.000 ; free physical = 49874 ; free virtual = 55284
+INFO: [SYSTEM_LINK 82-70] Extracting xo v3 file /tools/projects/FPGA-VLA/runs/T0043/pl_stub.xo
+INFO: [SYSTEM_LINK 82-53] Creating IP database /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/_sysl/.cdb/xd_ip_db.xml
+INFO: [SYSTEM_LINK 82-38] [13:59:44] build_xd_ip_db started: /tools/Xilinx/Vitis/2024.1/bin/build_xd_ip_db -ip_search 0  -sds-pf /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/hw_emu.hpfm -clkid 2 -ip /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/iprepo/xilinx_com_hls_pl_stub_1_0,pl_stub -o /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/_sysl/.cdb/xd_ip_db.xml
+INFO: [SYSTEM_LINK 82-37] [13:59:50] build_xd_ip_db finished successfully
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 469.082 ; gain = 0.000 ; free physical = 49892 ; free virtual = 55307
+INFO: [SYSTEM_LINK 82-51] Create system connectivity graph
+INFO: [SYSTEM_LINK 82-101] Importing AIE connectivity graph
+INFO: [SYSTEM_LINK 82-38] [13:59:50] aie_import started: /tools/Xilinx/Vitis/2024.1/bin/aie_import  --dpa_aie_mem_offload false -r /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/_sysl/.cdb/xd_ip_db.xml -i /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/aie/cfgraph.xml -o /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/cfgraph/aie_cfgraph.xml -c /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/cfgraph/aie_comp.xml -f /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/cfgraph/aie_fcnmap.xml
+INFO: [SYSTEM_LINK 82-37] [13:59:50] aie_import finished successfully
+Time (s): cpu = 00:00:00.86 ; elapsed = 00:00:00.87 . Memory (MB): peak = 469.082 ; gain = 0.000 ; free physical = 49891 ; free virtual = 55306
+INFO: [SYSTEM_LINK 82-102] Applying explicit connections to the system connectivity graph: /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/cfgraph/cfgen_cfgraph.xml
+INFO: [SYSTEM_LINK 82-38] [13:59:55] cfgen started: /tools/Xilinx/Vitis/2024.1/bin/cfgen  -nk pl_stub:1:pl_stub_1 -sc pl_stub_1.s_q_to_aie:ai_engine_0.Q_in -sc ai_engine_0.out:pl_stub_1.s_out_from_aie -sp pl_stub_1.q_in_buf:DDR -sp pl_stub_1.out_buf:DDR -dpa_mem_offload false -dpa_aie_mem_offload false -dmclkid 2 -r /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/_sysl/.cdb/xd_ip_db.xml -i /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/cfgraph/aie_cfgraph.xml -o /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/cfgraph/cfgen_cfgraph.xml
+INFO: [CFGEN 83-0] Kernel Specs: 
+INFO: [CFGEN 83-0]   kernel: pl_stub, num: 1  {pl_stub_1}
+INFO: [CFGEN 83-0] Port Specs: 
+INFO: [CFGEN 83-0]   kernel: pl_stub_1, k_port: q_in_buf, sptag: DDR
+INFO: [CFGEN 83-0]   kernel: pl_stub_1, k_port: out_buf, sptag: DDR
+INFO: [CFGEN 83-0] Stream Specs: 
+INFO: [CFGEN 83-0]   pl_stub_1.s_q_to_aie => ai_engine_0.Q_in
+INFO: [CFGEN 83-0]   ai_engine_0.out => pl_stub_1.s_out_from_aie
+INFO: [CFGEN 83-2226] Inferring mapping for argument ai_engine_0.K_gmio_V_gmio to DDR
+INFO: [SYSTEM_LINK 82-37] [13:59:58] cfgen finished successfully
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 469.082 ; gain = 0.000 ; free physical = 49889 ; free virtual = 55304
+INFO: [SYSTEM_LINK 82-52] Create top-level block diagram
+INFO: [SYSTEM_LINK 82-38] [13:59:58] cf2bd started: /tools/Xilinx/Vitis/2024.1/bin/cf2bd  --linux --trace_buffer 1024 --input_file /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/cfgraph/cfgen_cfgraph.xml --ip_db /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/_sysl/.cdb/xd_ip_db.xml --cf_name dr --working_dir /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/_sysl/.xsd --temp_dir /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link --output_dir /tools/projects/FPGA-VLA/runs/T0043/_x/link/int
+INFO: [CF2BD 82-31] Launching cf2xd: cf2xd -linux -trace-buffer 1024 -i /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/cfgraph/cfgen_cfgraph.xml -r /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/_sysl/.cdb/xd_ip_db.xml -o dr.xml
+INFO: [CF2BD 82-28] cf2xd finished successfully
+INFO: [CF2BD 82-31] Launching cf_xsd: cf_xsd -disable-address-gen -dn dr -dp /tools/projects/FPGA-VLA/runs/T0043/_x/link/sys_link/_sysl/.xsd
+INFO: [CF2BD 82-28] cf_xsd finished successfully
+INFO: [SYSTEM_LINK 82-37] [14:00:00] cf2bd finished successfully
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 469.082 ; gain = 0.000 ; free physical = 49879 ; free virtual = 55301
+INFO: [v++ 60-1441] [14:00:00] Run run_link: Step system_link: Completed
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 503.062 ; gain = 0.000 ; free physical = 49954 ; free virtual = 55370
+INFO: [v++ 60-1443] [14:00:00] Run run_link: Step cf2sw: Started
+INFO: [v++ 60-1453] Command Line: cf2sw -sdsl /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/sdsl.dat -rtd /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/cf2sw.rtd -nofilter /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/cf2sw_full.rtd -xclbin /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xclbin_orig.xml -o /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xclbin_orig.1.xml
+INFO: [v++ 60-1454] Run Directory: /tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link
+INFO: [v++ 60-1441] [14:00:02] Run run_link: Step cf2sw: Completed
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 503.062 ; gain = 0.000 ; free physical = 49951 ; free virtual = 55369
+INFO: [v++ 60-1443] [14:00:02] Run run_link: Step rtd2_system_diagram: Started
+INFO: [v++ 60-1453] Command Line: rtd2SystemDiagram
+INFO: [v++ 60-1454] Run Directory: /tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link
+INFO: [v++ 60-1441] [14:00:02] Run run_link: Step rtd2_system_diagram: Completed
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.14 . Memory (MB): peak = 503.062 ; gain = 0.000 ; free physical = 49946 ; free virtual = 55364
+INFO: [v++ 60-1443] [14:00:02] Run run_link: Step vpl: Started
+INFO: [v++ 60-1453] Command Line: vpl -t hw_emu -f xilinx_vck190_base_202410_1 --remote_ip_cache /tools/projects/FPGA-VLA/runs/T0043/.ipcache --output_dir /tools/projects/FPGA-VLA/runs/T0043/_x/link/int --log_dir /tools/projects/FPGA-VLA/runs/T0043/_x/logs/link --report_dir /tools/projects/FPGA-VLA/runs/T0043/_x/reports/link --config /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/vplConfig.ini -k /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/kernel_info.dat --webtalk_flag Vitis --temp_dir /tools/projects/FPGA-VLA/runs/T0043/_x/link --emulation_mode debug_waveform --no-info --iprepo /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xo/ip_repo/xilinx_com_hls_pl_stub_1_0 --messageDb /tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link/vpl.pb /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/dr.bd.tcl
+INFO: [v++ 60-1454] Run Directory: /tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link
+
+****** vpl v2024.1 (64-bit)
+  **** SW Build 5074859 on 2024-05-20-23:21:20
+  **** Start of session at: Thu May 28 14:00:03 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+INFO: [VPL 60-839] Read in kernel information from file '/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/kernel_info.dat'.
+INFO: [VPL 60-423]   Target device: xilinx_vck190_base_202410_1
+INFO: [VPL 60-1032] Extracting hardware platform to /tools/projects/FPGA-VLA/runs/T0043/_x/link/vivado/vpl/.local/hw_platform
+[14:00:10] Run vpl: Step create_project: Started
+Creating Vivado project.
+[14:00:21] Run vpl: Step create_project: Completed
+[14:00:21] Run vpl: Step create_bd: Started
+[14:00:41] Run vpl: Step create_bd: Completed
+[14:00:41] Run vpl: Step update_bd: Started
+[14:00:42] Run vpl: Step update_bd: Completed
+[14:00:42] Run vpl: Step generate_target: Started
+[14:01:57] Run vpl: Step generate_target: RUNNING...
+[14:02:45] Run vpl: Step generate_target: Completed
+[14:02:45] Run vpl: Step config_hw_emu.gen_scripts: Started
+[14:03:08] Run vpl: Step config_hw_emu.gen_scripts: Completed
+[14:03:08] Run vpl: Step config_hw_emu.compile: Started
+[14:03:36] Run vpl: Step config_hw_emu.compile: Completed
+[14:03:36] Run vpl: Step config_hw_emu.elaborate: Started
+Check VPL, containing 2 checks, has run: 0 errors
+[14:04:33] Run vpl: Step config_hw_emu.elaborate: Completed
+[14:04:33] Run vpl: FINISHED. Run Status: config_hw_emu.elaborate Complete!
+INFO: [v++ 60-1441] [14:04:34] Run run_link: Step vpl: Completed
+Time (s): cpu = 00:00:05 ; elapsed = 00:04:32 . Memory (MB): peak = 503.062 ; gain = 0.000 ; free physical = 48199 ; free virtual = 54762
+INFO: [v++ 60-1443] [14:04:34] Run run_link: Step rtdgen: Started
+INFO: [v++ 60-1453] Command Line: rtdgen
+INFO: [v++ 60-1454] Run Directory: /tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link
+INFO: [v++ 60-1453] Command Line: cf2sw -a /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/address_map.xml -sdsl /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/sdsl.dat -xclbin /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xclbin_orig.xml -rtd /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn.rtd -o /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn.xml
+INFO: [v++ 60-1652] Cf2sw returned exit code: 0
+WARNING: [v++ 60-1455] Debuggable symbols are not generated successfully, clean up /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/consolidated.cf
+INFO: [v++ 60-1441] [14:04:38] Run run_link: Step rtdgen: Completed
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 503.062 ; gain = 0.000 ; free physical = 48038 ; free virtual = 54624
+INFO: [v++ 60-1443] [14:04:38] Run run_link: Step xclbinutil: Started
+INFO: [v++ 60-1453] Command Line: xclbinutil --add-section PDI:RAW:/tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link/../int/vpl_gen_fixed_presynth.pdi --add-section DEBUG_IP_LAYOUT:JSON:/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/debug_ip_layout.rtd --add-section BITSTREAM:RAW:/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/behav.xse --force --target hw_emu --key-value SYS:dfx_enable:false --add-section :JSON:/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn.rtd --add-section CLOCK_FREQ_TOPOLOGY:JSON:/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn_xml.rtd --add-section BUILD_METADATA:JSON:/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn_build.rtd --add-section EMBEDDED_METADATA:RAW:/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn.xml --add-section SYSTEM_METADATA:RAW:/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/systemDiagramModelSlrBaseAddress.json --add-section AIE_METADATA:JSON:/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/aie_control_config.json --key-value SYS:PlatformVBNV:xilinx.com_xd_xilinx_vck190_base_202410_1_202410_1 --output /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn.xclbin
+INFO: [v++ 60-1454] Run Directory: /tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link
+XRT Build Version: 2.16.0 (Vitis)
+       Build Date: 2023-07-13 16:00:55
+          Hash ID: 157faa07876c55bb8aa8ec51b28608a6a0f6638e
+Creating a default 'in-memory' xclbin image.
+
+Section: 'PDI'(18) was successfully added.
+Size   : 439840 bytes
+Format : RAW
+File   : '/tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link/../int/vpl_gen_fixed_presynth.pdi'
+
+Section: 'DEBUG_IP_LAYOUT'(9) was successfully added.
+Size   : 1592 bytes
+Format : JSON
+File   : '/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/debug_ip_layout.rtd'
+
+Section: 'BITSTREAM'(0) was successfully added.
+Size   : 24808197 bytes
+Format : RAW
+File   : '/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/behav.xse'
+
+Section: 'MEM_TOPOLOGY'(6) was successfully added.
+Format : JSON
+File   : 'mem_topology'
+
+Section: 'IP_LAYOUT'(8) was successfully added.
+Format : JSON
+File   : 'ip_layout'
+
+Section: 'CONNECTIVITY'(7) was successfully added.
+Format : JSON
+File   : 'connectivity'
+WARNING: Skipping CLOCK_FREQ_TOPOLOGY section for count size is zero.
+WARNING: Section 'CLOCK_FREQ_TOPOLOGY' content is empty.  No data in the given JSON file.
+
+Section: 'CLOCK_FREQ_TOPOLOGY'(11) was empty.  No action taken.
+Format : JSON
+File   : '/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn_xml.rtd'
+
+Section: 'BUILD_METADATA'(14) was successfully added.
+Size   : 2749 bytes
+Format : JSON
+File   : '/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn_build.rtd'
+
+Section: 'EMBEDDED_METADATA'(2) was successfully added.
+Size   : 4510 bytes
+Format : RAW
+File   : '/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn.xml'
+
+Section: 'SYSTEM_METADATA'(22) was successfully added.
+Size   : 17790 bytes
+Format : RAW
+File   : '/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/systemDiagramModelSlrBaseAddress.json'
+
+Section: 'AIE_METADATA'(25) was successfully added.
+Size   : 2177 bytes
+Format : JSON
+File   : '/tools/projects/FPGA-VLA/runs/T0043/_x/link/int/aie_control_config.json'
+Successfully wrote (25289011 bytes) to the output file: /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn.xclbin
+Leaving xclbinutil.
+INFO: [v++ 60-1441] [14:04:38] Run run_link: Step xclbinutil: Completed
+Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.11 . Memory (MB): peak = 503.062 ; gain = 0.000 ; free physical = 47998 ; free virtual = 54610
+INFO: [v++ 60-1443] [14:04:38] Run run_link: Step xclbinutilinfo: Started
+INFO: [v++ 60-1453] Command Line: xclbinutil --quiet --force --info /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn.xclbin.info --input /tools/projects/FPGA-VLA/runs/T0043/_x/link/int/xmod_attn.xclbin
+INFO: [v++ 60-1454] Run Directory: /tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link
+INFO: [v++ 60-1441] [14:04:38] Run run_link: Step xclbinutilinfo: Completed
+Time (s): cpu = 00:00:00.2 ; elapsed = 00:00:00.21 . Memory (MB): peak = 503.062 ; gain = 0.000 ; free physical = 47987 ; free virtual = 54600
+INFO: [v++ 60-1443] [14:04:38] Run run_link: Step generate_sc_driver: Started
+INFO: [v++ 60-1453] Command Line: 
+INFO: [v++ 60-1454] Run Directory: /tools/projects/FPGA-VLA/runs/T0043/_x/link/run_link
+INFO: [v++ 60-1441] [14:04:38] Run run_link: Step generate_sc_driver: Completed
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 503.062 ; gain = 0.000 ; free physical = 47987 ; free virtual = 54600
+Check POST-VPL, containing 1 checks, has run: 0 errors
+INFO: [v++ 60-244] Generating system estimate report...
+INFO: [v++ 60-1092] Generated system estimate report: /tools/projects/FPGA-VLA/runs/T0043/_x/reports/link/system_estimate_xmod_attn.xtxt
+INFO: [v++ 82-3844] Successfully added runtime data to ./xmod_attn.xsa
+INFO: [v++ 60-586] Created xmod_attn.xsa
+INFO: [v++ 60-1307] Run completed. Additional information can be found in:
+	Guidance: /tools/projects/FPGA-VLA/runs/T0043/_x/reports/link/v++_link_xmod_attn_guidance.html
+	Steps Log File: /tools/projects/FPGA-VLA/runs/T0043/_x/logs/link/link.steps.log
+
+INFO: [v++ 60-2343] Use the Vitis Unified IDE to visualize and navigate the reports. Run the following command. 
+    vitis -a/ --analyze /tools/projects/FPGA-VLA/runs/T0043/xmod_attn.xsa.link_summary 
+INFO: [v++ 60-791] Total elapsed time: 0h 5m 2s
+INFO: [v++ 60-1653] Closing dispatch client.
