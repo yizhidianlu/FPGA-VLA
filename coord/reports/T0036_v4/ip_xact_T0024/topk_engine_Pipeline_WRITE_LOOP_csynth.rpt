@@ -1,0 +1,523 @@
+
+
+================================================================
+== Vitis HLS Report for 'topk_engine_Pipeline_WRITE_LOOP'
+================================================================
+* Date:           Wed May 27 13:12:22 2026
+
+* Version:        2024.1 (Build 5069499 on May 21 2024)
+* Project:        xmod_attn_v1_hls
+* Solution:       sol1 (Vivado IP Flow Target)
+* Product family: versalaicore
+* Target device:  xcvc1902-vsva2197-2MP-e-S
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  1.473 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval |                    Pipeline                   |
+    |   min   |   max   |    min   |    max   | min | max |                      Type                     |
+    +---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+    |       66|       66|  0.264 us|  0.264 us|   65|   65|  loop auto-rewind stp(delay=0 clock cycles(s))|
+    +---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------+---------+---------+----------+-----------+-----------+------+----------+
+        |              |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |   Loop Name  |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- WRITE_LOOP  |       64|       64|         1|          1|          1|    64|       yes|
+        +--------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+---------+--------+-----+
+|       Name      | BRAM_18K|  DSP |    FF   |   LUT  | URAM|
++-----------------+---------+------+---------+--------+-----+
+|DSP              |        -|     -|        -|       -|    -|
+|Expression       |        -|     -|        0|      11|    -|
+|FIFO             |        -|     -|        -|       -|    -|
+|Instance         |        -|     -|        0|     504|    -|
+|Memory           |        -|     -|        -|       -|    -|
+|Multiplexer      |        -|     -|        0|      24|    -|
+|Register         |        -|     -|        9|       -|    -|
++-----------------+---------+------+---------+--------+-----+
+|Total            |        0|     0|        9|     539|    0|
++-----------------+---------+------+---------+--------+-----+
+|Available        |     1934|  1968|  1799680|  899840|  463|
++-----------------+---------+------+---------+--------+-----+
+|Utilization (%)  |        0|     0|       ~0|      ~0|    0|
++-----------------+---------+------+---------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    +-----------------------------+------------------------+---------+----+---+-----+-----+
+    |           Instance          |         Module         | BRAM_18K| DSP| FF| LUT | URAM|
+    +-----------------------------+------------------------+---------+----+---+-----+-----+
+    |sparsemux_129_6_16_1_1_U718  |sparsemux_129_6_16_1_1  |        0|   0|  0|  336|    0|
+    |sparsemux_129_6_8_1_1_U719   |sparsemux_129_6_8_1_1   |        0|   0|  0|  168|    0|
+    +-----------------------------+------------------------+---------+----+---+-----+-----+
+    |Total                        |                        |        0|   0|  0|  504|    0|
+    +-----------------------------+------------------------+---------+----+---+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name     | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------------+----------+----+---+----+------------+------------+
+    |add_ln110_fu_2626_p2   |         +|   0|  0|   8|           7|           1|
+    |icmp_ln110_fu_2632_p2  |      icmp|   0|  0|   3|           7|           8|
+    +-----------------------+----------+----+---+----+------------+------------+
+    |Total                  |          |   0|  0|  11|          14|           9|
+    +-----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------+----+-----------+-----+-----------+
+    |         Name         | LUT| Input Size| Bits| Total Bits|
+    +----------------------+----+-----------+-----+-----------+
+    |ap_done_int           |   8|          2|    1|          2|
+    |ap_sig_allocacmp_k_4  |   8|          2|    7|         14|
+    |k_fu_678              |   8|          2|    7|         14|
+    +----------------------+----+-----------+-----+-----------+
+    |Total                 |  24|          6|   15|         30|
+    +----------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------+---+----+-----+-----------+
+    |     Name    | FF| LUT| Bits| Const Bits|
+    +-------------+---+----+-----+-----------+
+    |ap_CS_fsm    |  1|   0|    1|          0|
+    |ap_done_reg  |  1|   0|    1|          0|
+    |k_fu_678     |  7|   0|    7|          0|
+    +-------------+---+----+-----+-----------+
+    |Total        |  9|   0|    9|          0|
+    +-------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------------+-----+-----+------------+---------------------------------+--------------+
+|       RTL Ports       | Dir | Bits|  Protocol  |          Source Object          |    C Type    |
++-----------------------+-----+-----+------------+---------------------------------+--------------+
+|ap_clk                 |   in|    1|  ap_ctrl_hs|  topk_engine_Pipeline_WRITE_LOOP|  return value|
+|ap_rst                 |   in|    1|  ap_ctrl_hs|  topk_engine_Pipeline_WRITE_LOOP|  return value|
+|ap_start               |   in|    1|  ap_ctrl_hs|  topk_engine_Pipeline_WRITE_LOOP|  return value|
+|ap_done                |  out|    1|  ap_ctrl_hs|  topk_engine_Pipeline_WRITE_LOOP|  return value|
+|ap_idle                |  out|    1|  ap_ctrl_hs|  topk_engine_Pipeline_WRITE_LOOP|  return value|
+|ap_ready               |  out|    1|  ap_ctrl_hs|  topk_engine_Pipeline_WRITE_LOOP|  return value|
+|top_scores_0           |  out|   16|      ap_vld|                     top_scores_0|       pointer|
+|top_scores_0_ap_vld    |  out|    1|      ap_vld|                     top_scores_0|       pointer|
+|top_indices_0          |  out|    8|      ap_vld|                    top_indices_0|       pointer|
+|top_indices_0_ap_vld   |  out|    1|      ap_vld|                    top_indices_0|       pointer|
+|top_indices_63         |  out|    8|      ap_vld|                   top_indices_63|       pointer|
+|top_indices_63_ap_vld  |  out|    1|      ap_vld|                   top_indices_63|       pointer|
+|top_indices_62         |  out|    8|      ap_vld|                   top_indices_62|       pointer|
+|top_indices_62_ap_vld  |  out|    1|      ap_vld|                   top_indices_62|       pointer|
+|top_indices_61         |  out|    8|      ap_vld|                   top_indices_61|       pointer|
+|top_indices_61_ap_vld  |  out|    1|      ap_vld|                   top_indices_61|       pointer|
+|top_indices_60         |  out|    8|      ap_vld|                   top_indices_60|       pointer|
+|top_indices_60_ap_vld  |  out|    1|      ap_vld|                   top_indices_60|       pointer|
+|top_indices_59         |  out|    8|      ap_vld|                   top_indices_59|       pointer|
+|top_indices_59_ap_vld  |  out|    1|      ap_vld|                   top_indices_59|       pointer|
+|top_indices_58         |  out|    8|      ap_vld|                   top_indices_58|       pointer|
+|top_indices_58_ap_vld  |  out|    1|      ap_vld|                   top_indices_58|       pointer|
+|top_indices_57         |  out|    8|      ap_vld|                   top_indices_57|       pointer|
+|top_indices_57_ap_vld  |  out|    1|      ap_vld|                   top_indices_57|       pointer|
+|top_indices_56         |  out|    8|      ap_vld|                   top_indices_56|       pointer|
+|top_indices_56_ap_vld  |  out|    1|      ap_vld|                   top_indices_56|       pointer|
+|top_indices_55         |  out|    8|      ap_vld|                   top_indices_55|       pointer|
+|top_indices_55_ap_vld  |  out|    1|      ap_vld|                   top_indices_55|       pointer|
+|top_indices_54         |  out|    8|      ap_vld|                   top_indices_54|       pointer|
+|top_indices_54_ap_vld  |  out|    1|      ap_vld|                   top_indices_54|       pointer|
+|top_indices_53         |  out|    8|      ap_vld|                   top_indices_53|       pointer|
+|top_indices_53_ap_vld  |  out|    1|      ap_vld|                   top_indices_53|       pointer|
+|top_indices_52         |  out|    8|      ap_vld|                   top_indices_52|       pointer|
+|top_indices_52_ap_vld  |  out|    1|      ap_vld|                   top_indices_52|       pointer|
+|top_indices_51         |  out|    8|      ap_vld|                   top_indices_51|       pointer|
+|top_indices_51_ap_vld  |  out|    1|      ap_vld|                   top_indices_51|       pointer|
+|top_indices_50         |  out|    8|      ap_vld|                   top_indices_50|       pointer|
+|top_indices_50_ap_vld  |  out|    1|      ap_vld|                   top_indices_50|       pointer|
+|top_indices_49         |  out|    8|      ap_vld|                   top_indices_49|       pointer|
+|top_indices_49_ap_vld  |  out|    1|      ap_vld|                   top_indices_49|       pointer|
+|top_indices_48         |  out|    8|      ap_vld|                   top_indices_48|       pointer|
+|top_indices_48_ap_vld  |  out|    1|      ap_vld|                   top_indices_48|       pointer|
+|top_indices_47         |  out|    8|      ap_vld|                   top_indices_47|       pointer|
+|top_indices_47_ap_vld  |  out|    1|      ap_vld|                   top_indices_47|       pointer|
+|top_indices_46         |  out|    8|      ap_vld|                   top_indices_46|       pointer|
+|top_indices_46_ap_vld  |  out|    1|      ap_vld|                   top_indices_46|       pointer|
+|top_indices_45         |  out|    8|      ap_vld|                   top_indices_45|       pointer|
+|top_indices_45_ap_vld  |  out|    1|      ap_vld|                   top_indices_45|       pointer|
+|top_indices_44         |  out|    8|      ap_vld|                   top_indices_44|       pointer|
+|top_indices_44_ap_vld  |  out|    1|      ap_vld|                   top_indices_44|       pointer|
+|top_indices_43         |  out|    8|      ap_vld|                   top_indices_43|       pointer|
+|top_indices_43_ap_vld  |  out|    1|      ap_vld|                   top_indices_43|       pointer|
+|top_indices_42         |  out|    8|      ap_vld|                   top_indices_42|       pointer|
+|top_indices_42_ap_vld  |  out|    1|      ap_vld|                   top_indices_42|       pointer|
+|top_indices_41         |  out|    8|      ap_vld|                   top_indices_41|       pointer|
+|top_indices_41_ap_vld  |  out|    1|      ap_vld|                   top_indices_41|       pointer|
+|top_indices_40         |  out|    8|      ap_vld|                   top_indices_40|       pointer|
+|top_indices_40_ap_vld  |  out|    1|      ap_vld|                   top_indices_40|       pointer|
+|top_indices_39         |  out|    8|      ap_vld|                   top_indices_39|       pointer|
+|top_indices_39_ap_vld  |  out|    1|      ap_vld|                   top_indices_39|       pointer|
+|top_indices_38         |  out|    8|      ap_vld|                   top_indices_38|       pointer|
+|top_indices_38_ap_vld  |  out|    1|      ap_vld|                   top_indices_38|       pointer|
+|top_indices_37         |  out|    8|      ap_vld|                   top_indices_37|       pointer|
+|top_indices_37_ap_vld  |  out|    1|      ap_vld|                   top_indices_37|       pointer|
+|top_indices_36         |  out|    8|      ap_vld|                   top_indices_36|       pointer|
+|top_indices_36_ap_vld  |  out|    1|      ap_vld|                   top_indices_36|       pointer|
+|top_indices_35         |  out|    8|      ap_vld|                   top_indices_35|       pointer|
+|top_indices_35_ap_vld  |  out|    1|      ap_vld|                   top_indices_35|       pointer|
+|top_indices_34         |  out|    8|      ap_vld|                   top_indices_34|       pointer|
+|top_indices_34_ap_vld  |  out|    1|      ap_vld|                   top_indices_34|       pointer|
+|top_indices_33         |  out|    8|      ap_vld|                   top_indices_33|       pointer|
+|top_indices_33_ap_vld  |  out|    1|      ap_vld|                   top_indices_33|       pointer|
+|top_indices_32         |  out|    8|      ap_vld|                   top_indices_32|       pointer|
+|top_indices_32_ap_vld  |  out|    1|      ap_vld|                   top_indices_32|       pointer|
+|top_indices_31         |  out|    8|      ap_vld|                   top_indices_31|       pointer|
+|top_indices_31_ap_vld  |  out|    1|      ap_vld|                   top_indices_31|       pointer|
+|top_indices_30         |  out|    8|      ap_vld|                   top_indices_30|       pointer|
+|top_indices_30_ap_vld  |  out|    1|      ap_vld|                   top_indices_30|       pointer|
+|top_indices_29         |  out|    8|      ap_vld|                   top_indices_29|       pointer|
+|top_indices_29_ap_vld  |  out|    1|      ap_vld|                   top_indices_29|       pointer|
+|top_indices_28         |  out|    8|      ap_vld|                   top_indices_28|       pointer|
+|top_indices_28_ap_vld  |  out|    1|      ap_vld|                   top_indices_28|       pointer|
+|top_indices_27         |  out|    8|      ap_vld|                   top_indices_27|       pointer|
+|top_indices_27_ap_vld  |  out|    1|      ap_vld|                   top_indices_27|       pointer|
+|top_indices_26         |  out|    8|      ap_vld|                   top_indices_26|       pointer|
+|top_indices_26_ap_vld  |  out|    1|      ap_vld|                   top_indices_26|       pointer|
+|top_indices_25         |  out|    8|      ap_vld|                   top_indices_25|       pointer|
+|top_indices_25_ap_vld  |  out|    1|      ap_vld|                   top_indices_25|       pointer|
+|top_indices_24         |  out|    8|      ap_vld|                   top_indices_24|       pointer|
+|top_indices_24_ap_vld  |  out|    1|      ap_vld|                   top_indices_24|       pointer|
+|top_indices_23         |  out|    8|      ap_vld|                   top_indices_23|       pointer|
+|top_indices_23_ap_vld  |  out|    1|      ap_vld|                   top_indices_23|       pointer|
+|top_indices_22         |  out|    8|      ap_vld|                   top_indices_22|       pointer|
+|top_indices_22_ap_vld  |  out|    1|      ap_vld|                   top_indices_22|       pointer|
+|top_indices_21         |  out|    8|      ap_vld|                   top_indices_21|       pointer|
+|top_indices_21_ap_vld  |  out|    1|      ap_vld|                   top_indices_21|       pointer|
+|top_indices_20         |  out|    8|      ap_vld|                   top_indices_20|       pointer|
+|top_indices_20_ap_vld  |  out|    1|      ap_vld|                   top_indices_20|       pointer|
+|top_indices_19         |  out|    8|      ap_vld|                   top_indices_19|       pointer|
+|top_indices_19_ap_vld  |  out|    1|      ap_vld|                   top_indices_19|       pointer|
+|top_indices_18         |  out|    8|      ap_vld|                   top_indices_18|       pointer|
+|top_indices_18_ap_vld  |  out|    1|      ap_vld|                   top_indices_18|       pointer|
+|top_indices_17         |  out|    8|      ap_vld|                   top_indices_17|       pointer|
+|top_indices_17_ap_vld  |  out|    1|      ap_vld|                   top_indices_17|       pointer|
+|top_indices_16         |  out|    8|      ap_vld|                   top_indices_16|       pointer|
+|top_indices_16_ap_vld  |  out|    1|      ap_vld|                   top_indices_16|       pointer|
+|top_indices_15         |  out|    8|      ap_vld|                   top_indices_15|       pointer|
+|top_indices_15_ap_vld  |  out|    1|      ap_vld|                   top_indices_15|       pointer|
+|top_indices_14         |  out|    8|      ap_vld|                   top_indices_14|       pointer|
+|top_indices_14_ap_vld  |  out|    1|      ap_vld|                   top_indices_14|       pointer|
+|top_indices_13         |  out|    8|      ap_vld|                   top_indices_13|       pointer|
+|top_indices_13_ap_vld  |  out|    1|      ap_vld|                   top_indices_13|       pointer|
+|top_indices_12         |  out|    8|      ap_vld|                   top_indices_12|       pointer|
+|top_indices_12_ap_vld  |  out|    1|      ap_vld|                   top_indices_12|       pointer|
+|top_indices_11         |  out|    8|      ap_vld|                   top_indices_11|       pointer|
+|top_indices_11_ap_vld  |  out|    1|      ap_vld|                   top_indices_11|       pointer|
+|top_indices_10         |  out|    8|      ap_vld|                   top_indices_10|       pointer|
+|top_indices_10_ap_vld  |  out|    1|      ap_vld|                   top_indices_10|       pointer|
+|top_indices_9          |  out|    8|      ap_vld|                    top_indices_9|       pointer|
+|top_indices_9_ap_vld   |  out|    1|      ap_vld|                    top_indices_9|       pointer|
+|top_indices_8          |  out|    8|      ap_vld|                    top_indices_8|       pointer|
+|top_indices_8_ap_vld   |  out|    1|      ap_vld|                    top_indices_8|       pointer|
+|top_indices_7          |  out|    8|      ap_vld|                    top_indices_7|       pointer|
+|top_indices_7_ap_vld   |  out|    1|      ap_vld|                    top_indices_7|       pointer|
+|top_indices_6          |  out|    8|      ap_vld|                    top_indices_6|       pointer|
+|top_indices_6_ap_vld   |  out|    1|      ap_vld|                    top_indices_6|       pointer|
+|top_indices_5          |  out|    8|      ap_vld|                    top_indices_5|       pointer|
+|top_indices_5_ap_vld   |  out|    1|      ap_vld|                    top_indices_5|       pointer|
+|top_indices_4          |  out|    8|      ap_vld|                    top_indices_4|       pointer|
+|top_indices_4_ap_vld   |  out|    1|      ap_vld|                    top_indices_4|       pointer|
+|top_indices_3          |  out|    8|      ap_vld|                    top_indices_3|       pointer|
+|top_indices_3_ap_vld   |  out|    1|      ap_vld|                    top_indices_3|       pointer|
+|top_indices_2          |  out|    8|      ap_vld|                    top_indices_2|       pointer|
+|top_indices_2_ap_vld   |  out|    1|      ap_vld|                    top_indices_2|       pointer|
+|top_indices_1          |  out|    8|      ap_vld|                    top_indices_1|       pointer|
+|top_indices_1_ap_vld   |  out|    1|      ap_vld|                    top_indices_1|       pointer|
+|top_scores_63          |  out|   16|      ap_vld|                    top_scores_63|       pointer|
+|top_scores_63_ap_vld   |  out|    1|      ap_vld|                    top_scores_63|       pointer|
+|top_scores_62          |  out|   16|      ap_vld|                    top_scores_62|       pointer|
+|top_scores_62_ap_vld   |  out|    1|      ap_vld|                    top_scores_62|       pointer|
+|top_scores_61          |  out|   16|      ap_vld|                    top_scores_61|       pointer|
+|top_scores_61_ap_vld   |  out|    1|      ap_vld|                    top_scores_61|       pointer|
+|top_scores_60          |  out|   16|      ap_vld|                    top_scores_60|       pointer|
+|top_scores_60_ap_vld   |  out|    1|      ap_vld|                    top_scores_60|       pointer|
+|top_scores_59          |  out|   16|      ap_vld|                    top_scores_59|       pointer|
+|top_scores_59_ap_vld   |  out|    1|      ap_vld|                    top_scores_59|       pointer|
+|top_scores_58          |  out|   16|      ap_vld|                    top_scores_58|       pointer|
+|top_scores_58_ap_vld   |  out|    1|      ap_vld|                    top_scores_58|       pointer|
+|top_scores_57          |  out|   16|      ap_vld|                    top_scores_57|       pointer|
+|top_scores_57_ap_vld   |  out|    1|      ap_vld|                    top_scores_57|       pointer|
+|top_scores_56          |  out|   16|      ap_vld|                    top_scores_56|       pointer|
+|top_scores_56_ap_vld   |  out|    1|      ap_vld|                    top_scores_56|       pointer|
+|top_scores_55          |  out|   16|      ap_vld|                    top_scores_55|       pointer|
+|top_scores_55_ap_vld   |  out|    1|      ap_vld|                    top_scores_55|       pointer|
+|top_scores_54          |  out|   16|      ap_vld|                    top_scores_54|       pointer|
+|top_scores_54_ap_vld   |  out|    1|      ap_vld|                    top_scores_54|       pointer|
+|top_scores_53          |  out|   16|      ap_vld|                    top_scores_53|       pointer|
+|top_scores_53_ap_vld   |  out|    1|      ap_vld|                    top_scores_53|       pointer|
+|top_scores_52          |  out|   16|      ap_vld|                    top_scores_52|       pointer|
+|top_scores_52_ap_vld   |  out|    1|      ap_vld|                    top_scores_52|       pointer|
+|top_scores_51          |  out|   16|      ap_vld|                    top_scores_51|       pointer|
+|top_scores_51_ap_vld   |  out|    1|      ap_vld|                    top_scores_51|       pointer|
+|top_scores_50          |  out|   16|      ap_vld|                    top_scores_50|       pointer|
+|top_scores_50_ap_vld   |  out|    1|      ap_vld|                    top_scores_50|       pointer|
+|top_scores_49          |  out|   16|      ap_vld|                    top_scores_49|       pointer|
+|top_scores_49_ap_vld   |  out|    1|      ap_vld|                    top_scores_49|       pointer|
+|top_scores_48          |  out|   16|      ap_vld|                    top_scores_48|       pointer|
+|top_scores_48_ap_vld   |  out|    1|      ap_vld|                    top_scores_48|       pointer|
+|top_scores_47          |  out|   16|      ap_vld|                    top_scores_47|       pointer|
+|top_scores_47_ap_vld   |  out|    1|      ap_vld|                    top_scores_47|       pointer|
+|top_scores_46          |  out|   16|      ap_vld|                    top_scores_46|       pointer|
+|top_scores_46_ap_vld   |  out|    1|      ap_vld|                    top_scores_46|       pointer|
+|top_scores_45          |  out|   16|      ap_vld|                    top_scores_45|       pointer|
+|top_scores_45_ap_vld   |  out|    1|      ap_vld|                    top_scores_45|       pointer|
+|top_scores_44          |  out|   16|      ap_vld|                    top_scores_44|       pointer|
+|top_scores_44_ap_vld   |  out|    1|      ap_vld|                    top_scores_44|       pointer|
+|top_scores_43          |  out|   16|      ap_vld|                    top_scores_43|       pointer|
+|top_scores_43_ap_vld   |  out|    1|      ap_vld|                    top_scores_43|       pointer|
+|top_scores_42          |  out|   16|      ap_vld|                    top_scores_42|       pointer|
+|top_scores_42_ap_vld   |  out|    1|      ap_vld|                    top_scores_42|       pointer|
+|top_scores_41          |  out|   16|      ap_vld|                    top_scores_41|       pointer|
+|top_scores_41_ap_vld   |  out|    1|      ap_vld|                    top_scores_41|       pointer|
+|top_scores_40          |  out|   16|      ap_vld|                    top_scores_40|       pointer|
+|top_scores_40_ap_vld   |  out|    1|      ap_vld|                    top_scores_40|       pointer|
+|top_scores_39          |  out|   16|      ap_vld|                    top_scores_39|       pointer|
+|top_scores_39_ap_vld   |  out|    1|      ap_vld|                    top_scores_39|       pointer|
+|top_scores_38          |  out|   16|      ap_vld|                    top_scores_38|       pointer|
+|top_scores_38_ap_vld   |  out|    1|      ap_vld|                    top_scores_38|       pointer|
+|top_scores_37          |  out|   16|      ap_vld|                    top_scores_37|       pointer|
+|top_scores_37_ap_vld   |  out|    1|      ap_vld|                    top_scores_37|       pointer|
+|top_scores_36          |  out|   16|      ap_vld|                    top_scores_36|       pointer|
+|top_scores_36_ap_vld   |  out|    1|      ap_vld|                    top_scores_36|       pointer|
+|top_scores_35          |  out|   16|      ap_vld|                    top_scores_35|       pointer|
+|top_scores_35_ap_vld   |  out|    1|      ap_vld|                    top_scores_35|       pointer|
+|top_scores_34          |  out|   16|      ap_vld|                    top_scores_34|       pointer|
+|top_scores_34_ap_vld   |  out|    1|      ap_vld|                    top_scores_34|       pointer|
+|top_scores_33          |  out|   16|      ap_vld|                    top_scores_33|       pointer|
+|top_scores_33_ap_vld   |  out|    1|      ap_vld|                    top_scores_33|       pointer|
+|top_scores_32          |  out|   16|      ap_vld|                    top_scores_32|       pointer|
+|top_scores_32_ap_vld   |  out|    1|      ap_vld|                    top_scores_32|       pointer|
+|top_scores_31          |  out|   16|      ap_vld|                    top_scores_31|       pointer|
+|top_scores_31_ap_vld   |  out|    1|      ap_vld|                    top_scores_31|       pointer|
+|top_scores_30          |  out|   16|      ap_vld|                    top_scores_30|       pointer|
+|top_scores_30_ap_vld   |  out|    1|      ap_vld|                    top_scores_30|       pointer|
+|top_scores_29          |  out|   16|      ap_vld|                    top_scores_29|       pointer|
+|top_scores_29_ap_vld   |  out|    1|      ap_vld|                    top_scores_29|       pointer|
+|top_scores_28          |  out|   16|      ap_vld|                    top_scores_28|       pointer|
+|top_scores_28_ap_vld   |  out|    1|      ap_vld|                    top_scores_28|       pointer|
+|top_scores_27          |  out|   16|      ap_vld|                    top_scores_27|       pointer|
+|top_scores_27_ap_vld   |  out|    1|      ap_vld|                    top_scores_27|       pointer|
+|top_scores_26          |  out|   16|      ap_vld|                    top_scores_26|       pointer|
+|top_scores_26_ap_vld   |  out|    1|      ap_vld|                    top_scores_26|       pointer|
+|top_scores_25          |  out|   16|      ap_vld|                    top_scores_25|       pointer|
+|top_scores_25_ap_vld   |  out|    1|      ap_vld|                    top_scores_25|       pointer|
+|top_scores_24          |  out|   16|      ap_vld|                    top_scores_24|       pointer|
+|top_scores_24_ap_vld   |  out|    1|      ap_vld|                    top_scores_24|       pointer|
+|top_scores_23          |  out|   16|      ap_vld|                    top_scores_23|       pointer|
+|top_scores_23_ap_vld   |  out|    1|      ap_vld|                    top_scores_23|       pointer|
+|top_scores_22          |  out|   16|      ap_vld|                    top_scores_22|       pointer|
+|top_scores_22_ap_vld   |  out|    1|      ap_vld|                    top_scores_22|       pointer|
+|top_scores_21          |  out|   16|      ap_vld|                    top_scores_21|       pointer|
+|top_scores_21_ap_vld   |  out|    1|      ap_vld|                    top_scores_21|       pointer|
+|top_scores_20          |  out|   16|      ap_vld|                    top_scores_20|       pointer|
+|top_scores_20_ap_vld   |  out|    1|      ap_vld|                    top_scores_20|       pointer|
+|top_scores_19          |  out|   16|      ap_vld|                    top_scores_19|       pointer|
+|top_scores_19_ap_vld   |  out|    1|      ap_vld|                    top_scores_19|       pointer|
+|top_scores_18          |  out|   16|      ap_vld|                    top_scores_18|       pointer|
+|top_scores_18_ap_vld   |  out|    1|      ap_vld|                    top_scores_18|       pointer|
+|top_scores_17          |  out|   16|      ap_vld|                    top_scores_17|       pointer|
+|top_scores_17_ap_vld   |  out|    1|      ap_vld|                    top_scores_17|       pointer|
+|top_scores_16          |  out|   16|      ap_vld|                    top_scores_16|       pointer|
+|top_scores_16_ap_vld   |  out|    1|      ap_vld|                    top_scores_16|       pointer|
+|top_scores_15          |  out|   16|      ap_vld|                    top_scores_15|       pointer|
+|top_scores_15_ap_vld   |  out|    1|      ap_vld|                    top_scores_15|       pointer|
+|top_scores_14          |  out|   16|      ap_vld|                    top_scores_14|       pointer|
+|top_scores_14_ap_vld   |  out|    1|      ap_vld|                    top_scores_14|       pointer|
+|top_scores_13          |  out|   16|      ap_vld|                    top_scores_13|       pointer|
+|top_scores_13_ap_vld   |  out|    1|      ap_vld|                    top_scores_13|       pointer|
+|top_scores_12          |  out|   16|      ap_vld|                    top_scores_12|       pointer|
+|top_scores_12_ap_vld   |  out|    1|      ap_vld|                    top_scores_12|       pointer|
+|top_scores_11          |  out|   16|      ap_vld|                    top_scores_11|       pointer|
+|top_scores_11_ap_vld   |  out|    1|      ap_vld|                    top_scores_11|       pointer|
+|top_scores_10          |  out|   16|      ap_vld|                    top_scores_10|       pointer|
+|top_scores_10_ap_vld   |  out|    1|      ap_vld|                    top_scores_10|       pointer|
+|top_scores_9           |  out|   16|      ap_vld|                     top_scores_9|       pointer|
+|top_scores_9_ap_vld    |  out|    1|      ap_vld|                     top_scores_9|       pointer|
+|top_scores_8           |  out|   16|      ap_vld|                     top_scores_8|       pointer|
+|top_scores_8_ap_vld    |  out|    1|      ap_vld|                     top_scores_8|       pointer|
+|top_scores_7           |  out|   16|      ap_vld|                     top_scores_7|       pointer|
+|top_scores_7_ap_vld    |  out|    1|      ap_vld|                     top_scores_7|       pointer|
+|top_scores_6           |  out|   16|      ap_vld|                     top_scores_6|       pointer|
+|top_scores_6_ap_vld    |  out|    1|      ap_vld|                     top_scores_6|       pointer|
+|top_scores_5           |  out|   16|      ap_vld|                     top_scores_5|       pointer|
+|top_scores_5_ap_vld    |  out|    1|      ap_vld|                     top_scores_5|       pointer|
+|top_scores_4           |  out|   16|      ap_vld|                     top_scores_4|       pointer|
+|top_scores_4_ap_vld    |  out|    1|      ap_vld|                     top_scores_4|       pointer|
+|top_scores_3           |  out|   16|      ap_vld|                     top_scores_3|       pointer|
+|top_scores_3_ap_vld    |  out|    1|      ap_vld|                     top_scores_3|       pointer|
+|top_scores_2           |  out|   16|      ap_vld|                     top_scores_2|       pointer|
+|top_scores_2_ap_vld    |  out|    1|      ap_vld|                     top_scores_2|       pointer|
+|top_scores_1           |  out|   16|      ap_vld|                     top_scores_1|       pointer|
+|top_scores_1_ap_vld    |  out|    1|      ap_vld|                     top_scores_1|       pointer|
+|p_reload11             |   in|   16|     ap_none|                       p_reload11|        scalar|
+|right_v_reload         |   in|   16|     ap_none|                   right_v_reload|        scalar|
+|right_v_1_reload       |   in|   16|     ap_none|                 right_v_1_reload|        scalar|
+|right_v_2_reload       |   in|   16|     ap_none|                 right_v_2_reload|        scalar|
+|right_v_3_reload       |   in|   16|     ap_none|                 right_v_3_reload|        scalar|
+|right_v_4_reload       |   in|   16|     ap_none|                 right_v_4_reload|        scalar|
+|right_v_5_reload       |   in|   16|     ap_none|                 right_v_5_reload|        scalar|
+|right_v_6_reload       |   in|   16|     ap_none|                 right_v_6_reload|        scalar|
+|right_v_7_reload       |   in|   16|     ap_none|                 right_v_7_reload|        scalar|
+|right_v_8_reload       |   in|   16|     ap_none|                 right_v_8_reload|        scalar|
+|right_v_9_reload       |   in|   16|     ap_none|                 right_v_9_reload|        scalar|
+|right_v_10_reload      |   in|   16|     ap_none|                right_v_10_reload|        scalar|
+|right_v_11_reload      |   in|   16|     ap_none|                right_v_11_reload|        scalar|
+|right_v_12_reload      |   in|   16|     ap_none|                right_v_12_reload|        scalar|
+|right_v_13_reload      |   in|   16|     ap_none|                right_v_13_reload|        scalar|
+|right_v_14_reload      |   in|   16|     ap_none|                right_v_14_reload|        scalar|
+|right_v_15_reload      |   in|   16|     ap_none|                right_v_15_reload|        scalar|
+|right_v_16_reload      |   in|   16|     ap_none|                right_v_16_reload|        scalar|
+|right_v_17_reload      |   in|   16|     ap_none|                right_v_17_reload|        scalar|
+|right_v_18_reload      |   in|   16|     ap_none|                right_v_18_reload|        scalar|
+|right_v_19_reload      |   in|   16|     ap_none|                right_v_19_reload|        scalar|
+|right_v_20_reload      |   in|   16|     ap_none|                right_v_20_reload|        scalar|
+|right_v_21_reload      |   in|   16|     ap_none|                right_v_21_reload|        scalar|
+|right_v_22_reload      |   in|   16|     ap_none|                right_v_22_reload|        scalar|
+|right_v_23_reload      |   in|   16|     ap_none|                right_v_23_reload|        scalar|
+|right_v_24_reload      |   in|   16|     ap_none|                right_v_24_reload|        scalar|
+|right_v_25_reload      |   in|   16|     ap_none|                right_v_25_reload|        scalar|
+|right_v_26_reload      |   in|   16|     ap_none|                right_v_26_reload|        scalar|
+|right_v_27_reload      |   in|   16|     ap_none|                right_v_27_reload|        scalar|
+|right_v_28_reload      |   in|   16|     ap_none|                right_v_28_reload|        scalar|
+|right_v_29_reload      |   in|   16|     ap_none|                right_v_29_reload|        scalar|
+|right_v_30_reload      |   in|   16|     ap_none|                right_v_30_reload|        scalar|
+|right_v_31_reload      |   in|   16|     ap_none|                right_v_31_reload|        scalar|
+|right_v_32_reload      |   in|   16|     ap_none|                right_v_32_reload|        scalar|
+|right_v_33_reload      |   in|   16|     ap_none|                right_v_33_reload|        scalar|
+|right_v_34_reload      |   in|   16|     ap_none|                right_v_34_reload|        scalar|
+|right_v_35_reload      |   in|   16|     ap_none|                right_v_35_reload|        scalar|
+|right_v_36_reload      |   in|   16|     ap_none|                right_v_36_reload|        scalar|
+|right_v_37_reload      |   in|   16|     ap_none|                right_v_37_reload|        scalar|
+|right_v_38_reload      |   in|   16|     ap_none|                right_v_38_reload|        scalar|
+|right_v_39_reload      |   in|   16|     ap_none|                right_v_39_reload|        scalar|
+|right_v_40_reload      |   in|   16|     ap_none|                right_v_40_reload|        scalar|
+|right_v_41_reload      |   in|   16|     ap_none|                right_v_41_reload|        scalar|
+|right_v_42_reload      |   in|   16|     ap_none|                right_v_42_reload|        scalar|
+|right_v_43_reload      |   in|   16|     ap_none|                right_v_43_reload|        scalar|
+|right_v_44_reload      |   in|   16|     ap_none|                right_v_44_reload|        scalar|
+|right_v_45_reload      |   in|   16|     ap_none|                right_v_45_reload|        scalar|
+|right_v_46_reload      |   in|   16|     ap_none|                right_v_46_reload|        scalar|
+|right_v_47_reload      |   in|   16|     ap_none|                right_v_47_reload|        scalar|
+|right_v_48_reload      |   in|   16|     ap_none|                right_v_48_reload|        scalar|
+|right_v_49_reload      |   in|   16|     ap_none|                right_v_49_reload|        scalar|
+|right_v_50_reload      |   in|   16|     ap_none|                right_v_50_reload|        scalar|
+|right_v_51_reload      |   in|   16|     ap_none|                right_v_51_reload|        scalar|
+|right_v_52_reload      |   in|   16|     ap_none|                right_v_52_reload|        scalar|
+|right_v_53_reload      |   in|   16|     ap_none|                right_v_53_reload|        scalar|
+|right_v_54_reload      |   in|   16|     ap_none|                right_v_54_reload|        scalar|
+|right_v_55_reload      |   in|   16|     ap_none|                right_v_55_reload|        scalar|
+|right_v_56_reload      |   in|   16|     ap_none|                right_v_56_reload|        scalar|
+|right_v_57_reload      |   in|   16|     ap_none|                right_v_57_reload|        scalar|
+|right_v_58_reload      |   in|   16|     ap_none|                right_v_58_reload|        scalar|
+|right_v_59_reload      |   in|   16|     ap_none|                right_v_59_reload|        scalar|
+|right_v_60_reload      |   in|   16|     ap_none|                right_v_60_reload|        scalar|
+|right_v_61_reload      |   in|   16|     ap_none|                right_v_61_reload|        scalar|
+|right_v_62_reload      |   in|   16|     ap_none|                right_v_62_reload|        scalar|
+|empty_25               |   in|    8|     ap_none|                         empty_25|        scalar|
+|empty_26               |   in|    8|     ap_none|                         empty_26|        scalar|
+|empty_27               |   in|    8|     ap_none|                         empty_27|        scalar|
+|empty_28               |   in|    8|     ap_none|                         empty_28|        scalar|
+|empty_29               |   in|    8|     ap_none|                         empty_29|        scalar|
+|empty_30               |   in|    8|     ap_none|                         empty_30|        scalar|
+|empty_31               |   in|    8|     ap_none|                         empty_31|        scalar|
+|empty_32               |   in|    8|     ap_none|                         empty_32|        scalar|
+|empty_33               |   in|    8|     ap_none|                         empty_33|        scalar|
+|empty_34               |   in|    8|     ap_none|                         empty_34|        scalar|
+|empty_35               |   in|    8|     ap_none|                         empty_35|        scalar|
+|empty_36               |   in|    8|     ap_none|                         empty_36|        scalar|
+|empty_37               |   in|    8|     ap_none|                         empty_37|        scalar|
+|empty_38               |   in|    8|     ap_none|                         empty_38|        scalar|
+|empty_39               |   in|    8|     ap_none|                         empty_39|        scalar|
+|empty_40               |   in|    8|     ap_none|                         empty_40|        scalar|
+|empty_41               |   in|    8|     ap_none|                         empty_41|        scalar|
+|empty_42               |   in|    8|     ap_none|                         empty_42|        scalar|
+|empty_43               |   in|    8|     ap_none|                         empty_43|        scalar|
+|empty_44               |   in|    8|     ap_none|                         empty_44|        scalar|
+|empty_45               |   in|    8|     ap_none|                         empty_45|        scalar|
+|empty_46               |   in|    8|     ap_none|                         empty_46|        scalar|
+|empty_47               |   in|    8|     ap_none|                         empty_47|        scalar|
+|empty_48               |   in|    8|     ap_none|                         empty_48|        scalar|
+|empty_49               |   in|    8|     ap_none|                         empty_49|        scalar|
+|empty_50               |   in|    8|     ap_none|                         empty_50|        scalar|
+|empty_51               |   in|    8|     ap_none|                         empty_51|        scalar|
+|empty_52               |   in|    8|     ap_none|                         empty_52|        scalar|
+|empty_53               |   in|    8|     ap_none|                         empty_53|        scalar|
+|empty_54               |   in|    8|     ap_none|                         empty_54|        scalar|
+|empty_55               |   in|    8|     ap_none|                         empty_55|        scalar|
+|empty_56               |   in|    8|     ap_none|                         empty_56|        scalar|
+|empty_57               |   in|    8|     ap_none|                         empty_57|        scalar|
+|empty_58               |   in|    8|     ap_none|                         empty_58|        scalar|
+|empty_59               |   in|    8|     ap_none|                         empty_59|        scalar|
+|empty_60               |   in|    8|     ap_none|                         empty_60|        scalar|
+|empty_61               |   in|    8|     ap_none|                         empty_61|        scalar|
+|empty_62               |   in|    8|     ap_none|                         empty_62|        scalar|
+|empty_63               |   in|    8|     ap_none|                         empty_63|        scalar|
+|empty_64               |   in|    8|     ap_none|                         empty_64|        scalar|
+|empty_65               |   in|    8|     ap_none|                         empty_65|        scalar|
+|empty_66               |   in|    8|     ap_none|                         empty_66|        scalar|
+|empty_67               |   in|    8|     ap_none|                         empty_67|        scalar|
+|empty_68               |   in|    8|     ap_none|                         empty_68|        scalar|
+|empty_69               |   in|    8|     ap_none|                         empty_69|        scalar|
+|empty_70               |   in|    8|     ap_none|                         empty_70|        scalar|
+|empty_71               |   in|    8|     ap_none|                         empty_71|        scalar|
+|empty_72               |   in|    8|     ap_none|                         empty_72|        scalar|
+|empty_73               |   in|    8|     ap_none|                         empty_73|        scalar|
+|empty_74               |   in|    8|     ap_none|                         empty_74|        scalar|
+|empty_75               |   in|    8|     ap_none|                         empty_75|        scalar|
+|empty_76               |   in|    8|     ap_none|                         empty_76|        scalar|
+|empty_77               |   in|    8|     ap_none|                         empty_77|        scalar|
+|empty_78               |   in|    8|     ap_none|                         empty_78|        scalar|
+|empty_79               |   in|    8|     ap_none|                         empty_79|        scalar|
+|empty_80               |   in|    8|     ap_none|                         empty_80|        scalar|
+|empty_81               |   in|    8|     ap_none|                         empty_81|        scalar|
+|empty_82               |   in|    8|     ap_none|                         empty_82|        scalar|
+|empty_83               |   in|    8|     ap_none|                         empty_83|        scalar|
+|empty_84               |   in|    8|     ap_none|                         empty_84|        scalar|
+|empty_85               |   in|    8|     ap_none|                         empty_85|        scalar|
+|empty_86               |   in|    8|     ap_none|                         empty_86|        scalar|
+|empty_87               |   in|    8|     ap_none|                         empty_87|        scalar|
+|empty                  |   in|    8|     ap_none|                            empty|        scalar|
++-----------------------+-----+-----+------------+---------------------------------+--------------+
+

@@ -1,0 +1,31 @@
+{
+  "task_id": "T0036_v4",
+  "status": "PARTIAL",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-28T05:35:00Z",
+  "summary": "T0036_v3 BLOCKED state RESOLVED. All 4 HLS IPs (T0024 xmod_attn, T0025 gvsa_matmul, T0026 action_diff_head, T0029 vit_encoder_12layer) re-exported with m_axi master interfaces using a wrapper-with-local-staging refactor (m_axi -> URAM/BRAM local copies -> original partitioned-array inner kernels -> m_axi store-back). New BD mr_vla_bd_v4 built with 5 IP cells + axi_smartconnect 16:4 consolidation. Full system synth PASS with DSP58=465 (EXACT match to orch projection), URAM 64.6%, BRAM 45.7%, LUT 9.35%. Impl deferred: synth WNS=NA (no propagated clock constraint at wrapper level) + synth IOB 5841 vs 692 (the 4 consolidated AXI4 masters + s_axilite control + scheduler streams externalized as top-level pins — this is a synth-only artifact; a Vitis xpfm platform integration would route the AXI ports to NoC/DDR and collapse IOB count to <200).",
+  "report_dir": "coord/reports/T0036_v4/",
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "impl skipped (synth-only deliverable; WNS=NA at synth)",
+    "bram_pct 45.7% > 40% criterion (staging + AXI infra)",
+    "uram_pct 64.6% > 25% criterion (T0024 K/V on-chip staging dominates)",
+    "synth IOB 844% over budget — synth-only artifact, not deployable count"
+  ],
+  "key_numbers_for_table_v": {
+    "DSP58": 465,
+    "URAM288E5": 299,
+    "BRAM_Tile": 442,
+    "LUT_CLB": 84145,
+    "Registers": 53035,
+    "design_state": "Synthesized",
+    "tool_version": "Vivado 2024.1",
+    "device": "xcvc1902-vsva2197-2MP-e-S",
+    "speed_grade": "-2MP"
+  },
+  "next_action_options": [
+    "ACK PARTIAL and accept DSP=465 / URAM=299 / BRAM=442 as the [HW-SYNTH] row for Table V; defer [HW-IMPL] post-route for camera-ready",
+    "Queue T0036_v5: wrap mr_vla_bd_v4 into a Vitis xpfm platform with NoC + DDR4 controllers + PS9 control bus, then re-run synth+impl through the platform flow for true [HW-IMPL] numbers (4-8h)",
+    "Queue T0036_v5 alt: add explicit clk_wiz + proc_sys_reset + create_clock XDC to current build_bd_v4.tcl and rerun synth+impl with externalized AXI as-is to get a synthesizable WNS number (2-3h, accepts synth-only IOB inflation)"
+  ]
+}

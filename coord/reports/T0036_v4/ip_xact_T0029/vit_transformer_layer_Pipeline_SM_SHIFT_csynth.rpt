@@ -1,0 +1,162 @@
+
+
+================================================================
+== Vitis HLS Report for 'vit_transformer_layer_Pipeline_SM_SHIFT'
+================================================================
+* Date:           Wed May 27 13:26:25 2026
+
+* Version:        2024.1 (Build 5069499 on May 21 2024)
+* Project:        vit_enc_hls
+* Solution:       sol1 (Vivado IP Flow Target)
+* Product family: versalaicore
+* Target device:  xcvc1902-vsva2197-2MP-e-S
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.709 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval |                    Pipeline                   |
+    |   min   |   max   |    min   |    max   | min | max |                      Type                     |
+    +---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+    |      259|      259|  1.036 us|  1.036 us|  257|  257|  loop auto-rewind stp(delay=0 clock cycles(s))|
+    +---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +------------+---------+---------+----------+-----------+-----------+------+----------+
+        |            |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- SM_SHIFT  |      257|      257|         3|          1|          1|   256|       yes|
+        +------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+---------+--------+-----+
+|       Name      | BRAM_18K|  DSP |    FF   |   LUT  | URAM|
++-----------------+---------+------+---------+--------+-----+
+|DSP              |        -|     -|        -|       -|    -|
+|Expression       |        -|     -|        0|     115|    -|
+|FIFO             |        -|     -|        -|       -|    -|
+|Instance         |        -|     -|        -|       -|    -|
+|Memory           |        -|     -|        -|       -|    -|
+|Multiplexer      |        -|     -|        0|      80|    -|
+|Register         |        -|     -|       91|       -|    -|
++-----------------+---------+------+---------+--------+-----+
+|Total            |        0|     0|       91|     195|    0|
++-----------------+---------+------+---------+--------+-----+
+|Available        |     1934|  1968|  1799680|  899840|  463|
++-----------------+---------+------+---------+--------+-----+
+|Utilization (%)  |        0|     0|       ~0|      ~0|    0|
++-----------------+---------+------+---------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name    | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------+----------+----+---+----+------------+------------+
+    |add_ln108_fu_137_p2   |         +|   0|  0|   9|           9|           1|
+    |add_ln110_fu_153_p2   |         +|   0|  0|  16|          16|          16|
+    |diff_fu_193_p2        |         +|   0|  0|  18|          18|          18|
+    |sum_1_fu_238_p2       |         +|   0|  0|  24|          24|          24|
+    |sub_neg_fu_184_p2     |         -|   0|  0|  17|           6|          17|
+    |icmp_ln108_fu_143_p2  |      icmp|   0|  0|   4|           9|          10|
+    |icmp_ln111_fu_199_p2  |      icmp|   0|  0|   9|          18|           1|
+    |s_fu_219_p3           |    select|   0|  0|  16|           1|          16|
+    |ap_enable_pp0         |       xor|   0|  0|   2|           1|           2|
+    +----------------------+----------+----+---+----+------------+------------+
+    |Total                 |          |   0|  0| 115|         102|         105|
+    +----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |ap_done_int              |   8|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1  |   8|          2|    1|          2|
+    |ap_sig_allocacmp_j_1     |  16|          2|    9|         18|
+    |j_fu_50                  |  16|          2|    9|         18|
+    |sum_fu_46                |  32|          2|   24|         48|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  80|         10|   44|         88|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------+----+----+-----+-----------+
+    |               Name               | FF | LUT| Bits| Const Bits|
+    +----------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                         |   1|   0|    1|          0|
+    |ap_done_reg                       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2           |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter1_reg  |   1|   0|    1|          0|
+    |icmp_ln108_reg_299                |   1|   0|    1|          0|
+    |icmp_ln111_reg_308                |   1|   0|    1|          0|
+    |j_1_reg_294                       |   9|   0|    9|          0|
+    |j_1_reg_294_pp0_iter1_reg         |   9|   0|    9|          0|
+    |j_fu_50                           |   9|   0|    9|          0|
+    |sext_ln108_cast_reg_289           |  17|   0|   17|          0|
+    |sum_fu_46                         |  24|   0|   24|          0|
+    |trunc_ln111_reg_313               |  16|   0|   16|          0|
+    +----------------------------------+----+----+-----+-----------+
+    |Total                             |  91|   0|   91|          0|
+    +----------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++------------------+-----+-----+------------+-----------------------------------------+--------------+
+|     RTL Ports    | Dir | Bits|  Protocol  |              Source Object              |    C Type    |
++------------------+-----+-----+------------+-----------------------------------------+--------------+
+|ap_clk            |   in|    1|  ap_ctrl_hs|  vit_transformer_layer_Pipeline_SM_SHIFT|  return value|
+|ap_rst            |   in|    1|  ap_ctrl_hs|  vit_transformer_layer_Pipeline_SM_SHIFT|  return value|
+|ap_start          |   in|    1|  ap_ctrl_hs|  vit_transformer_layer_Pipeline_SM_SHIFT|  return value|
+|ap_done           |  out|    1|  ap_ctrl_hs|  vit_transformer_layer_Pipeline_SM_SHIFT|  return value|
+|ap_idle           |  out|    1|  ap_ctrl_hs|  vit_transformer_layer_Pipeline_SM_SHIFT|  return value|
+|ap_ready          |  out|    1|  ap_ctrl_hs|  vit_transformer_layer_Pipeline_SM_SHIFT|  return value|
+|zext_ln100        |   in|   16|     ap_none|                               zext_ln100|        scalar|
+|scores_address0   |  out|   16|   ap_memory|                                   scores|         array|
+|scores_ce0        |  out|    1|   ap_memory|                                   scores|         array|
+|scores_q0         |   in|   16|   ap_memory|                                   scores|         array|
+|sext_ln108        |   in|   16|     ap_none|                               sext_ln108|        scalar|
+|shifted_address0  |  out|    8|   ap_memory|                                  shifted|         array|
+|shifted_ce0       |  out|    1|   ap_memory|                                  shifted|         array|
+|shifted_we0       |  out|    1|   ap_memory|                                  shifted|         array|
+|shifted_d0        |  out|   16|   ap_memory|                                  shifted|         array|
+|sum_out           |  out|   24|      ap_vld|                                  sum_out|       pointer|
+|sum_out_ap_vld    |  out|    1|      ap_vld|                                  sum_out|       pointer|
++------------------+-----+-----+------------+-----------------------------------------+--------------+
+

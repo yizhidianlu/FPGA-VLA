@@ -1,0 +1,209 @@
+
+
+================================================================
+== Vitis HLS Report for 'xmod_attn_v1_Pipeline_MAX_LOOP'
+================================================================
+* Date:           Wed May 27 13:12:23 2026
+
+* Version:        2024.1 (Build 5069499 on May 21 2024)
+* Project:        xmod_attn_v1_hls
+* Solution:       sol1 (Vivado IP Flow Target)
+* Product family: versalaicore
+* Target device:  xcvc1902-vsva2197-2MP-e-S
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.844 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval |                    Pipeline                   |
+    |   min   |   max   |    min   |    max   | min | max |                      Type                     |
+    +---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+    |       65|       65|  0.260 us|  0.260 us|   64|   64|  loop auto-rewind stp(delay=0 clock cycles(s))|
+    +---------+---------+----------+----------+-----+-----+-----------------------------------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +------------+---------+---------+----------+-----------+-----------+------+----------+
+        |            |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- MAX_LOOP  |       63|       63|         1|          1|          1|    63|       yes|
+        +------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+---------+--------+-----+
+|       Name      | BRAM_18K|  DSP |    FF   |   LUT  | URAM|
++-----------------+---------+------+---------+--------+-----+
+|DSP              |        -|     -|        -|       -|    -|
+|Expression       |        -|     -|        0|      35|    -|
+|FIFO             |        -|     -|        -|       -|    -|
+|Instance         |        -|     -|        0|     336|    -|
+|Memory           |        -|     -|        -|       -|    -|
+|Multiplexer      |        -|     -|        0|      56|    -|
+|Register         |        -|     -|       25|       -|    -|
++-----------------+---------+------+---------+--------+-----+
+|Total            |        0|     0|       25|     427|    0|
++-----------------+---------+------+---------+--------+-----+
+|Available        |     1934|  1968|  1799680|  899840|  463|
++-----------------+---------+------+---------+--------+-----+
+|Utilization (%)  |        0|     0|       ~0|      ~0|    0|
++-----------------+---------+------+---------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    +------------------------------+------------------------+---------+----+---+-----+-----+
+    |           Instance           |         Module         | BRAM_18K| DSP| FF| LUT | URAM|
+    +------------------------------+------------------------+---------+----+---+-----+-----+
+    |sparsemux_127_6_16_1_1_U1108  |sparsemux_127_6_16_1_1  |        0|   0|  0|  336|    0|
+    +------------------------------+------------------------+---------+----+---+-----+-----+
+    |Total                         |                        |        0|   0|  0|  336|    0|
+    +------------------------------+------------------------+---------+----+---+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name    | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------+----------+----+---+----+------------+------------+
+    |add_ln10_fu_853_p2    |         +|   0|  0|   8|           7|           1|
+    |icmp_ln10_fu_844_p2   |      icmp|   0|  0|   3|           7|           8|
+    |icmp_ln12_fu_1123_p2  |      icmp|   0|  0|   8|          16|          16|
+    |m_2_fu_1129_p3        |    select|   0|  0|  16|           1|          16|
+    +----------------------+----------+----+---+----+------------+------------+
+    |Total                 |          |   0|  0|  35|          31|          41|
+    +----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-----------------------------+----+-----------+-----+-----------+
+    |             Name            | LUT| Input Size| Bits| Total Bits|
+    +-----------------------------+----+-----------+-----+-----------+
+    |ap_done_int                  |   8|          2|    1|          2|
+    |ap_sig_allocacmp_k_3         |   8|          2|    7|         14|
+    |ap_sig_allocacmp_m_1_load_1  |  16|          2|   16|         32|
+    |k_fu_288                     |   8|          2|    7|         14|
+    |m_1_fu_284                   |  16|          2|   16|         32|
+    +-----------------------------+----+-----------+-----+-----------+
+    |Total                        |  56|         10|   47|         94|
+    +-----------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------+----+----+-----+-----------+
+    |     Name    | FF | LUT| Bits| Const Bits|
+    +-------------+----+----+-----+-----------+
+    |ap_CS_fsm    |   1|   0|    1|          0|
+    |ap_done_reg  |   1|   0|    1|          0|
+    |k_fu_288     |   7|   0|    7|          0|
+    |m_1_fu_284   |  16|   0|   16|          0|
+    +-------------+----+----+-----+-----------+
+    |Total        |  25|   0|   25|          0|
+    +-------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++--------------------+-----+-----+------------+--------------------------------+--------------+
+|      RTL Ports     | Dir | Bits|  Protocol  |          Source Object         |    C Type    |
++--------------------+-----+-----+------------+--------------------------------+--------------+
+|ap_clk              |   in|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_MAX_LOOP|  return value|
+|ap_rst              |   in|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_MAX_LOOP|  return value|
+|ap_start            |   in|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_MAX_LOOP|  return value|
+|ap_done             |  out|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_MAX_LOOP|  return value|
+|ap_idle             |  out|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_MAX_LOOP|  return value|
+|ap_ready            |  out|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_MAX_LOOP|  return value|
+|m                   |   in|   16|     ap_none|                               m|        scalar|
+|top_scores_1_load   |   in|   16|     ap_none|               top_scores_1_load|        scalar|
+|top_scores_2_load   |   in|   16|     ap_none|               top_scores_2_load|        scalar|
+|top_scores_3_load   |   in|   16|     ap_none|               top_scores_3_load|        scalar|
+|top_scores_4_load   |   in|   16|     ap_none|               top_scores_4_load|        scalar|
+|top_scores_5_load   |   in|   16|     ap_none|               top_scores_5_load|        scalar|
+|top_scores_6_load   |   in|   16|     ap_none|               top_scores_6_load|        scalar|
+|top_scores_7_load   |   in|   16|     ap_none|               top_scores_7_load|        scalar|
+|top_scores_8_load   |   in|   16|     ap_none|               top_scores_8_load|        scalar|
+|top_scores_9_load   |   in|   16|     ap_none|               top_scores_9_load|        scalar|
+|top_scores_10_load  |   in|   16|     ap_none|              top_scores_10_load|        scalar|
+|top_scores_11_load  |   in|   16|     ap_none|              top_scores_11_load|        scalar|
+|top_scores_12_load  |   in|   16|     ap_none|              top_scores_12_load|        scalar|
+|top_scores_13_load  |   in|   16|     ap_none|              top_scores_13_load|        scalar|
+|top_scores_14_load  |   in|   16|     ap_none|              top_scores_14_load|        scalar|
+|top_scores_15_load  |   in|   16|     ap_none|              top_scores_15_load|        scalar|
+|top_scores_16_load  |   in|   16|     ap_none|              top_scores_16_load|        scalar|
+|top_scores_17_load  |   in|   16|     ap_none|              top_scores_17_load|        scalar|
+|top_scores_18_load  |   in|   16|     ap_none|              top_scores_18_load|        scalar|
+|top_scores_19_load  |   in|   16|     ap_none|              top_scores_19_load|        scalar|
+|top_scores_20_load  |   in|   16|     ap_none|              top_scores_20_load|        scalar|
+|top_scores_21_load  |   in|   16|     ap_none|              top_scores_21_load|        scalar|
+|top_scores_22_load  |   in|   16|     ap_none|              top_scores_22_load|        scalar|
+|top_scores_23_load  |   in|   16|     ap_none|              top_scores_23_load|        scalar|
+|top_scores_24_load  |   in|   16|     ap_none|              top_scores_24_load|        scalar|
+|top_scores_25_load  |   in|   16|     ap_none|              top_scores_25_load|        scalar|
+|top_scores_26_load  |   in|   16|     ap_none|              top_scores_26_load|        scalar|
+|top_scores_27_load  |   in|   16|     ap_none|              top_scores_27_load|        scalar|
+|top_scores_28_load  |   in|   16|     ap_none|              top_scores_28_load|        scalar|
+|top_scores_29_load  |   in|   16|     ap_none|              top_scores_29_load|        scalar|
+|top_scores_30_load  |   in|   16|     ap_none|              top_scores_30_load|        scalar|
+|top_scores_31_load  |   in|   16|     ap_none|              top_scores_31_load|        scalar|
+|top_scores_32_load  |   in|   16|     ap_none|              top_scores_32_load|        scalar|
+|top_scores_33_load  |   in|   16|     ap_none|              top_scores_33_load|        scalar|
+|top_scores_34_load  |   in|   16|     ap_none|              top_scores_34_load|        scalar|
+|top_scores_35_load  |   in|   16|     ap_none|              top_scores_35_load|        scalar|
+|top_scores_36_load  |   in|   16|     ap_none|              top_scores_36_load|        scalar|
+|top_scores_37_load  |   in|   16|     ap_none|              top_scores_37_load|        scalar|
+|top_scores_38_load  |   in|   16|     ap_none|              top_scores_38_load|        scalar|
+|top_scores_39_load  |   in|   16|     ap_none|              top_scores_39_load|        scalar|
+|top_scores_40_load  |   in|   16|     ap_none|              top_scores_40_load|        scalar|
+|top_scores_41_load  |   in|   16|     ap_none|              top_scores_41_load|        scalar|
+|top_scores_42_load  |   in|   16|     ap_none|              top_scores_42_load|        scalar|
+|top_scores_43_load  |   in|   16|     ap_none|              top_scores_43_load|        scalar|
+|top_scores_44_load  |   in|   16|     ap_none|              top_scores_44_load|        scalar|
+|top_scores_45_load  |   in|   16|     ap_none|              top_scores_45_load|        scalar|
+|top_scores_46_load  |   in|   16|     ap_none|              top_scores_46_load|        scalar|
+|top_scores_47_load  |   in|   16|     ap_none|              top_scores_47_load|        scalar|
+|top_scores_48_load  |   in|   16|     ap_none|              top_scores_48_load|        scalar|
+|top_scores_49_load  |   in|   16|     ap_none|              top_scores_49_load|        scalar|
+|top_scores_50_load  |   in|   16|     ap_none|              top_scores_50_load|        scalar|
+|top_scores_51_load  |   in|   16|     ap_none|              top_scores_51_load|        scalar|
+|top_scores_52_load  |   in|   16|     ap_none|              top_scores_52_load|        scalar|
+|top_scores_53_load  |   in|   16|     ap_none|              top_scores_53_load|        scalar|
+|top_scores_54_load  |   in|   16|     ap_none|              top_scores_54_load|        scalar|
+|top_scores_55_load  |   in|   16|     ap_none|              top_scores_55_load|        scalar|
+|top_scores_56_load  |   in|   16|     ap_none|              top_scores_56_load|        scalar|
+|top_scores_57_load  |   in|   16|     ap_none|              top_scores_57_load|        scalar|
+|top_scores_58_load  |   in|   16|     ap_none|              top_scores_58_load|        scalar|
+|top_scores_59_load  |   in|   16|     ap_none|              top_scores_59_load|        scalar|
+|top_scores_60_load  |   in|   16|     ap_none|              top_scores_60_load|        scalar|
+|top_scores_61_load  |   in|   16|     ap_none|              top_scores_61_load|        scalar|
+|top_scores_62_load  |   in|   16|     ap_none|              top_scores_62_load|        scalar|
+|top_scores_63_load  |   in|   16|     ap_none|              top_scores_63_load|        scalar|
+|m_1_out             |  out|   16|      ap_vld|                         m_1_out|       pointer|
+|m_1_out_ap_vld      |  out|    1|      ap_vld|                         m_1_out|       pointer|
++--------------------+-----+-----+------------+--------------------------------+--------------+
+

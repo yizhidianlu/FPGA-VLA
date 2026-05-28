@@ -1,0 +1,171 @@
+
+
+================================================================
+== Vitis HLS Report for 'vit_encoder_12layer_Pipeline_COPY_P_VITIS_LOOP_96_6'
+================================================================
+* Date:           Wed May 27 13:27:29 2026
+
+* Version:        2024.1 (Build 5069499 on May 21 2024)
+* Project:        vit_enc_hls
+* Solution:       sol1 (Vivado IP Flow Target)
+* Product family: versalaicore
+* Target device:  xcvc1902-vsva2197-2MP-e-S
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.848 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-------+-------+-----------------------------------------------+
+    |  Latency (cycles) |  Latency (absolute) |    Interval   |                    Pipeline                   |
+    |   min   |   max   |    min   |    max   |  min  |  max  |                      Type                     |
+    +---------+---------+----------+----------+-------+-------+-----------------------------------------------+
+    |    98307|    98307|  0.393 ms|  0.393 ms|  98305|  98305|  loop auto-rewind stp(delay=0 clock cycles(s))|
+    +---------+---------+----------+----------+-------+-------+-----------------------------------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------------+---------+---------+----------+-----------+-----------+-------+----------+
+        |                          |  Latency (cycles) | Iteration|  Initiation Interval  |  Trip |          |
+        |         Loop Name        |   min   |   max   |  Latency |  achieved |   target  | Count | Pipelined|
+        +--------------------------+---------+---------+----------+-----------+-----------+-------+----------+
+        |- COPY_P_VITIS_LOOP_96_6  |    98305|    98305|         3|          1|          1|  98304|       yes|
+        +--------------------------+---------+---------+----------+-----------+-----------+-------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+---------+--------+-----+
+|       Name      | BRAM_18K|  DSP |    FF   |   LUT  | URAM|
++-----------------+---------+------+---------+--------+-----+
+|DSP              |        -|     -|        -|       -|    -|
+|Expression       |        -|     -|        0|     195|    -|
+|FIFO             |        -|     -|        -|       -|    -|
+|Instance         |        -|     -|        -|       -|    -|
+|Memory           |        -|     -|        -|       -|    -|
+|Multiplexer      |        -|     -|        0|     112|    -|
+|Register         |        -|     -|       57|       -|    -|
++-----------------+---------+------+---------+--------+-----+
+|Total            |        0|     0|       57|     307|    0|
++-----------------+---------+------+---------+--------+-----+
+|Available        |     1934|  1968|  1799680|  899840|  463|
++-----------------+---------+------+---------+--------+-----+
+|Utilization (%)  |        0|     0|       ~0|      ~0|    0|
++-----------------+---------+------+---------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-------------------------+----------+----+---+----+------------+------------+
+    |      Variable Name      | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-------------------------+----------+----+---+----+------------+------------+
+    |add_ln96_1_fu_358_p2     |         +|   0|  0|   9|           9|           1|
+    |add_ln96_2_fu_191_p2     |         +|   0|  0|  17|          17|           1|
+    |add_ln96_fu_227_p2       |         +|   0|  0|   9|           9|           1|
+    |add_ln98_1_fu_348_p2     |         +|   0|  0|  31|          15|          15|
+    |add_ln98_fu_319_p2       |         +|   0|  0|  35|          17|          17|
+    |sub_ln96_fu_309_p2       |         -|   0|  0|  31|          15|          15|
+    |sub_ln98_fu_283_p2       |         -|   0|  0|  35|          17|          17|
+    |icmp_ln96_1_fu_233_p2    |      icmp|   0|  0|   3|           9|           9|
+    |icmp_ln96_fu_197_p2      |      icmp|   0|  0|   7|          17|          17|
+    |select_ln96_1_fu_247_p3  |    select|   0|  0|   8|           1|           9|
+    |select_ln96_fu_239_p3    |    select|   0|  0|   8|           1|           1|
+    |ap_enable_pp0            |       xor|   0|  0|   2|           1|           2|
+    +-------------------------+----------+----+---+----+------------+------------+
+    |Total                    |          |   0|  0| 195|         128|         105|
+    +-------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------------------------+----+-----------+-----+-----------+
+    |                  Name                  | LUT| Input Size| Bits| Total Bits|
+    +----------------------------------------+----+-----------+-----+-----------+
+    |ap_done_int                             |   8|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1                 |   8|          2|    1|          2|
+    |ap_sig_allocacmp_indvar_flatten34_load  |  32|          2|   17|         34|
+    |d_fu_64                                 |  16|          2|    9|         18|
+    |indvar_flatten34_fu_72                  |  32|          2|   17|         34|
+    |p_fu_68                                 |  16|          2|    9|         18|
+    +----------------------------------------+----+-----------+-----+-----------+
+    |Total                                   | 112|         12|   54|        108|
+    +----------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------+----+----+-----+-----------+
+    |               Name               | FF | LUT| Bits| Const Bits|
+    +----------------------------------+----+----+-----+-----------+
+    |add_ln98_1_reg_454                |  15|   0|   15|          0|
+    |ap_CS_fsm                         |   1|   0|    1|          0|
+    |ap_done_reg                       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2           |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter1_reg  |   1|   0|    1|          0|
+    |d_fu_64                           |   9|   0|    9|          0|
+    |indvar_flatten34_fu_72            |  17|   0|   17|          0|
+    |p_fu_68                           |   9|   0|    9|          0|
+    |trunc_ln96_reg_450                |   2|   0|    2|          0|
+    +----------------------------------+----+----+-----+-----------+
+    |Total                             |  57|   0|   57|          0|
+    +----------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++--------------------------------------------------------------------------------+-----+-----+------------+-----------------------------------------------------------------------+--------------+
+|                                    RTL Ports                                   | Dir | Bits|  Protocol  |                             Source Object                             |    C Type    |
++--------------------------------------------------------------------------------+-----+-----+------------+-----------------------------------------------------------------------+--------------+
+|ap_clk                                                                          |   in|    1|  ap_ctrl_hs|                    vit_encoder_12layer_Pipeline_COPY_P_VITIS_LOOP_96_6|  return value|
+|ap_rst                                                                          |   in|    1|  ap_ctrl_hs|                    vit_encoder_12layer_Pipeline_COPY_P_VITIS_LOOP_96_6|  return value|
+|ap_start                                                                        |   in|    1|  ap_ctrl_hs|                    vit_encoder_12layer_Pipeline_COPY_P_VITIS_LOOP_96_6|  return value|
+|ap_done                                                                         |  out|    1|  ap_ctrl_hs|                    vit_encoder_12layer_Pipeline_COPY_P_VITIS_LOOP_96_6|  return value|
+|ap_idle                                                                         |  out|    1|  ap_ctrl_hs|                    vit_encoder_12layer_Pipeline_COPY_P_VITIS_LOOP_96_6|  return value|
+|ap_ready                                                                        |  out|    1|  ap_ctrl_hs|                    vit_encoder_12layer_Pipeline_COPY_P_VITIS_LOOP_96_6|  return value|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_address0  |  out|   15|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_ce0       |  out|    1|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_we0       |  out|    1|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3_d0        |  out|    8|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_3|         array|
+|buf_out_address0                                                                |  out|   17|   ap_memory|                                                                buf_out|         array|
+|buf_out_ce0                                                                     |  out|    1|   ap_memory|                                                                buf_out|         array|
+|buf_out_q0                                                                      |   in|    8|   ap_memory|                                                                buf_out|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_address0  |  out|   15|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_ce0       |  out|    1|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_we0       |  out|    1|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2_d0        |  out|    8|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_2|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_address0  |  out|   15|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_ce0       |  out|    1|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_we0       |  out|    1|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1_d0        |  out|    8|   ap_memory|  vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_1|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_address0    |  out|   15|   ap_memory|    vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_ce0         |  out|    1|   ap_memory|    vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_we0         |  out|    1|   ap_memory|    vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115|         array|
+|vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115_d0          |  out|    8|   ap_memory|    vit_encoder_12layer_signed_char_const_384_signed_char_const_384_115|         array|
++--------------------------------------------------------------------------------+-----+-----+------------+-----------------------------------------------------------------------+--------------+
+

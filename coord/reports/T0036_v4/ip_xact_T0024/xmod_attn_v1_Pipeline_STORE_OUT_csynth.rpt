@@ -1,0 +1,187 @@
+
+
+================================================================
+== Vitis HLS Report for 'xmod_attn_v1_Pipeline_STORE_OUT'
+================================================================
+* Date:           Wed May 27 13:13:55 2026
+
+* Version:        2024.1 (Build 5069499 on May 21 2024)
+* Project:        xmod_attn_v1_hls
+* Solution:       sol1 (Vivado IP Flow Target)
+* Product family: versalaicore
+* Target device:  xcvc1902-vsva2197-2MP-e-S
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+---------+----------+------------+
+    |  Clock |  Target | Estimated| Uncertainty|
+    +--------+---------+----------+------------+
+    |ap_clk  |  4.00 ns|  2.309 ns|     1.08 ns|
+    +--------+---------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+------+------+-----------------------------------------------+
+    |  Latency (cycles) |   Latency (absolute)  |   Interval  |                    Pipeline                   |
+    |   min   |   max   |    min    |    max    |  min |  max |                      Type                     |
+    +---------+---------+-----------+-----------+------+------+-----------------------------------------------+
+    |     4098|     4098|  16.392 us|  16.392 us|  4097|  4097|  loop auto-rewind stp(delay=0 clock cycles(s))|
+    +---------+---------+-----------+-----------+------+------+-----------------------------------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |             |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name  |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- STORE_OUT  |     4096|     4096|         2|          1|          1|  4096|       yes|
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+---------+--------+-----+
+|       Name      | BRAM_18K|  DSP |    FF   |   LUT  | URAM|
++-----------------+---------+------+---------+--------+-----+
+|DSP              |        -|     -|        -|       -|    -|
+|Expression       |        -|     -|        0|      23|    -|
+|FIFO             |        -|     -|        -|       -|    -|
+|Instance         |        -|     -|        -|       -|    -|
+|Memory           |        -|     -|        -|       -|    -|
+|Multiplexer      |        -|     -|        0|      56|    -|
+|Register         |        -|     -|       16|       -|    -|
++-----------------+---------+------+---------+--------+-----+
+|Total            |        0|     0|       16|      79|    0|
++-----------------+---------+------+---------+--------+-----+
+|Available        |     1934|  1968|  1799680|  899840|  463|
++-----------------+---------+------+---------+--------+-----+
+|Utilization (%)  |        0|     0|       ~0|      ~0|    0|
++-----------------+---------+------+---------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------+----------+----+---+----+------------+------------+
+    |       Variable Name       | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------+----------+----+---+----+------------+------------+
+    |add_ln92_fu_106_p2         |         +|   0|  0|  13|          13|           1|
+    |ap_block_pp0_stage0_11001  |       and|   0|  0|   2|           1|           1|
+    |icmp_ln92_fu_112_p2        |      icmp|   0|  0|   6|          13|          14|
+    |ap_enable_pp0              |       xor|   0|  0|   2|           1|           2|
+    +---------------------------+----------+----+---+----+------------+------------+
+    |Total                      |          |   0|  0|  23|          28|          18|
+    +---------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |ap_done_int              |   8|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1  |   8|          2|    1|          2|
+    |ap_sig_allocacmp_i_1     |  16|          2|   13|         26|
+    |ddrOUT_blk_n_W           |   8|          2|    1|          2|
+    |i_fu_54                  |  16|          2|   13|         26|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  56|         10|   29|         58|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+----+----+-----+-----------+
+    |           Name          | FF | LUT| Bits| Const Bits|
+    +-------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                |   1|   0|    1|          0|
+    |ap_done_reg              |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |   1|   0|    1|          0|
+    |i_fu_54                  |  13|   0|   13|          0|
+    +-------------------------+----+----+-----+-----------+
+    |Total                    |  16|   0|   16|          0|
+    +-------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------------+-----+-----+------------+---------------------------------+--------------+
+|       RTL Ports       | Dir | Bits|  Protocol  |          Source Object          |    C Type    |
++-----------------------+-----+-----+------------+---------------------------------+--------------+
+|ap_clk                 |   in|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_STORE_OUT|  return value|
+|ap_rst                 |   in|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_STORE_OUT|  return value|
+|ap_start               |   in|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_STORE_OUT|  return value|
+|ap_done                |  out|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_STORE_OUT|  return value|
+|ap_idle                |  out|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_STORE_OUT|  return value|
+|ap_ready               |  out|    1|  ap_ctrl_hs|  xmod_attn_v1_Pipeline_STORE_OUT|  return value|
+|m_axi_ddrOUT_AWVALID   |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWREADY   |   in|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWADDR    |  out|   64|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWID      |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWLEN     |  out|   32|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWSIZE    |  out|    3|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWBURST   |  out|    2|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWLOCK    |  out|    2|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWCACHE   |  out|    4|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWPROT    |  out|    3|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWQOS     |  out|    4|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWREGION  |  out|    4|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_AWUSER    |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_WVALID    |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_WREADY    |   in|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_WDATA     |  out|    8|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_WSTRB     |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_WLAST     |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_WID       |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_WUSER     |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARVALID   |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARREADY   |   in|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARADDR    |  out|   64|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARID      |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARLEN     |  out|   32|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARSIZE    |  out|    3|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARBURST   |  out|    2|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARLOCK    |  out|    2|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARCACHE   |  out|    4|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARPROT    |  out|    3|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARQOS     |  out|    4|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARREGION  |  out|    4|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_ARUSER    |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_RVALID    |   in|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_RREADY    |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_RDATA     |   in|    8|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_RLAST     |   in|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_RID       |   in|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_RFIFONUM  |   in|   11|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_RUSER     |   in|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_RRESP     |   in|    2|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_BVALID    |   in|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_BREADY    |  out|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_BRESP     |   in|    2|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_BID       |   in|    1|       m_axi|                           ddrOUT|       pointer|
+|m_axi_ddrOUT_BUSER     |   in|    1|       m_axi|                           ddrOUT|       pointer|
+|out_r                  |   in|   64|     ap_none|                            out_r|        scalar|
+|out_local_address0     |  out|   12|   ap_memory|                        out_local|         array|
+|out_local_ce0          |  out|    1|   ap_memory|                        out_local|         array|
+|out_local_q0           |   in|    8|   ap_memory|                        out_local|         array|
++-----------------------+-----+-----+------------+---------------------------------+--------------+
+
