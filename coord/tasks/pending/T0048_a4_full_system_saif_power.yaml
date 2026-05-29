@@ -1,0 +1,101 @@
+task_id: T0048
+created_by: orchestrator
+created_at: 2026-05-30T00:00:00Z
+type: vivado_power_estimate
+priority: P0
+target_worker: remote_claude_ali_aie
+depends_on: [T0050]
+deadline_minutes: 300
+params:
+  module_name: mr_vla_full_system_saif_power_150mhz
+  description: |
+    **A4 — full-FIVE-cell vector-based (SAIF-driven) power @143.7 MHz.**
+
+    Replaces the single-kernel / vectorless power estimate with a vector-based
+    one driven by switching activity from a post-route timing simulation of
+    the WHOLE integrated 5-cell system (u_xmod, u_vit, u_sched, u_gvsa,
+    u_adh). This is the rigor-reviewer keystone (paper Threats T5): the
+    previous SAIF risk was "single-kernel coverage"; A4 makes the SAIF cover
+    all five cells on one representative closed-loop stimulus.
+
+    Reuse the accepted T0050 A1 post-route netlist:
+      runs/T0050/impl_150mhz_A1.dcp   (143.7 MHz, WNS -0.293 @150 target)
+    T0050 already gave a VECTORLESS power (total 15.99 W / dyn 2.40 W); A4
+    upgrades the DYNAMIC term to a vector-based number and reports per-cell
+    attribution. The static floor (~13.59 W) is unchanged.
+
+  quickstart_for_resumed_session: |
+    cd /tools/projects/FPGA-VLA
+    source /tools/Xilinx/Vivado/2024.1/settings64.sh
+    mkdir -p runs/T0048 && cd runs/T0048
+
+    # 1. Open the accepted post-route checkpoint
+    # 2. Generate a representative stimulus driving all 5 cells through one
+    #    closed-loop control episode (vision frame -> xmod attn -> action;
+    #    language path 1Hz; reuse the per-IP testbench vectors from
+    #    coord/reports/T002{2,4,5,6,9}/ where available, stitched into a
+    #    top-level TB, OR a synthetic activity pattern that exercises each
+    #    cell's datapath at its rate-domain duty cycle).
+    # 3. Run post-route functional timing sim to capture SAIF:
+    vivado -mode batch -nolog -nojournal -source <(cat <<'TCL'
+    open_checkpoint /tools/projects/FPGA-VLA/runs/T0050/impl_150mhz_A1.dcp
+    # If a post-route sim netlist + TB is available, run xsim to emit a SAIF.
+    # Otherwise, drive report_power with a per-cell activity assumption derived
+    # from the multi-rate duty cycles (vision 30/100, language 1/100, action 1)
+    # and document it as activity-modelled (not vectorless default).
+    # Preferred: read_saif <full_system.saif> ; then:
+    set_operating_conditions -ambient_temp 25
+    report_power -file /tools/projects/FPGA-VLA/coord/reports/T0048/report_power_vectorbased.rpt
+    report_power -hierarchical -file /tools/projects/FPGA-VLA/coord/reports/T0048/report_power_percell.rpt
+    exit
+    TCL
+    )
+
+    # 4. Extract total / dynamic / static + per-cell breakdown; compare to the
+    #    T0050 vectorless 15.99 W / 2.40 W dyn. Report the band.
+    mkdir -p /tools/projects/FPGA-VLA/coord/reports/T0048
+    # write result.json + inbox DONE (hyphen ts)
+
+  flow:
+    step_1_open_dcp: open runs/T0050/impl_150mhz_A1.dcp (143.7 MHz post-route).
+    step_2_stimulus: |
+      Build a representative full-system stimulus exercising all 5 cells at
+      their rate-domain duty cycles for one closed-loop episode. If a
+      post-route sim TB is impractical in time, fall back to an
+      activity-modelled report_power with per-cell toggle rates set from the
+      multi-rate duty cycles (NOT the vectorless 12.5%/6.25% default), and
+      label it as such.
+    step_3_saif_power: |
+      read_saif (if a SAIF was captured) then report_power + report_power
+      -hierarchical for per-cell attribution.
+    step_4_report: |
+      coord/reports/T0048/result.json with: total_w, dynamic_w (vector-based),
+      static_w, per_cell_dynamic breakdown, method (saif-vector vs
+      activity-modelled), and the delta vs T0050 vectorless (15.99/2.40).
+
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 6.96
+acceptance_criteria:
+  - status: "== DONE"
+  - result.power_method: "in [saif_vector, activity_modelled]"
+  - result.dynamic_w: "> 0 and < 6"
+  - result.total_w: "< 20"
+  - result.per_cell_breakdown_present: true
+human_ack_required_on:
+  - dynamic_w_above_4               # informational; would shift J/step
+  - saif_capture_infeasible          # then activity-modelled fallback, flag it
+  - total_w_above_15                 # informational
+notes: |
+  Output feeds B1 (J/step recompute, dynamic-energy basis). Report the
+  vector-based dynamic power as the J/step numerator at f_ctrl=100 Hz:
+  J/step_dyn = P_dyn / 100. With T0050 vectorless 2.40 W this is ~0.024 J/step;
+  the vector-based number refines it.
+
+  Paper hook: Threats T5 currently states the SAIF covers the full 5-cell
+  system — A4 must actually produce that full-system SAIF (or the honestly-
+  labelled activity-modelled equivalent) so T5 is backed. Method must be
+  stated truthfully (saif-vector vs activity-modelled) in result.json.
+
+  This is the LAST hardware-side task gating the paper's power/J-step numbers.
+  After A4 + B1, the FPGA evidence chain is numerically complete for TCAD
+  (remaining gaps = LIBERO task-success on GPU, board-free, tasks C0-C2).
