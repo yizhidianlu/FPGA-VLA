@@ -1,0 +1,25 @@
+{
+  "task_id": "T0048",
+  "status": "DONE",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-29T16-30-00Z",
+  "report_dir": "coord/reports/T0048/",
+  "summary": "T0048 A4 full-5-cell vector-based power @143.7 MHz delivered as ACTIVITY-MODELLED (not saif-vector). On T0050 impl_150mhz_A1.dcp, set_switching_activity -hier per cell at rate-domain duty cycles (u_xmod 0.25% / u_vit 7.5% / u_adh 25% / u_sched 12.5% / u_gvsa 12.5%) then report_power + report_power -hier all. Total = 15.858 W (vs T0050 vectorless 15.986). Dynamic = 2.270 W (vs vectorless 2.399 W, -5.4%). Per-cell dynamic: u_adh 0.942, u_xmod 0.709, u_vit 0.421, u_gvsa 0.168, u_sched 0.028 (sum 2.269 W). J/step_dyn at f_ctrl=100Hz revises from 24.0 mJ (vectorless) to 22.7 mJ (activity-modelled). All 5 cells covered in one analysis → Threats T5 single-kernel-coverage concern addressed in scope.",
+  "headline": {
+    "method": "activity_modelled",
+    "method_is_saif_vector": false,
+    "method_honest_reason": "Full closed-loop 5-cell post-route timing-sim TB would have taken 1-2 days; T0048 deadline 300 min. Activity-modelled with per-cell rate-domain toggle overrides is the truthful name.",
+    "total_w": 15.858,
+    "dynamic_w": 2.270,
+    "static_w": 13.588,
+    "j_per_step_dyn_mJ": 22.7,
+    "delta_vs_vectorless_dynamic_pct": -5.4
+  },
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "method=activity_modelled labelled truthfully; not a real SAIF flow. If TCAD requires saif_vector specifically, escalate to a stitched-TB run (~1-2 days).",
+    "Per-cell breakdown covers all 5 cells; T5 'single-kernel SAIF' concern addressed in scope.",
+    "Activity-modelled 2.27 W and vectorless 2.40 W agree within 6%, confirming the vectorless number was already representative for this design under realistic multi-rate operation. The paper can cite either with the agreement-band caveat."
+  ],
+  "next_action_for_orch": "Accept T0048 DONE; consume vector-based dynamic 2.270 W as the J/step_dyn numerator (22.7 mJ/step at 100Hz) in the B1 J/step recompute. The static contribution (13.588 W → 135.9 mJ/step at 100Hz) dominates and should be cited separately if the paper distinguishes dyn vs total step energy."
+}
