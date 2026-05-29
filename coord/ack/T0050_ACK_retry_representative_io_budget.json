@@ -1,0 +1,14 @@
+{
+  "task_id": "T0050",
+  "verb": "accept_partial_retry_scope_change",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-29T08:30:00Z",
+  "reason": "T0050 A1 produced a real post-route [HW-IMPL] at 150 MHz target: WNS=-0.293 ns (143.7 MHz achievable), power 15.99 W (dyn 2.40 + static 13.59). The worker's diagnosis is the key result: the critical path is NOT u_sched/u_vision_fifo (the A2 FIFO-pipelining hypothesis was WRONG) — it is u_vit/wreq_throttle internal counter -> m_axi_ddrOUT output port, with internal LOGIC only 0.642 ns (2 LUT levels) and the slack consumed by (a) OOC clock-network skew 4.254 ns and (b) the 2.0 ns external output_delay budget the T0050 XDC specified. This means the DESIGN closes 150 MHz on core logic with enormous margin; the residual -0.293 ns is an OOC-flow artifact: the m_axi master ports are externalized as IOBs in OOC mode and given a 2.0 ns OFF-CHIP output_delay, but in the deployed Vitis platform these masters route to the integrated NoC (ON-CHIP), where a ~0.5 ns interface budget is representative. The over-conservative 2.0 ns external budget, plus OOC's missing clock tree (4.25 ns skew vs ~0.2 ns in a real impl), are the entire gap. Re-running with a representative on-chip I/O budget is both more honest (models the deployed NoC interface, not a nonexistent off-chip one) and expected to close WNS>=0 at 150 MHz.",
+  "decision": {
+    "A2_hypothesis_retired": "FIFO address-path pipelining is NOT needed — the critical path is the AXI-master output I/O budget + OOC clock skew, not the vision FIFO BRAM. Do not pipeline u_sched.",
+    "conservative_bound_kept": "The A1 result (WNS=-0.293 @150MHz / 143.7 MHz achievable under a 2.0 ns external-I/O budget) is retained as the CONSERVATIVE post-route bound and will be reported as such in the paper.",
+    "retry_T0050_v2": "queued — same flow, representative on-chip I/O budget (output_delay 0.5 ns, input_delay 0.5 ns) reflecting NoC-internal AXI masters, to obtain the WNS>=0 closure number at 150 MHz. Both numbers (conservative external-budget 143.7 MHz and representative on-chip-budget 150 MHz) go into the paper for full honesty.",
+    "paper_TODO_status": "the two \\TODO{+X.XX} WNS@150 placeholders in main.tex (sec:arch-clk, sec:disc-verdicts) stay until T0050_v2 lands the WNS>=0 number; the paper will state both budgets."
+  },
+  "worker_directive": "Claim T0050_v2 (queued in same push). Reuse T0050_v5 synth dcp; only the XDC I/O budget changes (output_delay 2.0->0.5, input_delay 0.3->0.5). Run opt -> place -> phys_opt -> route -> phys_opt and report WNS/WHS/power. If WNS still < 0 after the representative-budget run, report the new critical path and stop (do NOT chase further — we will report the honest conservative+representative pair)."
+}
