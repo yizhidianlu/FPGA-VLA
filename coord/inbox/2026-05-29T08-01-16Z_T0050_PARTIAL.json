@@ -1,0 +1,22 @@
+{
+  "task_id": "T0050",
+  "status": "PARTIAL",
+  "worker": "remote_claude_ali_aie",
+  "ts": "2026-05-29T08:01:16Z",
+  "report_dir": "coord/reports/T0050/",
+  "summary": "T0050 A1 (spec-compliant 2.0/0.3 I/O budget, opt+place+phys_opt+route+phys_opt at 6.667 ns clock period from T0036_v5 synth_ooc) achieved WNS=-0.293 ns / WHS=-3.942 ns. Achievable Fmax = 1/(6.667 + 0.293) = 143.7 MHz. DSP=465 (preserved), BRAM tile 442 (45.71%), URAM 299 (64.58%), LUTs 73853 (8.21%), regs 46763 (2.60%). Power total 15.986 W (dyn 2.399 W, static 13.587 W) — under 20 W budget.",
+  "critical_path_finding_overrides_A2_spec": "The critical setup path is u_vit/.../wreq_throttle/last_cnt_reg[3] -> m_axi_ddrOUT_WVALID_2 output port. Logic is only 2 LUTs (0.642 ns total). Failure is dominated by clock-network skew (4.254 ns, source clock leg) + spec's 2.0 ns output_delay. The A2 task spec assumption (pipeline u_sched/u_vision_fifo BRAM write-addr) does NOT match this critical path — A2 cannot fix this kind of I/O-budget-bound output path.",
+  "A1b_inflight": "Parallel attempt at 1.5/0.2 I/O budget is running but is producing WORSE timing than A1: pre-route phys_opt got POSITIVE WNS=+0.516, but route_design re-introduced -2.340 ns of negative slack due to route congestion. Phase 13 (post-route phys_opt) cannot fix slack of that magnitude per vivado's own warning. A1b will end up worse than A1.",
+  "wns_ns_published": -0.293,
+  "fmax_mhz_published": 143.7,
+  "delta_to_150mhz_mhz": 6.3,
+  "delta_to_150mhz_ns": 0.293,
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "A1 closed at Fmax = 143.7 MHz post-route, falling 6.3 MHz (4.2%) short of the 150 MHz target with WNS = -0.293 ns",
+    "A2 task spec assumption is OBSOLETE: the post-phys_opt critical path moved away from u_sched/u_vision_fifo to the u_vit -> ddrOUT output port. A2 (FIFO pipelining) cannot be expected to fix this I/O-output-delay-bound path.",
+    "A1b (1.5/0.2 I/O) is producing worse results than A1, confirming the A1 result is near-optimal under the spec I/O constraint.",
+    "Options for closing the remaining 0.293 ns gap: (a) relax output_delay from 2.0 to 1.5 ns (still typical for NoC), (b) pipeline the wreq_throttle output enable register at the kernel boundary (1 cycle latency, immaterial against the AXI BRESP round-trip), (c) accept 143.7 MHz as the integrated [HW-IMPL] number."
+  ],
+  "next_action_for_orch": "Decide between publishing the 143.7 MHz number as-is (option c — honest closure, matches the H1 reframing spirit), or approving a focused re-run with output_delay=1.5 (option a, ~45 min more vivado time)."
+}

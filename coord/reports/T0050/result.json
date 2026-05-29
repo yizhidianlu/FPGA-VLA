@@ -1,0 +1,79 @@
+{
+  "task_id": "T0050",
+  "status": "PARTIAL",
+  "supersedes": "T0036_v6",
+  "method": "vivado_2024.1_OOC_impl_from_T0036_v5_synth_at_6.667ns_with_phys_opt",
+  "worker": "remote_claude_ali_aie",
+  "finished_at": "2026-05-29T07:55:00Z",
+  "machine": "ali-ecs ecs.g8ise.4xlarge 47.116.52.72",
+  "vivado_flow": "opt_design -> place_design -> phys_opt_design -> route_design -> phys_opt_design",
+  "result_A1_strict_spec_io_budget_2.0_0.3": {
+    "impl_ok": true,
+    "clock_period_ns": 6.667,
+    "clock_target_mhz": 150.0,
+    "wns_ns": -0.293,
+    "whs_ns": -3.942,
+    "tns_ns": -13.329,
+    "ths_ns": -67994.457,
+    "setup_failing_endpoints": 88,
+    "hold_failing_endpoints": 21987,
+    "achievable_period_ns": 6.960,
+    "achievable_fmax_mhz": 143.7,
+    "critical_path": {
+      "source": "u_vit/.../wreq_throttle/last_cnt_reg[3]",
+      "destination": "m_axi_ddrOUT_WVALID_2 (output port)",
+      "logic_delay_ns": 0.283,
+      "route_delay_ns": 0.359,
+      "logic_levels": 2,
+      "clock_skew_ns": -4.254,
+      "output_delay_ns": 2.000,
+      "clock_uncertainty_ns": 0.063,
+      "diagnosis": "Critical path is dominated by clock-network skew (4.254 ns, source clock leg) + the 2.0 ns output_delay budget asked by the task spec. Internal logic only 0.642 ns total (2 LUTs). This is NOT the u_sched/u_vision_fifo BRAM access that the A2 task spec hypothesized as bottleneck — the critical path moved post phys_opt."
+    },
+    "utilization_post_route": {
+      "registers": 46763, "registers_pct": 2.60,
+      "clb_luts": 73853, "clb_luts_pct": 8.21,
+      "luts_as_logic": 65005,
+      "luts_as_memory": 8848,
+      "slices_used": 14614, "slices_pct": 12.99,
+      "ramb36e5_int": 279, "ramb18e5_int": 326, "block_ram_tile": 442, "bram_tile_pct": 45.71,
+      "uram288e5": 299, "uram_pct": 64.58,
+      "dsp58": 465, "dsp_pct": 23.63
+    },
+    "power_w": {
+      "total_on_chip": 15.986,
+      "dynamic": 2.399,
+      "device_static": 13.587,
+      "tja_c_per_w": 4.7
+    },
+    "artefacts": {
+      "dcp": "runs/T0050/impl_150mhz_A1.dcp (88 MiB)",
+      "timing_rpt": "coord/reports/T0050/impl_timing_150mhz_A1.rpt",
+      "util_rpt":   "coord/reports/T0050/impl_util_150mhz_A1.rpt",
+      "power_rpt":  "coord/reports/T0050/impl_power_150mhz_A1.rpt"
+    }
+  },
+  "A1b_io_budget_1.5_0.2_in_flight": {
+    "rationale": "Spec's 2.0/0.3 I/O budget puts 4.667 ns of internal budget at 6.667 ns target; v5 OOC convention used 1.5/0.2 which yields 5.167 ns and was the budget v5/v6 demonstrated. Re-running with this looser budget to test whether the design itself can close at 150 MHz under a more typical I/O margin.",
+    "preroute_phys_opt_estimated_wns_ns": 0.516,
+    "preroute_phys_opt_status": "POSITIVE (post place + phys_opt only, prior to route_design)",
+    "postroute_estimated_wns_ns": -2.340,
+    "postroute_diagnosis": "route_design re-introduced large negative slack (-2.85 ns delta from preroute estimate). Routing congestion under the 1.5 ns I/O budget is worse than under the 2.0 ns budget, even though logic budget is looser — the placer chose a more aggressive placement that route cannot achieve.",
+    "phase_13_postroute_physopt": "in progress; expected to land between -1.5 and -2.0 ns based on warning 'Post-Route Physical Optimization is most effective when WNS is above -0.5ns'",
+    "expected_to_be_worse_than_A1": true
+  },
+  "acceptance_criteria_check": {
+    "status_DONE": "PARTIAL — A1 produced impl_ok=true with WNS=-0.293 ns (0.293 ns short of >= 0 target). A2 (FIFO pipelining) does NOT match the actual critical path which is the I/O output_delay path, so A2 cannot fix this. The deliverable is Fmax=143.7 MHz, not 150 MHz.",
+    "wns_ns_ge_0": false,
+    "wns_ns_actual": -0.293,
+    "route_used": "A1_phys_opt (spec 2.0/0.3 I/O budget)",
+    "total_power_w_lt_20": true
+  },
+  "human_ack_needed": true,
+  "human_ack_reasons": [
+    "WNS @ 150 MHz target = -0.293 ns; achievable Fmax under spec I/O budget = 143.7 MHz. Paper claim should be '143.7 MHz post-route [HW-IMPL]' OR adjust I/O budget assumption (1.5/0.3 hybrid) and re-run.",
+    "A2 spec assumption WRONG: the critical path is NOT u_sched/u_vision_fifo (FIFO pipelining would not help). The path is u_vit/wreq_throttle internal counter -> ddrOUT output port, with 4.254 ns clock skew + 2.0 ns output_delay dominating.",
+    "Two remediation options: (i) accept 143.7 MHz with current 2.0/0.3 I/O budget as honest closure, or (ii) re-run with 1.5/0.3 hybrid budget (loose output_delay, keep input). Option (ii) requires another ~45-60 min vivado run."
+  ],
+  "next_action_for_orch": "Decide between (A) publishing 143.7 MHz post-route as the [HW-IMPL] number — close enough to 150 MHz to honor the H1 reframing intent, or (B) approving a fresh hybrid-I/O re-run targeting WNS >= 0 at the cost of additional implementation time and possible router congestion regression. A1b (1.5/0.2 hybrid) currently shows worse routing congestion than A1; (B) would use 1.5 output_delay / 0.3 input."
+}
