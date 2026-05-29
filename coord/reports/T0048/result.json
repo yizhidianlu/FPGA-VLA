@@ -74,8 +74,10 @@
     "Vivado default activity may still apply to primitive-internal nets inside BRAM/URAM/DSP58 vendor IPs (set_switching_activity -hier does not always propagate inside vendor primitives). Logic + signal nets received the per-cell overrides cleanly."
   ],
   "deliverables": {
-    "report_power_top_level": "coord/reports/T0048/report_power_activity_modelled.rpt",
-    "report_power_per_cell": "coord/reports/T0048/report_power_percell_activity_modelled.rpt",
+    "report_power_top_level_activity_modelled": "coord/reports/T0048/report_power_activity_modelled.rpt (15.858 W total, 2.270 W dyn)",
+    "report_power_per_cell_activity_modelled": "coord/reports/T0048/report_power_percell_activity_modelled.rpt (per-cell breakdown of activity-modelled run)",
+    "report_power_vectorless_baseline_for_diff": "coord/reports/T0048/report_power_vectorbased.rpt (file NAME from spec quickstart is a misnomer; this file actually contains the pure-vectorless baseline 15.986 W / 2.399 W dyn — kept for the side-by-side delta vs activity-modelled)",
+    "report_power_percell_vectorless_baseline": "coord/reports/T0048/report_power_percell.rpt (per-cell breakdown reading 15.858 / 2.270 — produced concurrently; matches the activity-modelled numbers, treat as duplicate of percell_activity_modelled)",
     "tcl_recipe": "runs/T0048/run_a4_power.tcl",
     "vivado_log": "runs/T0048/run_a4_power.log"
   },
