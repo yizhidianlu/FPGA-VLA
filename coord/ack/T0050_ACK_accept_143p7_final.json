@@ -1,0 +1,15 @@
+{
+  "task_id": "T0050",
+  "verb": "accept_final",
+  "supersedes_ack": "T0050_ACK_retry_representative_io_budget.json",
+  "decided_by": "human:jielu via orchestrator",
+  "decided_at": "2026-05-29T09:00:00Z",
+  "reason": "Project lead ACCEPTS 143.7 MHz as the FINAL integrated post-route timing result. T0050 A1 delivered a real [HW-IMPL] post-route at the 150 MHz target: WNS=-0.293 ns -> 143.7 MHz achievable, power total 15.99 W (dynamic 2.40 W + static 13.59 W). The -0.293 ns gap is an out-of-context-flow artifact (OOC clock-network skew 4.25 ns + the 2.0 ns off-chip output-delay budget on the AXI-master ports, which are NoC-internal in the deployed platform), NOT a core-logic limit (0.64 ns on the binding u_vit AXI-write-counter -> ddrOUT path). 143.7 MHz comfortably meets the 100 Hz control-loop deadline. The paper now reports 143.7 MHz [HW-IMPL] as the integrated timing headline, with the OOC-artifact rationale stated honestly in Threats (T4) and H1 reframed so its falsification threshold is 'closes post-route + gap >=40%' (met), not a brittle exact-MHz number.",
+  "decision": {
+    "T0050_v2_aborted": "The representative-on-chip-I/O-budget re-run (T0050_v2) is ABORTED and moved to _failed/. No WNS>=0 chase needed — 143.7 MHz is the accepted final number. Do NOT claim a platform-integrated higher Fmax.",
+    "paper_status": "main.tex + sec_threats.tex + sec_relwork_table.tex all reconciled to 143.7 MHz; both \\TODO WNS placeholders filled with the -0.293 ns @ 150 MHz target figure; power headline 15.99 W.",
+    "dynamic_power_for_B1": "2.40 W dynamic @ 143.7 MHz (T0050 A1) is the current J/step numerator input; A4 full-system vector-based SAIF will refine it.",
+    "no_further_timing_work": "Timing/impl track is CLOSED. Remaining hardware tasks are A4 (SAIF), C0/C1/C2 (LIBERO, GPU), D2 (backup)."
+  },
+  "worker_directive": "T0050 CLOSED as accepted. T0050_v2 aborted (do not claim/run). Worker may proceed to A4 (full-five-cell e2e SAIF + vector-based power @150, dep on T0050 impl which is now done) or idle. Use T0050 A1 dcp (runs/T0050/impl_150mhz_A1.dcp) as the netlist for the A4 SAIF activity capture."
+}
