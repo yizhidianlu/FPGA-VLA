@@ -1,0 +1,104 @@
+task_id: T0050
+created_by: orchestrator
+created_at: 2026-05-29T02:00:00Z
+type: vivado_pnr
+priority: P0
+supersedes: T0036_v6
+target_worker: remote_claude_ali_aie
+depends_on: [T0036_v6]
+deadline_minutes: 300
+params:
+  module_name: mr_vla_full_top_v7_150mhz
+  description: |
+    **150 MHz honest-retarget impl — produce a POSITIVE-WNS [HW-IMPL]
+    integrated post-route number for the TCAD submission.**
+
+    DECISION (project lead, 2026-05-29): TCAD journal target; honestly
+    retarget integrated timing to 150 MHz (abandon 250 MHz). The paper's
+    H1 timing arm is being reframed: per-IP + standalone scheduler close
+    >=250 MHz [HW-SYNTH]; the integrated 5-cell system closes at 150 MHz
+    post-route [HW-IMPL]. T0050 must deliver that positive-WNS 150 MHz
+    number (currently main.tex uses a \TODO placeholder).
+
+    Evidence it will close: T0036_v5 @250MHz target WNS=-2.34ns;
+    T0036_v6 @167MHz (6.0ns) WNS=-0.473ns. Linear-ish interpolation puts
+    the true period need at ~6.47ns -> 6.667ns (150 MHz) should land
+    WNS >= 0. Two routes:
+      A1 (optimistic, ~1-2h): bare re-impl at 6.667ns + phys_opt_design.
+        v6 did NOT phys_opt; an explicit phys_opt pass may recover the
+        0.47ns route slack alone.
+      A2 (expected path, ~1d): if A1 still negative, pipeline the
+        u_sched/u_vision_fifo write-address / ENARDEN path with 1-2
+        register stages (the critical path is 92.8% route delay on this
+        single BRAM access), re-synth u_sched OOC, re-stitch, re-impl.
+
+  quickstart_for_resumed_session: |
+    cd /tools/projects/FPGA-VLA
+    source /tools/Xilinx/Vivado/2024.1/settings64.sh
+    cp -r runs/T0036_v6 runs/T0050
+    cd runs/T0050
+
+    # ---- A1: bare re-impl at 150 MHz + phys_opt ----
+    cat > mr_vla_bd_v7_150.xdc <<'XDC'
+    create_clock -name clk_in -period 6.667 [get_ports clk_in]
+    set_input_delay  -clock clk_in -max 2.0 [all_inputs]
+    set_input_delay  -clock clk_in -min 0.3 [all_inputs]
+    set_output_delay -clock clk_in -max 2.0 [all_outputs]
+    set_output_delay -clock clk_in -min 0.3 [all_outputs]
+    XDC
+    vivado -mode batch -nolog -nojournal -source <(cat <<'TCL'
+    open_checkpoint runs/T0036_v6/synth_ooc.dcp
+    read_xdc runs/T0050/mr_vla_bd_v7_150.xdc
+    opt_design
+    place_design
+    phys_opt_design
+    route_design
+    phys_opt_design
+    report_timing_summary -file runs/T0050/impl_timing_150mhz_A1.rpt
+    report_utilization     -file runs/T0050/impl_util_150mhz_A1.rpt
+    report_power           -file runs/T0050/impl_power_150mhz_A1.rpt
+    write_checkpoint -force runs/T0050/impl_150mhz_A1.dcp
+    exit
+    TCL
+    )
+    WNS_A1=$(grep -A2 "Design Timing Summary" runs/T0050/impl_timing_150mhz_A1.rpt | grep -oE '\-?[0-9]+\.[0-9]+' | head -1)
+    echo "A1 WNS @150MHz = $WNS_A1"
+
+    # ---- A2: only if A1 WNS < 0 -> pipeline u_sched FIFO addr path ----
+    # Edit the T0030 scheduler SV (u_vision_fifo): add 1-2 pipeline regs on
+    # wptr -> mem ENARDEN/addr path. Re-synth u_sched OOC, re-stitch BD,
+    # re-run the impl flow above. Document the added latency cycle on the
+    # vision rate-enable (must NOT break the multi-rate timing invariant:
+    # vision fires every 1/30s, +1-2 cycles @150MHz = +13ns << 33ms budget).
+
+    # ---- archive ----
+    mkdir -p /tools/projects/FPGA-VLA/coord/reports/T0050
+    cp -p runs/T0050/impl_*_150mhz_*.rpt /tools/projects/FPGA-VLA/coord/reports/T0050/
+    # write result.json: wns_ns, whs_ns, fmax_mhz, lut/dsp/bram/uram, power
+    # total + dynamic + static, route_A1_or_A2, + inbox DONE (hyphen ts).
+
+  target_part: xcvc1902-vsva2197-2MP-e-S
+  clock_period_ns: 6.667
+
+acceptance_criteria:
+  - status: "== DONE"
+  - result.impl_ok: true
+  - result.wns_ns: ">= 0"
+  - result.route: "in [A1_phys_opt, A2_fifo_pipeline]"
+  - result.total_power_w: "< 20"
+
+human_ack_required_on:
+  - wns_still_below_0_after_A2     # would mean deeper retiming needed
+  - vivado_crash
+  - multi_rate_invariant_broken    # if A2 pipeline reg breaks rate-enable timing
+
+notes: |
+  Output for paper: a single positive-WNS [HW-IMPL] integrated number at
+  150 MHz with post-route power. This fills the \TODO{A2 WNS@150} in
+  main.tex §III-C / §V-A / §VI H1. Report which route (A1 phys_opt or
+  A2 fifo-pipeline) achieved closure — A2 (if needed) means +1-2 cycles
+  on the vision rate-enable, harmless against the 33ms vision budget but
+  must be stated in the paper.
+
+  Dynamic power @150 feeds the J/step recompute (B1): report P_dyn
+  separately. Expected ~2.3W dynamic (v6 was 2.57W@167, scales ~linearly).
