@@ -6,7 +6,7 @@
   "report_dir": "coord/reports/T0050/",
   "summary": "T0050 A1 (spec-compliant 2.0/0.3 I/O budget, opt+place+phys_opt+route+phys_opt at 6.667 ns clock period from T0036_v5 synth_ooc) achieved WNS=-0.293 ns / WHS=-3.942 ns. Achievable Fmax = 1/(6.667 + 0.293) = 143.7 MHz. DSP=465 (preserved), BRAM tile 442 (45.71%), URAM 299 (64.58%), LUTs 73853 (8.21%), regs 46763 (2.60%). Power total 15.986 W (dyn 2.399 W, static 13.587 W) — under 20 W budget.",
   "critical_path_finding_overrides_A2_spec": "The critical setup path is u_vit/.../wreq_throttle/last_cnt_reg[3] -> m_axi_ddrOUT_WVALID_2 output port. Logic is only 2 LUTs (0.642 ns total). Failure is dominated by clock-network skew (4.254 ns, source clock leg) + spec's 2.0 ns output_delay. The A2 task spec assumption (pipeline u_sched/u_vision_fifo BRAM write-addr) does NOT match this critical path — A2 cannot fix this kind of I/O-budget-bound output path.",
-  "A1b_inflight": "Parallel attempt at 1.5/0.2 I/O budget is running but is producing WORSE timing than A1: pre-route phys_opt got POSITIVE WNS=+0.516, but route_design re-introduced -2.340 ns of negative slack due to route congestion. Phase 13 (post-route phys_opt) cannot fix slack of that magnitude per vivado's own warning. A1b will end up worse than A1.",
+  "A1b_completed": "Parallel attempt at 1.5/0.2 I/O budget COMPLETED with WNS=-0.654 ns, WHS=-3.593 ns (Fmax=136.7 MHz). Confirms A1 (WNS=-0.293) is the better result by +0.361 ns. The looser I/O budget biased the placer to chase logic delay over routability; router could not satisfy the resulting denser placement.",
   "wns_ns_published": -0.293,
   "fmax_mhz_published": 143.7,
   "delta_to_150mhz_mhz": 6.3,

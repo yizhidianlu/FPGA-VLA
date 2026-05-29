@@ -53,14 +53,21 @@
       "power_rpt":  "coord/reports/T0050/impl_power_150mhz_A1.rpt"
     }
   },
-  "A1b_io_budget_1.5_0.2_in_flight": {
-    "rationale": "Spec's 2.0/0.3 I/O budget puts 4.667 ns of internal budget at 6.667 ns target; v5 OOC convention used 1.5/0.2 which yields 5.167 ns and was the budget v5/v6 demonstrated. Re-running with this looser budget to test whether the design itself can close at 150 MHz under a more typical I/O margin.",
+  "A1b_io_budget_1.5_0.2_completed": {
+    "rationale": "Spec's 2.0/0.3 I/O budget puts 4.667 ns of internal budget at 6.667 ns target; v5 OOC convention used 1.5/0.2 which yields 5.167 ns and was the budget v5/v6 demonstrated. Re-ran with this looser budget to test whether the design itself can close at 150 MHz under a more typical I/O margin.",
     "preroute_phys_opt_estimated_wns_ns": 0.516,
     "preroute_phys_opt_status": "POSITIVE (post place + phys_opt only, prior to route_design)",
     "postroute_estimated_wns_ns": -2.340,
     "postroute_diagnosis": "route_design re-introduced large negative slack (-2.85 ns delta from preroute estimate). Routing congestion under the 1.5 ns I/O budget is worse than under the 2.0 ns budget, even though logic budget is looser — the placer chose a more aggressive placement that route cannot achieve.",
-    "phase_13_postroute_physopt": "in progress; expected to land between -1.5 and -2.0 ns based on warning 'Post-Route Physical Optimization is most effective when WNS is above -0.5ns'",
-    "expected_to_be_worse_than_A1": true
+    "final_wns_ns": -0.654,
+    "final_whs_ns": -3.593,
+    "final_tns_ns": -184.331,
+    "final_ths_ns": -49720.344,
+    "final_setup_failing_endpoints": 613,
+    "final_hold_failing_endpoints": 22846,
+    "final_achievable_fmax_mhz": 136.7,
+    "power_w": {"total_on_chip": 15.912, "dynamic": 2.324, "device_static": 13.588},
+    "confirmed_worse_than_A1": "A1b final WNS=-0.654 vs A1 final WNS=-0.293 — A1 is +0.361 ns better. The looser I/O budget biased the placer to chase logic delay over routability; router could not satisfy the resulting denser placement."
   },
   "acceptance_criteria_check": {
     "status_DONE": "PARTIAL — A1 produced impl_ok=true with WNS=-0.293 ns (0.293 ns short of >= 0 target). A2 (FIFO pipelining) does NOT match the actual critical path which is the I/O output_delay path, so A2 cannot fix this. The deliverable is Fmax=143.7 MHz, not 150 MHz.",
