@@ -1,25 +1,13 @@
 ﻿{
-    "worker":  "remote_claude_win",
-    "platform":  "windows",
-    "ts":  "2026-05-31T01:39:39Z",
-    "pid":  0,
-    "uptime_sec":  0,
-    "vitis":  "OK",
-    "vivado":  "OK",
-    "claude_cli":  "OK",
-    "gpu":  "NVIDIA GeForce RTX 3060 Laptop GPU",
     "current_task":  "",
-    "tasks_completed_session":  21,
-    "last_completed_task":  "T0034",
-    "last_completed_summary":  "T0034 IP-Integrator: Vivado crashed (EXCEPTION_ACCESS_VIOLATION) 鈥?3rd integration crash across 3 methods. Integrated co-synth not achievable on this 16GB host. T0032 component-sum stands. W8 class-A batch (T0033/34/35) done.",
-    "outstanding_ack_needed":  [
-                                   "T0034:vivado_crash_again_host_limited",
-                                   "T0035:latency_above_200000_benign"
-                               ],
+    "platform":  "windows",
+    "ts":  "2026-08-16T01:53:53Z",
+    "vivado":  "OK",
     "protocol_version":  "1.0",
-    "session_kind":  "claude_code_interactive",
-    "worker_state":  "IDLE - all pending tasks processed (T0010..T0035, 21 tasks this session). Awaiting orch.",
-    "heartbeat_note":  "Auto heartbeat loop PID 27892 keeps ts fresh every 15 min.",
-    "heartbeat_tick_count":  817,
-    "last_heartbeat_source":  "heartbeat_loop.ps1 (auto)"
+    "pid":  12108,
+    "gpu":  "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "worker":  "remote_claude_win",
+    "vitis":  "OK",
+    "uptime_sec":  10,
+    "claude_cli":  "OK"
 }
